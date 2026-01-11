@@ -1,0 +1,77 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Library/
+Logs/
+UserSettings/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+.obj/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ============ #
+# Builds       #
+# ============ #
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Never commit the following
+/[Aa]ssets/Plugins/Editor/JetBrains*
+/[Aa]ssets/Plugins/Editor/ReSharper*
+/[Aa]ssets/Plugins/Editor/Visual*
+/[Aa]ssets/Plugins/Editor/UnityVS*
+
+# Android
+/[Aa]ssets/Plugins/Android/[Aa]ndroid[Aa]pp.*
+/[Aa]ssets/Plugins/Android/[Aa]ndroid[Mm]anifest.*
+
+# iOS
+/[Aa]ssets/Plugins/iOS/[Ii]OS[Aa]pp.*
+/[Aa]ssets/Plugins/iOS/[Ii]OS[Mm]anifest.*
+
+# Windows Store
+/[Aa]ssets/Plugins/WSA/[Ww]indows[Ss]tore[Aa]pp.*
+/[Aa]ssets/Plugins/WSA/[Ww]indows[Ss]tore[Mm]anifest.*
+
+# macOS
+/[Aa]ssets/Plugins/macOS/[Mm]ac[Oo]S[Aa]pp.*
+/[Aa]ssets/Plugins/macOS/[Mm]ac[Oo]S[Mm]anifest.*
+
+# ===================================== #
+# Package Manager Cache                #
+# ===================================== #
+/[Pp]ackage[Cc]ache/
