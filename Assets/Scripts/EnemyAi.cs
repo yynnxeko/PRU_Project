@@ -11,8 +11,8 @@ public class EnemyAi : MonoBehaviour
     public LayerMask obstacleMask;
 
     [Header("Nâng cấp 2: Góc nhìn động")]
-    public float focusDistance = 7f; // Khi nghi ngờ nhìn xa hơn (6m -> 9m)
-    public float focusAngle = 40f;   // Khi nghi ngờ góc hẹp lại (90 -> 50)
+    public float focusDistance = 7f; // Khi nghi ngờ nhìn xa hơn
+    public float focusAngle = 40f;   // Khi nghi ngờ góc hẹp lại
     public float changeSpeed = 6.5f;   // Tốc độ biến đổi hình dạng nón
 
     [Header("Gán 2 cái Nón")]
@@ -27,7 +27,7 @@ public class EnemyAi : MonoBehaviour
     [Header("Logic Nghi ngờ")]
     public float suspicionLevel = 0f;
     public float cooldownRate = 10f;
-    public float normalRate = 15f;
+    public float normalRate = 20f;
     public float fastRate = 50f;
 
     // Biến nội bộ
@@ -94,17 +94,32 @@ public class EnemyAi : MonoBehaviour
 
         // --- 1. XỬ LÝ NGHI NGỜ ---
         int zone = CheckZone();
-        bool isSuspicious = (zone > 0);
+        bool isSeeingPlayer = (zone > 0);
 
-        if (isSuspicious)
+        if (isSeeingPlayer)
         {
             float rate = (zone == 2) ? fastRate : normalRate;
             suspicionLevel += rate * Time.deltaTime;
+
+            // --- MỚI: TỰ ĐỘNG XOAY ĐẦU VỀ PHÍA MỤC TIÊU ---
+            // Chỉ xoay khi đang nhìn thấy (Line of Sight không bị chặn)
+            Vector3 dirToPlayer = (player.position - transform.position).normalized;
+
+            // Tính góc xoay (sửa tên biến để không trùng)
+            float rotationAngle = Mathf.Atan2(dirToPlayer.y, dirToPlayer.x) * Mathf.Rad2Deg;
+
+            // Xoay từ từ về phía đó (cho mượt)
+            // Trừ 90 độ vì Sprite mặc định thường hướng Lên (Up), còn Atan2 tính theo hướng Phải (Right)
+            Quaternion targetRotation = Quaternion.Euler(0, 0, rotationAngle - 90);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
         }
         else
         {
             suspicionLevel -= cooldownRate * Time.deltaTime;
             isAlert = false; // Mất dấu thì hết báo động
+
+            // KHÔNG xoay ở đây -> Giữ nguyên hướng nhìn cuối cùng (Looking at last known position)
         }
 
         suspicionLevel = Mathf.Clamp(suspicionLevel, 0f, 100f);
@@ -116,7 +131,6 @@ public class EnemyAi : MonoBehaviour
         if (suspicionLevel > 0)
         {
             // Càng nghi ngờ nhiều -> Càng biến đổi về dạng "Tập trung" (Focus)
-            // Dùng Lerp để chuyển mượt mà dựa trên % nghi ngờ
             float factor = suspicionLevel / 100f;
             targetDist = Mathf.Lerp(baseDistance, focusDistance, factor);
             targetAngle = Mathf.Lerp(baseAngle, focusAngle, factor);
@@ -131,7 +145,7 @@ public class EnemyAi : MonoBehaviour
         if (suspicionLevel >= 100f)
         {
             isAlert = true;
-            Debug.Log("BÁO ĐỘNG !!!");
+            // Debug.Log("BÁO ĐỘNG !!!");
 
             // Hiệu ứng nhấp nháy (Flash)
             flashTimer += Time.deltaTime * 10f; // Tốc độ nháy
@@ -159,7 +173,7 @@ public class EnemyAi : MonoBehaviour
         }
     }
 
-    // Hàm vẽ nón (Đã sửa để nhận tham số angle động)
+    // Hàm vẽ nón
     void DrawCone(Mesh meshToDraw, float dist, float angle)
     {
         if (meshToDraw == null) return;
@@ -209,13 +223,12 @@ public class EnemyAi : MonoBehaviour
         meshToDraw.triangles = triangles;
     }
 
-    // Hàm check zone (Sửa lại để dùng currentViewDist/Angle động)
+    // Hàm check zone (Dùng currentViewDist/Angle động)
     int CheckZone()
     {
         float dist = Vector3.Distance(transform.position, player.position);
 
         // Dùng biến currentViewDist thay vì maxViewDistance cố định
-        // Để khi nón dài ra, tầm phát hiện cũng dài theo
         if (dist > currentViewDist) return 0;
 
         Vector3 dir = (player.position - transform.position).normalized;
