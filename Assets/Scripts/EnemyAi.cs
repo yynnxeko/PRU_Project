@@ -13,7 +13,7 @@ public class EnemyAi : MonoBehaviour
     [Header("Nâng cấp 2: Góc nhìn động")]
     public float focusDistance = 7f; // Khi nghi ngờ nhìn xa hơn
     public float focusAngle = 40f;   // Khi nghi ngờ góc hẹp lại
-    public float changeSpeed = 6.5f;   // Tốc độ biến đổi hình dạng nón
+    public float changeSpeed = 7.5f;   // Tốc độ biến đổi hình dạng nón
 
     [Header("Gán 2 cái Nón")]
     public MeshFilter meshFilterFar;
@@ -26,7 +26,7 @@ public class EnemyAi : MonoBehaviour
 
     [Header("Logic Nghi ngờ")]
     public float suspicionLevel = 0f;
-    public float cooldownRate = 10f;
+    public float cooldownRate = 15f;
     public float normalRate = 20f;
     public float fastRate = 50f;
 
@@ -145,31 +145,39 @@ public class EnemyAi : MonoBehaviour
         if (suspicionLevel >= 100f)
         {
             isAlert = true;
-            // Debug.Log("BÁO ĐỘNG !!!");
+            flashTimer += Time.deltaTime * 10f;
 
-            // Hiệu ứng nhấp nháy (Flash)
-            flashTimer += Time.deltaTime * 10f; // Tốc độ nháy
+            // Nhấp nháy Đỏ - Đen
             if (Mathf.Sin(flashTimer) > 0)
             {
+                // Khi sáng (Đỏ)
                 myBodyColor.color = Color.red;
-                if (renderNear) renderNear.material.color = colorAlert; // Nón đỏ lòm
+                if (renderNear) renderNear.material.color = colorAlert;
+                if (renderFar) renderFar.material.color = colorAlert; // <-- THÊM DÒNG NÀY
             }
             else
             {
-                myBodyColor.color = Color.black; // Nháy sang đen cho gắt
-                if (renderNear) renderNear.material.color = colorNear; // Nón về bình thường
+                // Khi tối (Đen) - Trả về màu gốc của từng nón
+                myBodyColor.color = Color.black;
+                if (renderNear) renderNear.material.color = colorNear;
+                if (renderFar) renderFar.material.color = colorFar;   // <-- THÊM DÒNG NÀY
             }
         }
         else if (suspicionLevel > 0f)
         {
+            // Mức nghi ngờ (Vàng)
             myBodyColor.color = Color.yellow;
-            // Trả màu nón về mặc định
+
+            // Đảm bảo cả 2 nón không bị kẹt màu đỏ nếu thoát khỏi trạng thái báo động
             if (renderNear) renderNear.material.color = colorNear;
+            if (renderFar) renderFar.material.color = colorFar;       // <-- THÊM DÒNG NÀY
         }
         else
         {
+            // Bình thường (Trắng)
             myBodyColor.color = Color.white;
             if (renderNear) renderNear.material.color = colorNear;
+            if (renderFar) renderFar.material.color = colorFar;       // <-- THÊM DÒNG NÀY
         }
     }
 

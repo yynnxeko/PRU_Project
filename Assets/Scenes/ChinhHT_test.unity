@@ -246,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 217075505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.6, y: 5.95, z: 0}
+  m_LocalPosition: {x: -14.7, y: 3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -680,7 +680,7 @@ Transform:
   m_GameObject: {fileID: 1884683819}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.11, y: 5.65, z: 0}
+  m_LocalPosition: {x: 3.85, y: 3.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -709,15 +709,15 @@ MonoBehaviour:
     m_Bits: 64
   focusDistance: 7
   focusAngle: 40
-  changeSpeed: 6.5
+  changeSpeed: 7.5
   meshFilterFar: {fileID: 1588819748}
   meshFilterNear: {fileID: 851423520}
   colorFar: {r: 1, g: 0, b: 0, a: 0.15686275}
   colorNear: {r: 1, g: 0, b: 0, a: 0.23529412}
   colorAlert: {r: 1, g: 0, b: 0, a: 1}
   suspicionLevel: -0.02
-  cooldownRate: 10
-  normalRate: 15
+  cooldownRate: 15
+  normalRate: 20
   fastRate: 50
 --- !u!114 &1884683824
 MonoBehaviour:
@@ -902,7 +902,7 @@ Transform:
   m_GameObject: {fileID: 2095617824}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.59, y: 6.26, z: 0}
+  m_LocalPosition: {x: -4.87, y: 3.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
