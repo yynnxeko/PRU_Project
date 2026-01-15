@@ -1,0 +1,1698 @@
+fileFormatVersion: 2
+guid: 55d0171d5b138784f96932c870d91656
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f20565b0a953d5489f681e74033e3e8
+      internalID: -1622361393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e5487c5e59f4a46981c198755ffb23
+      internalID: 1270049094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ecb2c201d173cb4a934c4909c36abaa
+      internalID: -672422792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 417190d795dbb2748aab111b83d5c810
+      internalID: 1942737125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 947ac35508717344aa75f912eb9d6ae8
+      internalID: 1183346785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d7d1ac4657099e4499a1337a14bd092
+      internalID: -20948941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7ee69c8462c3294f805e1f91b2a1b0a
+      internalID: 2108811105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad7f8a74e08d31f43ad4b3c470016ef7
+      internalID: 2067037700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d47a84014f1766438029711a6466084
+      internalID: 463363396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7b8e2d17042a745af55fe0bd691c3c
+      internalID: -265479960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_10
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7c7d9f6b089444ea4c2526edbd96ca
+      internalID: -1523794883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_11
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd9e69123e90adb4eb16440a54650e26
+      internalID: -409713393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_12
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3920e83037d3804a962e0abe9ae9c2f
+      internalID: 679262043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3679301a19a04e54cafbf00635dcea04
+      internalID: -1780596135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_14
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d32bd551027dc9469cdbd84ee1e0dbe
+      internalID: -1983094715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_15
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302f11a5317837f4aa961c62af1e69e4
+      internalID: -1092854580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4accbf3b7af5a614db9a53dfc32dad45
+      internalID: 1729308254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d857f47fb1ffcc499ac90f9333a5f4a
+      internalID: 1038184948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3854bc16864ba94ea4e971894f8973d
+      internalID: 1484437072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1acf31acb809031448f383fb3650e3ea
+      internalID: -904573695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_20
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1dabb264678d5d44931437ca74da61b
+      internalID: -1253753236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_21
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4ed10b0ecdf2e64990c20d027d4dd9c
+      internalID: 2052809206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_22
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb332c0d202188f4f9e91c4d505aaa85
+      internalID: 478841034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_23
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abb5140e7c704ff40a1d2690ee574a3f
+      internalID: 1955541683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9a7c8f7c0531941a289e7f6f925c9f
+      internalID: -1697573908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_25
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 192aa79d29c348043b8ca9dfcfa607ef
+      internalID: -664600436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e5e49f6f0f662642b404dbb5209f29e
+      internalID: -514667528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_27
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edee26297756d6e4e8f53cea315df38f
+      internalID: 2088674884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_28
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f902c730e2111ef4eb5a10356080c955
+      internalID: 47344637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_29
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48c8d7aa8d56b124099366222d48e564
+      internalID: -2128820690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_30
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aff63010a00150646b1b91027821f4b6
+      internalID: -1638514287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_31
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59bcaa433563327448c2174591ffdfbf
+      internalID: 1527670111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766df54034fa9454981d44862db7b74b
+      internalID: 696853135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_33
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79d0cae92646dc34595507a170d04011
+      internalID: -1186004953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_34
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d41cddbb25bad514c9e4a81cca316ba9
+      internalID: -1550007381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_35
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92d80c157b18c724fa968d844ec2ea9f
+      internalID: 312749173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_36
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28a9eeb4cedb3894da41d868ced157d4
+      internalID: -1095733925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_37
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09cf5f02be67f434597695482db2ab66
+      internalID: 1490982576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_38
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80b5eaeb5aea1954b9ecd257fd61c1a4
+      internalID: -609634795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_39
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72d14ca3d6815ab40bdc25088403bba2
+      internalID: 483511198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d10e28f87644ef488e23f7e9b71452d
+      internalID: 62067146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_41
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3075ee3550a150e4797afe37a815be8d
+      internalID: -1306522941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_42
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3990f94f93e1e48b277edaa8e70a0a
+      internalID: -1932063405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_43
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cfc4d63e33b1ef4788b173505392d93
+      internalID: -461765260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c761d3f14e9c0c84585a684efc0fcbe8
+      internalID: -1190369562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_45
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe7d30437d929b46bcca712b20061a4
+      internalID: 282280585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_46
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec1255e394274b45a5529506a11a78a
+      internalID: -551891352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_47
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e83305e7203d9c49940ffb16847aa72
+      internalID: 1381311866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ef2c3f8875f52b47888d4def5884230
+      internalID: -1264530598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_49
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d703bef90abcd3c408a63dcefa0ef24c
+      internalID: -1752632114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_50
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77f2c54577bc16e44b1c2fb79de617c0
+      internalID: -2110796863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_51
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4843180bc2c6be04c9b5cc8d3f52d602
+      internalID: 1107490343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_52
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d4ceeb930da8a439924fcb94285486
+      internalID: -1657790659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_53
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f91631530cc2b34ebac53c01b5a28f0
+      internalID: -154311874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_54
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96644c066f01b3b499009a8f85e42e93
+      internalID: -162695138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_55
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 274a7c03f0fc9454e8eadab050c55e56
+      internalID: 1169600838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2916b4ed767280544a472ed4ecd86007
+      internalID: -385257625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_57
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e276f3aa4918c74c8a0e37925e4a0e0
+      internalID: 2027540181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_58
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 167a3137d78255145b936c6b72353536
+      internalID: -828849274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_59
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0436f8515f2bd94d8e04d1927aca85d
+      internalID: -916808605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_60
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518c916240421b547987e3c5a66e1359
+      internalID: -1067497308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_61
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7531e24b755b5446be94269f6f4749a
+      internalID: -151567703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_62
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65866312a8f1bad47ad120fbd94787ac
+      internalID: -2021439462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_63
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff9ab38419afbe4aa97578c222411aa
+      internalID: 1959257412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b7ebe9dc67a1d4b9bd2d450fa672c1
+      internalID: 1290820413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_65
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 217d0c560e6e21c46aa9271db679debf
+      internalID: 1139490751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_66
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 443fba1efb5cf464c85e7f9ff07c9c60
+      internalID: -2071483672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_67
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef40f0d7910ae9045bc9dce3ae1508f6
+      internalID: -1067894044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_68
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3136c0f2bdfda54b92d7901edf2c01d
+      internalID: -1804313664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_69
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d735efa69fcf8459a07aa5791c3388
+      internalID: 2074500860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_70
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 533ea8305749d9f498222a9eb9af6b49
+      internalID: 1787871938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Generic_Building_32x32_Hardware_Store_Example_71
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3d201e82679754487578b35e197e14
+      internalID: -204552876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_0: -1622361393
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_1: 1270049094
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_10: -1523794883
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_11: -409713393
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_12: 679262043
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_13: -1780596135
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_14: -1983094715
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_15: -1092854580
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_16: 1729308254
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_17: 1038184948
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_18: 1484437072
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_19: -904573695
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_2: -672422792
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_20: -1253753236
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_21: 2052809206
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_22: 478841034
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_23: 1955541683
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_24: -1697573908
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_25: -664600436
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_26: -514667528
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_27: 2088674884
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_28: 47344637
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_29: -2128820690
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_3: 1942737125
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_30: -1638514287
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_31: 1527670111
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_32: 696853135
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_33: -1186004953
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_34: -1550007381
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_35: 312749173
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_36: -1095733925
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_37: 1490982576
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_38: -609634795
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_39: 483511198
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_4: 1183346785
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_40: 62067146
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_41: -1306522941
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_42: -1932063405
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_43: -461765260
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_44: -1190369562
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_45: 282280585
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_46: -551891352
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_47: 1381311866
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_48: -1264530598
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_49: -1752632114
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_5: -20948941
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_50: -2110796863
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_51: 1107490343
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_52: -1657790659
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_53: -154311874
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_54: -162695138
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_55: 1169600838
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_56: -385257625
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_57: 2027540181
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_58: -828849274
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_59: -916808605
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_6: 2108811105
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_60: -1067497308
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_61: -151567703
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_62: -2021439462
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_63: 1959257412
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_64: 1290820413
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_65: 1139490751
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_66: -2071483672
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_67: -1067894044
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_68: -1804313664
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_69: 2074500860
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_7: 2067037700
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_70: 1787871938
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_71: -204552876
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_8: 463363396
+      ME_Singles_Generic_Building_32x32_Hardware_Store_Example_9: -265479960
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
