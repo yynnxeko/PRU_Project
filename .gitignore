@@ -5,6 +5,8 @@ Temp/
 Library/
 Logs/
 UserSettings/
+MemoryCaptures/
+Recordings/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -48,6 +50,8 @@ Thumbs.db
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/[Cc]rashReports/
+/[Rr]eleases/
 
 # Never commit the following
 /[Aa]ssets/Plugins/Editor/JetBrains*
@@ -75,3 +79,26 @@ Thumbs.db
 # Package Manager Cache                #
 # ===================================== #
 /[Pp]ackage[Cc]ache/
+/[Pp]ackages/com.unity.collab-proxy/
+
+# ===================================== #
+# IDE / Editor specific                 #
+# ===================================== #
+.vscode/
+.vs/
+.idea/
+*.code-workspace
+
+# ===================================== #
+# Plastic SCM / Collaborate             #
+# ===================================== #
+/PlasticSCM/
+/.plastic/
+/collab/
+
+# ===================================== #
+# Other Unity artifacts                 #
+# ===================================== #
+*.unitypackage
+*.asset
+*.prefs
