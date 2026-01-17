@@ -282,7 +282,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &217075508
@@ -312,8 +312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7154391e6134ee4ebaa0950da2b67dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carriedEvidence: 5
-  stashedEvidence: 0
+  maxHidden: 2
+  maxHand: 1
+  hiddenEvidence: 
+  handEvidence: 
 --- !u!114 &217075510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,10 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1b939844b45cd429aff7f926e4dd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 3
-  slowSpeed: 1.5
+  speed: 3
   rb: {fileID: 217075512}
-  noise: {fileID: 217075510}
+  animator: {fileID: 0}
+  faceDir: {x: 0, y: -1}
 --- !u!50 &217075512
 Rigidbody2D:
   serializedVersion: 4
@@ -468,7 +470,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &800599765
@@ -779,6 +781,7 @@ GameObject:
   - component: {fileID: 1375754906}
   - component: {fileID: 1375754905}
   - component: {fileID: 1375754904}
+  - component: {fileID: 1375754908}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -875,6 +878,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+--- !u!114 &1375754908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375754903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1461052177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,7 +1112,6 @@ GameObject:
   - component: {fileID: 1884683823}
   - component: {fileID: 1884683825}
   - component: {fileID: 1884683826}
-  - component: {fileID: 1884683827}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1167,7 +1213,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1884683822
@@ -1218,7 +1264,6 @@ MonoBehaviour:
   cooldownRate: 15
   normalRate: 20
   fastRate: 50
-  evidenceSensitivity: 0.5
 --- !u!50 &1884683825
 Rigidbody2D:
   serializedVersion: 4
@@ -1268,18 +1313,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1884683827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884683819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b5df23afe9cca449215f6813be8268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2075116049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1458,7 @@ SpriteRenderer:
   m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2095617827
