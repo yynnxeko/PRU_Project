@@ -1,29 +1,70 @@
 ﻿using UnityEngine;
 
-public class StashPoint : Interactable
+public class StashPoint : MonoBehaviour
 {
-    void Awake()
+    public float holdTime = 1.5f;
+
+    private bool playerInRange;
+    private float holdTimer;
+    private bool hasStashedThisHold;
+
+    private PlayerInventory inventory;
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        promptMessage = "Hold E to stash evidence";
+        if (other.CompareTag("Player"))
+        {
+            inventory = other.GetComponent<PlayerInventory>();
+            playerInRange = true;
+            Debug.Log("Hold E to stash evidence");
+        }
     }
 
-    public override void HoldInteract(PlayerInteraction player, float holdTime)
+    void OnTriggerExit2D(Collider2D other)
     {
-        // 👉 Hook cho AI suspicion sau
-        Debug.Log($"Stashing... {holdTime:F1}s");
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            holdTimer = 0f;
+            hasStashedThisHold = false;
+            inventory = null;
+        }
     }
 
-    public override void CancelHold(PlayerInteraction player)
+    void Update()
     {
-        Debug.Log("Stash cancelled");
-    }
+        if (!playerInRange || inventory == null) return;
 
-    public override void Interact(PlayerInteraction player)
-    {
-        PlayerInventory inv = player.GetComponent<PlayerInventory>();
-        if (inv == null || !inv.HasEvidence()) return;
+        // ⛔ Nếu đã stash trong lần giữ này → KHÔNG làm gì nữa
+        if (hasStashedThisHold) return;
 
-        inv.StashAll();
-        Debug.Log("Evidence safely hidden");
+        if (Input.GetKey(KeyCode.E))
+        {
+            holdTimer += Time.deltaTime;
+            Debug.Log("Stashing... " + holdTimer.ToString("F2"));
+
+            if (holdTimer >= holdTime)
+            {
+                if (inventory.HasEvidence())
+                {
+                    int amount = inventory.TotalEvidence();
+                    inventory.StashAll();
+
+                    Debug.Log($"Stashed {amount} evidence");
+                }
+                else
+                {
+                    Debug.Log("No evidence to stash");
+                }
+
+                hasStashedThisHold = true; // 🔒 khóa cho đến khi nhả E
+            }
+        }
+        else
+        {
+            // 🔓 Khi nhả E → reset
+            holdTimer = 0f;
+            hasStashedThisHold = false;
+        }
     }
 }

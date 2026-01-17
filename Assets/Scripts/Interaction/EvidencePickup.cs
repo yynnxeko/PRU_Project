@@ -1,26 +1,42 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EvidencePickup : Interactable
+public class EvidencePickup : MonoBehaviour
 {
-    public EvidenceType type;
+    private bool playerInRange;
+    private PlayerInventory inventory;
 
-    void Awake()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        promptMessage = "Press E to pick up evidence";
+        if (other.CompareTag("Player"))
+        {
+            inventory = other.GetComponent<PlayerInventory>();
+            playerInRange = true;
+            Debug.Log("Press E to pick evidence");
+        }
     }
 
-    public override void Interact(PlayerInteraction player)
+    void OnTriggerExit2D(Collider2D other)
     {
-        PlayerInventory inv = player.GetComponent<PlayerInventory>();
-        if (inv == null) return;
-
-        if (!inv.CanPickup())
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Inventory full!");
-            return;
+            playerInRange = false;
+            inventory = null;
         }
+    }
 
-        inv.AddEvidence(type);
-        Destroy(gameObject);
+    void Update()
+    {
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        {
+            if (inventory != null && inventory.CanPickEvidence())
+            {
+                inventory.AddEvidence();
+                Destroy(gameObject); // evidence biến mất
+            }
+            else
+            {
+                Debug.Log("Không còn chỗ chứa evidence");
+            }
+        }
     }
 }

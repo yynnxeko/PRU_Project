@@ -1,56 +1,62 @@
-using UnityEngine;
-using System.Collections.Generic;
-
-public enum EvidenceType
-{
-    USB,
-    Document,
-    Phone
-}
+﻿using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    public int hiddenEvidence = 0;   // giấu trong người
+    public int handEvidence = 0;     // cầm tay
+
     public int maxHidden = 2;
     public int maxHand = 1;
 
-    public List<EvidenceType> hiddenEvidence = new List<EvidenceType>();
-    public List<EvidenceType> handEvidence = new List<EvidenceType>();
-
-    public int TotalCount => hiddenEvidence.Count + handEvidence.Count;
-
-    public bool CanPickup()
+    // ===== KIỂM TRA =====
+    public bool CanPickEvidence()
     {
-        return TotalCount < (maxHidden + maxHand);
+        return hiddenEvidence < maxHidden || handEvidence < maxHand;
     }
 
-    public void AddEvidence(EvidenceType type)
+    // ===== NHẶT =====
+    public void AddEvidence()
     {
-        if (hiddenEvidence.Count < maxHidden)
+        if (hiddenEvidence < maxHidden)
         {
-            hiddenEvidence.Add(type);
+            hiddenEvidence++;
+            Debug.Log("Evidence giấu trong người. Hidden: " + hiddenEvidence);
         }
-        else if (handEvidence.Count < maxHand)
+        else if (handEvidence < maxHand)
         {
-            handEvidence.Add(type);
+            handEvidence++;
+            Debug.Log("Evidence cầm tay. Hand: " + handEvidence);
+        }
+        else
+        {
+            Debug.Log("Không còn slot chứa evidence!");
+        }
+    }
+
+    public int TotalEvidence()
+    {
+        return hiddenEvidence + handEvidence;
+    }
+
+    // ===== GIẤU (STASH) =====
+    public void StashAll()
+    {
+        int total = hiddenEvidence + handEvidence;
+
+        if (total <= 0)
+        {
+            Debug.Log("Không có evidence để giấu");
+            return;
         }
 
-        Debug.Log($"Picked {type} | Hidden:{hiddenEvidence.Count} Hand:{handEvidence.Count}");
+        hiddenEvidence = 0;
+        handEvidence = 0;
+
+        Debug.Log("Đã giấu " + total + " evidence. Slot được reset.");
     }
 
     public bool HasEvidence()
     {
-        return TotalCount > 0;
-    }
-
-    public void StashAll()
-    {
-        hiddenEvidence.Clear();
-        handEvidence.Clear();
-        Debug.Log("All evidence stashed safely");
-    }
-
-    public bool IsOverloaded()
-    {
-        return handEvidence.Count > 0;
+        return hiddenEvidence + handEvidence > 0;
     }
 }
