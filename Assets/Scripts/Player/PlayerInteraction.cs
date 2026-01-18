@@ -1,49 +1,37 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float holdDuration = 1.5f;
-
     Interactable current;
-    float holdTimer;
-    bool isHolding;
 
     void Update()
     {
         if (current == null) return;
 
-        // TAP E
         if (Input.GetKeyDown(KeyCode.E))
         {
-            isHolding = true;
-            holdTimer = 0f;
+            current.holdAction.StartHold();
+            current.OnHoldStart(this);
         }
 
-        // HOLD E
-        if (isHolding && Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
-            holdTimer += Time.deltaTime;
-            current.HoldInteract(this, holdTimer);
+            bool completed = current.holdAction.UpdateHold(Time.deltaTime);
 
-            if (holdTimer >= holdDuration)
+            current.OnHolding(this, current.holdAction.GetProgress());
+
+            if (completed)
             {
-                current.Interact(this);
-                ResetHold();
+                current.OnHoldComplete(this);
+                current.holdAction.CancelHold();
             }
         }
 
-        // RELEASE E
         if (Input.GetKeyUp(KeyCode.E))
         {
-            current.CancelHold(this);
-            ResetHold();
+            current.holdAction.CancelHold();
+            current.OnHoldCancel(this);
         }
-    }
-
-    void ResetHold()
-    {
-        isHolding = false;
-        holdTimer = 0f;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -58,10 +46,16 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.GetComponent<Interactable>() == current)
+        if (current == null) return;
+
+        Interactable i = other.GetComponent<Interactable>();
+        if (i != null && i == current)
         {
+            if (current.holdAction != null)
+                current.holdAction.CancelHold();
+
             current = null;
-            ResetHold();
         }
     }
+
 }
