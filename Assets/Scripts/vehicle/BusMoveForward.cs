@@ -3,54 +3,109 @@ using System.Collections;
 
 public class BusMoveForward : MonoBehaviour
 {
+    [Header("Move")]
     public float speed = 2f;
-    public float moveDistancePx = 100f;
+    public float stopDistancePx = 100f;     // quãng đường tới barrier (pixel)
+    public Vector3 finalTarget;             // tọa độ xe chạy tiếp tới
 
-    public Vector3 teleportTarget = new Vector3(62f, 6.64f, 0f);
+    [Header("Barriers (open together)")]
+    public Animator[] barrierAnimators;     // nhiều barrier
+    public float waitAfterOpen = 0.3f;      // đứng lại sau khi barrier mở
 
-    [Header("Fade")]
-    public CameraFade cameraFade;
-    public float fadeTime = 0.5f;
-    public float darkHoldTime = 2f;
+    [Header("Player & Camera Switch")]
+    public GameObject player;               // Player (disable lúc đầu)
+    public BusCameraFollow cameraFollow;    // script camera follow
 
-    private Vector3 firstTarget;
-    private bool done = false;
+    private Vector3 stopTarget;
+    private bool reachedStop = false;
+    private bool movingToFinal = false;
+    private bool finished = false;
 
     void Start()
     {
-        float moveUnit = moveDistancePx / 32f;
-        firstTarget = transform.position + Vector3.right * moveUnit;
+        // pixel -> unit (PPU = 32)
+        float moveUnit = stopDistancePx / 32f;
+        stopTarget = transform.position + Vector3.right * moveUnit;
+
+        // Ẩn player lúc đầu
+        if (player != null)
+            player.SetActive(false);
+
+        // Camera theo bus lúc đầu
+        if (cameraFollow != null)
+            cameraFollow.target = transform;
     }
 
     void Update()
     {
-        if (done) return;
+        if (finished) return;
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            firstTarget,
-            speed * Time.deltaTime
-        );
-
-        if (Vector3.Distance(transform.position, firstTarget) < 0.01f)
+        // 🚍 Chặng 1: chạy tới điểm dừng
+        if (!reachedStop)
         {
-            done = true;
-            StartCoroutine(TeleportSequence());
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                stopTarget,
+                speed * Time.deltaTime
+            );
+
+            if (Vector3.Distance(transform.position, stopTarget) < 0.01f)
+            {
+                reachedStop = true;
+                StartCoroutine(StopAndOpenBarriers());
+            }
+            return;
+        }
+
+        // 🚍 Chặng 2: chạy tiếp tới đích
+        if (movingToFinal)
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                finalTarget,
+                speed * Time.deltaTime
+            );
+
+            if (Vector3.Distance(transform.position, finalTarget) < 0.01f)
+            {
+                FinishBusFlow();
+            }
         }
     }
 
-    IEnumerator TeleportSequence()
+    IEnumerator StopAndOpenBarriers()
     {
-        // fade tối
-        yield return StartCoroutine(cameraFade.FadeToBlack(fadeTime));
+        // 🚧 mở tất cả barrier song song
+        foreach (Animator anim in barrierAnimators)
+        {
+            if (anim != null)
+                anim.Play("traffic_barrier_open", 0, 0f);
+        }
 
-        // teleport khi màn hình đã đen
-        transform.position = teleportTarget;
+        // ⏱ đứng lại một chút
+        yield return new WaitForSeconds(waitAfterOpen);
 
-        // giữ màn hình đen
-        yield return new WaitForSeconds(darkHoldTime);
+        // ▶️ chạy tiếp
+        movingToFinal = true;
+    }
 
-        // fade sáng lại
-        yield return StartCoroutine(cameraFade.FadeFromBlack(fadeTime));
+    void FinishBusFlow()
+    {
+        finished = true;
+        movingToFinal = false;
+
+        // 👤 hiện player
+        if (player != null)
+        {
+            player.transform.position = transform.position;
+            player.SetActive(true);
+        }
+
+        // 🎥 camera theo player
+        if (cameraFollow != null && player != null)
+            cameraFollow.target = player.transform;
+
+        // ❌ (tuỳ chọn) ẩn bus
+        // gameObject.SetActive(false);
     }
 }
