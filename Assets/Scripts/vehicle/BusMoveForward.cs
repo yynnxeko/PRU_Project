@@ -14,25 +14,19 @@ public class BusMoveForward : MonoBehaviour
 
     [Header("Player & Camera Switch")]
     public GameObject player;
-    public Vector3 playerSpawnPos;           // ✅ vị trí xuất hiện PLAYER
+    public Vector3 playerSpawnPos;           // vị trí xuất hiện PLAYER
     public BusCameraFollow cameraFollow;
 
-    [Header("Spawn Enemy")]
-    public GameObject enemyPrefab;
+    [Header("Enemy (Scene Object)")]
+    public GameObject enemy;
     public Vector3 enemySpawnPos;
 
-    [Header("Spawn NPCs (2 Prefabs)")]
-    public GameObject npcPrefab1;
+    [Header("NPCs (Scene Objects)")]
+    public GameObject npc1;
     public Vector3 npcSpawnPos1;
 
-    public GameObject npcPrefab2;
+    public GameObject npc2;
     public Vector3 npcSpawnPos2;
-
-    // --- PHẦN THÊM MỚI CHO HỘI THOẠI ---
-    [Header("Dialogue Trigger")]
-    public float dialogueTriggerX;          // Tọa độ X để kích hoạt hội thoại
-    private bool hasTriggeredDialogue = false;
-    // -----------------------------------
 
     private Vector3 stopTarget;
     private bool reachedStop = false;
@@ -41,20 +35,15 @@ public class BusMoveForward : MonoBehaviour
 
     void Start()
     {
+        // Tính khoảng dừng (pixel -> unit)
         float moveUnit = stopDistancePx / 32f;
         stopTarget = transform.position + Vector3.right * moveUnit;
 
-        // TỰ ĐỘNG TÍNH TOÁN ĐIỂM KÍCH HOẠT THOẠI
-        // Mặc định: Kích hoạt khi chạy được 1/3 quãng đường tới rào chắn
-        // Bạn có thể sửa thủ công trong Inspector nếu muốn
-        if (dialogueTriggerX == 0)
-        {
-            dialogueTriggerX = transform.position.x + (moveUnit * 0.3f);
-        }
-
-        // Ẩn player lúc đầu
-        if (player != null)
-            player.SetActive(false);
+        // Ẩn toàn bộ nhân vật lúc đầu
+        if (player != null) player.SetActive(false);
+        if (enemy != null) enemy.SetActive(false);
+        if (npc1 != null) npc1.SetActive(false);
+        if (npc2 != null) npc2.SetActive(false);
 
         // Camera theo bus
         if (cameraFollow != null)
@@ -73,16 +62,6 @@ public class BusMoveForward : MonoBehaviour
                 stopTarget,
                 speed * Time.deltaTime
             );
-
-            // --- KIỂM TRA ĐỂ GỌI HỘI THOẠI ---
-            // Nếu xe chạy qua điểm dialogueTriggerX thì gọi thoại
-            if (transform.position.x >= dialogueTriggerX && !hasTriggeredDialogue)
-            {
-                hasTriggeredDialogue = true;
-                DialogueManager dm = FindObjectOfType<DialogueManager>();
-                if (dm != null) dm.StartDialogue();
-            }
-            // ---------------------------------
 
             if (Vector3.Distance(transform.position, stopTarget) < 0.01f)
             {
@@ -110,6 +89,7 @@ public class BusMoveForward : MonoBehaviour
 
     IEnumerator StopAndOpenBarriers()
     {
+        // Mở tất cả barrier
         foreach (Animator anim in barrierAnimators)
         {
             if (anim != null)
@@ -125,7 +105,7 @@ public class BusMoveForward : MonoBehaviour
         finished = true;
         movingToFinal = false;
 
-        // 👤 PLAYER xuất hiện tại vị trí chỉ định
+        // 👤 PLAYER
         if (player != null)
         {
             player.transform.position = playerSpawnPos;
@@ -136,25 +116,28 @@ public class BusMoveForward : MonoBehaviour
         if (cameraFollow != null && player != null)
             cameraFollow.target = player.transform;
 
-        // 👾 Spawn Enemy
-        if (enemyPrefab != null)
+        // 👾 ENEMY
+        if (enemy != null)
         {
-            Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity);
+            enemy.transform.position = enemySpawnPos;
+            enemy.SetActive(true);
         }
 
-        // 👥 Spawn NPC 1
-        if (npcPrefab1 != null)
+        // 👥 NPC 1
+        if (npc1 != null)
         {
-            Instantiate(npcPrefab1, npcSpawnPos1, Quaternion.identity);
+            npc1.transform.position = npcSpawnPos1;
+            npc1.SetActive(true);
         }
 
-        // 👥 Spawn NPC 2
-        if (npcPrefab2 != null)
+        // 👥 NPC 2
+        if (npc2 != null)
         {
-            Instantiate(npcPrefab2, npcSpawnPos2, Quaternion.identity);
+            npc2.transform.position = npcSpawnPos2;
+            npc2.SetActive(true);
         }
 
-        // ❌ Tuỳ chọn: ẩn bus
+        // ❌ Tuỳ chọn: ẩn bus sau khi xong
         // gameObject.SetActive(false);
     }
 }
