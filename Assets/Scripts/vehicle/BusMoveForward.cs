@@ -28,6 +28,12 @@ public class BusMoveForward : MonoBehaviour
     public GameObject npcPrefab2;
     public Vector3 npcSpawnPos2;
 
+    // --- PHẦN THÊM MỚI CHO HỘI THOẠI ---
+    [Header("Dialogue Trigger")]
+    public float dialogueTriggerX;          // Tọa độ X để kích hoạt hội thoại
+    private bool hasTriggeredDialogue = false;
+    // -----------------------------------
+
     private Vector3 stopTarget;
     private bool reachedStop = false;
     private bool movingToFinal = false;
@@ -37,6 +43,14 @@ public class BusMoveForward : MonoBehaviour
     {
         float moveUnit = stopDistancePx / 32f;
         stopTarget = transform.position + Vector3.right * moveUnit;
+
+        // TỰ ĐỘNG TÍNH TOÁN ĐIỂM KÍCH HOẠT THOẠI
+        // Mặc định: Kích hoạt khi chạy được 1/3 quãng đường tới rào chắn
+        // Bạn có thể sửa thủ công trong Inspector nếu muốn
+        if (dialogueTriggerX == 0)
+        {
+            dialogueTriggerX = transform.position.x + (moveUnit * 0.3f);
+        }
 
         // Ẩn player lúc đầu
         if (player != null)
@@ -59,6 +73,16 @@ public class BusMoveForward : MonoBehaviour
                 stopTarget,
                 speed * Time.deltaTime
             );
+
+            // --- KIỂM TRA ĐỂ GỌI HỘI THOẠI ---
+            // Nếu xe chạy qua điểm dialogueTriggerX thì gọi thoại
+            if (transform.position.x >= dialogueTriggerX && !hasTriggeredDialogue)
+            {
+                hasTriggeredDialogue = true;
+                DialogueManager dm = FindObjectOfType<DialogueManager>();
+                if (dm != null) dm.StartDialogue();
+            }
+            // ---------------------------------
 
             if (Vector3.Distance(transform.position, stopTarget) < 0.01f)
             {
