@@ -9,12 +9,24 @@ public class BusMoveForward : MonoBehaviour
     public Vector3 finalTarget;             // tọa độ xe chạy tiếp tới
 
     [Header("Barriers (open together)")]
-    public Animator[] barrierAnimators;     // nhiều barrier
-    public float waitAfterOpen = 0.3f;      // đứng lại sau khi barrier mở
+    public Animator[] barrierAnimators;
+    public float waitAfterOpen = 0.3f;
 
     [Header("Player & Camera Switch")]
-    public GameObject player;               // Player (disable lúc đầu)
-    public BusCameraFollow cameraFollow;    // script camera follow
+    public GameObject player;
+    public Vector3 playerSpawnPos;           // ✅ vị trí xuất hiện PLAYER
+    public BusCameraFollow cameraFollow;
+
+    [Header("Spawn Enemy")]
+    public GameObject enemyPrefab;
+    public Vector3 enemySpawnPos;
+
+    [Header("Spawn NPCs (2 Prefabs)")]
+    public GameObject npcPrefab1;
+    public Vector3 npcSpawnPos1;
+
+    public GameObject npcPrefab2;
+    public Vector3 npcSpawnPos2;
 
     private Vector3 stopTarget;
     private bool reachedStop = false;
@@ -23,7 +35,6 @@ public class BusMoveForward : MonoBehaviour
 
     void Start()
     {
-        // pixel -> unit (PPU = 32)
         float moveUnit = stopDistancePx / 32f;
         stopTarget = transform.position + Vector3.right * moveUnit;
 
@@ -31,7 +42,7 @@ public class BusMoveForward : MonoBehaviour
         if (player != null)
             player.SetActive(false);
 
-        // Camera theo bus lúc đầu
+        // Camera theo bus
         if (cameraFollow != null)
             cameraFollow.target = transform;
     }
@@ -40,7 +51,7 @@ public class BusMoveForward : MonoBehaviour
     {
         if (finished) return;
 
-        // 🚍 Chặng 1: chạy tới điểm dừng
+        // 🚍 Chặng 1: chạy tới barrier
         if (!reachedStop)
         {
             transform.position = Vector3.MoveTowards(
@@ -57,7 +68,7 @@ public class BusMoveForward : MonoBehaviour
             return;
         }
 
-        // 🚍 Chặng 2: chạy tiếp tới đích
+        // 🚍 Chặng 2: chạy tới đích
         if (movingToFinal)
         {
             transform.position = Vector3.MoveTowards(
@@ -75,17 +86,13 @@ public class BusMoveForward : MonoBehaviour
 
     IEnumerator StopAndOpenBarriers()
     {
-        // 🚧 mở tất cả barrier song song
         foreach (Animator anim in barrierAnimators)
         {
             if (anim != null)
                 anim.Play("traffic_barrier_open", 0, 0f);
         }
 
-        // ⏱ đứng lại một chút
         yield return new WaitForSeconds(waitAfterOpen);
-
-        // ▶️ chạy tiếp
         movingToFinal = true;
     }
 
@@ -94,18 +101,36 @@ public class BusMoveForward : MonoBehaviour
         finished = true;
         movingToFinal = false;
 
-        // 👤 hiện player
+        // 👤 PLAYER xuất hiện tại vị trí chỉ định
         if (player != null)
         {
-            player.transform.position = transform.position;
+            player.transform.position = playerSpawnPos;
             player.SetActive(true);
         }
 
-        // 🎥 camera theo player
+        // 🎥 Camera theo player
         if (cameraFollow != null && player != null)
             cameraFollow.target = player.transform;
 
-        // ❌ (tuỳ chọn) ẩn bus
+        // 👾 Spawn Enemy
+        if (enemyPrefab != null)
+        {
+            Instantiate(enemyPrefab, enemySpawnPos, Quaternion.identity);
+        }
+
+        // 👥 Spawn NPC 1
+        if (npcPrefab1 != null)
+        {
+            Instantiate(npcPrefab1, npcSpawnPos1, Quaternion.identity);
+        }
+
+        // 👥 Spawn NPC 2
+        if (npcPrefab2 != null)
+        {
+            Instantiate(npcPrefab2, npcSpawnPos2, Quaternion.identity);
+        }
+
+        // ❌ Tuỳ chọn: ẩn bus
         // gameObject.SetActive(false);
     }
 }
