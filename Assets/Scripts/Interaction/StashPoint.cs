@@ -1,70 +1,65 @@
 ﻿using UnityEngine;
 
-public class StashPoint : MonoBehaviour
+public class StashPoint : Interactable
 {
-    public float holdTime = 1.5f;
+    PlayerInventory inventory;
+    bool completedThisHold;
 
-    private bool playerInRange;
-    private float holdTimer;
-    private bool hasStashedThisHold;
-
-    private PlayerInventory inventory;
+    void Awake()
+    {
+        promptMessage = "Hold E to stash evidence";
+        holdAction.requiredHoldTime = 1.5f;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            inventory = other.GetComponent<PlayerInventory>();
-            playerInRange = true;
-            Debug.Log("Hold E to stash evidence");
-        }
+        if (!other.CompareTag("Player")) return;
+
+        inventory = other.GetComponent<PlayerInventory>();
+        completedThisHold = false;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            holdTimer = 0f;
-            hasStashedThisHold = false;
-            inventory = null;
-        }
+        if (!other.CompareTag("Player")) return;
+
+        inventory = null;
+        completedThisHold = false;
+        holdAction.CancelHold();
     }
 
-    void Update()
+    public override void OnHoldStart(PlayerInteraction player)
     {
-        if (!playerInRange || inventory == null) return;
+        completedThisHold = false;
+    }
 
-        // ⛔ Nếu đã stash trong lần giữ này → KHÔNG làm gì nữa
-        if (hasStashedThisHold) return;
+    public override void OnHolding(PlayerInteraction player, float progress)
+    {
+        // Optional: update UI progress bar
+        // Debug.Log($"Stashing... {progress:P0}");
+    }
 
-        if (Input.GetKey(KeyCode.E))
+    public override void OnHoldCancel(PlayerInteraction player)
+    {
+        completedThisHold = false;
+    }
+
+    public override void OnHoldComplete(PlayerInteraction player)
+    {
+        if (completedThisHold) return;
+        if (inventory == null) return;
+
+        if (!inventory.HasEvidence())
         {
-            holdTimer += Time.deltaTime;
-            Debug.Log("Stashing... " + holdTimer.ToString("F2"));
-
-            if (holdTimer >= holdTime)
-            {
-                if (inventory.HasEvidence())
-                {
-                    int amount = inventory.TotalEvidence();
-                    inventory.StashAll();
-
-                    Debug.Log($"Stashed {amount} evidence");
-                }
-                else
-                {
-                    Debug.Log("No evidence to stash");
-                }
-
-                hasStashedThisHold = true; // 🔒 khóa cho đến khi nhả E
-            }
+            Debug.Log("No evidence to stash");
+            return;
         }
-        else
-        {
-            // 🔓 Khi nhả E → reset
-            holdTimer = 0f;
-            hasStashedThisHold = false;
-        }
+
+        int amount = inventory.TotalEvidence();
+        inventory.StashAll();
+
+        Debug.Log($"Stashed {amount} evidence");
+
+        completedThisHold = true;
     }
 }
