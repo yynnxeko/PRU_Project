@@ -3137,7 +3137,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 197408531
+  m_SortingLayerID: -86734187
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 332182a78c5a9114e9549881692f8596, type: 3}
@@ -24966,7 +24966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4dd986cf5ee634f8322f0beb9f1af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdDuration: 1.5
 --- !u!95 &1677064334
 Animator:
   serializedVersion: 5
@@ -25026,7 +25025,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1887555535
+  m_SortingLayerID: 758676253
   m_SortingLayer: 4
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d2ccfdf12d22bb74f83990fa7e0648e9, type: 3}
@@ -25138,7 +25137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   rb: {fileID: 1677064337}
-  animator: {fileID: 0}
+  animator: {fileID: 1677064334}
   faceDir: {x: 0, y: -1}
 --- !u!4 &1677064340
 Transform:
