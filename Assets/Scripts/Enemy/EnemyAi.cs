@@ -10,16 +10,16 @@ public enum EnemyState
 
 public class EnemyAi : MonoBehaviour
 {
-    [Header("--- COMPONENTS (QUAN TRỌNG) ---")]
+    [Header("--- COMPONENTS ---")]
     public Animator anim;
-    public Transform rotatingPart;       // Kéo GameObject "RotatingPart" (chứa đèn) vào đây
+    public Transform rotatingPart;
 
     [Header("--- CÀI ĐẶT CHUNG ---")]
     public EnemyState currentState = EnemyState.Idle;
     public Transform player;
     public LayerMask obstacleMask;
 
-    [Header("--- UI SUSPICION ---")]
+    [Header("--- UI ---")]
     public Image suspicionBarFill;
     public GameObject suspicionCanvas;
 
@@ -68,6 +68,9 @@ public class EnemyAi : MonoBehaviour
 
     private Quaternion patrolBaseRotation;
     private bool hasSetBaseRotation = false;
+
+    // Biến lưu hướng nhìn cuối cùng (để cập nhật LastInput)
+    private Vector2 lastFaceDir = Vector2.down;
 
     void Awake()
     {
@@ -126,20 +129,20 @@ public class EnemyAi : MonoBehaviour
         }
 
         UpdateVisuals();
+
+        // CẬP NHẬT ANIMATION 5 BIẾN
         UpdateAnimation();
 
-        // --- FIX LỖI 1: CHẶN XUNG ĐỘT XOAY ---
-        // Kiểm tra xem đã đến đích chưa
+        // Xử lý xoay đèn khi di chuyển
         bool isArrivedAtPatrolPoint = (currentState == EnemyState.Idle && !agent.pathPending && agent.remainingDistance <= 0.5f);
-
-        // Chỉ xoay đèn theo hướng di chuyển nếu ĐANG ĐI và KHÔNG PHẢI đang đứng chờ ở điểm patrol
         if (agent.velocity.sqrMagnitude > 0.1f && !isArrivedAtPatrolPoint)
         {
             LookAtTarget(transform.position + agent.velocity);
-            hasSetBaseRotation = false; // Reset cờ để lần sau dừng lại sẽ lưu góc mới
+            hasSetBaseRotation = false;
         }
     }
 
+    // --- HÀM ANIMATION CHUẨN (GIỐNG PLAYER) ---
     void UpdateAnimation()
     {
         if (anim == null) return;
@@ -147,26 +150,48 @@ public class EnemyAi : MonoBehaviour
         bool isMoving = agent.velocity.sqrMagnitude > 0.1f;
         anim.SetBool("IsMoving", isMoving);
 
-        Vector3 faceDir = Vector3.up;
-
         if (isMoving)
         {
-            faceDir = agent.velocity.normalized;
+            // --- TRƯỜNG HỢP 1: ĐANG DI CHUYỂN ---
+            Vector3 moveDir = agent.velocity.normalized;
+
+            // Gửi InputX/Y để chạy animation Walk
+            anim.SetFloat("InputX", moveDir.x);
+            anim.SetFloat("InputY", moveDir.y);
+
+            // Lưu lại hướng này vào LastInput để dùng khi dừng lại
+            lastFaceDir = new Vector2(moveDir.x, moveDir.y);
+            anim.SetFloat("LastInputX", lastFaceDir.x);
+            anim.SetFloat("LastInputY", lastFaceDir.y);
         }
         else
         {
-            if (rotatingPart != null)
-            {
-                // Mẹo nhỏ: Làm tròn hướng đèn để Animator dễ bắt hướng hơn
-                Vector3 lightDir = rotatingPart.up;
-                if (Mathf.Abs(lightDir.x) > 0.3f) faceDir = new Vector3(Mathf.Sign(lightDir.x), 0, 0);
-                else faceDir = new Vector3(0, Mathf.Sign(lightDir.y), 0);
-            }
-            else faceDir = transform.up;
-        }
+            // --- TRƯỜNG HỢP 2: ĐANG ĐỨNG YÊN ---
 
-        anim.SetFloat("InputX", faceDir.x);
-        anim.SetFloat("InputY", faceDir.y);
+            // InputX/Y về 0 (vì không di chuyển)
+            anim.SetFloat("InputX", 0);
+            anim.SetFloat("InputY", 0);
+
+            // Kiểm tra xem có đang ở chế độ "Lắc Đèn" (Patrol Wait) không?
+            bool isWaitingAtPoint = (currentState == EnemyState.Idle && !agent.pathPending && agent.remainingDistance <= 0.5f);
+
+            if (isWaitingAtPoint && rotatingPart != null)
+            {
+                // Nếu đang lắc đèn: Cập nhật LastInput theo hướng đèn
+                // Để nhân vật quay mặt theo đèn
+                Vector3 lightDir = rotatingPart.up;
+
+                if (Mathf.Abs(lightDir.x) > 0.3f)
+                    lastFaceDir = new Vector2(Mathf.Sign(lightDir.x), 0);
+                else
+                    lastFaceDir = new Vector2(0, Mathf.Sign(lightDir.y));
+            }
+            // Nếu không lắc đèn: Giữ nguyên lastFaceDir cũ (hướng nhìn cuối cùng khi dừng)
+
+            // Gửi LastInput vào Animator để nó hiện đúng hình Idle
+            anim.SetFloat("LastInputX", lastFaceDir.x);
+            anim.SetFloat("LastInputY", lastFaceDir.y);
+        }
     }
 
     void HandleIdleOrPatrol()
@@ -180,18 +205,13 @@ public class EnemyAi : MonoBehaviour
         {
             patrolTimer += Time.deltaTime;
 
-            // --- FIX LỖI 2: LƯU GÓC SẠCH SẼ ---
             if (!hasSetBaseRotation)
             {
-                // Lấy góc Z hiện tại thôi để tránh lỗi quaternion quay 360
                 float currentZ = (rotatingPart != null) ? rotatingPart.eulerAngles.z : transform.eulerAngles.z;
                 patrolBaseRotation = Quaternion.Euler(0, 0, currentZ);
-
                 hasSetBaseRotation = true;
             }
 
-            // --- FIX LỖI 3: DÙNG PATROL TIMER THAY VÌ TIME.TIME ---
-            // patrolTimer bắt đầu từ 0 -> Sin(0) = 0 -> Đèn lắc từ từ, không bị giật
             float wave = Mathf.Sin(patrolTimer * patrolRotationSpeed) * patrolRotationAngle;
 
             if (rotatingPart != null)
@@ -209,7 +229,7 @@ public class EnemyAi : MonoBehaviour
         }
     }
 
-    // ... (Giữ nguyên các hàm còn lại y hệt) ...
+    // ... CÁC HÀM PHÍA DƯỚI GIỮ NGUYÊN (Copy lại từ code cũ) ...
     void HandleSuspicious()
     {
         if (suspicionLevel <= 0) { ChangeState(EnemyState.Return); return; }
