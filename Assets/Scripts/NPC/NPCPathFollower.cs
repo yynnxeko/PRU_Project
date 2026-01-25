@@ -2,53 +2,79 @@
 
 public class NPCPathFollower : MonoBehaviour
 {
+    [Header("Path")]
     public Transform[] waypoints;
     public float speed = 2f;
+    public float arriveDistance = 0.1f;
 
     int currentIndex;
     bool isPaused;
 
-    public bool IsFinished => currentIndex >= waypoints.Length;
+    // Debug trạng thái (xem trong Inspector)
+    [Header("Debug (Read Only)")]
+    [SerializeField] bool isFinished;
+
+    public bool IsFinished => isFinished;
 
     void Update()
     {
-        Debug.Log("NPC Update: IsFinished=" + IsFinished + " isPaused=" + isPaused);
-        if (IsFinished || isPaused) return;
+        // 🔒 Khóa khi đang bus cutscene
+        if (GameFlow.BusCutscene) return;
+
+        UpdateFinishedState();
+
+        if (isFinished || isPaused) return;
 
         Move();
     }
 
+    void UpdateFinishedState()
+    {
+        isFinished = waypoints == null
+                     || waypoints.Length == 0
+                     || currentIndex >= waypoints.Length;
+    }
+
     void Move()
     {
+        if (currentIndex < 0 || currentIndex >= waypoints.Length) return;
+
         Transform target = waypoints[currentIndex];
+
         transform.position = Vector2.MoveTowards(
             transform.position,
             target.position,
             speed * Time.deltaTime
         );
 
-        if (Vector2.Distance(transform.position, target.position) < 0.1f)
+        if (Vector2.Distance(transform.position, target.position) <= arriveDistance)
+        {
             currentIndex++;
+        }
     }
 
-    // 🔹 NPC DỪNG
+    // ======================
+    // CONTROL
+    // ======================
     public void Pause()
     {
-        Debug.Log("NPC PAUSED");
+        if (isPaused) return;
         isPaused = true;
+        Debug.Log("[NPC] PAUSED");
     }
 
-    // 🔹 NPC ĐI TIẾP
     public void Resume()
     {
-        Debug.Log("NPC RESUMED");
+        if (!isPaused) return;
         isPaused = false;
+        Debug.Log("[NPC] RESUMED");
     }
-
 
     public void ResetPath()
     {
         currentIndex = 0;
         isPaused = false;
+        UpdateFinishedState();
+        Debug.Log("[NPC] RESET PATH");
     }
 }

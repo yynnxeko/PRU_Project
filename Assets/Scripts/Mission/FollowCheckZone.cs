@@ -1,24 +1,60 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class FollowCheckZone : MonoBehaviour
 {
-    public bool PlayerInside { get; private set; }
+    [Header("Assign Player Here")]
+    [Tooltip("Kéo Player ROOT hoặc Empty Player vào đây")]
+    public Transform player;
+
+    [Header("Debug (Read Only)")]
+    [SerializeField] bool playerInside;
+    public bool PlayerInside => playerInside;
+
+    int insideCount = 0;
+
+    void Reset()
+    {
+        // Tự bật IsTrigger cho đỡ quên
+        var col = GetComponent<BoxCollider2D>();
+        col.isTrigger = true;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerInside = true;
-            Debug.Log("Player inside follow zone");
-        }
+        if (!IsPlayer(other)) return;
+
+        insideCount++;
+        playerInside = true;
+
+        Debug.Log("[FollowZone] Player ENTER | count = " + insideCount);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!IsPlayer(other)) return;
+
+        insideCount--;
+        if (insideCount <= 0)
         {
-            PlayerInside = false;
-            Debug.Log("Player left follow zone");
+            insideCount = 0;
+            playerInside = false;
+            Debug.Log("[FollowZone] Player EXIT");
         }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (IsPlayer(other))
+            playerInside = true;
+    }
+
+    bool IsPlayer(Collider2D other)
+    {
+        if (player == null) return false;
+
+        // Nhận collider ở root hoặc con của player
+        return other.transform == player
+            || other.transform.IsChildOf(player);
     }
 }
