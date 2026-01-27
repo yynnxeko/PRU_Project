@@ -21,6 +21,7 @@ public class SpeechBubble : MonoBehaviour
 
     public void Show(string message, float duration = -1f)
     {
+        Debug.Log("GOI HAM SHOW ROI NE!");
         if (duration <= 0f) duration = defaultDuration;
 
         if (routine != null)
