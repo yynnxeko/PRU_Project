@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Obstacle
   - ground
-  - 
-  - 
+  - baoVe
+  - nguoiChoi
   - 
   - 
   - 
@@ -44,14 +44,26 @@ TagManager:
   - name: Ground
     uniqueID: 3584984463
     locked: 0
+  - name: Chest
+    uniqueID: 1693331243
+    locked: 0
   - name: Ground_02
     uniqueID: 3785895087
+    locked: 0
+  - name: Car
+    uniqueID: 4208233109
+    locked: 0
+  - name: npc
+    uniqueID: 474978037
     locked: 0
   - name: Player
     uniqueID: 758676253
     locked: 0
   - name: Buildings
     uniqueID: 4291477815
+    locked: 0
+  - name: Door
+    uniqueID: 2433401819
     locked: 0
   - name: Decorations
     uniqueID: 2405315913
@@ -61,4 +73,7 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 3282206563
+    locked: 0
+  - name: chat
+    uniqueID: 1347641613
     locked: 0
