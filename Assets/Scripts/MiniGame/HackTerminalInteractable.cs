@@ -3,6 +3,7 @@
 public class HackTerminalInteractable : Interactable
 {
     public HackLevel hackLevel = HackLevel.Level1;
+    PlayerInteraction currentPlayer;
 
     public override void OnHoldComplete(PlayerInteraction player)
     {
@@ -14,14 +15,14 @@ public class HackTerminalInteractable : Interactable
             return;
         }
 
-        HackUIManager.Instance.StartHack(hackLevel, success =>
-        {
-            OnHackFinished(success, player);
-        });
+        // lưu player lại nếu cần dùng sau
+        currentPlayer = player;
+
+        // OpenTerminal cần Action<bool>  => truyền hàm nhận đúng 1 bool
+        HackUIManager.Instance.OpenTerminal(OnHackFinished);
     }
 
-
-    void OnHackFinished(bool success, PlayerInteraction player)
+    void OnHackFinished(bool success)
     {
         if (!success)
         {
@@ -34,7 +35,7 @@ public class HackTerminalInteractable : Interactable
         switch (hackLevel)
         {
             case HackLevel.Level1:
-                // TODO: xử lý khi hack L1 thành công
+                // TODO: xử lý khi hack L1 thành công, có thể dùng currentPlayer
                 break;
             case HackLevel.Level2:
                 // TODO: xử lý khi hack L2 thành công
