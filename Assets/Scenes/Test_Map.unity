@@ -35024,6 +35024,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1178056196}
+  - component: {fileID: 1178056197}
   m_Layer: 0
   m_Name: Computer
   m_TagString: Untagged
@@ -35046,6 +35047,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1178056197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178056195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6830555283973bc48ab901d6421e8136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desktopCanvas: {fileID: 1248677439}
+  player: {fileID: 1462566279}
 --- !u!114 &1179043779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35827,8 +35842,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1986623982424255272, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1248677442}
   m_SourcePrefab: {fileID: 100100000, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+--- !u!1 &1248677439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1986623982424255272, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+  m_PrefabInstance: {fileID: 1248677438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1248677440 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1566032370810888653, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+  m_PrefabInstance: {fileID: 1248677438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1248677441 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8165707989811864055, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+  m_PrefabInstance: {fileID: 1248677438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1248677442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248677439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e7af62b6cdae9478f7ea9b499534ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowPrefab: {fileID: 1248677439}
+  windowsParent: {fileID: 1248677441}
+  taskbarContent: {fileID: 1248677440}
+  computer: {fileID: 1178056197}
+  iconButtons: []
 --- !u!1 &1253162534
 GameObject:
   m_ObjectHideFlags: 0
