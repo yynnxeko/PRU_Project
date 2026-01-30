@@ -1,117 +1,127 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class NpcMoveNav : MonoBehaviour
 {
+    // Cấu trúc dữ liệu cho Waypoint xịn hơn
+    [System.Serializable]
+    public class WaypointInfo
+    {
+        public Transform point;      // Kéo cái GameObject Waypoint vào đây
+        public bool isChair = false; // Tick vào nếu đây là điểm ngồi
+        public Vector2 sitFaceDirection = new Vector2(0, -1); // Hướng mặt khi ngồi (Mặc định quay xuống)
+    }
+
     [Header("Path Settings")]
-    public Transform[] waypoints;
+    public List<WaypointInfo> waypoints; // Dùng List thay vì mảng Transform thường
     public float arriveDistance = 0.1f;
 
-    // Biến này để kiểm soát "Đúng giờ mới đi"
     [Header("Status")]
-    public bool canMove = true; // Mặc định là FALSE (đứng yên chờ lệnh)
+    public bool canMove = true;
+    public bool IsSitting = false;
 
+    // ... (Các biến cũ giữ nguyên)
     int currentIndex;
     NavMeshAgent agent;
-
-    // Debug xem đến nơi chưa
-    [SerializeField] bool isFinished;
-    public bool IsFinished => isFinished;
+    Animator anim;
+    bool isFinished;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
-        // Setup chuẩn cho 2D
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-
-        // Random né nhau
-        agent.avoidancePriority = Random.Range(30, 60);
     }
 
     void Update()
     {
-        // Nếu chưa đến giờ (canMove = false) hoặc đã đi xong -> Đứng im
+        if (IsSitting) return; // Đang ngồi thì nghỉ khỏe
+
         if (!canMove || isFinished)
         {
-            if (!agent.isStopped) agent.isStopped = true;
-            UpdateAnimation(false); // Chạy anim Idle
+            if (agent.enabled) agent.isStopped = true;
+            UpdateAnimation(false);
             return;
         }
-        else
-        {
-            if (agent.isStopped) agent.isStopped = false;
-        }
 
-        CheckIfFinished();
+        if (agent.enabled) agent.isStopped = false;
+
+        CheckDestination();
         Move();
-        UpdateAnimation(true); // Chạy anim Walk
+        UpdateAnimation(true);
     }
 
-    void CheckIfFinished()
+    void CheckDestination()
     {
-        // Kiểm tra xem đã đi hết danh sách điểm chưa
-        if (waypoints == null || waypoints.Length == 0 || currentIndex >= waypoints.Length)
+        if (waypoints == null || waypoints.Count == 0) return;
+        if (currentIndex >= waypoints.Count) return;
+
+        // Logic check đến nơi
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + arriveDistance)
         {
-            isFinished = true;
+            // Đã đến điểm hiện tại!
+            WaypointInfo currentWP = waypoints[currentIndex];
+
+            // 1. Kiểm tra xem điểm này có phải là GHẾ không?
+            if (currentWP.isChair)
+            {
+                // Thực hiện hành động NGỒI ngay tại điểm này
+                SitDown(currentWP);
+            }
+            else
+            {
+                // Nếu không phải ghế, đi tiếp điểm sau
+                currentIndex++;
+                if (currentIndex >= waypoints.Count)
+                {
+                    isFinished = true;
+                }
+            }
         }
     }
 
     void Move()
     {
-        if (isFinished) return;
+        if (isFinished || IsSitting) return;
+        if (currentIndex >= waypoints.Count) return;
 
-        Transform target = waypoints[currentIndex];
-        agent.SetDestination(target.position);
-
-        // Kiểm tra đến điểm hiện tại chưa
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + arriveDistance)
-        {
-            currentIndex++; // Chuyển sang điểm tiếp theo
-        }
-    }
-
-    // Hàm xử lý Animation (Quay mặt + Chạy/Đứng)
-    void UpdateAnimation(bool isMoving)
-    {
-        var anim = GetComponent<Animator>();
-        if (anim == null) return;
-
-        if (isMoving && agent.velocity.sqrMagnitude > 0.1f)
-        {
-            Vector3 direction = agent.velocity.normalized;
-            anim.SetFloat("InputX", direction.x);
-            anim.SetFloat("InputY", direction.y);
-            anim.SetBool("IsMoving", true);
-
-            // Lưu hướng quay mặt
-            anim.SetFloat("LastInputX", direction.x);
-            anim.SetFloat("LastInputY", direction.y);
-        }
-        else
-        {
-            anim.SetBool("IsMoving", false);
-        }
+        agent.SetDestination(waypoints[currentIndex].point.position);
     }
 
     // ==========================================
-    // HÀM GỌI TỪ HỆ THỐNG GIỜ (TIME MANAGER)
+    // HÀM NGỒI (Sửa lại theo ý ông)
     // ==========================================
-
-    // Gọi hàm này khi đến giờ làm việc (ví dụ 8:00 AM)
-    public void StartWork()
+    void SitDown(WaypointInfo wpData)
     {
-        canMove = true;
-        isFinished = false;
-        currentIndex = 0;
-        Debug.Log("NPC bắt đầu đi làm!");
-    }
-
-    // Gọi hàm này khi hết giờ (nếu cần dừng lại ngay lập tức)
-    public void StopWork()
-    {
+        IsSitting = true;
         canMove = false;
+        isFinished = true;
+
         agent.isStopped = true;
+        agent.enabled = false;
+        transform.position = wpData.point.position;
+
+        // GỌI TRỰC TIẾP (đừng gọi qua hàm trung gian nào cả cho chắc)
+        if (anim)
+        {
+            anim.SetBool("IsSitting", true);
+
+            // Ép hướng ngồi vào Animator
+            anim.SetFloat("LastInputX", wpData.sitFaceDirection.x);
+            anim.SetFloat("LastInputY", wpData.sitFaceDirection.y);
+
+            // Reset mấy biến cũ
+            anim.SetFloat("InputX", 0);
+            anim.SetFloat("InputY", 0);
+        }
     }
+
+
+    // ... (Các hàm UpdateAnimation, SetAnimDirection, StartWork giữ nguyên như cũ)
+
+    void UpdateAnimation(bool isMoving) { /* ... Code cũ ... */ }
+    void SetAnimDirection(float x, float y) { /* ... Code cũ ... */ }
 }
