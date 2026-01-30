@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\minigame\\hackuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\enemy\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|d:\\project\\projectmonhoc\\pru\\pru_project\\assets\\scripts\\minigame\\hackuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\minigame\\hackuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,11 +15,11 @@
       "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\minigame\\hackterminalinteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|d:\\project\\projectmonhoc\\pru\\pru_project\\assets\\scripts\\computer\\appwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\computer\\appwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\computer\\appwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|d:\\project\\projectmonhoc\\pru\\pru_project\\assets\\scripts\\computer\\desktopmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\computer\\desktopmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\computer\\desktopmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\minigame\\hacklevel1ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\minigame\\hacklevel1ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\enemy\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy\\enemyai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3DE4AED1-8F00-6BAB-56C8-36301D9995C8}|Assembly-CSharp.csproj|D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 23,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Bookmark",
@@ -114,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AppWindow.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\Computer\\AppWindow.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Computer\\AppWindow.cs",
@@ -122,12 +122,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Computer\\AppWindow.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAAABoAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T14:31:04.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-27T14:31:04.358Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "DesktopManager.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\Computer\\DesktopManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Computer\\DesktopManager.cs",
@@ -135,12 +134,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Computer\\DesktopManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T14:30:30.517Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-27T14:30:30.517Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Computer.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\Computer\\Computer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Computer\\Computer.cs",
@@ -152,15 +150,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "EnemyAi.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\Enemy\\EnemyAi.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy\\EnemyAi.cs",
               "ToolTip": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\Enemy\\EnemyAi.cs",
               "RelativeToolTip": "Assets\\Scripts\\Enemy\\EnemyAi.cs",
-              "ViewState": "AgIAAFYBAAAAAAAAAAAuwH8BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHkAAAAAAAAAAAArwIgAAACBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T16:06:46.114Z"
+              "WhenOpened": "2026-01-24T16:06:46.114Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -188,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "HackTerminalInteractable.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\MiniGame\\HackTerminalInteractable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MiniGame\\HackTerminalInteractable.cs",
@@ -196,8 +195,7 @@
               "RelativeToolTip": "Assets\\Scripts\\MiniGame\\HackTerminalInteractable.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T01:01:41.715Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-24T01:01:41.715Z"
             },
             {
               "$type": "Document",
@@ -213,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "HackLevel1UI.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\MiniGame\\HackLevel1UI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MiniGame\\HackLevel1UI.cs",
@@ -225,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "HackUIManager.cs",
               "DocumentMoniker": "D:\\Project\\ProjectMonHoc\\PRU\\PRU_Project\\Assets\\Scripts\\MiniGame\\HackUIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MiniGame\\HackUIManager.cs",
