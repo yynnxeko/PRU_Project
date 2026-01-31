@@ -47,7 +47,7 @@ public class CutsceneController : MonoBehaviour
         move2 = StartCoroutine(Follow(nv2, nv1, dist12));
         move3 = StartCoroutine(Follow(nv3, nv2, dist23));
         move4 = StartCoroutine(Follow(nv4, nv3, dist34));
-
+            
         yield return new WaitUntil(() =>
             Vector3.Distance(nv1.transform.position, sp2.position) < 0.1f
         );
