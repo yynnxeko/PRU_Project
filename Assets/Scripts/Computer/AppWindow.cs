@@ -10,22 +10,51 @@ public class AppWindow : MonoBehaviour, IDragHandler, IPointerClickHandler
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private Button closeBtn;
     [SerializeField] private CanvasGroup canvasGroup;
+    public Transform contentRoot;
     private RectTransform rect;
 
     public void Init(string name, DesktopManager mgr)
     {
-        appName = name; manager = mgr;
+        appName = name;
+        manager = mgr;
+
         rect = GetComponent<RectTransform>();
-        titleText ??= transform.Find("Frame/TitleBar/Title").GetComponent<TextMeshProUGUI>();
-        titleText.text = name;
-        closeBtn ??= transform.Find("Frame/TitleBar/CloseBtn").GetComponent<Button>();
-        closeBtn.onClick.AddListener(() => manager.CloseWindow(this));
-        canvasGroup = GetComponent<CanvasGroup>() ?? gameObject.AddComponent<CanvasGroup>();
+
+        // TÌM LẠI CÁC THÀNH PHẦN NẾU CHƯA KÉO TRONG INSPECTOR
+        if (titleText == null)
+        {
+            var t = transform.Find("Frame/TitleBar/Title");
+            if (t != null) titleText = t.GetComponent<TextMeshProUGUI>();
+        }
+        if (closeBtn == null)
+        {
+            var t = transform.Find("Frame/TitleBar/CloseBtn");
+            if (t != null) closeBtn = t.GetComponent<Button>();
+        }
+        if (canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+            if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        // CHỈ GỌI KHI KHÔNG NULL
+        if (titleText != null) titleText.text = name;
+        if (closeBtn != null)
+        {
+            closeBtn.onClick.RemoveAllListeners();
+            closeBtn.onClick.AddListener(() => manager.CloseWindow(this));
+        }
+
         canvasGroup.alpha = 1f;
-        // Nội dung app
-        Transform content = transform.Find("Content");
-        if (content) content.GetComponent<Text>().text = "App " + name + " đang chạy!";
+
+        // nếu chưa gán contentRoot thì tìm mặc định
+        if (contentRoot == null)
+        {
+            var c = transform.Find("Content");
+            if (c != null) contentRoot = c;
+        }
     }
+
 
     public void OnDrag(PointerEventData data)
     {
@@ -41,5 +70,10 @@ public class AppWindow : MonoBehaviour, IDragHandler, IPointerClickHandler
     {
         canvasGroup.alpha = 1f;
         transform.SetAsLastSibling();
+    }
+
+    public void CloseSelf()
+    {
+        manager.CloseWindow(this);
     }
 }
