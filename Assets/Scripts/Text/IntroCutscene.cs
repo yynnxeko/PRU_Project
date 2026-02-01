@@ -6,6 +6,7 @@ public class IntroCutscene : MonoBehaviour
     [Header("Assets")]
     public Sprite playerAvatar; // Kéo hình người chơi vào
     public Sprite bossAvatar;   // Kéo hình "Cấp trên" (hoặc để trống nếu là giọng nói bí ẩn)
+    public Sprite guardAvatar;
 
     [Header("Settings")]
     public float delayBetweenLines = 0.5f; // Nghỉ một chút giữa các câu
@@ -40,6 +41,8 @@ public class IntroCutscene : MonoBehaviour
         yield return ShowLine("Sống sót.", bossName, bossAvatar);
         yield return ShowLine("Và ghi nhớ mọi thứ.", bossName, bossAvatar);
 
+        string guardName = "<color=orange>Lính gác</color>";
+        yield return ShowLine("Xuống xe! Xếp hàng!", guardName, guardAvatar);
         // --- KẾT THÚC ---
         Debug.Log("--- [SFX] Màn hình nhiễu mạnh. Tắt cuộc gọi ---");
 
