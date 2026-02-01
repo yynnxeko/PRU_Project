@@ -1,31 +1,31 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class NpcMoveNav : MonoBehaviour
 {
-    // Cấu trúc dữ liệu cho Waypoint xịn hơn
     [System.Serializable]
     public class WaypointInfo
     {
-        public Transform point;      // Kéo cái GameObject Waypoint vào đây
-        public bool isChair = false; // Tick vào nếu đây là điểm ngồi
-        public Vector2 sitFaceDirection = new Vector2(0, -1); // Hướng mặt khi ngồi (Mặc định quay xuống)
+        public Transform point;
+        public bool isChair = false;
+        public Vector2 sitFaceDirection = new Vector2(0, -1);
     }
 
     [Header("Path Settings")]
-    public List<WaypointInfo> waypoints; // Dùng List thay vì mảng Transform thường
-    public float arriveDistance = 0.1f;
+    public List<WaypointInfo> waypoints;
+    public float arriveDistance = 0.15f;
 
     [Header("Status")]
     public bool canMove = true;
     public bool IsSitting = false;
 
-    // ... (Các biến cũ giữ nguyên)
-    int currentIndex;
+    int currentIndex = 0;
     NavMeshAgent agent;
     Animator anim;
-    bool isFinished;
+    bool isFinished = false;
+    bool isSittingProcessStarted = false;
 
     void Awake()
     {
@@ -36,92 +36,110 @@ public class NpcMoveNav : MonoBehaviour
         agent.updateUpAxis = false;
     }
 
+    void Start()
+    {
+        if (waypoints.Count > 0)
+            agent.SetDestination(waypoints[currentIndex].point.position);
+    }
+
     void Update()
     {
-        if (IsSitting) return; // Đang ngồi thì nghỉ khỏe
+        if (IsSitting || isSittingProcessStarted) return;
 
         if (!canMove || isFinished)
         {
-            if (agent.enabled) agent.isStopped = true;
+            agent.isStopped = true;
             UpdateAnimation(false);
             return;
         }
 
-        if (agent.enabled) agent.isStopped = false;
+        agent.isStopped = false;
 
-        CheckDestination();
         Move();
+        CheckDestination();
         UpdateAnimation(true);
-    }
-
-    void CheckDestination()
-    {
-        if (waypoints == null || waypoints.Count == 0) return;
-        if (currentIndex >= waypoints.Count) return;
-
-        // Logic check đến nơi
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + arriveDistance)
-        {
-            // Đã đến điểm hiện tại!
-            WaypointInfo currentWP = waypoints[currentIndex];
-
-            // 1. Kiểm tra xem điểm này có phải là GHẾ không?
-            if (currentWP.isChair)
-            {
-                // Thực hiện hành động NGỒI ngay tại điểm này
-                SitDown(currentWP);
-            }
-            else
-            {
-                // Nếu không phải ghế, đi tiếp điểm sau
-                currentIndex++;
-                if (currentIndex >= waypoints.Count)
-                {
-                    isFinished = true;
-                }
-            }
-        }
     }
 
     void Move()
     {
-        if (isFinished || IsSitting) return;
-        if (currentIndex >= waypoints.Count) return;
-
-        agent.SetDestination(waypoints[currentIndex].point.position);
+        if (currentIndex < waypoints.Count)
+            agent.SetDestination(waypoints[currentIndex].point.position);
     }
 
-    // ==========================================
-    // HÀM NGỒI (Sửa lại theo ý ông)
-    // ==========================================
-    void SitDown(WaypointInfo wpData)
+    void CheckDestination()
     {
-        IsSitting = true;
-        canMove = false;
-        isFinished = true;
+        if (agent.pathPending) return;
+        if (agent.remainingDistance > agent.stoppingDistance + arriveDistance) return;
 
-        agent.isStopped = true;
-        agent.enabled = false;
-        transform.position = wpData.point.position;
+        WaypointInfo wp = waypoints[currentIndex];
 
-        // GỌI TRỰC TIẾP (đừng gọi qua hàm trung gian nào cả cho chắc)
-        if (anim)
+        if (wp.isChair)
         {
-            anim.SetBool("IsSitting", true);
-
-            // Ép hướng ngồi vào Animator
-            anim.SetFloat("LastInputX", wpData.sitFaceDirection.x);
-            anim.SetFloat("LastInputY", wpData.sitFaceDirection.y);
-
-            // Reset mấy biến cũ
-            anim.SetFloat("InputX", 0);
-            anim.SetFloat("InputY", 0);
+            if (!isSittingProcessStarted)
+                StartCoroutine(SitDownSmoothly(wp));
+        }
+        else
+        {
+            currentIndex++;
+            if (currentIndex >= waypoints.Count)
+                isFinished = true;
         }
     }
 
+    IEnumerator SitDownSmoothly(WaypointInfo wp)
+    {
+        isSittingProcessStarted = true;
 
-    // ... (Các hàm UpdateAnimation, SetAnimDirection, StartWork giữ nguyên như cũ)
+        // Giảm tốc cho mượt
+        float originalSpeed = agent.speed;
+        agent.speed = 1.2f;
 
-    void UpdateAnimation(bool isMoving) { /* ... Code cũ ... */ }
-    void SetAnimDirection(float x, float y) { /* ... Code cũ ... */ }
+        agent.SetDestination(wp.point.position);
+
+        // ← CHỈ ĐỂ NPC ĐI TỚI CUỐI CÙNG (KHÔNG TẮT NAVMESH SỚM)
+        while (agent.pathPending || agent.remainingDistance > 0.02f)
+        {
+            UpdateAnimation(true);
+            yield return null;
+        }
+
+        // ← CHỈ TẮT NAVMESH KHI ĐÃ NGỒI THẬT
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+
+        IsSitting = true;
+        isFinished = true;
+        agent.speed = originalSpeed;
+
+        if (anim)
+        {
+            UpdateAnimation(false);
+            anim.SetBool("IsSitting", true);
+            anim.SetFloat("LastInputX", wp.sitFaceDirection.x);
+            anim.SetFloat("LastInputY", wp.sitFaceDirection.y);
+            anim.SetFloat("InputX", 0);
+            anim.SetFloat("InputY", 0);
+        }
+
+        isSittingProcessStarted = false;
+    }
+
+    void UpdateAnimation(bool isMoving)
+    {
+        if (!anim) return;
+
+        anim.SetBool("IsMoving", isMoving);
+
+        if (isMoving && agent.hasPath)
+        {
+            Vector3 v = agent.velocity;
+            if (v.sqrMagnitude > 0.01f)
+            {
+                anim.SetFloat("InputX", v.x);
+                anim.SetFloat("InputY", v.y);
+                anim.SetFloat("LastInputX", v.x);
+                anim.SetFloat("LastInputY", v.y);
+            }
+        }
+    }
 }
