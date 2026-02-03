@@ -4,16 +4,17 @@ public class PlayerController2 : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    // Bỏ public để không hiện ngoài Inspector cho đỡ rối
     Rigidbody2D rb;
     Animator animator;
 
     Vector2 movement;
     Vector2 lastMoveDir;
 
+    // 🔒 Khóa di chuyển khi ngủ
+    public bool canMove = true;
+
     void Start()
     {
-        // Tự động tìm Component trên chính GameObject này
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -22,6 +23,13 @@ public class PlayerController2 : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+        {
+            movement = Vector2.zero;
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -30,6 +38,8 @@ public class PlayerController2 : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canMove) return;
+
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 

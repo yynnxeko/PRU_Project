@@ -2,41 +2,46 @@
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 3f;
+    public float moveSpeed = 3f;
 
-    public Rigidbody2D rb;
-    public Animator animator;
+    Rigidbody2D rb;
+    Animator animator;
 
-    [HideInInspector]
-    public Vector2 faceDir = Vector2.down;
+    Vector2 movement;
+    Vector2 lastMovement;
 
-    Vector2 input;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
-        // ===== INPUT (CHO PHÉP ĐI CHÉO) =====
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        input = new Vector2(x, y);
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        // ===== XÁC ĐỊNH HƯỚNG NHÌN (CHỈ 4 HƯỚNG) =====
-        if (input != Vector2.zero)
+        // Nếu đang di chuyển thì lưu hướng cuối
+        if (movement != Vector2.zero)
         {
-            if (Mathf.Abs(input.y) >= Mathf.Abs(input.x))
-                faceDir = input.y > 0 ? Vector2.up : Vector2.down;
-            else
-                faceDir = input.x > 0 ? Vector2.right : Vector2.left;
-        }
+            lastMovement = movement.normalized;
 
-        // ===== ANIMATOR =====
-        animator.SetFloat("MoveX", faceDir.x);
-        animator.SetFloat("MoveY", faceDir.y);
-        animator.SetFloat("Speed", input.sqrMagnitude);
+            animator.SetFloat("InputX", movement.x);
+            animator.SetFloat("InputY", movement.y);
+
+            animator.SetFloat("LastInputX", lastMovement.x);
+            animator.SetFloat("LastInputY", lastMovement.y);
+
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
     }
 
     void FixedUpdate()
     {
-        // 🚀 DI CHUYỂN THẬT (CHO PHÉP CHÉO)
-        rb.velocity = input.normalized * speed;
+        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 }
