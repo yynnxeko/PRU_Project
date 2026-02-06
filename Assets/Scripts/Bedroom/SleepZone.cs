@@ -10,18 +10,21 @@ public class SleepZone : MonoBehaviour
 
     public Transform sleepPoint;
 
+    // 👉 KÉO MAINBED VÀO ĐÂY
+    public BoxCollider2D mainBedCollider;
+
     bool isSleeping = false;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         anim = player.GetComponent<Animator>();
-        controller = player.GetComponent<PlayerController2>(); // lấy script movement
+        controller = player.GetComponent<PlayerController2>();
     }
 
     void Update()
     {
-        if (!playerInside) return;
+        if (!playerInside && !isSleeping) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -38,7 +41,10 @@ public class SleepZone : MonoBehaviour
 
         anim.SetBool("IsSleep", true);
 
-        controller.canMove = false;   // 🔒 khóa di chuyển
+        controller.canMove = false;
+
+        // 🔁 Bật trigger cho giường (hoặc tắt va chạm)
+        mainBedCollider.isTrigger = true;
 
         isSleeping = true;
     }
@@ -47,7 +53,10 @@ public class SleepZone : MonoBehaviour
     {
         anim.SetBool("IsSleep", false);
 
-        controller.canMove = true;    // 🔓 mở di chuyển
+        controller.canMove = true;
+
+        // 🔁 Trả lại va chạm bình thường
+        mainBedCollider.isTrigger = false;
 
         isSleeping = false;
     }
