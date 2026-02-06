@@ -69,12 +69,20 @@ public class PlayerController2 : MonoBehaviour
 
     void CheckChair()
     {
+        if (chair == null || chair.chairPoint == null)
+        {
+            isNearChair = false;
+            return;
+        }
+
         float distance = Vector2.Distance(transform.position, chair.chairPoint.position);
         isNearChair = distance <= chair.detectRange;
     }
 
     void SitDown()
     {
+        if (chair == null || chair.chairPoint == null) return;
+
         transform.position = chair.chairPoint.position;
         rb.Sleep();
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4358220841800870593}
   - component: {fileID: 5370977934006172280}
   - component: {fileID: 4030326731008524721}
+  - component: {fileID: 7801587226511158366}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -180,3 +181,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.56913376}
   m_EdgeRadius: 0
+--- !u!114 &7801587226511158366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6654301487692688315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfd5caac881b3848b1ea24cde2b4d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  chair:
+    chairPoint: {fileID: 0}
+    sitFaceDirection: {x: 0, y: -1}
+    detectRange: 1
+  isInGame: 0
+  canMove: 1
