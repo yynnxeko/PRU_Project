@@ -3178,7 +3178,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.016666668
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
@@ -35683,7 +35683,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.016666668
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
@@ -36043,6 +36043,10 @@ PrefabInstance:
       propertyPath: wm2000Prefab
       value: 
       objectReference: {fileID: 1744407292189834, guid: c46548f7b668a78409fa399c095e4e6b, type: 3}
+    - target: {fileID: 1657413882591150066, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: connectDotPrefab
+      value: 
+      objectReference: {fileID: 9194443448929468070, guid: ed9c218423fef1646ac8dc5b2c170810, type: 3}
     - target: {fileID: 1986623982424255272, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
       propertyPath: m_Name
       value: DesktopCanvas
@@ -36103,6 +36107,38 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 26676874, guid: 33a944188a3bad04aab15eec7671548c, type: 3}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1248677440}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenApp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DesktopManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Game2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221594728849037169, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36139,9 +36175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f85148891a9eee439c1da4b4e43cd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windowsParent: {fileID: 0}
-  wm2000Prefab: {fileID: 0}
-  windowPrefab: {fileID: 0}
 --- !u!1 &1253162534
 GameObject:
   m_ObjectHideFlags: 0
@@ -37427,8 +37460,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9c218423fef1646ac8dc5b2c170810, type: 3}
---- !u!4 &1402094953 stripped
-Transform:
+--- !u!224 &1402094953 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 7124239574327302730, guid: ed9c218423fef1646ac8dc5b2c170810, type: 3}
   m_PrefabInstance: {fileID: 1402094952}
   m_PrefabAsset: {fileID: 0}

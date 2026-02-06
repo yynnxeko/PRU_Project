@@ -1,145 +1,118 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems; // Để bắt sự kiện chuột/touch trên UI
 using UnityEngine.Events;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler
 {
-  static public int UNPLAYABLE_INDEX = 0;
-  static public Color COLOR_HIGHTLIGHT = new Color(1, 1, 0, 0.05f);
-  static public string NAME_CONNECTION = "Connection";
-  static public string NAME_BACK = "Back";
-  static public string NAME_MAK = "Mark";
+    static public int UNPLAYABLE_INDEX = 0;
+    static public Color COLOR_HIGHTLIGHT = new Color(1, 1, 0, 0.5f);
+    static public string NAME_CONNECTION = "Connection";
+    static public string NAME_BACK = "Back";
+    static public string NAME_MAK = "Mark"; // Tên object trong Hierarchy là "Mark"
 
-  public int cid = 0;
-  [HideInInspector]
-  public UnityEvent<Tile> onSelected;
+    public int cid = 0;
+    public int gridX;
+    public int gridY;
 
-  public bool isSelected
-  {
-    get { return _isSelected; }
-    private set { this._isSelected = value; }
-  }
+    [HideInInspector] public UnityEvent<Tile> onSelected;
+    [HideInInspector] public UnityEvent<Tile> onHover;
 
-  public bool isHighlighted
-  {
-    get { return _isHighlighted; }
-    private set { this._isHighlighted = value; }
-  }
+    // --- AUTO-PROPERTIES (Thay thế cho các biến có dấu "_" cũ) ---
+    public bool isSelected { get; private set; }
+    public bool isHighlighted { get; private set; }
+    public bool isSolved { get; set; }
+    public bool isPlayble { get; private set; }
 
-  public bool isSolved
-  {
-    get { return this._isSolved; }
-    set { this._isSolved = value; }
-  }
+    // Helper lấy Component Image nhanh
+    private Image BackComponentImage => transform.Find(NAME_BACK).GetComponent<Image>();
+    private Image ConnectionComponentImage => transform.Find(NAME_CONNECTION).Find("Pipe").GetComponent<Image>();
+    private Image MarkComponentImage => transform.Find(NAME_MAK).GetComponent<Image>();
 
-  public bool isPlayble
-  {
-    get { return this._isPlayble; }
-    private set { this._isPlayble = value; }
-  }
+    public Color ConnectionColor => ConnectionComponentImage.color;
 
-  private SpriteRenderer BackComponentRenderer
-  {
-    get { return this.transform.Find(NAME_BACK).gameObject.GetComponent<SpriteRenderer>(); }
-  }
+    private Color _originalColor;
 
-  public Color ConnectionColor
-  {
-    get
+    void Start()
     {
-      return this.ConnectionComponentRenderer.color;
-    }
-    private set { }
-  }
+        // [FIXED] Dùng tên biến mới (không có dấu _)
+        isPlayble = cid > UNPLAYABLE_INDEX;
 
-  public SpriteRenderer ConnectionComponentRenderer
-  {
-    get
+        _originalColor = BackComponentImage.color;
+
+        if (isPlayble)
+            SetConnectionColor(MarkComponentImage.color);
+        else
+        {
+            var mark = transform.Find(NAME_MAK);
+            if (mark) mark.gameObject.SetActive(false);
+        }
+    }
+
+    // --- XỬ LÝ EVENT UI ---
+
+    public void OnPointerDown(PointerEventData eventData)
     {
-      return this.transform.Find(NAME_CONNECTION)
-      .gameObject.transform.Find("Pipe")
-      .gameObject.GetComponent<SpriteRenderer>();
+        if (isPlayble && !isSolved) // [FIXED]
+        {
+            isSelected = true;
+            InvokeOnSelected();
+        }
     }
-    private set { }
-  }
 
-  private SpriteRenderer MarkComponentRenderer
-  {
-    get { return this.transform.Find(NAME_MAK).gameObject.GetComponent<SpriteRenderer>(); }
-  }
-
-  private bool _isSolved = false;
-  private bool _isHighlighted = false;
-  private bool _isPlayble = false;
-  private bool _isSelected = false;
-  private Color _originalColor;
-  void Start()
-  {
-    _isPlayble = cid > UNPLAYABLE_INDEX;
-    _originalColor = BackComponentRenderer.color;
-    if (_isPlayble)
-      SetConnectionColor(MarkComponentRenderer.color);
-    else
-      Destroy(MarkComponentRenderer.gameObject);
-  }
-
-  public void ResetConnection()
-  {
-    // if (_isSolved) return;
-    var connection = this.transform.Find(NAME_CONNECTION).gameObject;
-    connection.SetActive(false);
-    connection.transform.eulerAngles = Vector3.zero;
-    Debug.Log("Tile -> Reset(" + _isSolved + "): " + cid);
-    _isSolved = false;
-  }
-
-  public void HightlightReset()
-  {
-    _isHighlighted = false;
-    BackComponentRenderer.color = _originalColor;
-  }
-
-  public void Highlight()
-  {
-    _isHighlighted = true;
-    BackComponentRenderer.color = COLOR_HIGHTLIGHT;
-  }
-
-  public void SetConnectionColor(Color color)
-  {
-    ConnectionComponentRenderer.color = color;
-  }
-
-  public void ConnectionToSide(bool top, bool rigth, bool bottom, bool left)
-  {
-    Debug.Log("Tile -> ConnectionToSide: " + top + "|" + rigth + "|" + bottom + "|" + left);
-    this.transform.Find(NAME_CONNECTION).gameObject.SetActive(true);
-    int angle = rigth ? -90 : bottom ? -180 : left ? -270 : 0;
-    this.transform.Find(NAME_CONNECTION).gameObject.transform.Rotate(new Vector3(0, 0, angle));
-  }
-
-  void OnMouseUp()
-  {
-    if (_isPlayble && !_isSolved)
+    public void OnPointerUp(PointerEventData eventData)
     {
-      _isSelected = false;
-      InvokeOnSelected();
+        if (isPlayble && !isSolved) // [FIXED]
+        {
+            isSelected = false;
+            InvokeOnSelected();
+        }
     }
-  }
 
-  void OnMouseDown()
-  {
-    if (_isPlayble && !_isSolved)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-      _isSelected = true;
-      InvokeOnSelected();
+        // Khi chuột lướt vào ô này -> Báo cho Field biết để vẽ đường
+        if (onHover != null) onHover.Invoke(this);
     }
-  }
 
-  void InvokeOnSelected()
-  {
-    Debug.Log("Tile -> InvokeOnSelected(" + cid + ")");
-    if (onSelected != null) onSelected.Invoke(this.GetComponent<Tile>());
-  }
+    // --- LOGIC HIỂN THỊ ---
+
+    public void ResetConnection()
+    {
+        var connection = transform.Find(NAME_CONNECTION).gameObject;
+        connection.SetActive(false);
+        connection.transform.localEulerAngles = Vector3.zero;
+        isSolved = false; // [FIXED]
+    }
+
+    public void HightlightReset()
+    {
+        isHighlighted = false; // [FIXED]
+        BackComponentImage.color = _originalColor;
+    }
+
+    public void Highlight()
+    {
+        isHighlighted = true; // [FIXED]
+        BackComponentImage.color = COLOR_HIGHTLIGHT;
+    }
+
+    public void SetConnectionColor(Color color)
+    {
+        if (ConnectionComponentImage != null)
+            ConnectionComponentImage.color = color;
+    }
+
+    public void ConnectionToSide(bool top, bool right, bool bottom, bool left)
+    {
+        transform.Find(NAME_CONNECTION).gameObject.SetActive(true);
+        // Xoay ống nối theo hướng
+        float angle = right ? -90 : bottom ? -180 : left ? -270 : 0;
+        transform.Find(NAME_CONNECTION).localEulerAngles = new Vector3(0, 0, angle);
+    }
+
+    void InvokeOnSelected()
+    {
+        if (onSelected != null) onSelected.Invoke(this);
+    }
 }
