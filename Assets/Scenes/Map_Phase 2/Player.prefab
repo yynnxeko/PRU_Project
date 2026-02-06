@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 4358220841800870593}
   - component: {fileID: 5370977934006172280}
   - component: {fileID: 4030326731008524721}
-  - component: {fileID: 4929544994437183043}
-  - component: {fileID: 7463582488497372244}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -182,36 +180,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.56913376}
   m_EdgeRadius: 0
---- !u!114 &4929544994437183043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6654301487692688315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcfd5caac881b3848b1ea24cde2b4d02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  chair:
-    chairPoint: {fileID: 479994690164450499, guid: 80935e56ae2fcde41aa225c91172221c, type: 3}
-    sitFaceDirection: {x: -1, y: 0}
-    detectRange: 1.5
-  isInGame: 0
---- !u!114 &7463582488497372244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6654301487692688315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bf801ac02915ff4d84aa2423dcbf86b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chairPoint: {fileID: 479994690164450499, guid: 80935e56ae2fcde41aa225c91172221c, type: 3}
-  hintText: {fileID: 0}
-  moveTime: 1

@@ -130,7 +130,8 @@ public class Hacker : MonoBehaviour
 
 HERE IS THE KEY!
 ");
-        Terminal.WriteLine("Type \"menu\" to return to Main Menu");
+        playerController.isInGame = true;
+        Terminal.WriteLine("Type \"Menu\" to return to Main Menu");
 
     }
 }

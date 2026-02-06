@@ -18,6 +18,9 @@ public class PlayerController2 : MonoBehaviour
     [Header("Game State")]
     public bool isInGame = false;
 
+    // 🔒 Khóa di chuyển khi ngủ
+    public bool canMove = true;
+
     Rigidbody2D rb;
     Animator animator;
     Vector2 movement;
@@ -34,6 +37,13 @@ public class PlayerController2 : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+        {
+            movement = Vector2.zero;
+            animator.SetBool("IsMoving", false);
+            return;
+        }
+
         if (isSitting)
         {
             if (!isInGame && Input.GetKeyDown(KeyCode.C)) StandUp();
@@ -53,7 +63,7 @@ public class PlayerController2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isSitting) return;
+        if (isSitting || !canMove) return;
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 
@@ -62,7 +72,6 @@ public class PlayerController2 : MonoBehaviour
         float distance = Vector2.Distance(transform.position, chair.chairPoint.position);
         isNearChair = distance <= chair.detectRange;
     }
-
 
     void SitDown()
     {
