@@ -10,12 +10,13 @@ public class DesktopManager : MonoBehaviour
     [SerializeField] private Transform taskbarContent;
     [SerializeField] private Computer computer;
     [SerializeField] private GameObject wm2000Prefab;
+    [SerializeField] private GameObject dialogueGamePrefab;
 
     private readonly List<AppWindow> openWindows = new List<AppWindow>();
     private readonly Dictionary<AppWindow, GameObject> windowToGroup = new Dictionary<AppWindow, GameObject>();
     private readonly Dictionary<AppWindow, GameObject> windowToTaskBtn = new Dictionary<AppWindow, GameObject>();
 
-    // ✅ giữ 1 instance Game1
+    // giữ 1 instance Game1
     private AppWindow game1Instance;
 
     void Start()
@@ -53,7 +54,11 @@ public class DesktopManager : MonoBehaviour
             OpenOrFocusGame1();
             return;
         }
-
+        if (appName == "DialogueGame")
+        {
+            OpenDialogueGame();
+            return;
+        }
         // app thường
         var winObj = Instantiate(windowPrefab, windowsParent);
         var appWin = winObj.GetComponent<AppWindow>() ?? winObj.AddComponent<AppWindow>();
@@ -64,7 +69,7 @@ public class DesktopManager : MonoBehaviour
         winObj.transform.SetAsLastSibling();
     }
 
-    // ✅ Game1: nếu đang mở thì focus, nếu chưa thì tạo mới (reset)
+    //Game1: nếu đang mở thì focus, nếu chưa thì tạo mới (reset)
     private void OpenOrFocusGame1()
     {
         // nếu instance cũ vẫn tồn tại -> focus
@@ -113,6 +118,47 @@ public class DesktopManager : MonoBehaviour
         groupGO.transform.SetAsLastSibling();
     }
 
+    //THÊM METHOD MỚI
+    private void OpenDialogueGame()
+    {
+        if (windowPrefab == null)
+        {
+            Debug.LogError("windowPrefab is NULL!");
+            return;
+        }
+
+        // 1) group
+        GameObject groupGO = new GameObject("DialogueGame_Group");
+        groupGO.transform.SetParent(windowsParent, false);
+
+        // 2) window
+        GameObject winObj = Instantiate(windowPrefab, groupGO.transform);
+        AppWindow appWin = winObj.GetComponent<AppWindow>() ?? winObj.AddComponent<AppWindow>();
+        appWin.Init("DialogueGame", this);
+
+        openWindows.Add(appWin);
+        windowToGroup[appWin] = groupGO;
+        CreateTaskBtn(appWin);
+
+        // 3) dialogueGamePrefab
+        if (dialogueGamePrefab != null)
+        {
+            GameObject dialogueGame = Instantiate(dialogueGamePrefab, groupGO.transform);
+            dialogueGame.transform.SetAsLastSibling();
+
+            // nút đỏ đóng chuẩn
+            var closeBtn = dialogueGame.GetComponentInChildren<CloseGroupButton>(true);
+            if (closeBtn != null) closeBtn.Init(this, appWin);
+            else Debug.LogWarning("DialogueGame prefab chưa có CloseGroupButton trên nút đỏ!");
+        }
+        else
+        {
+            Debug.LogError("dialogueGamePrefab chưa được gán trong DesktopManager!");
+        }
+
+        // đưa lên trên cùng
+        groupGO.transform.SetAsLastSibling();
+    }
     private void FocusWindow(AppWindow w)
     {
         if (w == null) return;

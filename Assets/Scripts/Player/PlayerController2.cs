@@ -15,11 +15,15 @@ public class PlayerController2 : MonoBehaviour
     [Header("Chair")]
     public ChairInfo chair; // chỉ 1 ghế, không cần array
 
+    [Header("Game State")]
+    public bool isInGame = false;
+
     Rigidbody2D rb;
     Animator animator;
     Vector2 movement;
 
     bool isSitting = false;
+    public bool IsSitting => isSitting;
     bool isNearChair = false;
 
     void Start()
@@ -32,7 +36,7 @@ public class PlayerController2 : MonoBehaviour
     {
         if (isSitting)
         {
-            if (Input.GetKeyDown(KeyCode.C)) StandUp();
+            if (!isInGame && Input.GetKeyDown(KeyCode.C)) StandUp();
             return;
         }
 
@@ -41,7 +45,7 @@ public class PlayerController2 : MonoBehaviour
 
         CheckChair();
 
-        if (Input.GetKeyDown(KeyCode.C) && isNearChair)
+        if (!isInGame && Input.GetKeyDown(KeyCode.C) && isNearChair)
             SitDown();
 
         UpdateAnimation();
@@ -58,6 +62,7 @@ public class PlayerController2 : MonoBehaviour
         float distance = Vector2.Distance(transform.position, chair.chairPoint.position);
         isNearChair = distance <= chair.detectRange;
     }
+
 
     void SitDown()
     {
@@ -107,5 +112,10 @@ public class PlayerController2 : MonoBehaviour
         Gizmos.color = Color.cyan;
         Vector3 sitDir = new Vector3(chair.sitFaceDirection.x, chair.sitFaceDirection.y, 0);
         Gizmos.DrawRay(chair.chairPoint.position, sitDir * 0.7f);
+    }
+
+    public void ForceStandUp()
+    {
+        if (isSitting) StandUp();
     }
 }
