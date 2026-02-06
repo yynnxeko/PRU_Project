@@ -10,6 +10,8 @@ public class CutsceneController : MonoBehaviour
     [Header("Points")]
     public Transform spawnPoint;
     public Transform sp2;
+    public Transform sp3;
+    public Transform sp4;
 
     [Header("Move")]
     public float speed = 1f;
@@ -20,106 +22,190 @@ public class CutsceneController : MonoBehaviour
     public float dist34 = 2f;
 
     [Header("Dialogue UI")]
+    public GameObject dialogueCanvas;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contextText;
 
-    Coroutine move1, move2, move3, move4;
+    Animator a1, a2, a3, a4;
 
     void Start()
     {
+        dialogueCanvas.SetActive(false);
+
         nv1.transform.position = spawnPoint.position;
         nv2.transform.position = spawnPoint.position + Vector3.left * dist12;
         nv3.transform.position = nv2.transform.position + Vector3.left * dist23;
         nv4.transform.position = nv3.transform.position + Vector3.left * dist34;
+
+        a1 = nv1.GetComponent<Animator>();
+        a2 = nv2.GetComponent<Animator>();
+        a3 = nv3.GetComponent<Animator>();
+        a4 = nv4.GetComponent<Animator>();
 
         StartCoroutine(CutsceneSequence());
     }
 
     IEnumerator CutsceneSequence()
     {
-        Animator a1 = nv1.GetComponent<Animator>();
-        Animator a2 = nv2.GetComponent<Animator>();
-        Animator a3 = nv3.GetComponent<Animator>();
-        Animator a4 = nv4.GetComponent<Animator>();
+        // ===== GROUP TO SP2 =====
+        yield return WalkGroupToPoint(sp2.position);
 
-        // ===== Move group =====
-        move1 = StartCoroutine(MoveToPoint(nv1, sp2.position));
-        move2 = StartCoroutine(Follow(nv2, nv1, dist12));
-        move3 = StartCoroutine(Follow(nv3, nv2, dist23));
-        move4 = StartCoroutine(Follow(nv4, nv3, dist34));
-            
-        yield return new WaitUntil(() =>
-            Vector3.Distance(nv1.transform.position, sp2.position) < 0.1f
-        );
+        FaceDirection(a1, Vector2.left);
 
-        StopMove();
+        // ===== DIALOG =====
+        yield return ShowLine("Tên môi giới", "Chỗ này chính là nơi làm việc của chúng ta.");
+        yield return ShowLine("Tên môi giới", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!");
+        yield return ShowLine("Người đàn ông", "Tôi... tôi có thể về được không?");
 
-        // ===== Dialogue =====
-        yield return ShowLine("Trưởng nhóm", "Chỗ này chính là nơi làm việc của chúng ta.");
-        yield return ShowLine("Trưởng nhóm", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!");
-        yield return ShowLine("Nhân viên", "Tôi... tôi có thể về được không?");
+        // ===== NV1 QUAY LẠI =====
+        yield return WalkSingleToPoint(nv1, a1, nv2.transform.position + Vector3.right * 0.5f);
 
-        // NV1 quay lại
-        yield return MoveToPoint(nv1, nv2.transform.position + Vector3.right);
+        yield return ShowLine("Tên môi giới", "Mày vừa nói gì!!");
+        yield return ShowLine("Người đàn ông", "Tôi muốn về...");
 
-        yield return ShowLine("Trưởng nhóm", "Mày vừa nói gì!!");
-        yield return ShowLine("Nhân viên", "Tôi muốn về...");
+        // ===== SHOCK =====
+        a1.SetTrigger("shocking");
 
-        // ===== Actions =====
-        a1.SetTrigger("ActionA");
         yield return new WaitForSeconds(0.4f);
 
-        yield return ShowLine("Nhân viên", "Á Á Á....");
+        yield return ShowLine("Người đàn ông", "Á Á Á....");
 
-        a2.SetTrigger("ActionB");
+        // ===== FAINT =====
+        a2.SetTrigger("shocked");
+        a2.SetTrigger("faint");
+
+        yield return new WaitForSeconds(1f);
+
+        // ===== AFTER =====
+        yield return ShowLine("Tên môi giới", "Làm việc tiếp!");
+
+        // 👉 đi ngang tới sp3
+        yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp3.position);
+
+        FaceDirection(a1, Vector2.left);
+
+        yield return ShowLine("Tên môi giới", "Còn đứng đó nhìn à?");
+
+        // 👉 đi lên trên tới sp4
+        yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp4.position);
     }
 
     // ================= MOVE =================
 
-    IEnumerator MoveToPoint(GameObject obj, Vector3 target)
+    IEnumerator WalkGroupToPoint(Vector3 target)
     {
+        Vector3 dir = (target - nv1.transform.position).normalized;
+        SetInputAll(new Vector2(dir.x, dir.y), true);
+
+        while (Vector3.Distance(nv1.transform.position, target) > 0.1f)
+        {
+            MoveAllTowards(target);
+            yield return null;
+        }
+
+        SetInputAll(Vector2.zero, false);
+    }
+
+    IEnumerator WalkSingleToPoint(GameObject obj, Animator anim, Vector3 target)
+    {
+        Vector3 dir = (target - obj.transform.position).normalized;
+        SetInput(anim, new Vector2(dir.x, dir.y), true);
+
         while (Vector3.Distance(obj.transform.position, target) > 0.1f)
         {
             obj.transform.position = Vector3.MoveTowards(
                 obj.transform.position,
                 target,
-                speed * Time.deltaTime
-            );
+                speed * Time.deltaTime);
+
             yield return null;
         }
+
+        SetInput(anim, Vector2.zero, false);
     }
 
-    IEnumerator Follow(GameObject follower, GameObject target, float distance)
+    IEnumerator WalkTwoToPoint(GameObject o1, Animator a1,
+                               GameObject o2, Animator a2,
+                               Vector3 target)
     {
-        while (true)
+        Vector3 dir = (target - o1.transform.position).normalized;
+
+        SetInput(a1, new Vector2(dir.x, dir.y), true);
+        SetInput(a2, new Vector2(dir.x, dir.y), true);
+
+        while (Vector3.Distance(o1.transform.position, target) > 0.1f)
         {
-            if (Vector3.Distance(follower.transform.position, target.transform.position) > distance)
-            {
-                follower.transform.position = Vector3.MoveTowards(
-                    follower.transform.position,
-                    target.transform.position - Vector3.right * distance,
-                    speed * Time.deltaTime
-                );
-            }
+            o1.transform.position = Vector3.MoveTowards(
+                o1.transform.position,
+                target,
+                speed * Time.deltaTime);
+
+            o2.transform.position = Vector3.MoveTowards(
+                o2.transform.position,
+                target,
+                speed * Time.deltaTime);
+
             yield return null;
         }
+
+        SetInput(a1, Vector2.zero, false);
+        SetInput(a2, Vector2.zero, false);
     }
 
-    void StopMove()
+    void MoveAllTowards(Vector3 target)
     {
-        if (move1 != null) StopCoroutine(move1);
-        if (move2 != null) StopCoroutine(move2);
-        if (move3 != null) StopCoroutine(move3);
-        if (move4 != null) StopCoroutine(move4);
+        nv1.transform.position = Vector3.MoveTowards(nv1.transform.position, target, speed * Time.deltaTime);
+        nv2.transform.position = Vector3.MoveTowards(nv2.transform.position, target, speed * Time.deltaTime);
+        nv3.transform.position = Vector3.MoveTowards(nv3.transform.position, target, speed * Time.deltaTime);
+        nv4.transform.position = Vector3.MoveTowards(nv4.transform.position, target, speed * Time.deltaTime);
+    }
+
+    // ================= ANIM INPUT =================
+
+    void SetInputAll(Vector2 dir, bool moving)
+    {
+        SetInput(a1, dir, moving);
+        SetInput(a2, dir, moving);
+        SetInput(a3, dir, moving);
+        SetInput(a4, dir, moving);
+    }
+
+    void SetInput(Animator anim, Vector2 dir, bool moving)
+    {
+        anim.SetFloat("InputX", dir.x);
+        anim.SetFloat("InputY", dir.y);
+
+        if (dir != Vector2.zero)
+        {
+            anim.SetFloat("LastInputX", dir.x);
+            anim.SetFloat("LastInputY", dir.y);
+        }
+
+        anim.SetBool("IsMoving", moving);
+    }
+
+    void FaceDirection(Animator anim, Vector2 dir)
+    {
+        anim.SetFloat("InputX", 0);
+        anim.SetFloat("InputY", 0);
+
+        anim.SetFloat("LastInputX", dir.x);
+        anim.SetFloat("LastInputY", dir.y);
+
+        anim.SetBool("IsMoving", false);
     }
 
     // ================= DIALOG =================
 
     IEnumerator ShowLine(string name, string text)
     {
+        dialogueCanvas.SetActive(true);
+
         nameText.text = name;
         contextText.text = text;
 
         yield return new WaitForSeconds(2f);
+
+        dialogueCanvas.SetActive(false);
     }
 }
