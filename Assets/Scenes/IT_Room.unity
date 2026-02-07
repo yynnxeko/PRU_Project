@@ -9946,6 +9946,171 @@ Transform:
   m_Children: []
   m_Father: {fileID: 137215224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!43 &1245923863
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 16
+    localAABB:
+      m_Center: {x: 0, y: -0.277534, z: 0}
+      m_Extent: {x: 0.5, y: 0.777534, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 16
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 704
+    _typelessdata: 0ccdcb3e7c6c83bf000000005f6e7f3f707488bd00000080000000800ccdcb3e7c6c83bf0ccdcb3e7c6c83bf0000003f0000003f00000000000000800000803f00000080000000800000003f0000003f0000003f0000003f86e6e53ef8d886be000000005f6e7f3f707488bd00000080000000800000003f0000003f0ccdcb3e7c6c83bf6099b93c7a3c85bf000000007b641a3d6dd17fbf00000080000000800ccdcb3e7c6c83bfe099b4be780c87bf000000000000003f00000000000000800000803f0000008000000080000000bf0000003f0000003f0000003fe099b4be780c87bf000000007b641a3d6dd17fbf0000008000000080e099b4be780c87bfe099b4be780c87bff04cdabef0188ebe000000001adc7ebf7514c1bd0000000000000080e099b4be780c87bf000000bf0000003f000000bf0000003f000000001adc7ebf7514c1bd0000000000000080000000bf0000003f000000bf0000003f86e6e53ef8d886be000000005f6e7f3f707488bd00000080000000800000003f0000003f0ccdcb3e7c6c83bf0ccdcb3e7c6c83bf000000007b641a3d6dd17fbf00000080000000800ccdcb3e7c6c83bf0ccdcb3e7c6c83bf0000003f0000003f000000005f6e7f3f707488bd00000080000000800000003f0000003f0000003f0000003f000000000000003f00000000000000800000803f0000008000000080000000bf0000003f0000003f0000003f6099b93c7a3c85bf000000007b641a3d6dd17fbf00000080000000800ccdcb3e7c6c83bfe099b4be780c87bf000000bf0000003f00000000000000800000803f0000008000000080000000bf0000003f000000bf0000003fe099b4be780c87bf000000001adc7ebf7514c1bd0000000000000080e099b4be780c87bfe099b4be780c87bff04cdabef0188ebe000000001adc7ebf7514c1bd0000000000000080e099b4be780c87bf000000bf0000003f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: -0.277534, z: 0}
+    m_Extent: {x: 0.5, y: 0.777534, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1001 &1276600512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13214,6 +13379,171 @@ Transform:
   m_Children: []
   m_Father: {fileID: 137215224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!43 &1945539016
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 16
+    localAABB:
+      m_Center: {x: 0, y: -0.277534, z: 0}
+      m_Extent: {x: 0.5, y: 0.777534, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 16
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 704
+    _typelessdata: 0ccdcb3e7c6c83bf000000005f6e7f3f707488bd00000080000000800ccdcb3e7c6c83bf0ccdcb3e7c6c83bf0000003f0000003f00000000000000800000803f00000080000000800000003f0000003f0000003f0000003f86e6e53ef8d886be000000005f6e7f3f707488bd00000080000000800000003f0000003f0ccdcb3e7c6c83bf6099b93c7a3c85bf000000007b641a3d6dd17fbf00000080000000800ccdcb3e7c6c83bfe099b4be780c87bf000000000000003f00000000000000800000803f0000008000000080000000bf0000003f0000003f0000003fe099b4be780c87bf000000007b641a3d6dd17fbf0000008000000080e099b4be780c87bfe099b4be780c87bff04cdabef0188ebe000000001adc7ebf7514c1bd0000000000000080e099b4be780c87bf000000bf0000003f000000bf0000003f000000001adc7ebf7514c1bd0000000000000080000000bf0000003f000000bf0000003f86e6e53ef8d886be000000005f6e7f3f707488bd00000080000000800000003f0000003f0ccdcb3e7c6c83bf0ccdcb3e7c6c83bf000000007b641a3d6dd17fbf00000080000000800ccdcb3e7c6c83bf0ccdcb3e7c6c83bf0000003f0000003f000000005f6e7f3f707488bd00000080000000800000003f0000003f0000003f0000003f000000000000003f00000000000000800000803f0000008000000080000000bf0000003f0000003f0000003f6099b93c7a3c85bf000000007b641a3d6dd17fbf00000080000000800ccdcb3e7c6c83bfe099b4be780c87bf000000bf0000003f00000000000000800000803f0000008000000080000000bf0000003f000000bf0000003fe099b4be780c87bf000000001adc7ebf7514c1bd0000000000000080e099b4be780c87bfe099b4be780c87bff04cdabef0188ebe000000001adc7ebf7514c1bd0000000000000080e099b4be780c87bf000000bf0000003f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: -0.277534, z: 0}
+    m_Extent: {x: 0.5, y: 0.777534, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1963117811
 GameObject:
   m_ObjectHideFlags: 0
@@ -14387,23 +14717,23 @@ MonoBehaviour:
   - question: "1. Alo, ai g\u1ECDi cho t\xF4i v\xE0o gi\u1EDD n\xE0y th\u1EBF?"
     choice1: "Ch\xE0o anh, t\xF4i g\u1ECDi t\u1EEB b\u1ED9 ph\u1EADn h\u1ED7 tr\u1EE3
       kh\xF3a th\u1EBB ng\xE2n h\xE0ng."
-    choice2: "Ng\u01B0\u1EDDi y\xEAu c\u0169 c\u1EE7a anh \u0111\xE2y, tr\u1EA3 ti\u1EC1n
-      tr\xE0 s\u1EEFa \u0111i!"
-    choice3: "Ship t\u1EDBi r\u1ED3i, ra nh\u1EADn 20kg s\u1EA7u ri\xEAng gi\xF9m
-      c\xE1i."
-    choice4: "D\u1EA1 em g\u1ECDi t\u1EEB h\u1ED9i nh\u1EEFng ng\u01B0\u1EDDi y\xEAu
-      m\xE0u h\u1ED3ng gh\xE9t s\u1EF1 gi\u1EA3 d\u1ED1i."
+    choice2: "T\xF4i l\xE0 ng\u01B0\u1EDDi y\xEAu c\u0169 c\u1EE7a anh \u0111\xE2y,
+      m\xECnh quay l\u1EA1i \u0111i!"
+    choice3: "Em b\xEAn giao h\xE0ng, anh c\xF3 \u0111\u01A1n 'N\u1ED7i bu\u1ED3n'
+      c\u1EA7n thanh to\xE1n."
+    choice4: "T\xF4i g\u1ECDi \u0111\u1EC3 h\u1ECFi xem anh \u0111\xE3 \u0103n c\u01A1m
+      v\u1EDBi c\xE1 ch\u01B0a?"
     correctIndex: 0
   - question: "2. Th\u1EBB c\u1EE7a t\xF4i b\u1ECB sao \xE0? T\xF4i v\u1EABn d\xF9ng
       b\xECnh th\u01B0\u1EDDng m\xE0?"
     choice1: "H\u1EC7 th\u1ED1ng ghi nh\u1EADn m\u1ED9t giao d\u1ECBch 20 tri\u1EC7u
       t\u1EA1i n\u01B0\u1EDBc ngo\xE0i."
-    choice2: "Th\u1EBB anh b\u1ECB d\xEDnh ph\xE8n, c\u1EA7n mang ra ti\u1EC7m gi\u1EB7t
-      \u1EE7i g\u1EA5p."
-    choice3: "V\xEC anh qu\xE1 \u0111\u1EB9p trai n\xEAn ng\xE2n h\xE0ng t\u1EA1m
-      kh\xF3a th\u1EBB cho b\u1EDBt \u0111\xE0o hoa."
-    choice4: "Th\u1EBB anh v\u1EEBa d\xF9ng \u0111\u1EC3 mua 1000 c\xE1i l\u1ED3ng
-      b\xE0n tr\xEAn m\u1EA1ng \u0111\xFAng kh\xF4ng?"
+    choice2: "Th\u1EBB c\u1EE7a anh b\u1ECB ma \xE1m, c\u1EA7n c\xFAng d\u01B0\u1EDDng
+      g\u1EA5p."
+    choice3: "T\u1EA1i th\u1EBB anh m\xE0u x\u1EA5u qu\xE1 n\xEAn ng\xE2n h\xE0ng
+      gh\xE9t, kh\xF3a l\u1EA1i."
+    choice4: "Anh d\xF9ng th\u1EBB \u0111\u1EC3 n\u1EA1o d\u1EEBa \u0111\xFAng kh\xF4ng?
+      N\xEAn n\xF3 h\u1ECFng r\u1ED3i."
     correctIndex: 0
   - question: "3. C\xE1i g\xEC? T\xF4i \u0111ang \u1EDF nh\xE0 m\xE0, c\xF3 \u0111i
       \u0111\xE2u \u0111\xE2u!"
@@ -14420,194 +14750,186 @@ MonoBehaviour:
       v\u1EDBi!"
     choice1: "Anh c\u1EA7n cung c\u1EA5p s\u1ED1 CCCD \u0111\u1EC3 t\xF4i \u0111\u1ED1i
       so\xE1t h\u1ED3 s\u01A1 g\u1ED1c."
-    choice2: "Anh nh\u1EA3y m\u1ED9t b\xE0i TikTok r\u1ED3i g\u1EEDi clip qua cho
-      em xem \u0111\xE3."
-    choice3: "Th\u1EAFp 3 n\xE9n nhang kh\u1EA5n v\xE1i t\u1ED5 ti\xEAn cho ti\u1EC1n
-      quay v\u1EC1 \u0111i."
-    choice4: "Anh th\u1EED t\u1EAFt ngu\u1ED3n m\xE1y t\xEDnh r\u1ED3i \u0111i ng\u1EE7,
-      s\xE1ng mai ti\u1EC1n t\u1EF1 \u0111\u1EBB th\xEAm."
+    choice2: "Anh th\u1EED nh\u1EA3y d\xE2y 3 c\xE1i r\u1ED3i ki\u1EC3m tra l\u1EA1i
+      xem."
+    choice3: "Anh ra \u0111\u1EA7u ng\xF5 h\xE9t l\u1EDBn 'T\xF4i b\u1ECB l\u1EEBa
+      r\u1ED3i' l\xE0 xong."
+    choice4: "U\u1ED1ng m\u1ED9t ng\u1EE5m n\u01B0\u1EDBc cho \u0111\u1EE1 s\u1EE3
+      r\u1ED3i \u0111i ng\u1EE7 \u0111i anh."
     correctIndex: 0
   - question: "5. S\u1ED1 c\u1EE7a t\xF4i l\xE0 030... nh\u01B0ng sao gi\u1ECDng
       anh nghe l\u1EA1 th\u1EBF?"
     choice1: "T\xF4i l\xE0 nh\xE2n vi\xEAn tr\u1EF1c ca \u0111\xEAm, \u0111\u01B0\u1EDDng
       truy\u1EC1n \u0111ang h\u01A1i nhi\u1EC5u."
-    choice2: "Em m\u1EDBi ph\u1EABu thu\u1EADt thanh qu\u1EA3n \u0111\u1EC3 gi\u1ED1ng
-      S\u01A1n T\xF9ng MTP \u0111\xF3."
-    choice3: "D\u1EA1 t\u1EA1i em \u0111ang v\u1EEBa \u0103n b\xFAn \u0111\u1EADu
-      m\u1EAFm t\xF4m v\u1EEBa n\xF3i chuy\u1EC7n."
-    choice4: "\xC0, t\u1EA1i v\xEC em l\xE0 ng\u01B0\u1EDDi ngo\xE0i h\xE0nh tinh
-      \u0111ang t\u1EADp n\xF3i ti\u1EBFng ng\u01B0\u1EDDi."
+    choice2: "Em m\u1EDBi \u0111i ph\u1EABu thu\u1EADt thanh qu\u1EA3n v\u1EC1, anh
+      th\u1EA5y quy\u1EBFn r\u0169 kh\xF4ng?"
+    choice3: "D\u1EA1 t\u1EA1i em \u0111ang v\u1EEBa \u0103n b\xFAn m\u1EAFm v\u1EEBa
+      n\xF3i chuy\u1EC7n v\u1EDBi anh \u0111\xF3."
+    choice4: "Do em m\u1EDBi b\u1ECB v\u1EE3 m\u1EAFng n\xEAn gi\u1ECDng n\xF3 tr\u1EA7m
+      m\u1EB7c v\u1EADy th\xF4i."
     correctIndex: 0
   - question: "6. \u1EDC, \u0111\xFAng r\u1ED3i. M\xE0 sao ng\xE2n h\xE0ng kh\xF4ng
       nh\u1EAFn tin qua App?"
     choice1: "Do t\xE0i kho\u1EA3n \u0111ang b\u1ECB hacker t\u1EA5n c\xF4ng, ch\xFAng
       t\xF4i ph\u1EA3i g\u1ECDi tr\u1EF1c ti\u1EBFp."
-    choice2: "App ng\xE2n h\xE0ng b\xEAn em \u0111ang b\u1EADn c\u1EADp nh\u1EADt
-      t\xEDnh n\u0103ng... coi b\xF3i."
-    choice3: "Nh\u1EAFn tin t\u1ED1n ti\u1EC1n l\u1EAFm, g\u1ECDi \u0111i\u1EC7n
-      cho n\xF3 t\xECnh c\u1EA3m anh \u1EA1."
-    choice4: "Hacker n\xF3 \u0111\u1ED5i m\u1EADt kh\u1EA9u App anh th\xE0nh 'anh_yeu_em_123'
-      r\u1ED3i."
+    choice2: "App b\xEAn em \u0111ang b\u1EADn \u0111i du l\u1ECBch, kh\xF4ng nh\u1EAFn
+      tin \u0111\u01B0\u1EE3c."
+    choice3: "D\u1EA1 t\u1ED5ng \u0111\xE0i b\xEAn em h\u1EBFt ti\u1EC1n \u0111i\u1EC7n
+      tho\u1EA1i n\xEAn ch\u1EC9 g\u1ECDi \u0111\u01B0\u1EE3c th\xF4i."
+    choice4: "Nh\u1EAFn tin l\u1ED7i th\u1EDDi r\u1ED3i, gi\u1EDD g\u1ECDi \u0111i\u1EC7n
+      nghe gi\u1ECDng nhau m\u1EDBi th\xE2n m\u1EADt."
     correctIndex: 0
   - question: "7. S\u1EE3 qu\xE1, trong \u0111\xF3 c\xF3 to\xE0n b\u1ED9 ti\u1EC1n
       ti\u1EBFt ki\u1EC7m c\u1EE7a t\xF4i!"
     choice1: "Anh b\xECnh t\u0129nh, n\u1EBFu ph\u1ED1i h\u1EE3p ngay th\xEC ti\u1EC1n
       s\u1EBD \u0111\u01B0\u1EE3c b\u1EA3o v\u1EC7."
-    choice2: "M\u1EA5t th\xEC th\xF4i, coi nh\u01B0 c\u1EE7a \u0111i thay ng\u01B0\u1EDDi,
-      l\xE0m l\u1EA1i t\u1EEB \u0111\u1EA7u anh \u01A1i."
-    choice3: "Ti\u1EC1n l\xE0 ph\xF9 du th\xF4i, t\xECnh c\u1EA3m m\u1EDBi l\xE0
-      v\u0129nh c\u1EEDu, \u0111\u1EEBng lo."
-    choice4: "N\u1EBFu m\u1EA5t thi\u1EC7t th\xEC anh cho em xin c\xE1i th\u1EBB
-      \u0111\u1EC3 em... l\xE0m k\u1EF7 ni\u1EC7m nha."
+    choice2: "Ti\u1EC1n ch\u1EC9 l\xE0 ph\xF9 du th\xF4i, ng\u01B0\u1EDDi c\xF2n
+      l\xE0 c\xF2n t\u1EA5t c\u1EA3 anh \u01A1i."
+    choice3: "Th\xF4i m\u1EA5t th\xEC th\xF4i, anh c\xF2n em m\xE0?"
+    choice4: "Anh \u0111\u01B0a ti\u1EC1n \u0111\xE2y em gi\u1EEF h\u1ED9 cho, h\u1EE9a
+      kh\xF4ng ti\xEAu m\u1ED9t xu!"
     correctIndex: 0
   - question: "8. T\xF4i nghe \u0111\xE2y, anh c\u1EA7n th\xF4ng tin g\xEC n\u1EEFa?"
     choice1: "Anh \u0111\u1ECDc gi\xFAp t\xF4i 16 s\u1ED1 in tr\xEAn m\u1EB7t th\u1EBB
       ng\xE2n h\xE0ng."
-    choice2: "Anh \u0111\u1ECDc cho em s\u1ED1 \u0111o 3 v\xF2ng c\u1EE7a anh \u0111\u1EC3
+    choice2: "Anh cho em bi\u1EBFt chi\u1EC1u cao, c\xE2n n\u1EB7ng \u0111\u1EC3
       em l\xE0m h\u1ED3 s\u01A1."
-    choice3: "Anh \u0111\u1ECDc \u0111\u1ECBa ch\u1EC9 nh\xE0 \u0111\u1EC3 em...
-      qua \u0103n tr\u1EF1c b\u1EEFa c\u01A1m."
-    choice4: "Anh c\xF3 ng\u01B0\u1EDDi y\xEAu ch\u01B0a? N\u1EBFu ch\u01B0a th\xEC
-      m\xECnh l\xE0m quen lu\xF4n."
+    choice3: "Anh \u0111\u1ECDc m\u1EADt kh\u1EA9u Facebook cho em v\xE0o xem \u1EA3nh
+      t\xED."
+    choice4: "Nh\xE0 anh c\xF3 nu\xF4i ch\xF3 kh\xF4ng? Ch\xF3 c\xF3 hay c\u1EAFn
+      ng\u01B0\u1EDDi l\u1EA1 kh\xF4ng?"
     correctIndex: 0
   - question: "9. \u0110\u1EE3i t\xED... 4506... 1234... Xong r\u1ED3i, \u0111\u01B0\u1EE3c
       ch\u01B0a?"
     choice1: "T\u1ED1t l\u1EAFm, b\xE2y gi\u1EDD t\xF4i s\u1EBD g\u1EEDi m\u1ED9t
-      m\xE3 x\xE1c nh\u1EADn 'h\u1EE7y l\u1EC7nh' v\u1EC1 m\xE1y."
-    choice2: "Ok, 16 s\u1ED1 n\xE0y \u0111\u1EB9p \u0111\u1EA5y, \u0111\u1EC3 em
-      \u0111\xE1nh con l\xF4 chi\u1EC1u nay."
-    choice3: "S\u1ED1 4 \u0111\u1EE9ng \u0111\u1EA7u l\xE0 xui l\u1EAFm, anh n\xEAn
-      \u0111\u1ED5i th\u1EBB m\xE0u t\xEDm cho h\u1EE3p phong th\u1EE7y."
-    choice4: "H\u1EBFt n\u01B0\u1EDBc ch\u1EA5m! Anh \u0111\xFAng l\xE0 kh\xE1ch
-      h\xE0ng ti\u1EC1m n\u0103ng nh\u1EA5t n\u0103m."
+      m\xE3 OTP v\u1EC1 m\xE1y anh."
+    choice2: "V\xE2ng, \u0111\u1EC3 em \u0111i mua t\u1EDD v\xE9 s\u1ED1 th\u1EED
+      v\u1EADn may b\u1EB1ng s\u1ED1 th\u1EBB anh."
+    choice3: "\u0110\u1EB9p r\u1ED3i, gi\u1EDD anh h\xE1t cho em nghe m\u1ED9t b\xE0i
+      r\u1ED3i m\xECnh l\xE0m ti\u1EBFp."
+    choice4: "Xong r\u1ED3i, gi\u1EDD anh \u0111i r\u1EEDa m\u1EB7t cho t\u1EC9nh
+      t\xE1o \u0111i nh\xE9."
     correctIndex: 0
-  - question: "10. C\xF3 tin nh\u1EAFn t\u1EDBi r\u1ED3i, nh\u01B0ng n\xF3 ghi l\xE0
-      m\xE3 OTP chuy\u1EC3n ti\u1EC1n?"
-    choice1: "\u0110\xF3 l\xE0 m\xE3 'thu h\u1ED3i giao d\u1ECBch', anh \u0111\u1ECDc
-      nhanh k\u1EBBo h\u1EBFt h\u1EA1n!"
-    choice2: "OTP ngh\u0129a l\xE0 '\xD4i Ti\u1EC1n Ph\u1EAFn', t\u1EE9c l\xE0 ti\u1EC1n
-      s\u1EAFp quay v\u1EC1 \u0111\xF3."
-    choice3: "\u0110\u1EA5y l\xE0 tin nh\u1EAFn r\u1EE7 \u0111i nh\u1EADu c\u1EE7a
-      t\u1ED5ng \u0111\xE0i th\xF4i, \u0111\u1EEBng \u0111\u1EC3 \xFD."
-    choice4: "\xC0, h\u1EC7 th\u1ED1ng b\xEAn em ghi nh\u1EA7m l\u1ED7i ch\xEDnh
-      t\u1EA3 \u0111\u1EA5y, anh c\u1EE9 \u0111\u1ECDc \u0111i."
+  - question: "10. Ch\u1EDD \u0111\xE3! Ng\xE2n h\xE0ng d\u1EB7n kh\xF4ng \u0111\u01B0a
+      OTP cho ai c\u1EA3. M\xE0y l\xE0 qu\xE2n l\u1EEBa \u0111\u1EA3o!"
+    choice1: "Anh nh\u1EA7m r\u1ED3i, \u0111\xE2y l\xE0 m\xE3 x\xE1c th\u1EF1c h\u1EE7y
+      giao d\u1ECBch m\xE0!"
+    choice2: "Em l\xE0 l\u1EEBa \u0111\u1EA3o \u0111\xE2y, nh\u01B0ng em l\xE0 l\u1EEBa
+      \u0111\u1EA3o d\u1EC5 th\u01B0\u01A1ng nh\u1EA5t qu\u1EA3 \u0111\u1EA5t!"
+    choice3: "Anh n\xF3i v\u1EADy em bu\u1ED3n em kh\xF3c cho anh xem gi\u1EDD!"
+    choice4: "Nhanh l\xEAn anh, em c\xF2n ph\u1EA3i \u0111i \u0103n \u0111\xE1m c\u01B0\u1EDBi
+      n\u1EEFa!"
+    correctIndex: -1
+  - question: "11. Alo, ai g\u1ECDi \u0111\u1EA5y?"
+    choice1: "D\u1EA1 em g\u1ECDi t\u1EEB t\u1ED5ng \u0111\xE0i h\u1ED7 tr\u1EE3
+      m\u1EDF kh\xF3a th\u1EBB \u1EA1."
+    choice2: "Em l\xE0 thi\xEAn s\u1EE9 \u0111\u1EBFn \u0111\u1EC3 gi\u1EA3i c\u1EE9u
+      v\xED ti\u1EC1n c\u1EE7a anh."
+    choice3: "D\u1EA1 em l\xE0 ng\u01B0\u1EDDi s\u1EBD c\u1EA7m ti\u1EC1n c\u1EE7a
+      anh \u0111i ch\u01A1i t\u1EBFt."
+    choice4: "Em g\u1ECDi nh\u1EA7m s\u1ED1, nh\u01B0ng l\u1EE1 r\u1ED3i m\xECnh
+      t\xE2m s\u1EF1 t\xED \u0111i."
     correctIndex: 0
-  - question: "11. Nh\u01B0ng ng\xE2n h\xE0ng d\u1EB7n kh\xF4ng \u0111\u01B0\u1EE3c
-      \u0111\u01B0a m\xE3 n\xE0y cho ai m\xE0?"
-    choice1: "T\xF4i l\xE0 nh\xE2n vi\xEAn t\u1ED5ng \u0111\xE0i, t\xF4i \u0111ang
-      nh\u1EADp v\xE0o h\u1EC7 th\u1ED1ng n\u1ED9i b\u1ED9."
-    choice2: "B\xECnh th\u01B0\u1EDDng th\xEC kh\xF4ng, nh\u01B0ng h\xF4m nay ng\xE0y
-      v\xEDa Th\u1EA7n T\xE0i n\xEAn \u0111\u01B0a \u0111\u01B0\u1EE3c."
-    choice3: "Ng\xE2n h\xE0ng d\u1EB7n ng\u01B0\u1EDDi l\u1EA1, c\xF2n em l\xE0...
-      ng\u01B0\u1EDDi quen t\u01B0\u01A1ng lai c\u1EE7a anh."
-    choice4: "C\xE1i m\xE3 \u0111\xF3 ch\u1EC9 \u0111\u1EC3... ng\u1EAFm cho \u0111\u1EB9p
-      th\xF4i, kh\xF4ng c\xF3 g\xEC \u0111\xE2u anh."
+  - question: "12. Th\u1EBB b\u1ECB kh\xF3a h\u1EA3? May qu\xE1, l\xE0m h\u1ED9 t\xF4i
+      v\u1EDBi."
+    choice1: "D\u1EA1 anh \u0111\u1ECDc m\xE3 OTP v\u1EEBa g\u1EEDi v\u1EC1 m\xE1y
+      \u0111\u1EC3 em x\u1EED l\xFD."
+    choice2: "Anh cho em m\u01B0\u1EE3n th\u1EBB \u0111\u1EC3 em \u0111i qu\u1EB9t
+      th\u1EED b\xE1t ph\u1EDF xem \u0111\u01B0\u1EE3c kh\xF4ng."
+    choice3: "Anh n\u1EA1p cho em c\xE1i th\u1EBB \u0111i\u1EC7n tho\u1EA1i 500k
+      \u0111\u1EC3 l\u1EA5y \u0111\u1ED9ng l\u1EF1c."
+    choice4: "Anh ra gi\u1EEFa s\xE2n \u0111\u1EE9ng m\u1ED9t ch\xE2n r\u1ED3i \u0111\u1ECDc
+      OTP cho n\xF3 thi\xEAng."
     correctIndex: 0
-  - question: "12. T\xF4i th\u1EA5y nghi nghi... \u0111\u1EC3 t\xF4i g\u1ECDi cho
-      con trai t\xF4i \u0111\xE3."
-    choice1: "Con trai anh kh\xF4ng bi\u1EBFt k\u1EF9 thu\u1EADt \u0111\xE2u, ch\u1EADm
-      1 ph\xFAt l\xE0 m\u1EA5t s\u1EA1ch ti\u1EC1n!"
-    choice2: "Con trai anh \u0111ang b\u1EADn \u0111i net r\u1ED3i, g\u1ECDi l\xE0m
-      g\xEC t\u1ED1n ti\u1EC1n \u0111i\u1EC7n tho\u1EA1i."
-    choice3: "Em m\u1EDBi l\xE0 con trai th\u1EA5t l\u1EA1c 20 n\u0103m c\u1EE7a
-      anh \u0111\xE2y, \u0111\u1EEBng tin ai h\u1EBFt!"
-    choice4: "G\u1ECDi n\xF3 l\xE0m g\xEC, n\xF3 l\u1EA1i xin ti\u1EC1n anh mua Skin
-      Li\xEAn Qu\xE2n b\xE2y gi\u1EDD."
+  - question: "13. M\xE3 l\xE0 112233. \u0110\u01B0\u1EE3c ch\u01B0a em?"
+    choice1: "D\u1EA1 \u0111\u01B0\u1EE3c r\u1ED3i, gi\u1EDD em c\u1EA7n li\xEAn
+      k\u1EBFt v\u1EDBi v\xED \u0111i\u1EC7n t\u1EED c\u1EE7a anh."
+    choice2: "D\u1EA1 ch\u01B0a, s\u1ED1 n\xE0y x\u1EA5u qu\xE1 anh xin m\xE3 kh\xE1c
+      \u0111\u1EB9p h\u01A1n \u0111i."
+    choice3: "Ok r\u1ED3i, gi\u1EDD anh ng\u1ED3i im nh\u01B0 t\u01B0\u1EE3ng \u0111\u1EC3
+      em l\xE0m ph\xE9p."
+    choice4: "M\xE3 n\xE0y em th\u1EA5y quen quen, h\xECnh nh\u01B0 l\xE0 ng\xE0y
+      sinh b\u1ED3 c\u0169 em."
     correctIndex: 0
-  - question: "13. Th\xF4i \u0111\u01B0\u1EE3c... m\xE3 l\xE0 889901. Xong r\u1ED3i
-      \u0111\xF3."
-    choice1: "H\u1EC7 th\u1ED1ng b\xE1o l\u1ED7i, h\xECnh nh\u01B0 anh \u0111\u1ECDc
-      sai s\u1ED1 cu\u1ED1i? \u0110\u1ECDc l\u1EA1i \u0111i!"
-    choice2: "U\u1EA7y m\xE3 \u0111\u1EB9p th\u1EBF, cho em xin \u0111\u1EC3 n\u1EA1p
-      th\u1EBB c\xE0o nha."
-    choice3: "\u0110\xFAng r\u1ED3i, gi\u1EDD anh \u0111\u1EE9ng d\u1EADy xoay 3
-      v\xF2ng cho n\xF3 hi\u1EC7u nghi\u1EC7m."
-    choice4: "M\xE3 n\xE0y ch\u1EC9 d\xF9ng \u0111\u1EC3... tr\xFAng th\u01B0\u1EDFng
-      m\u1ED9t c\xE1i b\u1EA1t tai t\u1EEB ng\xE2n h\xE0ng."
+  - question: "14. C\u1EE9 l\xE0m \u0111i, mi\u1EC5n l\u1EA5y l\u1EA1i \u0111\u01B0\u1EE3c
+      ti\u1EC1n cho t\xF4i."
+    choice1: "Anh t\u1EA3i \u1EE9ng d\u1EE5ng 'H\u1ED7 tr\u1EE3 t\u1EEB xa' n\xE0y
+      v\u1EC1 m\xE1y gi\xFAp em nh\xE9."
+    choice2: "Anh g\u1EEDi cho em th\xEAm c\xE1i \u0111\u1ECBa ch\u1EC9 nh\xE0 \u0111\u1EC3
+      em t\u1EDBi ch\u01A1i."
+    choice3: "Anh ch\u1EE5p \u1EA3nh ch\xE2n dung \u0111ang c\u01B0\u1EDDi th\u1EADt
+      t\u01B0\u01A1i g\u1EEDi em nh\xE9."
+    choice4: "Anh \u0111\u1EE9ng y\xEAn \u0111\xF3, h\xEDt v\xE0o th\u1EDF ra \u0111\u1EC1u
+      \u0111\u1EB7n cho em."
     correctIndex: 0
-  - question: "14. Kh\xF4ng, \u0111\xFAng m\xE0! \u0110\u1EC3 t\xF4i xem l\u1EA1i...
-      \xE0 l\xE0 889907."
-    choice1: "C\u1EA3m \u01A1n anh. \u0110ang x\u1EED l\xFD... \u1ED2, t\xE0i kho\u1EA3n
-      anh c\xF2n m\u1ED9t v\xED li\xEAn k\u1EBFt?"
-    choice2: "Tuy\u1EC7t v\u1EDDi, gi\u1EDD anh c\xFAng cho em c\xE1i m\u1EADt kh\u1EA9u
-      iCloud lu\xF4n nh\xE9."
-    choice3: "Ok, ti\u1EC1n c\u1EE7a anh \u0111ang bay v\u1EC1... t\xFAi c\u1EE7a
-      em r\u1ED3i."
-    choice4: "S\u1ED1 7 l\xE0 'Th\u1EA5t', t\u1EE9c l\xE0 th\u1EA5t b\xE1t \u0111\xF3,
-      anh coi ch\u1EEBng nha."
+  - question: "15. R\u1ED3i, t\u1EA3i xong r\u1ED3i, gi\u1EDD l\xE0m g\xEC n\u1EEFa?"
+    choice1: "Anh nh\u1EA5n 'Cho ph\xE9p' \u0111\u1EC3 em qu\xE9t virus tr\xEAn \u0111i\u1EC7n
+      tho\u1EA1i."
+    choice2: "Anh \u0111\u1EADp c\xE1i \u0111i\u1EC7n tho\u1EA1i xu\u1ED1ng \u0111\u1EA5t
+      3 c\xE1i cho n\xF3 t\u1EC9nh."
+    choice3: "Anh t\u1EAFt ngu\u1ED3n r\u1ED3i n\xE9m m\xE1y v\xE0o ch\u1EADu n\u01B0\u1EDBc
+      cho m\xE1t."
+    choice4: "Anh \u0111i mua cho em ly tr\xE0 s\u1EEFa r\u1ED3i m\xECnh t\xEDnh
+      ti\u1EBFp."
     correctIndex: 0
-  - question: "15. \u0110\xFAng, t\xF4i c\xF3 li\xEAn k\u1EBFt v\u1EDBi v\xED \u0111i\u1EC7n
-      t\u1EED n\u1EEFa."
-    choice1: "Ch\xFAng t\xF4i c\u1EA7n \u0111\u1ED3ng b\u1ED9 n\u1ED1t c\u1EA3 v\xED
-      \u0111\xF3 \u0111\u1EC3 \u0111\u1EA3m b\u1EA3o an to\xE0n tuy\u1EC7t \u0111\u1ED1i."
-    choice2: "V\xED \u0111\xF3 c\xF3 nhi\u1EC1u ti\u1EC1n kh\xF4ng? \u0110\u1EE7
-      mua m\u1ED9t con SH kh\xF4ng anh?"
-    choice3: "V\xED \u0111\xF3 \u0111\u1EC3 d\xE0nh mua tr\xE0 s\u1EEFa cho em l\xE0
-      h\u1EE3p l\xFD nh\u1EA5t r\u1ED3i."
-    choice4: "Anh x\xF3a v\xED \u0111\xF3 \u0111i, c\xE0i App '\u0110\xE0o v\xE0ng'
-      v\u1EC1 ch\u01A1i cho n\xF3 l\xE0nh."
-    correctIndex: 0
-  - question: "16. M\u1EC7t qu\xE1 nh\u1EC9, sao th\u1EE7 t\u1EE5c l\u1EB1ng nh\u1EB1ng
+  - question: "16. Sao m\xE0n h\xECnh c\u1EE7a t\xF4i c\u1EE9 nh\u1EA3y li\xEAn t\u1EE5c
       v\u1EADy?"
-    choice1: "\u0110\xE2y l\xE0 quy \u0111\u1ECBnh b\u1EA3o m\u1EADt m\u1EDBi c\u1EE7a
-      Ng\xE2n h\xE0ng Nh\xE0 n\u01B0\u1EDBc."
-    choice2: "L\u1EB1ng nh\u1EB1ng m\u1EDBi ch\u1EE9ng t\u1ECF ng\xE2n h\xE0ng em...
-      r\u1EA3nh r\u1ED7i anh \u1EA1."
-    choice3: "T\u1EA1i v\xEC s\u1EBFp em th\xEDch h\xE0nh x\xE1c kh\xE1ch h\xE0ng
-      cho vui \u0111\u1EA5y."
-    choice4: "Anh than n\u1EEFa l\xE0 em... kh\xF3c cho anh xem b\xE2y gi\u1EDD,
-      l\xE0m ti\u1EBFp \u0111i!"
+    choice1: "D\u1EA1 b\xEAn em \u0111ang gi\u1EA3i m\xE3 c\xE1c l\u1EDBp b\u1EA3o
+      m\u1EADt, anh \u0111\u1EEBng ch\u1EA1m v\xE0o."
+    choice2: "D\u1EA1 m\xE1y anh n\xF3 \u0111ang nh\u1EA3y EDM v\xEC s\u1EAFp c\xF3
+      ti\u1EC1n \u0111\xF3 anh."
+    choice3: "Ch\u1EAFc m\xE1y anh n\xF3 \u0111ang t\u1EADp th\u1EC3 d\u1EE5c bu\u1ED5i
+      s\xE1ng th\xF4i."
+    choice4: "M\xE1y anh n\xF3 \u0111ang \u0111\xF2i \u0111\u01B0\u1EE3c ngh\u1EC9
+      ng\u01A1i, anh m\u1EB7c k\u1EC7 n\xF3 \u0111i."
     correctIndex: 0
-  - question: "17. V\u1EADy t\xF4i ph\u1EA3i l\xE0m g\xEC ti\u1EBFp theo?"
-    choice1: "Anh c\u1EA5p quy\u1EC1n truy c\u1EADp t\u1EEB xa qua \u1EE9ng d\u1EE5ng
-      n\xE0y \u0111\u1EC3 t\xF4i qu\xE9t virus."
-    choice2: "Anh t\u1EF1 v\u1EA3 v\xE0o m\u1EB7t 3 c\xE1i \u0111\u1EC3 h\u1EC7 th\u1ED1ng
-      nh\u1EADn di\u1EC7n khu\xF4n m\u1EB7t."
-    choice3: "Anh \u0111em \u0111i\u1EC7n tho\u1EA1i nh\xFAng v\xE0o n\u01B0\u1EDBc
-      \u0111\u1EC3... r\u1EEDa s\u1EA1ch virus."
-    choice4: "Anh h\xE1t cho em nghe b\xE0i 'C\u1EAFt \u0111\xF4i n\u1ED7i s\u1EA7u'
-      \u0111\u1EC3 gi\u1EA3i h\u1EA1n \u0111i."
+  - question: "17. T\xF4i th\u1EA5y th\xF4ng b\xE1o tr\u1EEB ti\u1EC1n? 5 tri\u1EC7u,
+      r\u1ED3i 10 tri\u1EC7u?"
+    choice1: "\u0110\xF3 l\xE0 ti\u1EC1n \u0111ang \u0111\u01B0\u1EE3c chuy\u1EC3n
+      v\xE0o 'K\xE9t s\u1EAFt an to\xE0n' c\u1EE7a ng\xE2n h\xE0ng."
+    choice2: "D\u1EA1 ti\u1EC1n n\xF3 \u0111i du l\u1ECBch v\xF2ng quanh th\u1EBF
+      gi\u1EDBi r\u1ED3i s\u1EBD v\u1EC1."
+    choice3: "Anh hoa m\u1EAFt r\u1ED3i, ng\xE2n h\xE0ng \u0111ang t\u1EB7ng th\xEAm
+      ti\u1EC1n cho anh \u0111\xF3."
+    choice4: "Ti\u1EC1n n\xF3 th\u1EA5y anh gi\xE0u qu\xE1 n\xEAn n\xF3 r\u1EE7 b\u1EA1n
+      n\xF3 \u0111i ch\u01A1i b\u1EDBt."
     correctIndex: 0
-  - question: "18. \u1EE8ng d\u1EE5ng n\xE0y sao n\xF3 \u0111\xF2i quy\u1EC1n xem
-      m\xE0n h\xECnh?"
-    choice1: "\u0110\u1EC3 b\u1ED9 ph\u1EADn k\u1EF9 thu\u1EADt ki\u1EC3m tra xem
-      c\xF3 ph\u1EA7n m\u1EC1m gi\xE1n \u0111i\u1EC7p kh\xF4ng."
-    choice2: "\u0110\u1EC3 em xem anh c\xF3 \u0111ang nh\u1EAFn tin v\u1EDBi 'gh\u1EC7
-      nh\xED' n\xE0o kh\xF4ng th\xF4i."
-    choice3: "N\xF3 \u0111\xF2i xem cho vui \u1EA5y m\xE0, anh c\u1EE9 cho n\xF3
-      xem \u0111i \u0111\u1EEBng ng\u1EA1i."
-    choice4: "\u0110\u1EC3 em ki\u1EC3m tra xem h\xECnh n\u1EC1n \u0111i\u1EC7n tho\u1EA1i
-      c\u1EE7a anh c\xF3 \u0111\u1EB9p kh\xF4ng."
+  - question: "18. K\xE9t s\u1EAFt an to\xE0n \xE0? V\u1EADy khi n\xE0o t\xF4i nh\u1EADn
+      l\u1EA1i \u0111\u01B0\u1EE3c?"
+    choice1: "Sau 24h b\u1EA3o tr\xEC h\u1EC7 th\u1ED1ng s\u1EBD t\u1EF1 \u0111\u1ED9ng
+      ho\xE0n tr\u1EA3 \u1EA1."
+    choice2: "Khi n\xE0o em c\u01B0\u1EDBi v\u1EE3 em s\u1EBD tr\u1EA3 l\u1EA1i anh
+      g\u1EA5p \u0111\xF4i."
+    choice3: "D\u1EA1 khi n\xE0o l\u1EE3n bi\u1EBFt bay th\xEC ti\u1EC1n n\xF3 v\u1EC1
+      t\u1EDBi c\u1ED5ng nh\xE0 anh."
+    choice4: "N\u0103m sau anh nh\xE9, n\u0103m nay em b\u1EADn ti\xEAu m\u1EA5t
+      r\u1ED3i."
     correctIndex: 0
-  - question: "19. T\xF4i nh\u1EA5n 'Cho ph\xE9p' r\u1ED3i, th\u1EA5y m\xE0n h\xECnh
-      nh\u1EA3y lung tung qu\xE1!"
-    choice1: "\u0110\u1EEBng ch\u1EA1m v\xE0o m\xE1y, ch\xFAng t\xF4i \u0111ang gi\u1EA3i
-      m\xE3 c\xE1c m\xE3 \u0111\u1ED9c."
-    choice2: "M\xE1y anh \u0111ang nh\u1EA3y EDM \u0111\u1EA5y, k\u1EC7 n\xF3 \u0111i,
-      t\xED n\xF3 m\u1EC7t n\xF3 ngh\u1EC9."
-    choice3: "Ch\u1EAFc l\xE0 m\xE1y anh \u0111ang vui v\xEC s\u1EAFp \u0111\u01B0\u1EE3c...
-      v\u1EC1 h\u01B0u r\u1ED3i \u0111\xF3."
-    choice4: "D\u1EA1 \u0111i\u1EC7n tho\u1EA1i anh \u0111ang 'l\xEAn \u0111\u1ED3ng',
-      anh \u0111\u1EEBng c\xF3 c\u1EA3n n\xF3."
+  - question: "19. C\u1EA3m \u01A1n em nh\xE9, su\xFDt n\u1EEFa th\xEC t\xF4i m\u1EA5t
+      ti\u1EC1n."
+    choice1: "D\u1EA1 kh\xF4ng c\xF3 g\xEC, \u0111\xF3 l\xE0 tr\xE1ch nhi\u1EC7m
+      c\u1EE7a t\u1EE5i em."
+    choice2: "V\xE2ng, anh hi\u1EC1n qu\xE1 n\xEAn em th\u1EA5y th\u01B0\u01A1ng
+      cho c\xE1i v\xED c\u1EE7a anh."
+    choice3: "D\u1EA1 em l\xE0 thi\xEAn th\u1EA7n h\u1ED9 m\u1EC7nh c\u1EE7a nh\u1EEFng
+      ng\u01B0\u1EDDi d\u1EC5 tin m\xE0."
+    choice4: "D\u1EA1 em chu\u1EA9n b\u1ECB \u0111\u1ED5i s\u1ED1 \u0111i\u1EC7n
+      tho\u1EA1i r\u1ED3i, t\u1EA1m bi\u1EC7t anh nh\xE9."
     correctIndex: 0
-  - question: "20. Sao t\xF4i nh\u1EADn \u0111\u01B0\u1EE3c th\xF4ng b\xE1o t\xE0i
-      kho\u1EA3n v\u1EEBa b\u1ECB tr\u1EEB h\u1EBFt s\u1EA1ch ti\u1EC1n?!"
-    choice1: "H\u1EC7 th\u1ED1ng \u0111ang t\u1EA1m gi\u1EEF \u0111\u1EC3 b\u1EA3o
-      tr\xEC, anh vui l\xF2ng \u0111\u1EE3i 24h nh\xE9! (T\u1EAFt m\xE1y)"
-    choice2: "D\u1EA1 ti\u1EC1n n\xF3 \u0111i du l\u1ECBch t\xED th\xF4i, sang n\u0103m
-      n\xF3 v\u1EC1 l\u1EA1i."
-    choice3: "Ch\xFAc m\u1EEBng anh tr\xFAng gi\u1EA3i 'Ng\u01B0\u1EDDi b\u1ECB l\u1EEBa
-      d\u1EC5 nh\u1EA5t n\u0103m'!"
-    choice4: "\u01A0 em c\u0169ng kh\xF4ng bi\u1EBFt, ch\u1EAFc l\xE0 do... duy\xEAn
-      s\u1ED1 anh \u1EA1!"
+  - question: "20. Xong ch\u01B0a em \u01A1i?"
+    choice1: "D\u1EA1 xong r\u1ED3i, c\u1EA3m \u01A1n 'con m\u1ED3i' \u0111\xE3 \u0111\xF3ng
+      g\xF3p ti\u1EC1n ti\xEAu t\u1EBFt! *C\xFAp m\xE1y*"
+    choice2: "D\u1EA1 xong r\u1ED3i, anh ra ng\xE2n h\xE0ng vay th\xEAm ti\u1EC1n
+      r\u1ED3i g\u1ECDi l\u1EA1i em."
+    choice3: "D\u1EA1 xong, gi\u1EDD anh c\xF3 th\u1EC3 kh\xF3c \u0111\u01B0\u1EE3c
+      r\u1ED3i \u0111\xF3 \u1EA1."
+    choice4: "Xong r\u1ED3i, em \u0111i mua iPhone 15 \u0111\xE2y, bye anh nh\xE9!"
     correctIndex: 0
   computer: {fileID: 1460454162}
-  playerController: {fileID: 0}
-  playerTransform: {fileID: 1209912081}
+  playerController: {fileID: 1209912083}
+  doorPoint: {fileID: 1784016983}
+  medicalRoomPoint: {fileID: 1784016983}
   enemyTeleportPoint: {fileID: 1553513181}
-  enemyTeleportRadius: 2
-  playerDoorPoint: {fileID: 1784016983}
-  playerTeleportDelay: 2
 --- !u!4 &2146552337
 Transform:
   m_ObjectHideFlags: 0
@@ -14633,11 +14955,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 479994690164450499, guid: 80935e56ae2fcde41aa225c91172221c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.4
+      value: 12.49
       objectReference: {fileID: 0}
     - target: {fileID: 479994690164450499, guid: 80935e56ae2fcde41aa225c91172221c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9
+      value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 479994690164450499, guid: 80935e56ae2fcde41aa225c91172221c, type: 3}
       propertyPath: m_LocalPosition.z
