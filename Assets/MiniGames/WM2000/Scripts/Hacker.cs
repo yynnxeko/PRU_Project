@@ -10,14 +10,21 @@ public class Hacker : MonoBehaviour
     string currentWord;
     Leveling stage;
 
+    [SerializeField] private PlayerController2 playerController;
+
     void Start()
     {
+        if (playerController == null)
+            playerController = FindObjectOfType<PlayerController2>();
+
         ShowMainMenu("Yoga");
     }
 
     void ShowMainMenu(string name)
     {
         currentScreen = ScreenEnum.MainMenu;
+        // if (playerController != null) playerController.isInGame = false;
+
         Terminal.ClearScreen();
         Terminal.WriteLine($"Hello {name}");
         Terminal.WriteLine("What would you like to decode into?");
@@ -64,6 +71,10 @@ public class Hacker : MonoBehaviour
     void ShowGameScreen(float level)
     {
         currentScreen = ScreenEnum.Decoder;
+
+        if (playerController != null) playerController.isInGame = true;
+
+
         instantiateLevelAndRandomizeWord(level);
 
         Terminal.ClearScreen();
@@ -95,6 +106,9 @@ public class Hacker : MonoBehaviour
     void DisplayFinishScreen()
     {
         currentScreen = ScreenEnum.Finish;
+
+        if (playerController != null) playerController.isInGame = false;
+
         Terminal.ClearScreen();
         switch (currentLevel)
         {
@@ -116,7 +130,8 @@ public class Hacker : MonoBehaviour
 
 HERE IS THE KEY!
 ");
-        Terminal.WriteLine("Type \"menu\" to return to Main Menu");
+        playerController.isInGame = true;
+        Terminal.WriteLine("Type \"Menu\" to return to Main Menu");
 
     }
 }

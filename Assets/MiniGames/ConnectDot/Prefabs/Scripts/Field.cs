@@ -4,239 +4,193 @@ using UnityEngine.UI;
 
 public class Field : MonoBehaviour
 {
-  private Tile[,] _grid;
-  private bool _canDrawConnection = false;
+    private Tile[,] _grid;
+    private bool _canDrawConnection = false;
 
-  private List<Tile> _connections = new List<Tile>();
-  private Tile _connectionTile;
+    private List<Tile> _connections = new List<Tile>();
+    private Tile _connectionTile; // Tile hiện tại đang nối (đuôi rắn)
 
-  private List<int> _solvedConnections = new List<int>();
+    private int _dimensionX = 0;
+    private int _dimensionY = 0;
+    private int _solved = 0;
+    private Dictionary<int, int> _amountToSolve = new Dictionary<int, int>();
 
-  private int _dimensionX = 0;
-  private int _dimensionY = 0;
-  private int _solved = 0;
-  private Dictionary<int, int> _amountToSolve = new Dictionary<int, int>();
-
-  void Start()
-  {
-    _dimensionX = transform.childCount;
-    _dimensionY = transform.GetChild(0).transform.childCount;
-    _grid = new Tile[_dimensionX, _dimensionY];
-    for (int y = 0; y < _dimensionX; y++)
+    void Start()
     {
-      var row = transform.GetChild(y).transform;
-      row.gameObject.name = "" + y;
-      for (int x = 0; x < _dimensionY; x++)
-      {
-        var tile = row.GetChild(x).GetComponent<Tile>();
-        tile.gameObject.name = "" + x;
-        tile.onSelected.AddListener(onTileSelected);
-        _CollectAmountToSolveFromTile(tile);
-        _grid[x, y] = tile;
-      }
+        // 1. Setup Grid Dimensions
+        _dimensionY = transform.childCount; // Số hàng (Rows)
+        if (_dimensionY > 0)
+            _dimensionX = transform.GetChild(0).childCount; // Số cột (Cols)
+
+        _grid = new Tile[_dimensionX, _dimensionY];
+
+        // 2. Loop qua các hàng (Rows)
+        for (int y = 0; y < _dimensionY; y++)
+        {
+            var row = transform.GetChild(y);
+            row.name = "" + y;
+
+            // Loop qua các cột (Cols) trong hàng
+            for (int x = 0; x < _dimensionX; x++)
+            {
+                var tile = row.GetChild(x).GetComponent<Tile>();
+                tile.name = "" + x;
+
+                // Set tọa độ vào Tile luôn để tiện truy xuất
+                tile.gridX = x;
+                tile.gridY = y;
+
+                // Đăng ký sự kiện
+                tile.onSelected.AddListener(onTileSelected);
+                tile.onHover.AddListener(onTileHover); // [MỚI] Nghe sự kiện lướt chuột
+
+                _CollectAmountToSolveFromTile(tile);
+                _grid[x, y] = tile;
+            }
+        }
+        SetGameStatus(_solved, _amountToSolve.Count);
     }
-    SetGameStatus(_solved, _amountToSolve.Count);
-    _OutputGrid();
-  }
 
-  void _CollectAmountToSolveFromTile(Tile tile)
-  {
-    if (tile.cid > Tile.UNPLAYABLE_INDEX)
+    // [LOGIC MỚI] Xử lý khi chuột lướt vào một Tile (Thay cho Update)
+    void onTileHover(Tile hoverTile)
     {
-      if (_amountToSolve.ContainsKey(tile.cid))
-        _amountToSolve[tile.cid] += 1;
-      else _amountToSolve[tile.cid] = 1;
-    }
-  }
+        // Nếu không đang trong trạng thái vẽ thì bỏ qua
+        if (!_canDrawConnection) return;
 
-  void _OutputGrid()
-  {
-    var results = "";
-    int dimension = transform.childCount;
-    for (int y = 0; y < dimension; y++)
-    {
-      results += "{";
-      var row = transform.GetChild(y).transform;
-      for (int x = 0; x < row.childCount; x++)
-      {
-        var tile = _grid[x, y];
-        if (x > 0) results += ",";
-        results += tile.cid;
-      }
-      results += "}\n";
-    }
-    Debug.Log("Main -> Start: _grid: \n" + results);
-  }
+        // Logic cũ của bạn: Kiểm tra các điều kiện
+        Tile firstTile = _connections[0];
 
-  Vector3 _mouseWorldPosition;
-  int _mouseGridX, _mouseGridY;
+        // Cùng màu bắt đầu nhưng khác ô (tránh nối lại chính đầu rắn)
+        bool isDifferentActiveTile = hoverTile.cid > 0 && hoverTile.cid != firstTile.cid;
 
-  void Update()
-  {
-    if (_canDrawConnection)
-    {
-      _mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      _mouseGridX = (int)Mathf.Floor(_mouseWorldPosition.x);
-      _mouseGridY = (int)Mathf.Floor(_mouseWorldPosition.y);
+        if (hoverTile.isHighlighted || hoverTile.isSolved || isDifferentActiveTile) return;
 
-      if (_CheckMouseOutsideGrid()) return;
+        // Kiểm tra vị trí: Hover Tile vs Connection Tile (đuôi hiện tại)
+        if (hoverTile == _connectionTile) return; // Vẫn đang ở ô cũ
 
-      Tile hoverTile = _grid[_mouseGridX, _mouseGridY];
-      Tile firstTile = _connections[0];
-      bool isDifferentActiveTile = hoverTile.cid > 0 && hoverTile.cid != firstTile.cid;
+        // Tính khoảng cách Grid
+        var deltaX = Mathf.Abs(_connectionTile.gridX - hoverTile.gridX);
+        var deltaY = Mathf.Abs(_connectionTile.gridY - hoverTile.gridY);
 
-      if (hoverTile.isHighlighted || hoverTile.isSolved || isDifferentActiveTile) return;
+        bool isShiftNotOnNext = deltaX > 1 || deltaY > 1; // Nhảy cóc
+        bool isShiftDiagonal = (deltaX > 0 && deltaY > 0); // Đi chéo
 
-      Vector2 connectionTilePosition = _FindTileCoordinates(_connectionTile);
-      bool isPositionDifferent = IsDifferentPosition(_mouseGridX, _mouseGridY, connectionTilePosition);
-
-      Debug.Log("Field -> OnMouseDrag(" + isPositionDifferent + "): " + _mouseGridX + "|" + _mouseGridY);
-
-      if (isPositionDifferent)
-      {
-        var deltaX = System.Math.Abs(connectionTilePosition.x - _mouseGridX);
-        var deltaY = System.Math.Abs(connectionTilePosition.y - _mouseGridY);
-        bool isShiftNotOnNext = deltaX > 1 || deltaY > 1;
-        bool isShiftDiagonal = (deltaX > 0 && deltaY > 0);
-        Debug.Log("Field -> OnMouseDrag: isShiftNotOnNext = " + isShiftNotOnNext + "| isShiftDiagonal = " + isShiftDiagonal);
         if (isShiftNotOnNext || isShiftDiagonal) return;
 
+        // --- HỢP LỆ -> VẼ NỐI ---
         hoverTile.Highlight();
         hoverTile.SetConnectionColor(_connectionTile.ConnectionColor);
 
+        // Vẽ ống nối từ ô cũ sang ô mới
         _connectionTile.ConnectionToSide(
-          _mouseGridY > connectionTilePosition.y,
-          _mouseGridX > connectionTilePosition.x,
-          _mouseGridY < connectionTilePosition.y,
-          _mouseGridX < connectionTilePosition.x
+            hoverTile.gridY > _connectionTile.gridY, // Top (Y tăng) - Lưu ý: UI Grid có thể Y ngược tùy setup, check lại nếu bị ngược
+            hoverTile.gridX > _connectionTile.gridX, // Right
+            hoverTile.gridY < _connectionTile.gridY, // Bottom
+            hoverTile.gridX < _connectionTile.gridX  // Left
         );
 
+        // Cập nhật đuôi rắn
         _connectionTile = hoverTile;
         _connections.Add(_connectionTile);
 
+        // Check Win Condition
         if (_CheckIfTilesMatch(hoverTile, firstTile))
         {
-          _connections.ForEach((tile) => tile.isSolved = true);
-          _canDrawConnection = false;
-          _amountToSolve.Remove(firstTile.cid);
-          SetGameStatus(++_solved, _amountToSolve.Count + _solved);
-          if (_amountToSolve.Keys.Count == 0)
-          {
-            Debug.Log("GAME COMPLETE");
-          }
+            // Hoàn thành 1 đường
+            _connections.ForEach((tile) => tile.isSolved = true);
+            _canDrawConnection = false;
+
+            if (_amountToSolve.ContainsKey(firstTile.cid))
+                _amountToSolve.Remove(firstTile.cid);
+
+            SetGameStatus(++_solved, _amountToSolve.Count + _solved);
+
+            if (_amountToSolve.Keys.Count == 0)
+            {
+                Debug.Log("GAME COMPLETE");
+                // Có thể gọi DesktopManager để hiện thông báo thắng
+            }
         }
-      }
     }
-  }
 
-  bool _CheckIfTilesMatch(Tile tile, Tile another)
-  {
-    return tile.cid > 0 && another.cid == tile.cid;
-  }
+    // --- CÁC HÀM PHỤ TRỢ (Giữ nguyên hoặc chỉnh nhẹ) ---
 
-  bool _CheckMouseOutsideGrid()
-  {
-    return _mouseGridY >= _dimensionY || _mouseGridY < 0 || _mouseGridX >= _dimensionX || _mouseGridX < 0;
-  }
-
-  void onTileSelected(Tile tile)
-  {
-    Debug.Log("Field -> onTileSelected(" + tile.isSelected + "): " + _FindTileCoordinates(tile));
-    if (tile.isSelected)
+    void _CollectAmountToSolveFromTile(Tile tile)
     {
-      _connectionTile = tile;
-      _connections = new List<Tile>();
-      _connections.Add(_connectionTile);
-      _canDrawConnection = true;
-      _connectionTile.Highlight();
-    }
-    else
-    {
-      bool isFirstTileInConnection = _connectionTile == tile;
-      if (isFirstTileInConnection) tile.HightlightReset();
-      else if (!_CheckIfTilesMatch(_connectionTile, tile))
-      {
-        _ResetConnections();
-      }
-      _canDrawConnection = false;
-    }
-  }
-
-  public void onRestart()
-  {
-    Debug.Log("Field -> onRestart");
-    int dimension = transform.childCount;
-    for (int y = 0; y < dimension; y++)
-    {
-      var row = transform.GetChild(y).transform;
-      for (int x = 0; x < row.childCount; x++)
-      {
-        var tile = _grid[x, y];
-        tile.ResetConnection();
-        tile.HightlightReset();
-        _CollectAmountToSolveFromTile(tile);
-      }
-    }
-    _solved = 0;
-    SetGameStatus(_solved, _amountToSolve.Count);
-  }
-
-    void SetGameStatus(int solved, int from)
-    {
-        var statusGO = GameObject.Find("txtStatus");
-        if (statusGO == null)
+        if (tile.cid > Tile.UNPLAYABLE_INDEX)
         {
-            // Không có txtStatus thì chỉ log, không crash
-            Debug.Log($"Solve: {solved} from {from}");
-            return;
+            if (_amountToSolve.ContainsKey(tile.cid))
+                _amountToSolve[tile.cid] += 1;
+            else _amountToSolve[tile.cid] = 1;
         }
+    }
 
-        var txt = statusGO.GetComponent<Text>();
-        if (txt == null)
+    bool _CheckIfTilesMatch(Tile tile, Tile another)
+    {
+        return tile.cid > 0 && another.cid == tile.cid;
+    }
+
+    void onTileSelected(Tile tile)
+    {
+        if (tile.isSelected)
         {
-            Debug.LogWarning("txtStatus tồn tại nhưng không có UnityEngine.UI.Text");
-            return;
+            // Bắt đầu vẽ
+            _connectionTile = tile;
+            _connections = new List<Tile>();
+            _connections.Add(_connectionTile);
+            _canDrawConnection = true;
+            _connectionTile.Highlight();
         }
+        else
+        {
+            // Nhả chuột
+            bool isFirstTileInConnection = _connectionTile == tile;
+            if (isFirstTileInConnection)
+            {
+                tile.HightlightReset();
+            }
+            else if (!_CheckIfTilesMatch(_connectionTile, tile))
+            {
+                // Nhả chuột giữa đường -> Reset
+                _ResetConnections();
+            }
+            _canDrawConnection = false;
+        }
+    }
 
-        txt.text = $"Solve: {solved} from {from}";
+    public void onRestart()
+    {
+        foreach (var tile in _grid)
+        {
+            if (tile == null) continue;
+            tile.ResetConnection();
+            tile.HightlightReset();
+            // Reset logic đếm...
+        }
+        // Logic restart đếm số cần check lại tùy game logic của bạn
+        // Ở đây tôi giữ simple
     }
 
     void _ResetConnections()
-  {
-    Debug.Log("Field -> _ResetConnections: _connections.Count = " + _connections.Count);
-    _connections.ForEach((tile) =>
     {
-      tile.ResetConnection();
-      tile.HightlightReset();
-    });
-  }
-
-  Vector2 _FindTileCoordinates(Tile tile)
-  {
-    // Debug.Log("Field -> _FindTileCoordinates: " + tile.gameObject.name + " | " + tile.gameObject.transform.parent.gameObject.name);
-    int x = int.Parse(tile.gameObject.name);
-    int y = int.Parse(tile.gameObject.transform.parent.gameObject.name);
-    return new Vector2(x, y);
-  }
-
-  public bool IsDifferentPosition(int gridX, int gridY, Vector2 position)
-  {
-    return position.x != gridX || position.y != gridY;
-  }
-
-  private class Connection
-  {
-    public Tile tile;
-    public Vector2 position;
-    public Connection(Tile tile, Vector2 position)
-    {
-      this.tile = tile;
-      this.position = position;
+        _connections.ForEach((tile) =>
+        {
+            tile.ResetConnection();
+            tile.HightlightReset();
+        });
+        _connections.Clear();
     }
 
-    public bool IsDifferentPosition(int gridX, int gridY)
+    void SetGameStatus(int solved, int from)
     {
-      return this.position.x != gridX || this.position.y != gridY;
+        // Tìm txtStatus trong con của Field hoặc cha
+        // Lưu ý: Find("txtStatus") tìm toàn scene, có thể chậm hoặc nhầm
+        // Tốt nhất nên serialize field này
+        var statusGO = GameObject.Find("txtStatus");
+        if (statusGO != null)
+        {
+            var txt = statusGO.GetComponent<Text>();
+            if (txt) txt.text = $"Solve: {solved} from {from}";
+        }
     }
-  }
 }

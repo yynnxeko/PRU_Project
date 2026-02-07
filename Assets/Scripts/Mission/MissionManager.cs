@@ -23,7 +23,7 @@ public class MissionManager : MonoBehaviour
         {
             currentStepIndex++;
             if (currentStepIndex < steps.Length)
-                steps[currentStepIndex].StartStep();  // ✅ Start step mới
+                steps[currentStepIndex].StartStep();  // Start step mới
         }
         else if (step.IsFailed)
         {
