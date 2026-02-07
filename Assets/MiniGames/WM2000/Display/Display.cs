@@ -4,33 +4,29 @@ using UnityEngine.UI;
 public class Display : MonoBehaviour
 {
     [SerializeField] Terminal connectedToTerminal;
-
-    // TODO calculate these two if possible
     [SerializeField] int charactersWide = 40;
     [SerializeField] int charactersHigh = 14;
 
     Text screenText;
 
-    private void Start()
+    private void Awake()
     {
-        screenText = GetComponentInChildren<Text>();
-        WarnIfTerminalNotConneced();
-    }
+        screenText = GetComponentInChildren<Text>(true);
+        if (!screenText)
+        {
+            Debug.LogWarning("[Display] Missing Text (Legacy) in children.");
+        }
 
-    private void WarnIfTerminalNotConneced()
-    {
         if (!connectedToTerminal)
         {
-            Debug.LogWarning("Display not connected to a terminal");
+            Debug.LogWarning("[Display] Missing Terminal reference.");
         }
     }
 
-    // Akin to monitor refresh
     private void Update()
     {
-        if (connectedToTerminal)
-        {
-            screenText.text = connectedToTerminal.GetDisplayBuffer(charactersWide, charactersHigh);
-        }
+        if (!connectedToTerminal || !screenText) return;
+
+        screenText.text = connectedToTerminal.GetDisplayBuffer(charactersWide, charactersHigh);
     }
-} 
+}

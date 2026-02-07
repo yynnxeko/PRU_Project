@@ -32,10 +32,10 @@ public class EnemyAi : MonoBehaviour
     public float patrolRotationAngle = 60f;
 
     [Header("--- CẢM BIẾN ---")]
-    public float baseDistance = 6f;
-    public float focusDistance = 10f;
+    public float baseDistance = 5f;
+    public float focusDistance = 6.5f;
     public float baseAngle = 70f;
-    public float focusAngle = 40f;
+    public float focusAngle = 60f;
     public float innerViewDistance = 3f;
 
     [Header("--- LOGIC SUSPICION ---")]
@@ -71,9 +71,13 @@ public class EnemyAi : MonoBehaviour
 
     // Biến lưu hướng nhìn cuối cùng (để cập nhật LastInput)
     private Vector2 lastFaceDir = Vector2.down;
+    [SerializeField] private PlayerController2 playerController;
 
     void Awake()
     {
+        if (playerController == null && player != null)
+            playerController = player.GetComponent<PlayerController2>();
+
         agent = GetComponent<NavMeshAgent>();
         if (agent != null)
         {
@@ -392,8 +396,14 @@ public class EnemyAi : MonoBehaviour
     int CheckZone()
     {
         if (!player) return 0;
+
+        if (playerController != null && playerController.IsSitting)
+            return 0;
+
         float d = Vector3.Distance(transform.position, player.position);
+
         if (d > currentViewDist) return 0;
+
         Vector3 dir = (player.position - transform.position).normalized;
         Vector3 forwardDir = (rotatingPart != null) ? rotatingPart.up : transform.up;
         if (Vector3.Angle(forwardDir, dir) > currentViewAngle / 2) return 0;
