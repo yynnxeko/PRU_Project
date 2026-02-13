@@ -18,7 +18,7 @@ public class DialogueUI : MonoBehaviour
     [Header("Settings")]
     public float typingSpeed = 0.05f;
     public float autoCloseDelay = 2.0f;
-    
+
     // Hiệu ứng Mã hóa
     [Header("Decoding Effect")]
     public string scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"; // Các ký tự rác
@@ -40,7 +40,7 @@ public class DialogueUI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && dialoguePanel.activeSelf)
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && dialoguePanel.activeSelf)
         {
             if (isTyping) CompleteTextImmediately();
             else HideDialogue();
@@ -109,7 +109,7 @@ public class DialogueUI : MonoBehaviour
             {
                 // Chọn ngẫu nhiên 1 ký tự rác
                 char randomChar = scrambleChars[Random.Range(0, scrambleChars.Length)];
-                
+
                 // Hiển thị: Chuỗi đã xong + Ký tự rác đang nhảy
                 contextText.text = finalString + randomChar;
 

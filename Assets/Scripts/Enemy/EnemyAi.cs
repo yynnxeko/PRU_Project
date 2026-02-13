@@ -75,6 +75,11 @@ public class EnemyAi : MonoBehaviour
 
     void Awake()
     {
+        if (player == null)
+        {
+            GameObject p = GameObject.FindWithTag("Player");
+            if (p != null) player = p.transform;
+        }
         if (playerController == null && player != null)
             playerController = player.GetComponent<PlayerController2>();
 
