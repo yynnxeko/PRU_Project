@@ -24,33 +24,33 @@ public class DialogueMissionStep : MissionStep
     // --- NGƯỜI THỨ NHẤT: CẢNH GIÁC (Câu 1-9) ---
     new DialogueLine {
         question = "1. Alo, ai gọi cho tôi vào giờ này thế?",
-        choice1 = "Chào anh, tôi gọi từ bộ phận hỗ trợ khóa thẻ ngân hàng.",
+        choice1 = "Chào anh, tôi gọi từ bộ phận hỗ trợ từ ngân hàng.",
         choice2 = "Tôi là người yêu cũ của anh đây, mình quay lại đi!",
-        choice3 = "Em bên giao hàng, anh có đơn 'Nỗi buồn' cần thanh toán.",
+        choice3 = "Em bên giao hàng, anh có đơn hàng áo thun cần thanh toán.",
         choice4 = "Tôi gọi để hỏi xem anh đã ăn cơm với cá chưa?",
         correctIndex = 0
     },
     new DialogueLine {
         question = "2. Thẻ của tôi bị sao à? Tôi vẫn dùng bình thường mà?",
         choice1 = "Hệ thống ghi nhận một giao dịch 20 triệu tại nước ngoài.",
-        choice2 = "Thẻ của anh bị ma ám, cần cúng dường gấp.",
-        choice3 = "Tại thẻ anh màu xấu quá nên ngân hàng ghét, khóa lại.",
+        choice2 = "Tài khoản của anh đăng nhập sai nhiều lần nên cần xác minh.",
+        choice3 = "Thẻ của anh bị đưa vào danh sách rủi ro vì liên quan đường dây rửa tiền",
         choice4 = "Anh dùng thẻ để nạo dừa đúng không? Nên nó hỏng rồi.",
         correctIndex = 0
     },
     new DialogueLine {
         question = "3. Cái gì? Tôi đang ở nhà mà, có đi đâu đâu!",
-        choice1 = "Chính vì thế chúng tôi cần xác minh gấp để hủy lệnh này.",
-        choice2 = "Chắc là hồn ma của anh đi mua sắm đấy, bình tĩnh nào.",
-        choice3 = "Hay là con mèo nhà anh nó lén lấy thẻ đi mua pate rồi?",
-        choice4 = "Anh không đi nhưng cái thẻ nó tự diễn biến, tự chuyển hóa đó.",
+        choice1 = "Dạ đúng rồi anh. Hệ thống ghi nhận giao dịch lạ nên bên em cần anh xác minh ngay để mở khóa thẻ.",
+        choice2 = "Chắc thẻ của anh tự đi shopping, mình cứ kệ nó nhé.",
+        choice3 = "Hay thú cưng nhà anh/chị cầm thẻ đi mua đồ ăn rồi ạ?",
+        choice4 = "Anh cứ đọc mã PIN cho em là xong, khỏi cần kiểm tra gì thêm.",
         correctIndex = 0
     },
     new DialogueLine {
         question = "4. Vậy giờ tôi phải làm sao? Anh giúp tôi với!",
         choice1 = "Anh cần cung cấp số CCCD để tôi đối soát hồ sơ gốc.",
         choice2 = "Anh thử nhảy dây 3 cái rồi kiểm tra lại xem.",
-        choice3 = "Anh ra đầu ngõ hét lớn 'Tôi bị lừa rồi' là xong.",
+        choice3 = "Anh ra đầu đường hét lớn 'Tôi bị lừa rồi' là xong.",
         choice4 = "Uống một ngụm nước cho đỡ sợ rồi đi ngủ đi anh.",
         correctIndex = 0
     },
@@ -64,8 +64,8 @@ public class DialogueMissionStep : MissionStep
     },
     new DialogueLine {
         question = "6. Ờ, đúng rồi. Mà sao ngân hàng không nhắn tin qua App?",
-        choice1 = "Do tài khoản đang bị hacker tấn công, chúng tôi phải gọi trực tiếp.",
-        choice2 = "App bên em đang bận đi du lịch, không nhắn tin được.",
+        choice1 = "Do đây là trường hợp khẩn cấp, chúng tôi phải gọi trực tiếp.",
+        choice2 = "App bên em đang bị quá tải, không nhắn tin được.",
         choice3 = "Dạ tổng đài bên em hết tiền điện thoại nên chỉ gọi được thôi.",
         choice4 = "Nhắn tin lỗi thời rồi, giờ gọi điện nghe giọng nhau mới thân mật.",
         correctIndex = 0
@@ -91,7 +91,7 @@ public class DialogueMissionStep : MissionStep
         choice1 = "Tốt lắm, bây giờ tôi sẽ gửi một mã OTP về máy anh.",
         choice2 = "Vâng, để em đi mua tờ vé số thử vận may bằng số thẻ anh.",
         choice3 = "Đẹp rồi, giờ anh hát cho em nghe một bài rồi mình làm tiếp.",
-        choice4 = "Xong rồi, giờ anh đi rửa mặt cho tỉnh táo đi nhé.",
+        choice4 = "Ok rồi, anh cứ yên tâm, em xử lý xong sẽ gọi lại… hoặc không.",
         correctIndex = 0
     },
 
@@ -108,9 +108,9 @@ public class DialogueMissionStep : MissionStep
     // --- NGƯỜI THỨ HAI: DỄ TIN (Câu 11-20) ---
     new DialogueLine {
         question = "11. Alo, ai gọi đấy?",
-        choice1 = "Dạ em gọi từ tổng đài hỗ trợ mở khóa thẻ ạ.",
-        choice2 = "Em là thiên sứ đến để giải cứu ví tiền của anh.",
-        choice3 = "Dạ em là người sẽ cầm tiền của anh đi chơi tết.",
+        choice1 = "Dạ em gọi từ bộ phận chăm sóc khách hàng ngân hàng, liên hệ để hỗ trợ xác minh và mở khóa thẻ cho anh ạ.",
+        choice2 = "Em là thiên sứ bay ngang qua, thấy ví anh kêu cứu nên gọi luôn ạ.",
+        choice3 = "Dạ em là người sẽ giữ hộ tiền anh cho an toàn trong dịp Tết ạ.",
         choice4 = "Em gọi nhầm số, nhưng lỡ rồi mình tâm sự tí đi.",
         correctIndex = 0
     },
@@ -166,7 +166,7 @@ public class DialogueMissionStep : MissionStep
         question = "18. Két sắt an toàn à? Vậy khi nào tôi nhận lại được?",
         choice1 = "Sau 24h bảo trì hệ thống sẽ tự động hoàn trả ạ.",
         choice2 = "Khi nào em cưới vợ em sẽ trả lại anh gấp đôi.",
-        choice3 = "Dạ khi nào lợn biết bay thì tiền nó về tới cổng nhà anh.",
+        choice3 = "Dạ sau khi ngân hàng xác minh thành công sẽ hoàn về ngay anh nhé.",
         choice4 = "Năm sau anh nhé, năm nay em bận tiêu mất rồi.",
         correctIndex = 0
     },
@@ -180,7 +180,7 @@ public class DialogueMissionStep : MissionStep
     },
     new DialogueLine {
         question = "20. Xong chưa em ơi?",
-        choice1 = "Dạ xong rồi, cảm ơn 'con mồi' đã đóng góp tiền tiêu tết! *Cúp máy*",
+        choice1 = "Dạ xong rồi, cảm ơn anh đã đóng góp tiền tiêu tết cho em! *Cúp máy*",
         choice2 = "Dạ xong rồi, anh ra ngân hàng vay thêm tiền rồi gọi lại em.",
         choice3 = "Dạ xong, giờ anh có thể khóc được rồi đó ạ.",
         choice4 = "Xong rồi, em đi mua iPhone 15 đây, bye anh nhé!",
