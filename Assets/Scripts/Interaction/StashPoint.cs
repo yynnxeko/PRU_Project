@@ -14,7 +14,6 @@ public class StashPoint : Interactable
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-
         inventory = other.GetComponent<PlayerInventory>();
         completedThisHold = false;
     }
@@ -22,7 +21,6 @@ public class StashPoint : Interactable
     void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-
         inventory = null;
         completedThisHold = false;
         holdAction.CancelHold();
@@ -48,18 +46,14 @@ public class StashPoint : Interactable
     {
         if (completedThisHold) return;
         if (inventory == null) return;
-
         if (!inventory.HasEvidence())
         {
             Debug.Log("No evidence to stash");
             return;
         }
-
         int amount = inventory.TotalEvidence();
         inventory.StashAll();
-
         Debug.Log($"Stashed {amount} evidence");
-
         completedThisHold = true;
     }
 }
