@@ -6540,6 +6540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ffdc93243e4e449e45cef197db39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evidenceType: 1
+  evidenceName: Evidence
 --- !u!212 &588529715
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36051,6 +36053,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DesktopCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1986623982424255272, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5350166406041084741, guid: a5ccce7faf3d40f40b736e527cfa0690, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -38269,8 +38275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7154391e6134ee4ebaa0950da2b67dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hiddenEvidence: 0
-  handEvidence: 0
+  hiddenEvidences: []
+  handEvidences: []
   maxHidden: 2
   maxHand: 1
 --- !u!114 &1462566290
@@ -38285,10 +38291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1b939844b45cd429aff7f926e4dd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  rb: {fileID: 1462566282}
-  animator: {fileID: 1462566285}
-  faceDir: {x: 0, y: -1}
+  moveSpeed: 3
 --- !u!1 &1468262119
 GameObject:
   m_ObjectHideFlags: 0
@@ -40813,6 +40816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ffdc93243e4e449e45cef197db39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evidenceType: 2
+  evidenceName: Evidence
 --- !u!212 &1743807615
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -41023,6 +41028,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ffdc93243e4e449e45cef197db39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evidenceType: 3
+  evidenceName: Evidence
 --- !u!1 &1772030215
 GameObject:
   m_ObjectHideFlags: 0
@@ -41315,6 +41322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ffdc93243e4e449e45cef197db39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evidenceType: 4
+  evidenceName: Evidence
 --- !u!212 &1828244358
 SpriteRenderer:
   m_ObjectHideFlags: 0

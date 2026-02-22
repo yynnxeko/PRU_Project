@@ -2,6 +2,8 @@
 
 public class EvidencePickup : MonoBehaviour
 {
+    [SerializeField] private EvidenceType evidenceType = EvidenceType.Photo; 
+    [SerializeField] private string evidenceName = "Evidence";
     private bool playerInRange;
     private PlayerInventory inventory;
 
@@ -30,7 +32,8 @@ public class EvidencePickup : MonoBehaviour
         {
             if (inventory != null && inventory.CanPickEvidence())
             {
-                inventory.AddEvidence();
+                EvidenceItem newItem = new EvidenceItem { type = evidenceType, itemName = evidenceName };
+                inventory.AddEvidence(newItem);
                 Destroy(gameObject); // evidence biến mất
             }
             else
