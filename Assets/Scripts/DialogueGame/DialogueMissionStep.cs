@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class DialogueLine
@@ -18,6 +19,10 @@ public class DialogueLine
 
 public class DialogueMissionStep : MissionStep
 {
+    [Header("Scene Management")]
+    [SerializeField] private string failSceneName = "Map_Lobby_punch";
+
+
     [Header("Dialogue Data - 20 câu")]
     public DialogueLine[] lines = new DialogueLine[20]
 {
@@ -199,19 +204,29 @@ public class DialogueMissionStep : MissionStep
     private DialogueGameController gameController;
     private bool hasStartedGame = false;
     private int currentIndex = 0;
+    private static int savedIndex = 0;
 
     public override void StartStep()
     {
         base.StartStep();
         hasStartedGame = false;
+        currentIndex = savedIndex;
 
-        if (currentIndex < 10)
-            currentIndex = 0;
+        // if (currentIndex < 10)
+        //     currentIndex = 0;
     }
 
     public override void UpdateStep()
     {
         base.UpdateStep();
+
+        if (playerController == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                playerController = playerObj.GetComponent<PlayerController2>();
+        }
+
         if (!hasStartedGame)
         {
             gameController = FindObjectOfType<DialogueGameController>();
@@ -257,12 +272,14 @@ public class DialogueMissionStep : MissionStep
     public void OnDialogueCorrect()
     {
         currentIndex++;
+        savedIndex = currentIndex;
         if (currentIndex >= lines.Length) CompleteStep();
         else StartCurrentLine();
     }
 
     public void OnDialogueFailed()
     {
+        savedIndex = currentIndex;
         if (currentIndex == 9) StartCoroutine(SpecialFailedRoutine()); // câu 10
         else StartCoroutine(NormalFailedRoutine()); // câu 1-9, 11-20
     }
@@ -277,38 +294,38 @@ public class DialogueMissionStep : MissionStep
                 -1,
                 this
             );
+            BattleState.failIndex = 10;
+            DoorSceneChange.NextSpawnId = "lobby_punch";
+            // SceneManager.LoadScene(failSceneName);
         }
 
         yield return new WaitForSecondsRealtime(3f);
 
         if (computer != null) computer.CloseDesktop();
-        if (GameManager.Instance != null) GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
+        if (playerController != null) playerController.ForceStandUp();
+        if (GameManager.Instance != null)
+            GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
 
-        currentIndex = 10;
-        yield return StartCoroutine(HandleTeleport(medicalRoomPoint));
+
+        // Load scene đánh nhau
+        DoorSceneChange.NextSpawnId = "lobby_punch";
+        SceneManager.LoadScene(failSceneName);
     }
 
     private IEnumerator NormalFailedRoutine()
     {
         if (computer != null) computer.CloseDesktop();
-
+        if (playerController != null) playerController.ForceStandUp();
         yield return new WaitForSecondsRealtime(1f);
 
-        if (GameManager.Instance != null) GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
+        if (GameManager.Instance != null)
+            GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
 
-        yield return StartCoroutine(HandleTeleport(doorPoint));
+
+        // Load scene đánh nhau
+        BattleState.failIndex = currentIndex;
+        DoorSceneChange.NextSpawnId = "lobby_punch";
+        SceneManager.LoadScene(failSceneName);
     }
 
-    private IEnumerator HandleTeleport(Transform targetPos)
-    {
-        yield return new WaitForSecondsRealtime(2f);
-
-        if (playerController != null && targetPos != null)
-        {
-            playerController.transform.position = targetPos.position;
-            playerController.ForceStandUp();
-            playerController.isInGame = false;
-        }
-        hasStartedGame = false;
-    }
 }

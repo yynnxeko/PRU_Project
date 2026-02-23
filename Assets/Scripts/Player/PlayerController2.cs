@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class ChairInfo
 {
     public Transform chairPoint;
     public Vector2 sitFaceDirection = new Vector2(0, -1);
-    [Range(0.5f, 2f)] public float detectRange = 1f;
+    [Range(0.5f, 2f)] public float detectRange = 1.5f;
 }
 
 public class PlayerController2 : MonoBehaviour
@@ -24,11 +25,36 @@ public class PlayerController2 : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     Vector2 movement;
+    Vector2 lastInputStored = Vector2.down;
 
     bool isSitting = false;
     public bool IsSitting => isSitting;
     bool isNearChair = false;
 
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "IT_Room")
+        {
+            GameObject wpObj = GameObject.Find("WP_PLAYER");
+            if (wpObj != null)
+            {
+                chair.chairPoint = wpObj.transform;
+                Debug.Log("ChairPoint assigned on scene load: " + chair.chairPoint.position);
+            }
+        }
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -99,10 +125,25 @@ public class PlayerController2 : MonoBehaviour
     {
         isSitting = false;
         rb.WakeUp();
-
         animator.SetBool("IsSitting", false);
+
+        Vector2 dir = lastInputStored;
+        if (dir.sqrMagnitude < 0.01f)
+            dir = (chair != null ? chair.sitFaceDirection.normalized : Vector2.down);
+        dir = dir.normalized;
+
+        // khoảng cách nhảy ra (chỉnh nếu cần)
+        float pushDistance = 0.22f;
+
+        // di chuyển trước khi wake physics
+        transform.position = new Vector3(
+            transform.position.x + dir.x * pushDistance,
+            transform.position.y + dir.y * pushDistance,
+            transform.position.z
+        );
         animator.SetFloat("InputX", 0);
         animator.SetFloat("InputY", 0);
+
     }
 
     void UpdateAnimation()

@@ -33,6 +33,13 @@ public class Computer : MonoBehaviour
 
     void Update()
     {
+        if (playerController == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                playerController = playerObj.GetComponent<PlayerController2>();
+        }
+        
         bool isInGame = playerController != null && playerController.isInGame;
         bool isSitting = playerController != null && playerController.IsSitting;
 
