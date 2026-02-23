@@ -6,9 +6,9 @@ public class InteractionUI : MonoBehaviour
     public static InteractionUI Instance;
 
     [Header("UI Elements")]
-    public CanvasGroup panel;      // toàn bộ panel chứa prompt + progress
-    public Text promptText;        // văn bản prompt (ví dụ "Hold E to search cabinet")
-    public Slider progressBar;     // progress bar (0..1)
+    public CanvasGroup panel;
+    public TMPro.TMP_Text promptText;
+    public Slider progressBar;
 
     void Awake()
     {
@@ -22,38 +22,47 @@ public class InteractionUI : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        // start hidden
-        if (panel != null)
-        {
-            panel.alpha = 0f;
-            panel.blocksRaycasts = false;
-        }
-        if (progressBar != null)
-            progressBar.value = 0f;
+        HideAll();
     }
 
-    public void Show(string prompt)
+    public void ShowPrompt(string prompt)
     {
         if (panel == null) return;
         panel.alpha = 1f;
         panel.blocksRaycasts = true;
         if (promptText != null)
+        {
             promptText.text = prompt;
+            promptText.gameObject.SetActive(true);
+        }
         if (progressBar != null)
-            progressBar.value = 0f;
+            progressBar.gameObject.SetActive(false);
     }
 
-    public void UpdateProgress(float p)
-    {
-        if (progressBar == null) return;
-        progressBar.value = Mathf.Clamp01(p);
-    }
-
-    public void Hide()
+    public void ShowProgressBar(float progress)
     {
         if (panel == null) return;
-        panel.alpha = 0f;
-        panel.blocksRaycasts = false;
+        panel.alpha = 1f;
+        panel.blocksRaycasts = true;
+        if (promptText != null)
+            promptText.gameObject.SetActive(false);
+        if (progressBar != null)
+        {
+            progressBar.gameObject.SetActive(true);
+            progressBar.value = Mathf.Clamp01(progress);
+        }
+    }
+
+    public void HideAll()
+    {
+        if (panel != null)
+        {
+            panel.alpha = 0f;
+            panel.blocksRaycasts = false;
+        }
+        if (promptText != null)
+            promptText.gameObject.SetActive(false);
+        if (progressBar != null)
+            progressBar.gameObject.SetActive(false);
     }
 }

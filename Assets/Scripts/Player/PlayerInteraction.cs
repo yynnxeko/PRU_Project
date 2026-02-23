@@ -4,6 +4,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     Interactable current;
     PlayerController2 playerController;
+    bool isHolding = false;
 
     void Awake()
     {
@@ -14,62 +15,56 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (current == null) return;
 
-        // Key down: bắt đầu hold
-        if (Input.GetKeyDown(KeyCode.E))
+        // Bắt đầu hold
+        if (Input.GetKeyDown(KeyCode.E) && !isHolding)
         {
             current.holdAction.StartHold();
             current.OnHoldStart(this);
+            isHolding = true;
 
-            // khóa di chuyển nếu có PlayerController2
             if (playerController != null)
                 playerController.canMove = false;
 
-            // hiện UI prompt + reset progress
             if (InteractionUI.Instance != null)
-            {
-                InteractionUI.Instance.Show(current.promptMessage);
-                InteractionUI.Instance.UpdateProgress(0f);
-            }
+                InteractionUI.Instance.ShowProgressBar(0f);
         }
 
-        // Key giữ: update tiến trình
-        if (Input.GetKey(KeyCode.E))
+        // Đang giữ E và đang ở state holding
+        if (Input.GetKey(KeyCode.E) && isHolding)
         {
             bool completed = current.holdAction.UpdateHold(Time.deltaTime);
-
             float progress = current.holdAction.GetProgress();
             current.OnHolding(this, progress);
 
-            // update UI progress
-            if (InteractionUI.Instance != null)
-                InteractionUI.Instance.UpdateProgress(progress);
+            if (!completed && InteractionUI.Instance != null)
+                InteractionUI.Instance.ShowProgressBar(progress);
 
             if (completed)
             {
                 current.OnHoldComplete(this);
                 current.holdAction.CancelHold();
+                isHolding = false; // Chặn không update nữa!
 
-                // unlock movement
                 if (playerController != null)
                     playerController.canMove = true;
 
                 if (InteractionUI.Instance != null)
-                    InteractionUI.Instance.Hide();
+                    InteractionUI.Instance.HideAll();
             }
         }
 
-        // Key up: cancel hold
-        if (Input.GetKeyUp(KeyCode.E))
+        // Nhả E
+        if (Input.GetKeyUp(KeyCode.E) && isHolding)
         {
             current.holdAction.CancelHold();
             current.OnHoldCancel(this);
+            isHolding = false;
 
-            // unlock movement
             if (playerController != null)
                 playerController.canMove = true;
 
             if (InteractionUI.Instance != null)
-                InteractionUI.Instance.Hide();
+                InteractionUI.Instance.HideAll();
         }
     }
 
@@ -81,9 +76,9 @@ public class PlayerInteraction : MonoBehaviour
             current = i;
             Debug.Log(i.promptMessage);
 
-            // show prompt (non-intrusive) so player biết có thể tương tác
+            // Hiện PROMPT chỉ khi player đứng gần, KHÔNG GỌI Ở INTERACTABLE!
             if (InteractionUI.Instance != null)
-                InteractionUI.Instance.Show(i.promptMessage);
+                InteractionUI.Instance.ShowPrompt(i.promptMessage);
         }
     }
 
@@ -106,7 +101,7 @@ public class PlayerInteraction : MonoBehaviour
 
             // hide UI
             if (InteractionUI.Instance != null)
-                InteractionUI.Instance.Hide();
+                InteractionUI.Instance.HideAll();
 
             current = null;
         }
