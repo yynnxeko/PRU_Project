@@ -11,14 +11,14 @@ public class ChairIntroCamera : MonoBehaviour
     Camera cam;
     Vector3 camStartPos;
 
-    CameraFollow camFollow; // đúng script của bạn
+    CameraFollowPersist camFollow; // đúng script của bạn
 
     void Start()
     {
         cam = Camera.main;
         camStartPos = cam.transform.position;
 
-        camFollow = cam.GetComponent<CameraFollow>();
+        camFollow = cam.GetComponent<CameraFollowPersist>();
 
         StartCoroutine(IntroSequence());
     }

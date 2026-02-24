@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CutsceneController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class CutsceneController : MonoBehaviour
     public GameObject dialogueCanvas;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contextText;
+
 
     Animator a1, a2, a3, a4;
 
@@ -66,7 +68,7 @@ public class CutsceneController : MonoBehaviour
         // ===== SHOCK =====
         a1.SetTrigger("shocking");
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(1f);
 
         yield return ShowLine("Người đàn ông", "Á Á Á....");
 
@@ -77,7 +79,7 @@ public class CutsceneController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // ===== AFTER =====
-        yield return ShowLine("Tên môi giới", "Làm việc tiếp!");
+        yield return ShowLine("Tên môi giới", "Cút vào phòng ngay!");
 
         // 👉 đi ngang tới sp3
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp3.position);
@@ -88,6 +90,11 @@ public class CutsceneController : MonoBehaviour
 
         // 👉 đi lên trên tới sp4
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp4.position);
+
+        yield return new WaitForSeconds(1f);
+
+        // Load scene mới
+        SceneManager.LoadScene("Map_Internal Area_Day");
     }
 
     // ================= MOVE =================

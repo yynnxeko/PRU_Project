@@ -43,7 +43,19 @@ public class BusMoveForward : MonoBehaviour
 
     void Start()
     {
-        // 🔒 Khóa game khi bus chạy
+        if (player == null)
+        {
+            GameObject p = GameObject.FindWithTag("Player");
+            if (p != null)
+            {
+                player = p;
+            }
+            else
+            {
+                Debug.LogWarning("Không tìm thấy Player với tag 'Player'");
+            }
+        }
+        //  Khóa game khi bus chạy
         GameFlow.BusCutscene = true;
 
         float moveUnit = stopDistancePx / 32f;

@@ -14,6 +14,7 @@ public class CameraFollowPersist : MonoBehaviour
 
     void Awake()
     {
+        gameObject.tag = "MainCamera";
         if (dontDestroyOnLoad)
         {
             var cams = FindObjectsOfType<Camera>();
@@ -39,7 +40,7 @@ public class CameraFollowPersist : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FindPlayer(); 
+        FindPlayer();
     }
 
     void LateUpdate()

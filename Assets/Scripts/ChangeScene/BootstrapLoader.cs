@@ -14,6 +14,6 @@ public class BootstrapLoader : MonoBehaviour
     {
         yield return null; // Hoặc yield return new WaitForSeconds(0.1f);
 
-        SceneManager.LoadScene("IT_Room");
+        SceneManager.LoadScene("Buss");
     }
 }

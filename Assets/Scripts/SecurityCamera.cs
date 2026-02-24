@@ -39,6 +39,18 @@ public class SecurityCamera : MonoBehaviour
 
     void Start()
     {
+        if (player == null)
+        {
+            GameObject p = GameObject.FindWithTag("Player");
+            if (p != null)
+            {
+                player = p.transform;
+            }
+            else
+            {
+                Debug.LogWarning("Không tìm thấy Player với tag 'Player'");
+            }
+        }
         // 1. Lưu góc gốc để làm chuẩn
         baseRotation = transform.eulerAngles.z;
         currentMeshAngle = baseRotation;

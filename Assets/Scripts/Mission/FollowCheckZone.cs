@@ -12,7 +12,21 @@ public class FollowCheckZone : MonoBehaviour
     public bool PlayerInside => playerInside;
 
     int insideCount = 0;
-
+    void Start()
+    {
+        if (player == null)
+        {
+            GameObject p = GameObject.FindWithTag("Player");
+            if (p != null)
+            {
+                player = p.transform;
+            }
+            else
+            {
+                Debug.LogWarning("Không tìm thấy Player với tag 'Player'");
+            }
+        }
+    }
     void Reset()
     {
         // Tự bật IsTrigger cho đỡ quên

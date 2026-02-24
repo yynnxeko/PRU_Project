@@ -6,6 +6,7 @@ public class CabinetPoint : Interactable
 
     [Header("Evidence Settings")]
     public int evidenceReward = 1;
+    public EvidenceItem evidenceItem; // <-- ĐÂY
 
     void Awake()
     {
@@ -30,7 +31,10 @@ public class CabinetPoint : Interactable
         {
             for (int i = 0; i < evidenceReward; ++i)
             {
-                inventory.AddEvidence();
+                if (evidenceItem != null)
+                    inventory.AddEvidence(evidenceItem);
+                else
+                    Debug.LogWarning("CabinetPoint: evidenceItem chưa được gán!");
             }
             Debug.Log($"Bạn đã tìm được {evidenceReward} evidence trong tủ.");
         }
