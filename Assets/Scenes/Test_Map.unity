@@ -6748,6 +6748,7 @@ MonoBehaviour:
   flashlight: {fileID: 0}
   intensityNormal: 1.2
   intensityBoost: 2
+  playerController: {fileID: 0}
 --- !u!61 &597306600
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7925,8 +7926,8 @@ MonoBehaviour:
   waitText: "\u0110i l\u1EA1i \u0111\xE2y nhanh l\xEAn"
   bubbleOffsetY: 1.5
   extraFollowers:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1607929582}
+  - {fileID: 1050427663}
   maxLostTime: 3
 --- !u!213 &720168691
 Sprite:
