@@ -51,7 +51,7 @@ public class LoppyCutscene : MonoBehaviour
 
         // --- KẾT THÚC ---
         yield return MoveCamera(cam.transform.position, initialCamPos); // Về lại player
-        yield return ShowLine("Nghe thủng chưa? Giờ thì biến đi làm việc!", boss);
+        yield return ShowLine("Nghe thủng chưa? Giờ thì biến vào phòng tập thể đi!", boss);
 
         // Bật lại follow
         if (camFollow != null) camFollow.enabled = true;
