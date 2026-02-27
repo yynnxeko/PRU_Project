@@ -18,7 +18,8 @@ public class NPCPathFollower : MonoBehaviour
 
     void Update()
     {
-        // 🔒 Khóa khi đang bus cutscene
+        Debug.Log(GameFlow.BusCutscene + "aaaaaa");
+        //  Khóa khi đang bus cutscene
         if (GameFlow.BusCutscene) return;
 
         UpdateFinishedState();
@@ -37,6 +38,7 @@ public class NPCPathFollower : MonoBehaviour
 
     void Move()
     {
+        Debug.Log(GameFlow.BusCutscene);
         if (currentIndex < 0 || currentIndex >= waypoints.Length) return;
 
         Transform target = waypoints[currentIndex];
@@ -60,14 +62,12 @@ public class NPCPathFollower : MonoBehaviour
     {
         if (isPaused) return;
         isPaused = true;
-        Debug.Log("[NPC] PAUSED");
     }
 
     public void Resume()
     {
         if (!isPaused) return;
         isPaused = false;
-        Debug.Log("[NPC] RESUMED");
     }
 
     public void ResetPath()
@@ -75,6 +75,5 @@ public class NPCPathFollower : MonoBehaviour
         currentIndex = 0;
         isPaused = false;
         UpdateFinishedState();
-        Debug.Log("[NPC] RESET PATH");
     }
 }

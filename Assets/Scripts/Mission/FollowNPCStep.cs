@@ -37,7 +37,7 @@ public class FollowNPCStep : MissionStep
 
     public override void UpdateStep()
     {
-        // 🔒 KHÓA CUTSCENE BUS (nếu có)
+        //  KHÓA CUTSCENE BUS (nếu có)
         if (GameFlow.BusCutscene) return;
 
         if (IsCompleted || IsFailed) return;
