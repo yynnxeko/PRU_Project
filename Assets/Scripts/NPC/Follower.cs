@@ -11,9 +11,20 @@ public class Follower : MonoBehaviour
 
     public bool isPaused;
 
+    Animator anim;
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
-        if (target == null || isPaused) return;
+        if (target == null || isPaused)
+        {
+            SetAnimInput(Vector2.zero, false);
+            return;
+        }
 
         // mỗi NPC lùi thêm spacing * indexInLine
         Vector2 offsetBehind = new Vector2(0f, -spacing * (indexInLine + 1));
@@ -22,14 +33,47 @@ public class Follower : MonoBehaviour
         float dist = Vector2.Distance(transform.position, desiredPos);
         if (dist > followDistance)
         {
+            // Tính hướng di chuyển
+            Vector2 direction = (desiredPos - (Vector2)transform.position).normalized;
+            SetAnimInput(direction, true);
+
             transform.position = Vector2.MoveTowards(
                 transform.position,
                 desiredPos,
                 followSpeed * Time.deltaTime
             );
         }
+        else
+        {
+            // Đứng yên khi đã đủ gần
+            SetAnimInput(Vector2.zero, false);
+        }
     }
 
-    public void Pause() => isPaused = true;
+    // =====================
+    // ANIMATOR INPUT
+    // =====================
+    void SetAnimInput(Vector2 dir, bool moving)
+    {
+        if (anim == null) return;
+
+        anim.SetFloat("InputX", dir.x);
+        anim.SetFloat("InputY", dir.y);
+
+        if (dir != Vector2.zero)
+        {
+            anim.SetFloat("LastInputX", dir.x);
+            anim.SetFloat("LastInputY", dir.y);
+        }
+
+        anim.SetBool("IsMoving", moving);
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+        SetAnimInput(Vector2.zero, false);
+    }
+
     public void Resume() => isPaused = false;
 }

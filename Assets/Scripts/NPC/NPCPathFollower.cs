@@ -10,21 +10,32 @@ public class NPCPathFollower : MonoBehaviour
     int currentIndex;
     bool isPaused;
 
+    // Cache Animator
+    Animator anim;
+
     // Debug trạng thái (xem trong Inspector)
     [Header("Debug (Read Only)")]
     [SerializeField] bool isFinished;
 
     public bool IsFinished => isFinished;
 
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
-        Debug.Log(GameFlow.BusCutscene + "aaaaaa");
         //  Khóa khi đang bus cutscene
         if (GameFlow.BusCutscene) return;
 
         UpdateFinishedState();
 
-        if (isFinished || isPaused) return;
+        if (isFinished || isPaused)
+        {
+            SetAnimInput(Vector2.zero, false);
+            return;
+        }
 
         Move();
     }
@@ -38,10 +49,15 @@ public class NPCPathFollower : MonoBehaviour
 
     void Move()
     {
-        Debug.Log(GameFlow.BusCutscene);
         if (currentIndex < 0 || currentIndex >= waypoints.Length) return;
 
         Transform target = waypoints[currentIndex];
+
+        // Tính hướng di chuyển
+        Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+
+        // Set Animator input theo hướng di chuyển
+        SetAnimInput(direction, true);
 
         transform.position = Vector2.MoveTowards(
             transform.position,
@@ -52,7 +68,33 @@ public class NPCPathFollower : MonoBehaviour
         if (Vector2.Distance(transform.position, target.position) <= arriveDistance)
         {
             currentIndex++;
+
+            // Nếu hết waypoint → dừng anim
+            UpdateFinishedState();
+            if (isFinished)
+            {
+                SetAnimInput(Vector2.zero, false);
+            }
         }
+    }
+
+    // ======================
+    // ANIMATOR INPUT
+    // ======================
+    void SetAnimInput(Vector2 dir, bool moving)
+    {
+        if (anim == null) return;
+
+        anim.SetFloat("InputX", dir.x);
+        anim.SetFloat("InputY", dir.y);
+
+        if (dir != Vector2.zero)
+        {
+            anim.SetFloat("LastInputX", dir.x);
+            anim.SetFloat("LastInputY", dir.y);
+        }
+
+        anim.SetBool("IsMoving", moving);
     }
 
     // ======================
@@ -62,6 +104,7 @@ public class NPCPathFollower : MonoBehaviour
     {
         if (isPaused) return;
         isPaused = true;
+        SetAnimInput(Vector2.zero, false);
     }
 
     public void Resume()

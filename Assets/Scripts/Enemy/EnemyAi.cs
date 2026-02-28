@@ -387,13 +387,10 @@ public class EnemyAi : MonoBehaviour
         if (player != null && CheckZone() > 0)
         {
             float d = Vector3.Distance(transform.position, player.position);
+
             if (d <= 1.2f)
             {
-                if (cachedPlayerInventory != null && cachedPlayerInventory.TotalEvidence() > 0)
-                {
-                    Debug.Log("GAME OVER");
-                    Time.timeScale = 0f;
-                }
+                GameManager.Instance.HandlePlayerCaught(cachedPlayerInventory);
             }
         }
     }

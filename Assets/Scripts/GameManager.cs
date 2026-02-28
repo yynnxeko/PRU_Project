@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,23 @@ public class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
+    public void HandlePlayerCaught(PlayerInventory inventory)
+    {
+        bool hasEvidence = inventory != null && inventory.TotalEvidence() > 0;
 
+        bool isScene = SceneManager.GetActiveScene().name == "Map_Internal Area_Night";
+
+        if (hasEvidence || isScene)
+        {
+            GameOver();
+        }
+    }
+
+    void GameOver()
+    {
+        Debug.Log("GAME OVER");
+        Time.timeScale = 0f;
+    }
     // Hàm này Camera sẽ gọi khi báo động
     public void AlertAllEnemies(Vector3 targetPos)
     {

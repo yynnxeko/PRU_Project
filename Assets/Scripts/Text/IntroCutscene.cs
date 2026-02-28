@@ -40,7 +40,9 @@ public class IntroCutscene : MonoBehaviour
         yield return ShowLine("Và ghi nhớ mọi thứ.", bossName, bossAvatar);
 
 
-        // chưa có điều kiện là khi xe buýt dừng thì mới nói
+        // Chờ xe buýt dừng hẳn
+        yield return new WaitUntil(() => GameFlow.BusCutscene == false);
+
         string guardName = "<color=orange>Lính gác</color>";
         yield return ShowLine("Xuống xe! Xếp hàng!", guardName, guardAvatar);
         // --- KẾT THÚC ---

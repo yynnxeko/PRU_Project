@@ -43,16 +43,27 @@ public class FollowNPCStep : MissionStep
         if (IsCompleted || IsFailed) return;
         if (npc == null || followZone == null) return;
 
-        // NPC đi hết path → hoàn thành step
+        bool playerInside = followZone.PlayerInside;
+
+        // NPC đi hết path
         if (npc.IsFinished)
         {
-            npc.Pause();
-            CompleteStep();
+            if (playerInside)
+            {
+                // Player đã trong zone → hoàn thành
+                HideBubble();
+                npc.Pause();
+                CompleteStep();
+            }
+            else
+            {
+                // Player chưa đến → NPC dừng chờ + hiện bubble
+                HandlePlayerLost();
+            }
             return;
         }
 
-        bool playerInside = followZone.PlayerInside;
-
+        // NPC đang đi, kiểm tra player
         if (!playerInside)
         {
             HandlePlayerLost();

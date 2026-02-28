@@ -8,17 +8,31 @@ public class LoppyCutscene : MonoBehaviour
     public Sprite enemyAvatar;
 
     [Header("Room Points")]
-    public Transform posWork;
+    public Transform posRelax;
     public Transform posEat;
     public Transform posMedical;
-    public Transform posRelax;
+    public Transform posWork;
+
+    [Header("NPC (pause during cutscene)")]
+    public NPCPathFollower npcPath;
+    public Follower[] followers;
 
     private Camera cam;
     private CameraFollowPersist camFollow;
     private Vector3 initialCamPos;
 
+    // static → giữ khi chuyển scene, reset khi Stop Play
+    private static bool hasPlayed = false;
+
     void Start()
     {
+        // Nếu đã chạy rồi trong lần Play này thì không chạy lại
+        if (hasPlayed)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         cam = Camera.main;
         initialCamPos = cam.transform.position;
         camFollow = cam.GetComponent<CameraFollowPersist>();
@@ -28,36 +42,41 @@ public class LoppyCutscene : MonoBehaviour
 
     IEnumerator FullIntroSequence()
     {
-        // 1. Tắt follow để cam không bị giật về player
         if (camFollow != null) camFollow.enabled = false;
+
+        // ===== PAUSE NPC trong lúc cutscene =====
+        if (npcPath != null) npcPath.Pause();
+        foreach (var f in followers)
+            if (f != null) f.Pause();
 
         string boss = "<color=red>Giang hồ</color>";
 
-        // --- MỞ ĐẦU ---
         yield return ShowLine("Nhìn cho kỹ, nhớ cho rõ. Ở đây không có chỗ cho lũ ngu.", boss);
         yield return ShowLine("Có 4 khu vực chúng mày buộc phải thuộc lòng.", boss);
 
-        // --- PHÒNG LÀM VIỆC ---
+        yield return MoveAndTalk(posRelax, "Khu SINH HOẠT: Ngủ và im lặng.", boss);
+        yield return MoveAndTalk(posEat, "NHÀ BẾP: Đớp nhanh rồi biến, đừng có lề mề.", boss);
+        yield return MoveAndTalk(posMedical, "Khu Y TẾ: Nơi dành cho mấy thằng sắp chết.", boss);
         yield return MoveAndTalk(posWork, "PHÒNG LÀM VIỆC: Đến giờ thì vác xác vào mà cày!", boss);
 
-        // --- PHÒNG ĂN ---
-        yield return MoveAndTalk(posEat, "NHÀ BẾP: Đớp nhanh rồi biến, đừng có lề mề.", boss);
-
-        // --- PHÒNG Y TẾ ---
-        yield return MoveAndTalk(posMedical, "Khu Y TẾ: Nơi dành cho mấy thằng sắp chết.", boss);
-
-        // --- PHÒNG SINH HOẠT ---
-        yield return MoveAndTalk(posRelax, "Khu SINH HOẠT: Ngủ và im lặng.", boss);
-
-        // --- KẾT THÚC ---
-        yield return MoveCamera(cam.transform.position, initialCamPos); // Về lại player
+        yield return MoveCamera(cam.transform.position, initialCamPos);
         yield return ShowLine("Nghe thủng chưa? Giờ thì biến vào phòng tập thể đi!", boss);
 
-        // Bật lại follow
         if (camFollow != null) camFollow.enabled = true;
+
+        // ===== RESUME NPC sau cutscene =====
+        if (npcPath != null)
+        {
+            npcPath.ResetPath();
+            npcPath.Resume();
+        }
+        foreach (var f in followers)
+            if (f != null) f.Resume();
+
+        // Đánh dấu đã chạy trong lần Play này
+        hasPlayed = true;
     }
 
-    // Hàm tích hợp: Di chuyển Cam xong mới hiện thoại
     IEnumerator MoveAndTalk(Transform target, string text, string name)
     {
         if (target == null) yield break;
@@ -82,7 +101,7 @@ public class LoppyCutscene : MonoBehaviour
     IEnumerator ShowLine(string text, string name)
     {
         bool done = false;
-        // Gọi DialogueUI và đợi callback onComplete
+
         DialogueUI.Instance.ShowDialogue(text, name, enemyAvatar, () => { done = true; });
 
         while (!done)
