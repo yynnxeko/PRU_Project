@@ -94,7 +94,7 @@ public class CutsceneController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // Load scene mới
-        SceneManager.LoadScene("Map_Internal Area_Day");
+        SceneManager.LoadScene("Map_Internal Area_Night");
     }
 
     // ================= MOVE =================
