@@ -37,7 +37,15 @@ public class MissionManager : MonoBehaviour
             s.ResetStep();
 
         currentStepIndex = 0;
-        if (steps.Length > 0)
+        
+        // 👉 KHI NHIỆM VỤ THẤT BẠI THÌ RESET NGÀY
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.FailDay();
+        }
+        else if (steps.Length > 0)
+        {
             steps[0].StartStep();
+        }
     }
 }

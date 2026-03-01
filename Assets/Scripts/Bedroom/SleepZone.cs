@@ -47,6 +47,12 @@ public class SleepZone : MonoBehaviour
         mainBedCollider.isTrigger = true;
 
         isSleeping = true;
+        
+        // 👉 KHI NGỦ THÌ SẼ SANG NGÀY MỚI
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.AdvanceDay();
+        }
     }
 
     void WakeUp()

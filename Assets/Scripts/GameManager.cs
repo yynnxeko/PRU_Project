@@ -24,8 +24,13 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("GAME OVER");
-        Time.timeScale = 0f;
+        Debug.Log("GAME OVER - Resetting Day...");
+        // Time.timeScale = 0f; // Bỏ cái này để game tiếp tục chạy và load scene
+
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.FailDay();
+        }
     }
     // Hàm này Camera sẽ gọi khi báo động
     public void AlertAllEnemies(Vector3 targetPos)

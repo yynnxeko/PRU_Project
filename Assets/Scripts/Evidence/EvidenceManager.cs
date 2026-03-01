@@ -29,6 +29,34 @@ public class EvidenceManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         LoadAllData();
+        
+        // Tạo snapshot ngay khi game bắt đầu (Lần đầu tiên vào game)
+        BackupDayStart();
+    }
+
+    // ====================== SNAPSHOT LOGIC ======================
+    
+    private HashSet<string> dayStartCollected = new HashSet<string>();
+    private List<EvidenceItem> dayStartHidden = new List<EvidenceItem>();
+    private List<EvidenceItem> dayStartHand = new List<EvidenceItem>();
+
+    public void BackupDayStart()
+    {
+        dayStartCollected = new HashSet<string>(collectedEvidence);
+        dayStartHidden = new List<EvidenceItem>(savedHidden);
+        dayStartHand = new List<EvidenceItem>(savedHand);
+        Debug.Log("Evidence snapshot created for start of day.");
+    }
+
+    public void RestoreDayStart()
+    {
+        collectedEvidence = new HashSet<string>(dayStartCollected);
+        savedHidden = new List<EvidenceItem>(dayStartHidden);
+        savedHand = new List<EvidenceItem>(dayStartHand);
+        
+        // Cần lưu lại vào PlayerPrefs để đồng bộ
+        SaveAllData();
+        Debug.Log("Evidence restored to start of day snapshot.");
     }
 
     // ====================== PUBLIC METHODS ======================
