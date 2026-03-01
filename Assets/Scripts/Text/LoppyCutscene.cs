@@ -21,14 +21,28 @@ public class LoppyCutscene : MonoBehaviour
     private CameraFollowPersist camFollow;
     private Vector3 initialCamPos;
 
-    // static → giữ khi chuyển scene, reset khi Stop Play
     private static bool hasPlayed = false;
+    public static bool isPlaying = false;
 
     void Start()
     {
+        // 1. Khoá các tính năng khác lại ngay lập tức từ đầu frame
+        if (!hasPlayed)
+        {
+            isPlaying = true;
+        }
+
         // Nếu đã chạy rồi trong lần Play này thì không chạy lại
         if (hasPlayed)
         {
+            if (npcPath != null) npcPath.gameObject.SetActive(false);
+            if (followers != null)
+            {
+                foreach (var f in followers)
+                {
+                    if (f != null) f.gameObject.SetActive(false);
+                }
+            }
             gameObject.SetActive(false);
             return;
         }
@@ -75,6 +89,7 @@ public class LoppyCutscene : MonoBehaviour
 
         // Đánh dấu đã chạy trong lần Play này
         hasPlayed = true;
+        isPlaying = false;
     }
 
     IEnumerator MoveAndTalk(Transform target, string text, string name)

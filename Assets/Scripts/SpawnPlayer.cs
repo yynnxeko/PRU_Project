@@ -6,18 +6,7 @@ public class SpawnPlayer : MonoBehaviour
 
     void Start()
     {
-        // Đã spawn rồi trong lần Play này → không spawn lại
-        if (hasSpawned)
-        {
-            // Xóa Player duplicate nếu có (do scene tự tạo thêm)
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            if (players.Length > 1)
-            {
-                for (int i = 1; i < players.Length; i++)
-                    Destroy(players[i]);
-            }
-            return;
-        }
+        if (hasSpawned) return;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 

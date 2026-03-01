@@ -40,8 +40,15 @@ public class FollowNPCStep : MissionStep
         //  KHÓA CUTSCENE BUS (nếu có)
         if (GameFlow.BusCutscene) return;
 
+        // KHOÁ CUTSCENE LOBBY (Nếu đang diễn Cutscene đầu tiên ở sảnh)
+        if (LoppyCutscene.isPlaying) return;
+
         if (IsCompleted || IsFailed) return;
-        if (npc == null || followZone == null) return;
+        if (npc == null || !npc.gameObject.activeInHierarchy || followZone == null)
+        {
+            HideBubble();
+            return;
+        }
 
         bool playerInside = followZone.PlayerInside;
 
@@ -148,5 +155,15 @@ public class FollowNPCStep : MissionStep
             npc.ResetPath();
             npc.Pause();
         }
+    }
+
+    private void OnDisable()
+    {
+        HideBubble();
+    }
+
+    private void OnDestroy()
+    {
+        HideBubble();
     }
 }

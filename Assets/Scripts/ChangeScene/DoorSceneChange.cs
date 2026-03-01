@@ -13,6 +13,10 @@ public class DoorSceneChange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Unity không tự động chặn OnTriggerEnter2D khi component bị disable,
+        // Nên ta phải tự check if (!enabled) để ngưng load scene!
+        if (!enabled) return;
+
         if (!other.CompareTag(playerTag)) return;
 
         NextSpawnId = spawnIdInNextScene;

@@ -29,6 +29,13 @@ public class NPCPathFollower : MonoBehaviour
         //  Khóa khi đang bus cutscene
         if (GameFlow.BusCutscene) return;
 
+        //  Khóa khi đang Lobby cutscene
+        if (LoppyCutscene.isPlaying)
+        {
+            SetAnimInput(Vector2.zero, false);
+            return;
+        }
+
         UpdateFinishedState();
 
         if (isFinished || isPaused)
