@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class CameraFollowPersist : MonoBehaviour
 {
     [Header("Follow")]
-    [SerializeField] private float smooth = 10f;
+    [SerializeField] private float smooth = 7f;
     [SerializeField] private Vector3 offset = new Vector3(0, 0, -10);
 
     [Header("Persist")]
@@ -54,6 +54,17 @@ public class CameraFollowPersist : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Phá hủy các camera khác trong scene mới để tránh xung đột
+        var cams = FindObjectsOfType<Camera>();
+        foreach (var c in cams)
+        {
+            if (c != cam && c.gameObject != gameObject) 
+            {
+                Debug.Log("[CameraFollowPersist] Destroying extra camera: " + c.gameObject.name);
+                Destroy(c.gameObject);
+            }
+        }
+
         FindPlayer();
         // Reset bounds để tìm lại cho scene mới
         boundsCollider = null;
@@ -137,7 +148,7 @@ public class CameraFollowPersist : MonoBehaviour
                 foreach (var col in allColliders)
                 {
                     if (col is BoxCollider2D box && box.isTrigger &&
-                        col.bounds.size.x > 20f && col.bounds.size.y > 10f)
+                        col.bounds.size.x > 20f && col.bounds.size.y > 7f)
                     {
                         boundsObj = col.gameObject;
                         Debug.Log("[CameraFollowPersist] Tìm thấy bounds qua BoxCollider2D trigger lớn: '" + col.gameObject.name + "' bounds=" + col.bounds);
@@ -151,13 +162,13 @@ public class CameraFollowPersist : MonoBehaviour
         {
             boundsCollider = boundsObj.GetComponent<Collider2D>();
             if (boundsCollider != null)
-                Debug.Log("[CameraFollowPersist] ✅ CameraBounds OK! bounds=" + boundsCollider.bounds);
+                Debug.Log("[CameraFollowPersist]  CameraBounds OK! bounds=" + boundsCollider.bounds);
             else
                 Debug.LogWarning("[CameraFollowPersist] ⚠ Object '" + boundsObj.name + "' có nhưng không có Collider2D!");
         }
         else
         {
-            Debug.LogWarning("[CameraFollowPersist] ❌ Không tìm thấy CameraBounds trong scene!");
+            Debug.LogWarning("[CameraFollowPersist]  Không tìm thấy CameraBounds trong scene!");
         }
     }
 }

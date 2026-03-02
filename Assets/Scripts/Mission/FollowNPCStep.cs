@@ -129,7 +129,7 @@ public class FollowNPCStep : MissionStep
         );
 
         currentBubble.Init(npc.transform, Vector3.up * bubbleOffsetY);
-        currentBubble.Show(waitText, maxLostTime);
+currentBubble.Show(waitText, maxLostTime);
     }
 
     void HideBubble()

@@ -19,7 +19,7 @@ public class DayManager : MonoBehaviour
     public bool isNight => currentPhase == DayPhase.Night;
 
     [Header("Scene Settings")]
-    public string bedroomSceneName = "Map_Bedroom"; // Scene sáng sớm
+    public string bedroomSceneName = "BedRoom"; // Scene sáng sớm
 
     [Header("UI References")]
     public GameObject dayStartUIPrefab; // Kéo Prefab hiện chữ đỏ vào đây (nếu có)
@@ -34,7 +34,7 @@ public class DayManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        
+
         // Hiện thông báo ngày 1 khi bắt đầu (hoặc trong Start)
     }
 
@@ -53,7 +53,7 @@ public class DayManager : MonoBehaviour
         // Thêm các ngày khác ở đây...
 
         Debug.Log("<color=red>" + message + "</color>");
-        
+
         // Logic thực tế để hiện UI (ví dụ Instantiate prefab thông báo)
         if (dayStartUIPrefab != null)
         {
@@ -97,7 +97,7 @@ public class DayManager : MonoBehaviour
         {
             return baseName + "_Night";
         }
-        
+
         // Hiện tại chỉ hỗ trợ suffix _Night, bạn có thể thêm _Noon nếu cần
         return baseName;
     }
@@ -118,22 +118,23 @@ public class DayManager : MonoBehaviour
     {
         if (currentPhase == DayPhase.Morning) currentPhase = DayPhase.Noon;
         else if (currentPhase == DayPhase.Noon) currentPhase = DayPhase.Night;
-        
+
         Debug.Log("Time advanced to: " + currentPhase);
     }
 
     /// <summary>
     /// Gọi khi người chơi bị bắt hoặc làm sai nhiệm vụ.
-    /// Reset lại toàn bộ những gì làm trong ngày, về lại phòng ngủ đầu ngày hiện tại.
+    /// Reset lại toàn bộ những gì làm trong ngày, về lại phòng ngủ đầu ngày hiện tại tại vị trí spawnId.
     /// </summary>
-    public void FailDay()
+    public void FailDay(string spawnId = "")
     {
-        Debug.Log("Day Failed! Resetting to start of Day " + currentDay);
-        
+        Debug.Log("Day Failed! Resetting to start of Day " + currentDay + (string.IsNullOrEmpty(spawnId) ? "" : " at " + spawnId));
+
         // 1. Reset nhiệm vụ (Nếu bạn có MissionManager)
-        if (MissionManager.Instance != null)
+        MissionManager mm = Object.FindFirstObjectByType<MissionManager>();
+        if (mm != null)
         {
-            // MissionManager logic
+            mm.ResetCurrentMission();
         }
 
         // 2. Reset Evidence (Khôi phục snapshot đầu ngày)
@@ -145,6 +146,13 @@ public class DayManager : MonoBehaviour
         // 3. Spawn về phòng ngủ
         // Reset về sáng sớm
         currentPhase = DayPhase.Morning;
+
+        // Thiết lập vị trí spawn khi load scene
+        if (!string.IsNullOrEmpty(spawnId))
+        {
+            DoorSceneChange.NextSpawnId = spawnId;
+        }
+
         SceneManager.LoadScene(bedroomSceneName);
     }
 

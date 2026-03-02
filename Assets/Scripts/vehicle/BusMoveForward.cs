@@ -116,8 +116,7 @@ public class BusMoveForward : MonoBehaviour
             if (anim)
                 anim.Play("traffic_barrier_open", 0, 0f);
         }
-
-        yield return new WaitForSeconds(waitAfterOpen);
+yield return new WaitForSeconds(waitAfterOpen);
         movingToFinal = true;
     }
 

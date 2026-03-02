@@ -48,10 +48,15 @@ public class SleepZone : MonoBehaviour
 
         isSleeping = true;
         
-        // 👉 KHI NGỦ THÌ SẼ SANG NGÀY MỚI
-        if (DayManager.Instance != null)
+        // 👉 KHI NGỦ THÌ SẼ SANG NGÀY MỚI (CHỈ KHI LÀ BAN ĐÊM)
+        if (DayManager.Instance != null && DayManager.Instance.currentPhase == DayPhase.Night)
         {
             DayManager.Instance.AdvanceDay();
+        }
+        else
+        {
+            Debug.Log("Chưa đến lúc đi ngủ (Phải là buổi tối)");
+            WakeUp(); // Tự động thức dậy nếu chưa đến tối
         }
     }
 

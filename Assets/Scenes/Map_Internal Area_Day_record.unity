@@ -320,8 +320,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Map_Lobby
+  sceneToLoadNight: 
   spawnIdInNextScene: insideLobby
   playerTag: Player
+  requireNight: 0
 --- !u!61 &121132274
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15365,7 +15367,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

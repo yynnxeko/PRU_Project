@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
         if (DayManager.Instance != null)
         {
-            DayManager.Instance.FailDay();
+            DayManager.Instance.FailDay("");
         }
     }
     // Hàm này Camera sẽ gọi khi báo động

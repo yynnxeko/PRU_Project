@@ -2,62 +2,73 @@
 
 public class MissionManager : MonoBehaviour
 {
-    public static MissionManager Instance { get; private set; }
+    [Header("Mission List")]
+    public MissionStep[] allMissions;
+    public int currentStepIndex = 0;
 
-    public MissionStep[] steps;
-    int currentStepIndex;
-
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
+    // Đã xóa Awake và DontDestroyOnLoad theo yêu cầu của bạn
 
     void Start()
     {
-        currentStepIndex = 0;
-        if (steps.Length > 0)
-            steps[0].StartStep();  // ✅ Start step đầu tiên
+        // Không reset index ở Start để giữ tiến trình khi chuyển scene
+        if (allMissions != null && allMissions.Length > 0 && currentStepIndex < allMissions.Length)
+        {
+            // Chỉ start nếu mission chưa active (đề phòng chuyển cảnh)
+            if (!allMissions[currentStepIndex].IsCompleted && !allMissions[currentStepIndex].IsFailed)
+                allMissions[currentStepIndex].StartStep();
+        }
     }
 
     void Update()
     {
-        if (currentStepIndex >= steps.Length) return;
+        if (allMissions == null || currentStepIndex >= allMissions.Length) return;
 
-        MissionStep step = steps[currentStepIndex];
+        MissionStep step = allMissions[currentStepIndex];
+        if (step == null) return;
+
+        // Cập nhật logic nhiệm vụ hiện tại
+        if (Time.frameCount % 120 == 0)
+            Debug.Log($"[MissionManager] Updating Step {currentStepIndex}: {step.gameObject.name}");
+        
         step.UpdateStep();
 
         if (step.IsCompleted)
         {
+            Debug.Log($"Mission Step {currentStepIndex} Completed!");
             currentStepIndex++;
-            if (currentStepIndex < steps.Length)
-                steps[currentStepIndex].StartStep();  // Start step mới
+            
+            if (currentStepIndex < allMissions.Length)
+            {
+                if (allMissions[currentStepIndex] != null)
+                    allMissions[currentStepIndex].StartStep();
+            }
+            else
+            {
+                Debug.Log("All Missions Completed!");
+            }
         }
         else if (step.IsFailed)
         {
-            ResetMission();
+            Debug.Log($"Mission Step {currentStepIndex} Failed! Resetting...");
+            if (DayManager.Instance != null)
+                DayManager.Instance.FailDay("");
+            else
+                ResetCurrentMission(); // Fallback if no DayManager
         }
     }
 
-    void ResetMission()
+    /// <summary>
+    /// Reset lại đúng nhiệm vụ hiện tại (không nhảy index)
+    /// </summary>
+    public void ResetCurrentMission()
     {
-        foreach (var s in steps)
-            s.ResetStep();
-
-        currentStepIndex = 0;
-        
-        // 👉 KHI NHIỆM VỤ THẤT BẠI THÌ RESET NGÀY
-        if (DayManager.Instance != null)
+        if (allMissions != null && currentStepIndex < allMissions.Length)
         {
-            DayManager.Instance.FailDay();
-        }
-        else if (steps.Length > 0)
-        {
-            steps[0].StartStep();
+            if (allMissions[currentStepIndex] != null)
+            {
+                allMissions[currentStepIndex].ResetStep();
+                allMissions[currentStepIndex].StartStep();
+            }
         }
     }
 }

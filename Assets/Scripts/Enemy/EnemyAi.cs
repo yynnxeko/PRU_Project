@@ -18,6 +18,7 @@ public class EnemyAi : MonoBehaviour
     public EnemyState currentState = EnemyState.Idle;
     public Transform player;
     public LayerMask obstacleMask;
+    public bool ignorePlayer = false; // Bỏ qua người chơi (không tăng nghi ngờ, không dí, không bắt)
 
     [Header("--- UI ---")]
     public Image suspicionBarFill;
@@ -384,6 +385,7 @@ public class EnemyAi : MonoBehaviour
 
     void CheckCapturePlayer()
     {
+        if (ignorePlayer) return;
         if (player != null && CheckZone() > 0)
         {
             float d = Vector3.Distance(transform.position, player.position);
@@ -397,7 +399,7 @@ public class EnemyAi : MonoBehaviour
 
     int CheckZone()
     {
-        if (!player) return 0;
+        if (ignorePlayer || !player) return 0;
 
         if (playerController != null && playerController.IsSitting)
             return 0;

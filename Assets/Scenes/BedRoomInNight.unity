@@ -3595,6 +3595,8 @@ MonoBehaviour:
   target: {fileID: 1239706675}
   smoothSpeed: 5
   offset: {x: 0, y: 0, z: 0}
+  useBounds: 1
+  boundsCollider: {fileID: 0}
 --- !u!1 &428475545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4268,6 +4270,7 @@ GameObject:
   - component: {fileID: 701696848}
   - component: {fileID: 701696847}
   - component: {fileID: 701696846}
+  - component: {fileID: 701696849}
   m_Layer: 0
   m_Name: SleepZone
   m_TagString: Untagged
@@ -4349,6 +4352,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701696849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701696845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2751ba3d226196e43ab8efbce23e8ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDay: 1
+  currentPhase: 0
+  bedroomSceneName: BedRoom
+  dayStartUIPrefab: {fileID: 0}
 --- !u!1 &762679866
 GameObject:
   m_ObjectHideFlags: 0
@@ -13625,7 +13644,7 @@ MonoBehaviour:
   bubblePrefab: {fileID: 601460350}
   bedInstructionText: "B\u1EA5m E \u0111\u1EC3 ng\u1EE7"
   bubbleOffsetY: 1.5
-  bubbleDuration: 3
+  bubbleDuration: 2
   enemy: {fileID: 1246547596}
   enemyLeavePoint: {fileID: 2133836702}
   enemyMoveSpeed: 2
@@ -13642,8 +13661,8 @@ MonoBehaviour:
   npcMoveSpeed: 2
   playerBedPoint: {fileID: 1437278874}
   interactDistance: 1.5
-  nextSceneName: Map_Lobby
-  nextSceneSpawnId: to_lobbybed
+  nextSceneName: BedRoom
+  nextSceneSpawnId: to_bedroomDay
   fadeImage: {fileID: 0}
 --- !u!1 &2030665564
 GameObject:

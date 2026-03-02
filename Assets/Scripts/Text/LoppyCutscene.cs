@@ -90,7 +90,7 @@ public class LoppyCutscene : MonoBehaviour
         // Đánh dấu đã chạy trong lần Play này
         hasPlayed = true;
         isPlaying = false;
-    }
+}
 
     IEnumerator MoveAndTalk(Transform target, string text, string name)
     {
