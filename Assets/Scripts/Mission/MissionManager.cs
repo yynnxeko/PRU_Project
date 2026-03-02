@@ -2,8 +2,20 @@
 
 public class MissionManager : MonoBehaviour
 {
+    public static MissionManager Instance { get; private set; }
+
     public MissionStep[] steps;
     int currentStepIndex;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     void Start()
     {
