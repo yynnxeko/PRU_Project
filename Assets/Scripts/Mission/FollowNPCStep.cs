@@ -95,11 +95,8 @@ public class FollowNPCStep : MissionStep
             Debug.Log("[FollowStep] NPC WAITS");
         }
 
+        // Chỉ đợi + hiện bubble, không fail
         lostTimer += Time.deltaTime;
-        if (lostTimer >= maxLostTime)
-        {
-            FailStep();
-        }
     }
 
     void HandlePlayerBack()
@@ -129,7 +126,7 @@ public class FollowNPCStep : MissionStep
         );
 
         currentBubble.Init(npc.transform, Vector3.up * bubbleOffsetY);
-currentBubble.Show(waitText, maxLostTime);
+        currentBubble.Show(waitText, maxLostTime);
     }
 
     void HideBubble()

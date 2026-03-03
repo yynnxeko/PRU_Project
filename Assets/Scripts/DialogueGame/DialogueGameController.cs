@@ -17,17 +17,28 @@ public class DialogueGameController : MonoBehaviour
     private int correctIndex = -1;
     private DialogueMissionStep currentMissionStep;
 
+    /// <summary>
+    /// Instance hiện tại để DialogueMissionStep tìm nhanh không cần FindObjectOfType.
+    /// </summary>
+    public static DialogueGameController Instance { get; private set; }
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
-        // Tự động tìm PlayerController2 nếu chưa gán
         if (playerController == null)
             playerController = FindObjectOfType<PlayerController2>();
 
-        // Gán sự kiện cho 4 buttons
         if (choice1Button != null) choice1Button.onClick.AddListener(() => OnChoiceSelected(0));
         if (choice2Button != null) choice2Button.onClick.AddListener(() => OnChoiceSelected(1));
         if (choice3Button != null) choice3Button.onClick.AddListener(() => OnChoiceSelected(2));
         if (choice4Button != null) choice4Button.onClick.AddListener(() => OnChoiceSelected(3));
+
+        // Tự báo cho DialogueMissionStep biết mình đã sẵn sàng
+        DialogueMissionStep.NotifyControllerReady(this);
     }
 
     /// <summary>
@@ -68,26 +79,29 @@ public class DialogueGameController : MonoBehaviour
     {
         if (currentMissionStep == null) return;
 
-        // Check đúng/sai (silent - không hiện gì)
         if (index == correctIndex)
         {
-            // Đúng → complete step
             currentMissionStep.OnDialogueCorrect();
+            // Không tắt isInGame ở đây — OnDialogueCorrect sẽ tự quyết định
+            // (nếu xong 10/20 câu thì nó tự tắt, còn lại thì tiếp câu mới)
         }
         else
         {
-            // Sai → fail step
             currentMissionStep.OnDialogueFailed();
+            // Fail → FailedRoutine sẽ tự tắt isInGame và ForceStandUp
         }
+    }
 
-        // Kết thúc game → enable player movement
-        if (playerController != null)
-            playerController.isInGame = false;
+    void OnDisable()
+    {
+        // Khi bị tắt (Quit/CloseDesktop) → clear Instance để lần sau tạo mới được
+        if (Instance == this) Instance = null;
     }
 
     void OnDestroy()
     {
-        // Đảm bảo enable player khi đóng game
+        if (Instance == this) Instance = null;
+
         if (playerController != null)
             playerController.isInGame = false;
     }

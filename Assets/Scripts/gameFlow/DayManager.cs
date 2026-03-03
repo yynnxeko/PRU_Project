@@ -137,6 +137,9 @@ public class DayManager : MonoBehaviour
             mm.ResetCurrentMission();
         }
 
+        // 1b. Reset tiến độ câu hỏi về 0
+        DialogueMissionStep.ResetSavedIndex();
+
         // 2. Reset Evidence (Khôi phục snapshot đầu ngày)
         if (EvidenceManager.Instance != null)
         {
@@ -165,7 +168,10 @@ public class DayManager : MonoBehaviour
         currentPhase = DayPhase.Morning;
         Debug.Log("Day Advanced! Starting Day " + currentDay);
 
-        // 1. Lưu snapshot mới cho đầu ngày mới
+        // 1. Reset tiến độ câu hỏi về 0 cho ngày mới
+        DialogueMissionStep.ResetSavedIndex();
+
+        // 2. Lưu snapshot mới cho đầu ngày mới
         if (EvidenceManager.Instance != null)
         {
             EvidenceManager.Instance.BackupDayStart();

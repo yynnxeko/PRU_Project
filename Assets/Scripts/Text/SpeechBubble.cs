@@ -32,7 +32,6 @@ public class SpeechBubble : MonoBehaviour
 
     IEnumerator ShowRoutine(string message, float duration)
     {
-        Debug.Log("SpeechBubble show: " + message);
         text.text = message;
         yield return new WaitForSeconds(duration);
         Destroy(gameObject);

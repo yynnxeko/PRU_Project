@@ -7,8 +7,15 @@ public class NPCPathFollower : MonoBehaviour
     public float speed = 2f;
     public float arriveDistance = 0.1f;
 
+    [Header("Hide on Finish")]
+    [Tooltip("Follower đi theo NPC này – sẽ bị ẩn cùng khi hết path")]
+    public Follower follower;
+    [Tooltip("Thời gian delay trước khi ẩn (giây)")]
+    public float hideDelay = 0f;
+
     int currentIndex;
     bool isPaused;
+    bool hasHidden;
 
     // Cache Animator
     Animator anim;
@@ -76,11 +83,12 @@ public class NPCPathFollower : MonoBehaviour
         {
             currentIndex++;
 
-            // Nếu hết waypoint → dừng anim
+            // Nếu hết waypoint → dừng anim & ẩn
             UpdateFinishedState();
             if (isFinished)
             {
                 SetAnimInput(Vector2.zero, false);
+                HideAll();
             }
         }
     }
@@ -124,6 +132,35 @@ public class NPCPathFollower : MonoBehaviour
     {
         currentIndex = 0;
         isPaused = false;
+        hasHidden = false;
         UpdateFinishedState();
+    }
+
+    // ======================
+    // HIDE ON FINISH
+    // ======================
+    void HideAll()
+    {
+        if (hasHidden) return;
+        hasHidden = true;
+
+        if (hideDelay <= 0f)
+        {
+            DoHide();
+        }
+        else
+        {
+            Invoke(nameof(DoHide), hideDelay);
+        }
+    }
+
+    void DoHide()
+    {
+        // Ẩn NPC
+        gameObject.SetActive(false);
+
+        // Ẩn Follower (nếu có)
+        if (follower != null)
+            follower.gameObject.SetActive(false);
     }
 }
