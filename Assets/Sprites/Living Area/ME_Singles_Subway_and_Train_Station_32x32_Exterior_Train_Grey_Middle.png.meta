@@ -1,0 +1,994 @@
+fileFormatVersion: 2
+guid: a4cef401b35cc6545a50ea4ef11e98f1
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca5b62b1dd2e14140b4c9943f687a09e
+      internalID: 2125189590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bb4fa5d4a268774ea3099317efc4915
+      internalID: -1079212771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df2c46a4ba0db544c931f0e202d8e3a9
+      internalID: -1408616194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f377ff5d3b575b24e9e8b0032e069746
+      internalID: -1112890140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cefa973c164eab40954eec502f36a2f
+      internalID: 1726776693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1730653d204bfc40b59ca7e6a1c9a19
+      internalID: -1662825089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fb9cd0c2a9ac3943b513ef455a9b0fb
+      internalID: 1846245519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45410fbc22fe0a84da89417a267d6ce1
+      internalID: -11408059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d65b7f7d9502ea0428baa6ba6c676c04
+      internalID: 1621087660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9a6e93455b9caf469b0b140fd17c158
+      internalID: 1488778621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4628d715e359a50448415f197f38f75f
+      internalID: -1241386599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e3beea8b14f535458a351e97c5500dc
+      internalID: -1705966007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca615c755232e38489fc7ae025d84c47
+      internalID: 16834795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d85b2032bf6e5964ea8bccada8c46860
+      internalID: 376205374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2ae9f7540febeb419be93d0c06f29d0
+      internalID: -82940929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_15
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c8e9504c86bde44bb41a7e8fce52fde
+      internalID: 1020722699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_16
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bce3e91fa328c304a8005c2921c0d482
+      internalID: -852057171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_17
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bce56720495bad478d5bfb0b38628b5
+      internalID: -1184503607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f3768a493655e428b7302e525a1aa9
+      internalID: -22887873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_19
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6da11c0f354fa7645b0bb9d5ea04a2c4
+      internalID: -676430142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 974a56c2e6395044e9ee69d5a6229719
+      internalID: -1427535881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bd1dd6ffc006bc46b776b49eb970bf4
+      internalID: -1936829394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8598943a8155d449e53ccb346019ce
+      internalID: -627174046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_23
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dafbabe0c5e4344881512697f852625
+      internalID: -2039442565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_24
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ee503dd05744f4699bb2e088a1dddc
+      internalID: -1265014765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a80dbb02091ccc4fa302205475c3151
+      internalID: 1091448182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_26
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b270c70878d2f80459fe7de1740bb53d
+      internalID: 1462595646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_27
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a47d45cce02609342b3f67fcdca057d1
+      internalID: 1254512603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76cf8e68fe5872d479cd5e4ba279e87a
+      internalID: -929551331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_29
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69300394ee14cc8498f9d8c9df422c03
+      internalID: 543801496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8532274364a455468f90021527bc1b0
+      internalID: -1319833270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2e15d664ff3aab4aa5dccb90cbea667
+      internalID: 1540080784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_32
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1507541d6f76f4faf59ea9d4962c79
+      internalID: 853356635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_33
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d25f3c267ee20434da8b5051d17375fe
+      internalID: 1457264418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_34
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 580be79127e3a8245a62e532ccd7ae7c
+      internalID: -488827706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_35
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0d96e74f81881d40ba4148d321c35d6
+      internalID: -1689885217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_36
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4284904065045944fa905acb7728850f
+      internalID: -1028021946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_37
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ff155f9b4846342b8a21d5228f3852
+      internalID: -741324870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_38
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 348243d2cfe023349b278a1ee8ec1bb1
+      internalID: -1708524384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_39
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d68a076bf376db14c810a96b264b16e1
+      internalID: -553809432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_0: 2125189590
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_1: -1079212771
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_10: -1241386599
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_11: -1705966007
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_12: 16834795
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_13: 376205374
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_14: -82940929
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_15: 1020722699
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_16: -852057171
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_17: -1184503607
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_18: -22887873
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_19: -676430142
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_2: -1408616194
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_20: -1427535881
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_21: -1936829394
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_22: -627174046
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_23: -2039442565
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_24: -1265014765
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_25: 1091448182
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_26: 1462595646
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_27: 1254512603
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_28: -929551331
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_29: 543801496
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_3: -1112890140
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_30: -1319833270
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_31: 1540080784
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_32: 853356635
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_33: 1457264418
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_34: -488827706
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_35: -1689885217
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_36: -1028021946
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_37: -741324870
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_38: -1708524384
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_39: -553809432
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_4: 1726776693
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_5: -1662825089
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_6: 1846245519
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_7: -11408059
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_8: 1621087660
+      ME_Singles_Subway_and_Train_Station_32x32_Exterior_Train_Grey_Middle_9: 1488778621
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
