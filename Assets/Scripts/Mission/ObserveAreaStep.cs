@@ -21,7 +21,7 @@ public class ObserveAreaStep : MissionStep
             bool completed = hold.UpdateHold(Time.deltaTime);
             if (completed)
             {
-                IsCompleted = true;
+                CompleteStep();
                 hold.CancelHold(); // khóa lại
             }
         }
