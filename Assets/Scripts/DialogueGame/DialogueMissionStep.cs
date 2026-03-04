@@ -80,13 +80,14 @@ public class DialogueMissionStep : MissionStep
         choice4 = "Anh gửi cho bạn thân anh.",
         correctIndex = 0
     },
+    // bat sai
     new DialogueLine {
         question = "8. Ngân hàng có dặn không cung cấp OTP cho ai cả mà?",
         choice1 = "Đây là mã hủy giao dịch chứ không phải OTP thanh toán, anh yên tâm.",
         choice2 = "Anh tin tôi đi, tôi làm ở đây 10 năm rồi.",
         choice3 = "Nếu anh không đọc, tiền sẽ mất ngay lập tức.",
         choice4 = "Anh không đọc thì thôi.",
-        correctIndex = 0
+        correctIndex = -1
     },
     new DialogueLine {
         question = "9. Tôi vẫn thấy không yên tâm...",
@@ -102,7 +103,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Ừ… thôi vậy tôi cúp máy đây.",
         choice3 = "Nhanh lên anh, tôi còn phải gọi người khác.",
         choice4 = "Anh hiểu lầm rồi!",
-        correctIndex = -1
+        correctIndex = 0
     },
 
     // KỊCH BẢN 2: GIẢ DANH NGƯỜI THÂN GẶP TAI NẠN
@@ -424,6 +425,8 @@ public class DialogueMissionStep : MissionStep
         if (lines == null || currentIndex >= lines.Length) return;
         DialogueLine line = lines[currentIndex];
 
+        Debug.Log($"<color=yellow>[DMStep] Loading index={currentIndex} | correctIndex={line.correctIndex} | Q: {line.question}</color>");
+
         var choices = new List<(string text, bool isCorrect)> {
             (line.choice1, line.correctIndex == 0),
             (line.choice2, line.correctIndex == 1),
@@ -438,6 +441,8 @@ public class DialogueMissionStep : MissionStep
         }
 
         int newCorrectIndex = (line.correctIndex < 0) ? -1 : choices.FindIndex(c => c.isCorrect);
+
+        Debug.Log($"<color=yellow>[DMStep] Sent to controller: newCorrectIndex={newCorrectIndex}</color>");
 
         gameController.StartGame(
             line.question,
@@ -470,11 +475,9 @@ public class DialogueMissionStep : MissionStep
 
             // Bật cờ để NpcSceneEntry kích hoạt enemy dắt đi ăn
             if (GameFlagManager.Instance != null)
+            {
                 GameFlagManager.Instance.SetFlag("it_toLobby", true);
-
-            // Chuyển buổi (Morning → Noon → Night)
-            if (DayManager.Instance != null)
-                DayManager.Instance.AdvancePhase();
+            }
 
             return; // Không StartCurrentLine nữa, chờ NarrativeDirector
         }
@@ -485,30 +488,19 @@ public class DialogueMissionStep : MissionStep
 
     public void OnDialogueFailed()
     {
-        savedIndex = currentIndex;
+        // Nếu câu bẫy (correctIndex == -1) → lên 1 câu (skip qua câu bẫy)
+        if (currentIndex < lines.Length && lines[currentIndex].correctIndex == -1)
+        {
+            savedIndex = currentIndex + 1;
+            Debug.Log($"[DialogueMissionStep] Trap question at index {currentIndex} → savedIndex = {savedIndex}");
+        }
+        else
+        {
+            savedIndex = currentIndex;
+        }
+
         StartCoroutine(FailedRoutine());
     }
-
-    // === Logic cũ câu 10 (tạm comment, chờ gắn flag nhận nhiệm vụ) ===
-    // private IEnumerator SpecialFailedRoutine()
-    // {
-    //     if (gameController != null)
-    //     {
-    //         gameController.StartGame(
-    //             "<color=red>Mày chưa bị chích điện nữa hả =))</color>",
-    //             "...", "...", "...", "...",
-    //             -1,
-    //             this
-    //         );
-    //     }
-    //     yield return new WaitForSecondsRealtime(3f);
-    //     if (computer != null) computer.CloseDesktop();
-    //     if (playerController != null) playerController.ForceStandUp();
-    //     if (GameManager.Instance != null)
-    //         GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
-    //     DoorSceneChange.NextSpawnId = "lobby_punch";
-    //     SceneManager.LoadScene(failSceneName);
-    // }
 
     private IEnumerator FailedRoutine()
     {

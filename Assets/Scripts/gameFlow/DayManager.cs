@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public enum DayPhase
 {
@@ -177,7 +178,60 @@ public class DayManager : MonoBehaviour
             EvidenceManager.Instance.BackupDayStart();
         }
 
-        // 2. Chuyển về scene phòng ngủ ban ngày
+        // 3. Chuyển về scene phòng ngủ ban ngày
         SceneManager.LoadScene(bedroomSceneName);
+
+        // 4. Hiện thông báo ngày mới (gọi sau khi scene load)
+        SceneManager.sceneLoaded += OnDaySceneLoaded;
+    }
+
+    /// <summary>
+    /// Coroutine: Đợi delay giây rồi mới AdvanceDay (cho animation ngủ chạy).
+    /// Gọi từ SleepZone: StartCoroutine(DayManager.Instance.AdvanceDayWithDelay(2f));
+    /// </summary>
+    public IEnumerator AdvanceDayWithDelay(float delay)
+    {
+        Debug.Log($"[DayManager] TRƯỚC khi AdvanceDay → currentDay={currentDay}, currentPhase={currentPhase}");
+
+        currentDay++;
+        currentPhase = DayPhase.Morning;
+
+        Debug.Log($"[DayManager] SAU khi AdvanceDay → currentDay={currentDay}, currentPhase={currentPhase}");
+        Debug.Log($"[DayManager] Đợi {delay}s rồi load scene '{bedroomSceneName}'...");
+
+        yield return new WaitForSeconds(delay);
+
+        // 1. Reset tiến độ câu hỏi về 0 cho ngày mới
+        DialogueMissionStep.ResetSavedIndex();
+
+        // 2. Lưu snapshot mới cho đầu ngày mới
+        if (EvidenceManager.Instance != null)
+        {
+            EvidenceManager.Instance.BackupDayStart();
+        }
+
+        // 3. Reset trạng thái ngủ của Player trước khi load scene
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Animator anim = player.GetComponent<Animator>();
+            if (anim != null) anim.SetBool("IsSleep", false);
+
+            PlayerController2 ctrl = player.GetComponent<PlayerController2>();
+            if (ctrl != null) ctrl.canMove = true;
+        }
+
+        // 4. Chuyển về scene phòng ngủ ban ngày
+        Debug.Log($"[DayManager] Loading scene '{bedroomSceneName}' ngay bây giờ!");
+        SceneManager.LoadScene(bedroomSceneName);
+
+        // 4. Hiện thông báo ngày mới (gọi sau khi scene load)
+        SceneManager.sceneLoaded += OnDaySceneLoaded;
+    }
+
+    private void OnDaySceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnDaySceneLoaded;
+        ShowDayStartNotification();
     }
 }

@@ -2,7 +2,23 @@ using UnityEngine;
 
 public class Mission2_UnlockCabinet : MissionStep
 {
+    [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
+    public int missionIndex = 1;
+
     private bool hasPassword = false;
+
+    void Start()
+    {
+        // Tự đăng ký với FullMissionManager
+        if (FullMissionManager.Instance != null)
+        {
+            FullMissionManager.Instance.RegisterStep(missionIndex, this);
+        }
+        else
+        {
+            Debug.LogWarning("[Mission2_UnlockCabinet] FullMissionManager.Instance is null!");
+        }
+    }
 
     public override void StartStep()
     {
@@ -33,5 +49,9 @@ public class Mission2_UnlockCabinet : MissionStep
 
         Debug.Log("Đã mở tủ thành công!");
         CompleteStep();
+
+        // Báo cho FullMissionManager
+        if (FullMissionManager.Instance != null)
+            FullMissionManager.Instance.ReportComplete();
     }
 }

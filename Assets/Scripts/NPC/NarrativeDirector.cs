@@ -18,6 +18,7 @@ public class NarrativeDirector : MonoBehaviour
         public float duration = 2f;
         public float moveTimeout = 7f;
         public string flagName;
+        public bool flagValue = true; // Giá trị cần set cho flag (mặc định true)
     }
 
     [Header("Sequence Settings")]
@@ -120,8 +121,8 @@ public class NarrativeDirector : MonoBehaviour
                 case StepType.SetFlag:
                     if (GameFlagManager.Instance != null)
                     {
-                        GameFlagManager.Instance.SetFlag(step.flagName, true);
-                        Debug.Log($"[NarrativeDirector] FLAG SET: {step.flagName} = TRUE (Step: {step.stepName})+aaaaaaaa");
+                        GameFlagManager.Instance.SetFlag(step.flagName, step.flagValue);
+                        Debug.Log($"[NarrativeDirector] FLAG SET: {step.flagName} = {step.flagValue} (Step: {step.stepName})");
                     }
                     else
                     {

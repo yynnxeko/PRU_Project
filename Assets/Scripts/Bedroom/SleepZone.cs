@@ -47,15 +47,17 @@ public class SleepZone : MonoBehaviour
         mainBedCollider.isTrigger = true;
 
         isSleeping = true;
-        
+        Debug.Log("[SleepZone] ngủ rồiaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
         // 👉 KHI NGỦ THÌ SẼ SANG NGÀY MỚI (CHỈ KHI LÀ BAN ĐÊM)
         if (DayManager.Instance != null && DayManager.Instance.currentPhase == DayPhase.Night)
         {
-            DayManager.Instance.AdvanceDay();
+            Debug.Log("[SleepZone] Đang là Night → Gọi AdvanceDayWithDelay(2f)!");
+            StartCoroutine(DayManager.Instance.AdvanceDayWithDelay(2f));
         }
         else
         {
-            Debug.Log("Chưa đến lúc đi ngủ (Phải là buổi tối)");
+            Debug.Log($"[SleepZone] Chưa đến lúc đi ngủ! currentPhase={DayManager.Instance?.currentPhase}");
             WakeUp(); // Tự động thức dậy nếu chưa đến tối
         }
     }
