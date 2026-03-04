@@ -105,20 +105,26 @@ public class AutoBattleController : MonoBehaviour
 
         if (dialogueController != null)
         {
-            // Truyền callback để báo hiệu khi toàn bộ chuỗi thoại kết thúc
-            if (BattleState.failIndex == 10)
+            // Nếu có flag nhận nhiệm vụ → chạy kịch bản đánh nhập viện
+            bool goMedical = GameFlagManager.Instance != null
+                && GameFlagManager.Instance.GetFlag("go_to_medical");
+
+            if (goMedical)
                 dialogueController.PlayHospitalDialogue(() => { isDialogueFinished = true; });
             else
                 dialogueController.PlayWarningDialogue(() => { isDialogueFinished = true; });
 
-            // Đợi cho đến khi thoại chạy đến câu cuối và tự đóng sau 2s (autoCloseDelay)
             yield return new WaitUntil(() => isDialogueFinished);
         }
 
         ResetPlayerAnim();
 
-        if (BattleState.failIndex == 10)
+        bool goMedical2 = GameFlagManager.Instance != null
+            && GameFlagManager.Instance.GetFlag("go_to_medical");
+
+        if (goMedical2)
         {
+            GameFlagManager.Instance.SetFlag("go_to_medical", false); // Reset để lần sau không bị lặp
             DoorSceneChange.NextSpawnId = "medical";
             SceneManager.LoadScene("BossRoom");
         }

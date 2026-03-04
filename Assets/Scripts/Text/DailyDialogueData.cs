@@ -11,7 +11,7 @@ public class DailyDialogueData : ScriptableObject
         public DayPhase phase = DayPhase.Morning;
         [TextArea(3, 10)]
         public string[] lines;
-        public float durationPerLine = 3f;
+        public float durationPerLine = 9f;
     }
 
     public List<DayDialogue> dailyDialogues = new List<DayDialogue>();

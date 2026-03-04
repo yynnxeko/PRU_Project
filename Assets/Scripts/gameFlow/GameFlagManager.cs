@@ -1,9 +1,15 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class GameFlagManager : MonoBehaviour
 {
     public static GameFlagManager Instance { get; private set; }
+
+    /// <summary>
+    /// Event phát khi bất kỳ flag nào thay đổi. Param: (flagName, newValue)
+    /// </summary>
+    public static event Action<string, bool> OnFlagChanged;
 
     private Dictionary<string, bool> flags = new Dictionary<string, bool>();
 
@@ -27,8 +33,9 @@ public class GameFlagManager : MonoBehaviour
             flags[flagName] = value;
         else
             flags.Add(flagName, value);
-        
+
         Debug.Log($"[GameFlagManager] Flag '{flagName}' set to: {value}");
+        OnFlagChanged?.Invoke(flagName, value);
     }
 
     /// <summary>
@@ -40,4 +47,14 @@ public class GameFlagManager : MonoBehaviour
             return value;
         return false;
     }
+#if UNITY_EDITOR
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            flags.Clear();
+            Debug.Log("All flags manually cleared!");
+        }
+    }
+#endif
 }

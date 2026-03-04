@@ -107,7 +107,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Em là lừa đảo đây, nhưng em là lừa đảo dễ thương nhất quả đất!",
         choice3 = "Anh nói vậy em buồn em khóc cho anh xem giờ!",
         choice4 = "Nhanh lên anh, em còn phải đi ăn đám cưới nữa!",
-        correctIndex = -1
+        correctIndex = 0
     },
 
     // --- NGƯỜI THỨ HAI: DỄ TIN (Câu 11-20) ---
@@ -206,14 +206,44 @@ public class DialogueMissionStep : MissionStep
     private int currentIndex = 0;
     private static int savedIndex = 0;
 
+    /// <summary>
+    /// Reset tiến độ câu hỏi về đầu ngày. Gọi khi FailDay hoặc AdvanceDay.
+    /// </summary>
+    public static void ResetSavedIndex()
+    {
+        savedIndex = 0;
+    }
+
     public override void StartStep()
     {
         base.StartStep();
         hasStartedGame = false;
         currentIndex = savedIndex;
+    }
 
-        // if (currentIndex < 10)
-        //     currentIndex = 0;
+    /// <summary>
+    /// Được DialogueGameController gọi khi nó vừa Start() xong.
+    /// </summary>
+    public static void NotifyControllerReady(DialogueGameController controller)
+    {
+        // Tìm instance DialogueMissionStep đang active trong scene
+        var step = FindObjectOfType<DialogueMissionStep>();
+        if (step != null)
+        {
+            // Luôn gắn lại controller mới (fix lỗi vào lần 2 không hoạt động)
+            step.gameController = controller;
+            step.hasStartedGame = true;
+
+            if (step.playerController == null)
+            {
+                GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+                if (playerObj != null)
+                    step.playerController = playerObj.GetComponent<PlayerController2>();
+            }
+
+            step.StartCurrentLine();
+            Debug.Log($"[DialogueMissionStep] Controller ready → StartCurrentLine() (index={step.currentIndex})");
+        }
     }
 
     public override void UpdateStep()
@@ -227,9 +257,10 @@ public class DialogueMissionStep : MissionStep
                 playerController = playerObj.GetComponent<PlayerController2>();
         }
 
+        // Fallback: nếu NotifyControllerReady chưa kịp gọi
         if (!hasStartedGame)
         {
-            gameController = FindObjectOfType<DialogueGameController>();
+            gameController = DialogueGameController.Instance;
             if (gameController != null)
             {
                 hasStartedGame = true;
@@ -273,57 +304,76 @@ public class DialogueMissionStep : MissionStep
     {
         currentIndex++;
         savedIndex = currentIndex;
-        if (currentIndex >= lines.Length) CompleteStep();
-        else StartCurrentLine();
+
+        // Mỗi khi xong đủ 10 câu (câu 10 hoặc câu 20) → tắt máy tính, đứng dậy, bật cờ để enemy dắt đi ăn
+        if (currentIndex == 10 || currentIndex == 20)
+        {
+            // Tắt máy tính
+            if (computer != null) computer.CloseDesktop();
+
+            // Đứng dậy khỏi ghế
+            if (playerController != null)
+            {
+                playerController.isInGame = false;
+                playerController.ForceStandUp();
+            }
+
+            // Bật cờ để NpcSceneEntry kích hoạt enemy dắt đi ăn
+            if (GameFlagManager.Instance != null)
+                GameFlagManager.Instance.SetFlag("it_toLobby", true);
+
+            return; // Không StartCurrentLine nữa, chờ NarrativeDirector
+        }
+
+        if (currentIndex < lines.Length)
+            StartCurrentLine();
+        // Hết 20 câu thì không CompleteStep, chờ NarrativeDirector xử lý tiếp
     }
 
     public void OnDialogueFailed()
     {
         savedIndex = currentIndex;
-        if (currentIndex == 9) StartCoroutine(SpecialFailedRoutine()); // câu 10
-        else StartCoroutine(NormalFailedRoutine()); // câu 1-9, 11-20
+        StartCoroutine(FailedRoutine());
     }
 
-    private IEnumerator SpecialFailedRoutine()
+    // === Logic cũ câu 10 (tạm comment, chờ gắn flag nhận nhiệm vụ) ===
+    // private IEnumerator SpecialFailedRoutine()
+    // {
+    //     if (gameController != null)
+    //     {
+    //         gameController.StartGame(
+    //             "<color=red>Mày chưa bị chích điện nữa hả =))</color>",
+    //             "...", "...", "...", "...",
+    //             -1,
+    //             this
+    //         );
+    //     }
+    //     yield return new WaitForSecondsRealtime(3f);
+    //     if (computer != null) computer.CloseDesktop();
+    //     if (playerController != null) playerController.ForceStandUp();
+    //     if (GameManager.Instance != null)
+    //         GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
+    //     DoorSceneChange.NextSpawnId = "lobby_punch";
+    //     SceneManager.LoadScene(failSceneName);
+    // }
+
+    private IEnumerator FailedRoutine()
     {
-        if (gameController != null)
+        if (computer != null) computer.CloseDesktop();
+        if (playerController != null)
         {
-            gameController.StartGame(
-                "<color=red>Mày chưa bị chích điện nữa hả =))</color>",
-                "...", "...", "...", "...",
-                -1,
-                this
-            );
-            BattleState.failIndex = 10;
-            DoorSceneChange.NextSpawnId = "lobby_punch";
-            // SceneManager.LoadScene(failSceneName);
+            playerController.isInGame = false;
+            playerController.ForceStandUp();
         }
-
-        yield return new WaitForSecondsRealtime(3f);
-
-        if (computer != null) computer.CloseDesktop();
-        if (playerController != null) playerController.ForceStandUp();
-        if (GameManager.Instance != null)
-            GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
-
-
-        // Load scene đánh nhau
-        DoorSceneChange.NextSpawnId = "lobby_punch";
-        SceneManager.LoadScene(failSceneName);
-    }
-
-    private IEnumerator NormalFailedRoutine()
-    {
-        if (computer != null) computer.CloseDesktop();
-        if (playerController != null) playerController.ForceStandUp();
         yield return new WaitForSecondsRealtime(1f);
 
         if (GameManager.Instance != null)
             GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
 
+        // Nếu đã nhận nhiệm vụ (flag bật) → sai sẽ đi medical
+        if (GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("mission_accepted"))
+            GameFlagManager.Instance.SetFlag("go_to_medical", true);
 
-        // Load scene đánh nhau
-        BattleState.failIndex = currentIndex;
         DoorSceneChange.NextSpawnId = "lobby_punch";
         SceneManager.LoadScene(failSceneName);
     }

@@ -5,6 +5,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Caught Feedback")]
+    public SpeechBubble bubblePrefab;
+    public string caughtMessage = "Bị phát hiện! Chạy đi!";
+    public float bubbleDuration = 3f;
+    public Vector3 bubbleOffset = new Vector3(0, 1.5f, 0);
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -14,9 +20,16 @@ public class GameManager : MonoBehaviour
     {
         bool hasEvidence = inventory != null && inventory.TotalEvidence() > 0;
 
-        bool isScene = SceneManager.GetActiveScene().name == "Map_Internal Area_Night";
+        bool isNightScene = SceneManager.GetActiveScene().name == "Map_Internal Area_Night";
 
-        if (hasEvidence || isScene)
+        if (isNightScene)
+        {
+            // Chỉ hiện cảnh báo, không GameOver
+            ShowCaughtBubble();
+            return;
+        }
+
+        if (hasEvidence)
         {
             GameOver();
         }
@@ -25,12 +38,21 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         Debug.Log("GAME OVER - Resetting Day...");
-        // Time.timeScale = 0f; // Bỏ cái này để game tiếp tục chạy và load scene
 
         if (DayManager.Instance != null)
         {
             DayManager.Instance.FailDay("");
         }
+    }
+
+    void ShowCaughtBubble()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null || bubblePrefab == null) return;
+
+        SpeechBubble bubble = Instantiate(bubblePrefab, player.transform.position + bubbleOffset, Quaternion.identity);
+        bubble.Init(player.transform, bubbleOffset);
+        bubble.Show(caughtMessage, bubbleDuration);
     }
     // Hàm này Camera sẽ gọi khi báo động
     public void AlertAllEnemies(Vector3 targetPos)

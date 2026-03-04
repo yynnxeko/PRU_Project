@@ -33,7 +33,7 @@ public class DailyDialogueTrigger : MonoBehaviour
     private IEnumerator ShowDialogueRoutine(DailyDialogueData.DayDialogue dialogue)
     {
         // Chờ 1 chút để Player kịp spawn hoàn tất
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3.5f);
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player == null)
@@ -47,16 +47,16 @@ public class DailyDialogueTrigger : MonoBehaviour
             SpeechBubble bubble = Instantiate(bubblePrefab, player.transform.position + bubbleOffset, Quaternion.identity);
             bubble.Init(player.transform, bubbleOffset);
             bubble.Show(line, dialogue.durationPerLine);
-            
+
             // Chờ cho đến khi bong bóng biến mất trước khi hiện câu tiếp theo
             yield return new WaitForSeconds(dialogue.durationPerLine + 0.2f);
         }
 
-        // --- MỚI: Sau khi thoại xong, có thể gọi NPC hành động ---
-        NarrativeNpcController narrativeNpc = FindFirstObjectByType<NarrativeNpcController>();
-        if (narrativeNpc != null)
+        // --- SỬA LỖI: Gọi NarrativeDirector thay vì NarrativeNpcController cũ ---
+        NarrativeDirector director = FindFirstObjectByType<NarrativeDirector>();
+        if (director != null)
         {
-            narrativeNpc.StartNarrativeSequence();
+            director.StartNarrative();
         }
     }
 }
