@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Mission2_UnlockCabinet : MissionStep
 {
+    [Header("Mô tả nhiệm vụ")]
+    [TextArea]
+    public string missionDescription = "Tìm mật khẩu trên máy tính để mở tủ phòng ngủ.";
     [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
     public int missionIndex = 1;
 
@@ -24,14 +27,14 @@ public class Mission2_UnlockCabinet : MissionStep
     {
         base.StartStep();
         hasPassword = false;
-        Debug.Log("Nhiệm vụ 2: Tìm mật khẩu trên máy tính để mở tủ phòng ngủ.");
+        Debug.Log($"Nhiệm vụ 2: {missionDescription}");
     }
 
     // Gọi hàm này khi tương tác với máy tính
     public void OnComputerInteracted()
     {
         if (hasPassword) return;
-        
+
         hasPassword = true;
         Debug.Log("Đã tìm thấy mật khẩu! Giờ hãy đi mở tủ.");
     }
@@ -53,5 +56,11 @@ public class Mission2_UnlockCabinet : MissionStep
         // Báo cho FullMissionManager
         if (FullMissionManager.Instance != null)
             FullMissionManager.Instance.ReportComplete();
+    }
+
+    // Hàm cho phép lấy mô tả nhiệm vụ này
+    public override string GetMissionDescription()
+    {
+        return missionDescription;
     }
 }

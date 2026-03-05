@@ -17,6 +17,15 @@ public class FullMissionManager : MonoBehaviour
     [Header("Tổng số nhiệm vụ (để biết khi nào xong hết)")]
     public int totalMissions = 3;
 
+    [Header("Mô tả nhiệm vụ (Dùng cho mọi Scene)")]
+    [TextArea(2, 4)]
+    public string[] missionDescriptions = new string[]
+    {
+        "Hãy đến IT Room và lấy chìa khóa trong tủ đồ.",
+        "Tìm mật khẩu trên máy tính để mở tủ phòng ngủ.",
+        "Hãy trả lời các câu hỏi để chứng minh sự vô tội và tìm ra kẻ lừa đảo."
+    };
+
     // Mission step đang active trong scene hiện tại
     private MissionStep activeStep;
 
@@ -104,6 +113,24 @@ public class FullMissionManager : MonoBehaviour
     /// Kiểm tra xem tất cả nhiệm vụ đã xong chưa.
     /// </summary>
     public bool AllMissionsCompleted() => currentMissionIndex >= totalMissions;
+
+    /// <summary>
+    /// Tìm mô tả nhiệm vụ hiện tại. 
+    /// Lấy trực tiếp từ danh sách được cấu hình trên Inspector để dùng chung cho mọi Scene.
+    /// </summary>
+    public string GetActiveMissionDescription()
+    {
+        // Ưu tiên 1: Nếu đang có activeStep (nhiệm vụ nằm ngay trong scene này) thì lấy luôn
+        if (activeStep != null) return activeStep.GetMissionDescription();
+
+        // Ưu tiên 2: Lấy từ danh sách mô tả cấu hình sẵn trên FullMissionManager (hữu ích khi nhảy Scene)
+        if (missionDescriptions != null && currentMissionIndex >= 0 && currentMissionIndex < missionDescriptions.Length)
+        {
+            return missionDescriptions[currentMissionIndex];
+        }
+
+        return "Không có nhiệm vụ hiện tại.";
+    }
 
     /// <summary>
     /// Reset toàn bộ tiến trình (chơi lại từ đầu).

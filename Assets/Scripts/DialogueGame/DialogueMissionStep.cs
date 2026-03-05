@@ -80,7 +80,6 @@ public class DialogueMissionStep : MissionStep
         choice4 = "Anh gửi cho bạn thân anh.",
         correctIndex = 0
     },
-    // bat sai
     new DialogueLine {
         question = "8. Ngân hàng có dặn không cung cấp OTP cho ai cả mà?",
         choice1 = "Đây là mã hủy giao dịch chứ không phải OTP thanh toán, anh yên tâm.",
@@ -106,7 +105,8 @@ public class DialogueMissionStep : MissionStep
         correctIndex = 0
     },
 
-    // KỊCH BẢN 2: GIẢ DANH NGƯỜI THÂN GẶP TAI NẠN
+
+// KỊCH BẢN 2: GIẢ DANH NGƯỜI THÂN GẶP TAI NẠN
     new DialogueLine {
         question = "1. Alo? Ai đang gọi cho tôi vậy?",
         choice1 = "Chị ơi, em là bác sĩ ở bệnh viện. Người nhà chị vừa bị tai nạn nghiêm trọng.",
@@ -182,9 +182,13 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Thôi bị phát hiện rồi, em cúp máy đây!",
         choice3 = "Chị gọi đi rồi nhớ chuyển tiền nhé.",
         choice4 = "Nhanh lên chị, em còn phải gọi người khác nữa!",
-        correctIndex = 0
+        correctIndex = -1
     },
-    // KỊCH BẢN 3: LỪA ĐẢO RỬA TIỀN
+
+
+
+// KỊCH BẢN 3: LỪA ĐẢO RỬA TIỀN
+
     new DialogueLine {
         question = "1. Alo? Ai đang gọi cho tôi vậy?",
         choice1 = "Chào anh, tôi là cán bộ điều tra từ Cục phòng chống tội phạm công nghệ cao.",
@@ -260,10 +264,13 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Ừ tôi lừa đó, nhưng lừa có tâm mà!",
         choice3 = "Thôi bị phát hiện rồi thì tôi cúp máy đây!",
         choice4 = "Nhanh lên anh, tôi còn phải gọi người khác nữa!",
-        correctIndex = 0
+        correctIndex = -1
     },
 
-    // KỊCH BẢN4 : GIẢ DANH SHIPPER THU PHÍ COD
+
+
+
+// KỊCH BẢN4 : GIẢ DANH SHIPPER THU PHÍ COD
     new DialogueLine {
         question = "1. Alo, ai gọi vậy?",
         choice1 = "Chào anh/chị, em là shipper. Anh/chị có đơn hàng cần thanh toán ngay để em giao.",
@@ -339,8 +346,246 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Thôi bị phát hiện rồi, em xin lỗi… (cúp máy).",
         choice3 = "Anh/chị đừng căng, em đùa thôi mà.",
         choice4 = "Nhanh lên anh/chị, em còn phải gọi người khác nữa!",
+        correctIndex = -1
+    },
+
+		// Giả Danh Điện Lực 
+    new DialogueLine {
+        question = "1. Alo, ai đang gọi cho tôi vậy?",
+        choice1 = "Chào anh/chị, em gọi từ bên điện lực vì hợp đồng điện nhà mình đang có cảnh báo khẩn.",
         correctIndex = 0
     },
+    new DialogueLine {
+        question = "2. Cảnh báo gì? Nhà tôi vẫn có điện bình thường mà.",
+        choice1 = "Hệ thống báo công tơ nhà anh/chị chưa hoàn tất xác thực nên có thể bị ngắt điện trong hôm nay.",
+        choice2 = "Nhà mình dùng điện rất đều nên bên em gọi hỏi thăm cho yên tâm thôi ạ.",
+        choice3 = "Có thể công tơ đang mệt chút thôi, anh/chị cứ để nó nghỉ rồi kiểm tra lại sau.",
+        choice4 = "Thật ra em gọi nhầm số, nhưng tiện thì mình trò chuyện vài phút cũng được ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "3. Tôi không hề nhận được hóa đơn hay tin nhắn nào cả.",
+        choice1 = "Đây là cảnh báo nội bộ phát sinh gấp nên bên em gọi trực tiếp để hỗ trợ xử lý trước cho mình.",
+        choice2 = "Chắc hệ thống bận quá nên quên gửi, nhưng mình cứ làm trước rồi tính tiếp cũng được ạ.",
+        choice3 = "Tin nhắn có khi đang đi lạc đâu đó, miễn giờ em gọi được cho anh/chị là ổn rồi.",
+        choice4 = "Nếu chưa nhận thì thôi cũng không sao, nhưng em nghĩ mình cứ xử lý cho có cảm giác an toàn.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "4. Vậy bây giờ tôi cần làm gì?",
+        choice1 = "Anh/chị cần xác nhận lại thông tin chủ hợp đồng để em giữ điện tạm thời trước khi hệ thống khóa.",
+        choice2 = "Anh/chị cứ tắt cầu dao ba phút rồi mở lại, đôi khi may mắn sẽ tự quay về ngay đó ạ.",
+        choice3 = "Mình đợi thêm chút nữa xem điện có tự hiểu chuyện rồi sáng đẹp trở lại hay không nhé.",
+        choice4 = "Anh/chị cứ bình tĩnh trước đã, vì đôi khi hoảng quá lại làm mình quên mất chuyện khác.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "5. Xác nhận bằng cách nào? Tôi thấy hơi lạ.",
+        choice1 = "Em sẽ gửi một đường link nội bộ, anh/chị mở ra và điền thông tin để xác thực công tơ ngay.",
+        choice2 = "Anh/chị không cần lo đâu, link lạ một chút nhưng nhìn quen dần thì sẽ thấy bình thường thôi.",
+        choice3 = "Nếu ngại bấm link thì mình cứ nhìn thử trước, biết đâu giao diện đẹp lại muốn làm tiếp ạ.",
+        choice4 = "Thời nay thủ tục chỗ nào cũng có link cả, nên mình đừng để chuyện đó làm căng thẳng thêm nhé.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "6. Tôi muốn tự gọi tổng đài điện lực để hỏi trước.",
+        choice1 = "Anh/chị đừng gọi lúc này vì hồ sơ đang treo xử lý, gọi ra ngoài dễ làm chậm quy trình xác nhận.",
+        choice2 = "Gọi cũng được thôi, nhưng biết đâu chờ máy lâu hơn thì lại mất thời gian hơn nhiều đấy ạ.",
+        choice3 = "Nếu gọi thì lát nữa mình gọi cũng chưa muộn, còn bây giờ em đang hỗ trợ trực tiếp cho nhanh.",
+        choice4 = "Em nghĩ gọi hay không cũng vậy thôi, miễn cuối cùng anh/chị vẫn quay lại xử lý bước này nhé.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "7. Tôi vừa mở link, giờ nó yêu cầu nhập tài khoản ngân hàng.",
+        choice1 = "Đó là bước đồng bộ thanh toán chủ hợp đồng, anh/chị nhập giúp em để hệ thống giữ điện cho nhà mình.",
+        choice2 = "Có thể hệ thống hỏi hơi sâu thật, nhưng thủ tục bây giờ thường vòng vèo hơn mình nghĩ nhiều lắm.",
+        choice3 = "Nếu thấy lạ thì cứ nhập thử xem sao, vì nhiều lúc làm tiếp rồi mới hiểu được mục đích của nó.",
+        choice4 = "Em cũng không rõ giao diện mới này lắm, nhưng thường cứ điền đủ thì màn hình sẽ cho qua thôi ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "8. Ứng dụng ngân hàng gửi cho tôi một mã OTP.",
+        choice1 = "Anh/chị đọc mã đó giúp em để hoàn tất xác nhận giữ điện, nếu chậm là lệnh khóa sẽ chạy ngay.",
+        choice2 = "Anh/chị cứ giữ mã đó trước cũng được, đôi khi nhìn những con số làm mình thấy bớt hồi hộp hơn.",
+        choice3 = "Hay anh/chị chụp lại màn hình rồi gửi bạn bè xem thử họ đoán mã này dùng làm gì nhé ạ.",
+        choice4 = "Nếu thích thì anh/chị đọc từng số thật chậm cũng được, miễn sao cuối cùng em nghe đủ là ổn.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "9. Tôi thấy lạ rồi, điện lực sao lại cần OTP ngân hàng?",
+        choice1 = "Đây là mã xác thực giữ hợp đồng chứ không phải mã chuyển tiền, anh/chị yên tâm đọc giúp em nhé.",
+        choice2 = "OTP giờ dùng cho nhiều việc lắm ạ, nên chuyện điện nước liên quan tài khoản cũng không hiếm đâu.",
+        choice3 = "Quy trình mới đôi khi khó hiểu thật, nhưng mình cứ làm theo rồi sau đó thắc mắc cũng chưa muộn.",
+        choice4 = "Nếu anh/chị suy nghĩ quá lâu thì dễ mất thời gian, mà những việc gấp thường nên xử lý trước đã.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "10. Không, tôi sẽ tự gọi tổng đài điện lực chính thức để xác minh.",
+        choice1 = "Anh/chị gọi lúc này hồ sơ có thể bị chuyển lỗi và rất khó khôi phục ngay trong hôm nay đó nhé.",
+        choice2 = "Anh/chị cứ gọi cũng được, nhưng có khi chờ lâu xong rồi vẫn phải quay lại làm đúng bước này thôi.",
+        choice3 = "Nếu anh/chị thích kiểm tra lại thì em cũng không cản, chỉ là mình đang làm gần xong rồi thôi ạ.",
+        choice4 = "Thôi được ạ, em dừng ở đây, nhưng đúng là anh/chị cảnh giác hơi nhiều hơn mức cần thiết rồi.",
+        correctIndex = -1
+    },
+	//	Cọc Tiền Để Ứng Tuyển Việc Làm
+
+    new DialogueLine {
+        question = "1. Alo, ai đang gọi cho tôi vậy?",
+        choice1 = "Chào anh/chị, em gọi từ bộ phận tuyển dụng vì hồ sơ ứng tuyển của mình đang được duyệt gấp.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "2. Hồ sơ nào? Tôi đâu nhớ vừa nộp chỗ nào.",
+        choice1 = "Hệ thống bên em ghi nhận CV của anh/chị nằm trong nhóm ứng viên phù hợp cho vị trí làm việc từ xa.",
+        choice2 = "Có thể anh/chị nộp lúc khuya nên quên thôi, chuyện này nhiều người cũng gặp lắm ạ.",
+        choice3 = "Không sao đâu, đôi khi chưa nộp vẫn được chọn nếu hồ sơ nhìn có duyên với công ty.",
+        choice4 = "Em cũng chưa rõ lắm, nhưng bên em đang cần người nên cứ liên hệ trước cho nhanh ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "3. Công ty nào vậy? Tôi chưa thấy email hay tin nhắn gì cả.",
+        choice1 = "Bên em tuyển gấp nên gọi trực tiếp trước, email mời phỏng vấn sẽ gửi sau khi xác nhận hồ sơ.",
+        choice2 = "Do hệ thống thư bận quá nên bên em ưu tiên gọi miệng trước để đỡ chậm tiến độ ạ.",
+        choice3 = "Tin nhắn có thể đến sau thôi, miễn hiện tại anh/chị vẫn nghe máy là quy trình vẫn chạy.",
+        choice4 = "Email bây giờ nhiều lúc vào spam, nên nghe điện thoại trực tiếp vẫn tiện và nhanh hơn nhiều.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "4. Vị trí này cụ thể là làm gì?",
+        choice1 = "Đây là vị trí nhập liệu và hỗ trợ khách hàng online, thời gian linh hoạt và thu nhập khá ổn định.",
+        choice2 = "Công việc cũng nhẹ nhàng thôi, chủ yếu là thao tác cơ bản, không cần kinh nghiệm quá sâu đâu ạ.",
+        choice3 = "Anh/chị cứ hiểu là việc văn phòng online, làm ở đâu cũng được miễn mình phản hồi đều là được.",
+        choice4 = "Nội dung chi tiết sẽ gửi sau, hiện tại bên em chỉ cần giữ suất phỏng vấn cho mình trước đã.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "5. Nghe cũng được, vậy bước tiếp theo là gì?",
+        choice1 = "Anh/chị cần xác nhận hồ sơ hôm nay và đóng khoản phí xử lý hồ sơ để hệ thống giữ lịch phỏng vấn.",
+        choice2 = "Mình chỉ cần làm thêm một bước nhỏ trước, sau đó bên em sẽ sắp xếp lịch nhanh cho anh/chị.",
+        choice3 = "Quy trình cũng đơn giản thôi, bên em ưu tiên người phản hồi sớm nên làm trước sẽ có lợi hơn ạ.",
+        choice4 = "Nếu anh/chị thấy phù hợp thì mình chốt ngay hôm nay, vì đợt này số lượng hồ sơ vào khá nhiều.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "6. Phí hồ sơ là sao? Bình thường ứng tuyển có mất tiền đâu.",
+        choice1 = "Đây là phí xác thực hồ sơ và tạo mã nhân sự tạm thời, sau khi nhận việc công ty sẽ hoàn lại.",
+        choice2 = "Khoản này không lớn đâu, chủ yếu để lọc ứng viên nghiêm túc và giữ lịch cho đỡ bị hủy ngang.",
+        choice3 = "Nhiều bên bây giờ đều thu trước một khoản nhỏ, nên anh/chị cứ xem như bước xác minh ban đầu.",
+        choice4 = "Nếu không có khoản xác nhận thì hệ thống khó ưu tiên hồ sơ, nên bên em mới áp dụng vậy ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "7. Bao nhiêu tiền? Và tôi chuyển cho ai?",
+        choice1 = "Anh/chị chuyển 390 nghìn vào tài khoản hỗ trợ tuyển dụng, nội dung ghi mã hồ sơ để đối soát.",
+        choice2 = "Số tiền khá nhẹ thôi, quan trọng là mình xác nhận sớm để bên em khóa lịch cho chắc chắn nhé.",
+        choice3 = "Anh/chị chuyển ngay hôm nay là đẹp nhất, vì để sang ngày mai hồ sơ dễ bị đẩy xuống sau hơn.",
+        choice4 = "Bên em chỉ cần thấy giao dịch vào hệ thống là sẽ gửi lịch phỏng vấn và tài liệu ngay sau đó.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "8. Tôi muốn xem website công ty và thư mời chính thức trước.",
+        choice1 = "Anh/chị cứ yên tâm, thông tin đó sẽ gửi đủ sau khi hệ thống xác nhận hồ sơ đã được kích hoạt.",
+        choice2 = "Website bên em đang cập nhật nên xem lúc này cũng chưa đầy đủ, mình làm bước trước sẽ tiện hơn.",
+        choice3 = "Thư mời có sẵn cả, nhưng em chỉ gửi được sau khi hồ sơ chuyển sang trạng thái xác nhận thôi ạ.",
+        choice4 = "Nếu anh/chị đợi đủ giấy tờ rồi mới làm thì có thể suất này sẽ chuyển sang ứng viên khác mất.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "9. Tôi vẫn thấy hơi đáng ngờ.",
+        choice1 = "Em hiểu, nhưng đợt tuyển này chỉ giữ hồ sơ trong hôm nay, quá hạn là hệ thống tự động loại ra.",
+        choice2 = "Nhiều ứng viên ban đầu cũng phân vân như mình, nhưng làm xong thì mọi thứ đều diễn ra khá nhanh.",
+        choice3 = "Nếu anh/chị chần chừ quá lâu thì cơ hội sẽ qua mất, mà suất làm việc từ xa đang khá hiếm đấy.",
+        choice4 = "Bên em không ép đâu, chỉ là quy trình tuyển đang chạy liên tục nên phản hồi chậm sẽ thiệt hơn.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "10. Không, tôi sẽ chỉ làm việc qua email công ty chính thức và không đóng phí ứng tuyển.",
+        choice1 = "Anh/chị cân nhắc lại nhé, vì khi hồ sơ bị đóng rồi thì rất khó mở lại trong đợt tuyển này.",
+        choice2 = "Nếu anh/chị muốn an toàn quá mức thì em cũng chịu, nhưng cơ hội tốt thường không chờ lâu đâu.",
+        choice3 = "Thôi được ạ, em dừng hỗ trợ tại đây, nhưng đúng là mình đang bỏ lỡ một vị trí khá ổn đó.",
+        choice4 = "Anh/chị cứ kiểm tra thêm cũng được, còn bên em sẽ chuyển suất này cho người xác nhận sớm hơn.",
+        correctIndex = -1
+    },
+
+//	Giả Nhà Trường Báo Học Phí
+    new DialogueLine {
+        question = "1. Alo, ai đang gọi cho tôi vậy?",
+        choice1 = "Chào phụ huynh, em gọi từ phòng tài vụ nhà trường vì học phí của em nhà mình đang có vấn đề.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "2. Vấn đề gì? Tôi tưởng đã đóng đủ từ đầu kỳ rồi mà.",
+        choice1 = "Hệ thống kế toán báo khoản học phí kỳ này chưa được xác nhận hoàn tất nên cần kiểm tra gấp.",
+        choice2 = "Có thể phần mềm nhớ nhầm một chút thôi, nhưng mình cứ xử lý trước cho yên tâm cũng được ạ.",
+        choice3 = "Đôi khi dữ liệu đi hơi chậm nên trường gọi hỏi lại trước để tránh phụ huynh phải đi lại nhiều.",
+        choice4 = "Em cũng chưa rõ chi tiết lắm, chỉ thấy màn hình báo đỏ nên gọi mình trước cho chắc thôi ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "3. Tôi không hề nhận được thông báo nào từ giáo viên chủ nhiệm.",
+        choice1 = "Do đây là lỗi phát sinh ở hệ thống thu phí nên bên em gọi trực tiếp để xử lý trước cho nhanh.",
+        choice2 = "Có thể giáo viên bận nên chưa kịp báo, nhưng mình làm sớm thì thường sẽ đỡ rắc rối hơn ạ.",
+        choice3 = "Thông báo giấy nhiều khi đến chậm lắm, nên trường mới ưu tiên gọi điện để phụ huynh nắm trước.",
+        choice4 = "Nếu đợi đủ các đầu mối cùng báo thì hơi lâu, trong khi hồ sơ học vụ vẫn đang chạy liên tục ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "4. Vậy giờ tôi cần làm gì?",
+        choice1 = "Phụ huynh cần xác nhận lại mã học sinh và hoàn tất khoản bổ sung để tránh khóa hồ sơ học vụ.",
+        choice2 = "Mình chỉ cần làm thêm một bước nhỏ thôi, sau đó hệ thống sẽ tự cập nhật lại trạng thái ngay ạ.",
+        choice3 = "Quy trình cũng khá ngắn, bên em hướng dẫn qua điện thoại nên phụ huynh không phải đến trường đâu.",
+        choice4 = "Nếu xử lý ngay trong hôm nay thì hồ sơ sẽ ổn định, còn để sang ngày mai dễ phát sinh chậm hơn ạ.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "5. Khoản bổ sung là khoản gì? Nhà trường chưa từng nói với tôi.",
+        choice1 = "Đó là phần chênh lệch cập nhật theo danh sách mới, bao gồm phí hồ sơ điện tử và xác nhận học vụ.",
+        choice2 = "Khoản này không lớn đâu ạ, chủ yếu để hệ thống đủ điều kiện khóa dữ liệu cho đúng từng học sinh.",
+        choice3 = "Nhiều phụ huynh cũng hỏi giống mình, vì đợt điều chỉnh này phát sinh sau khi đã thu học phí đầu kỳ.",
+        choice4 = "Bên em đang hỗ trợ chung nên gọi lần lượt từng người, phụ huynh xử lý sớm sẽ đỡ phải theo dõi lại.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "6. Tôi muốn tự gọi cho giáo viên chủ nhiệm để hỏi trước.",
+        choice1 = "Phụ huynh cứ hỏi sau cũng được, nhưng hồ sơ hiện đang treo nên cần xử lý trước thời hạn hôm nay.",
+        choice2 = "Giáo viên chủ nhiệm không trực tiếp thao tác phần tài vụ, nên gọi lúc này cũng chưa giải quyết được ạ.",
+        choice3 = "Nếu liên hệ nhiều đầu mối cùng lúc thì thông tin dễ chồng chéo, bên em sợ phụ huynh càng rối hơn.",
+        choice4 = "Mình xác nhận xong bước này trước rồi hỏi lại sau vẫn được, vì dữ liệu hiện đang cần cập nhật gấp.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "7. Số tiền cần đóng là bao nhiêu?",
+        choice1 = "Phụ huynh chuyển 1 triệu 280 nghìn vào tài khoản hỗ trợ thu phí để bên em cập nhật ngay hôm nay.",
+        choice2 = "Khoản này không quá lớn đâu ạ, chủ yếu là hoàn tất đúng hạn để hồ sơ học sinh không bị treo thêm.",
+        choice3 = "Mình xử lý sớm thì hệ thống sẽ ghi nhận ngay, chứ để trễ là sang đợt đối soát tiếp theo khá phiền ạ.",
+        choice4 = "Bên em chỉ cần thấy giao dịch vào hệ thống là có thể mở lại trạng thái bình thường cho học sinh ngay.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "8. Sao lại chuyển vào tài khoản cá nhân? Trường không có cổng thanh toán à?",
+        choice1 = "Đây là tài khoản hỗ trợ đối soát tạm thời vì cổng thu phí đang bảo trì nên bên em xử lý thủ công.",
+        choice2 = "Phụ huynh yên tâm, nhiều trường hợp hôm nay cũng đang làm theo cách này để kịp thời hạn cập nhật ạ.",
+        choice3 = "Cổng thanh toán không phải lúc nào cũng mở ổn định, nên bên em mới linh hoạt hỗ trợ qua tài khoản này.",
+        choice4 = "Nếu đợi cổng chính thức hoạt động lại thì có thể quá hạn, nên trường mới ưu tiên xử lý trước cho mình.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "9. Tôi vẫn thấy rất lạ và muốn xem thông báo chính thức.",
+        choice1 = "Em hiểu, nhưng danh sách này chỉ giữ đến hết hôm nay, quá hạn là hệ thống tự chuyển sang nhắc nợ.",
+        choice2 = "Nhiều phụ huynh ban đầu cũng phân vân vậy ạ, nhưng xử lý xong thì hồ sơ đều trở lại bình thường ngay.",
+        choice3 = "Nếu mình chờ thêm giấy tờ đầy đủ thì có thể mất lượt xử lý ưu tiên và phải làm việc lại từ đầu ạ.",
+        choice4 = "Bên em không ép đâu, chỉ là thời hạn của hệ thống khá chặt nên phản hồi chậm sẽ bất tiện hơn thôi.",
+        correctIndex = 0
+    },
+    new DialogueLine {
+        question = "10. Không, tôi sẽ liên hệ giáo viên chủ nhiệm và kiểm tra trên kênh chính thức của nhà trường.",
+        choice1 = "Phụ huynh cân nhắc lại nhé, vì khi hồ sơ bị chuyển trạng thái rồi thì việc mở lại sẽ mất thêm thời gian.",
+        choice2 = "Nếu phụ huynh muốn kiểm tra thêm thì em cũng không cản, nhưng hạn xử lý hôm nay sẽ không chờ lâu đâu ạ.",
+        choice3 = "Thôi được ạ, em dừng hỗ trợ tại đây, còn danh sách này bên em sẽ chuyển sang phụ huynh khác sau nhé.",
+        choice4 = "Phụ huynh cứ xác minh thêm cũng được, nhưng thật sự lúc này mình đang ở rất gần bước hoàn tất rồi ạ.",
+        correctIndex = -1
+    },
+
 
 };
     [Header("References")]
@@ -362,7 +607,11 @@ public class DialogueMissionStep : MissionStep
     /// </summary>
     public static void ResetSavedIndex()
     {
-        savedIndex = 0;
+        // Mỗi ngày bắt đầu từ câu hỏi thứ (ngày-1)*10
+        int day = 1;
+        if (DayManager.Instance != null)
+            day = DayManager.Instance.currentDay;
+        savedIndex = (day - 1) * 10;
     }
 
     public override void StartStep()
@@ -458,6 +707,9 @@ public class DialogueMissionStep : MissionStep
     public void OnDialogueCorrect()
     {
         currentIndex++;
+        // Hết toàn bộ câu hỏi → loop lại từ đầu
+        if (currentIndex >= lines.Length)
+            currentIndex = 0;
         savedIndex = currentIndex;
 
         // Mỗi khi xong đủ 10 câu (10, 20, 30, 40...) → tắt máy, đứng dậy, bật cờ, chuyển buổi
@@ -523,4 +775,8 @@ public class DialogueMissionStep : MissionStep
         SceneManager.LoadScene(failSceneName);
     }
 
+    public override string GetMissionDescription()
+    {
+        return "Hãy trả lời các câu hỏi để chứng minh sự vô tội và tìm ra kẻ lừa đảo.";
+    }
 }

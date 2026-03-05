@@ -40,4 +40,12 @@ public abstract class MissionStep : MonoBehaviour
     {
         IsCompleted = true;
     }
+
+    /// <summary>
+    /// Trả về mô tả nhiệm vụ. Các subclass nên override hàm này.
+    /// </summary>
+    public virtual string GetMissionDescription()
+    {
+        return "Nhiệm vụ hiện tại không có mô tả chi tiết.";
+    }
 }

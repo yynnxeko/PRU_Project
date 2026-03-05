@@ -79,17 +79,16 @@ public class DialogueGameController : MonoBehaviour
     {
         if (currentMissionStep == null) return;
 
-        Debug.Log($"<color=cyan>[DGController] Button clicked: index={index} | correctIndex={correctIndex} | match={index == correctIndex}</color>");
-
         if (index == correctIndex)
         {
-            Debug.Log("<color=green>[DGController] → OnDialogueCorrect()</color>");
             currentMissionStep.OnDialogueCorrect();
+            // Không tắt isInGame ở đây — OnDialogueCorrect sẽ tự quyết định
+            // (nếu xong 10/20 câu thì nó tự tắt, còn lại thì tiếp câu mới)
         }
         else
         {
-            Debug.Log("<color=red>[DGController] → OnDialogueFailed()</color>");
             currentMissionStep.OnDialogueFailed();
+            // Fail → FailedRoutine sẽ tự tắt isInGame và ForceStandUp
         }
     }
 
