@@ -2,29 +2,41 @@ using UnityEngine;
 
 public class CabinetPoint : Interactable
 {
-    bool completedThisHold = false;
+    bool isCompleted = false;
 
     [Header("Evidence Settings")]
     public int evidenceReward = 1;
-    public EvidenceItem evidenceItem; // <-- ĐÂY
+    public EvidenceItem evidenceItem;
 
     void Awake()
     {
         promptMessage = "Hold E";
         holdAction.requiredHoldTime = 2.0f;
+        holdAction.resetOnStart = false; // Không reset progress khi bấm lại
+    }
+
+    public void Update()
+    {
+        // Nếu đã hoàn thành thì disable chính mình để PlayerInteraction không tìm thấy Interactable nữa
+        if (isCompleted)
+        {
+            if (InteractionUI.Instance != null)
+                InteractionUI.Instance.HideAll();
+            this.enabled = false;
+            gameObject.layer = 0; // Chuyển layer về default để Raycast/Trigger không dính (tùy setup)
+        }
     }
 
     public override void OnHoldCancel(PlayerInteraction player)
     {
-        completedThisHold = false;
         if (InteractionUI.Instance != null)
             InteractionUI.Instance.HideAll();
     }
 
     public override void OnHoldComplete(PlayerInteraction player)
     {
-        if (completedThisHold) return;
-        completedThisHold = true;
+        if (isCompleted) return;
+        isCompleted = true;
 
         PlayerInventory inventory = player.GetComponent<PlayerInventory>();
         if (inventory != null)
@@ -33,16 +45,20 @@ public class CabinetPoint : Interactable
             {
                 if (evidenceItem != null)
                     inventory.AddEvidence(evidenceItem);
-                else
-                    Debug.LogWarning("CabinetPoint: evidenceItem chưa được gán!");
             }
             Debug.Log($"Bạn đã tìm được {evidenceReward} evidence trong tủ.");
         }
-        else
+
+        // Báo cáo hoàn thành nhiệm vụ cho FullMissionManager
+        if (FullMissionManager.Instance != null)
         {
-            Debug.Log("Không tìm thấy PlayerInventory để nhận evidence!");
+            FullMissionManager.Instance.ReportComplete();
         }
+
         if (InteractionUI.Instance != null)
             InteractionUI.Instance.HideAll();
+            
+        // Disable để không hiện UI Prompt nữa
+        this.enabled = false;
     }
 }

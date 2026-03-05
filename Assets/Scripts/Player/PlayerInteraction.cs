@@ -71,7 +71,7 @@ public class PlayerInteraction : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Interactable i = other.GetComponent<Interactable>();
-        if (i != null)
+        if (i != null && i.enabled)
         {
             current = i;
             Debug.Log(i.promptMessage);

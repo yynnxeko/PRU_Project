@@ -90,7 +90,10 @@ public class FullMissionManager : MonoBehaviour
         // Lưu vào ổ cứng
         PlayerPrefs.SetInt(SAVE_KEY, currentMissionIndex);
         PlayerPrefs.Save();
-        Debug.Log($"[FullMissionManager] Saved progress: Mission {currentMissionIndex}");
+        
+        string nextMissionDesc = GetActiveMissionDescription();
+        Debug.Log($"<color=green>[FullMission] TIẾN TRÌNH MỚI: Mission {currentMissionIndex}</color>");
+        Debug.Log($"<color=cyan>[FullMission] HIỆN TẠI: {nextMissionDesc}</color>");
 
         activeStep = null;
 

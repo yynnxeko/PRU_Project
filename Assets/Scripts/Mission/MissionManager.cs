@@ -1,210 +1,94 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 public class MissionManager : MonoBehaviour
 {
-
-    [Header("Mission Data")]
-    public MissionData missionData;
-
-    [Header("Runtime Steps (auto-populated hoặc kéo thủ công)")]
-    public MissionStep[] steps;
-
-    [Header("Events")]
-    public UnityEvent onMissionStarted;
-    public UnityEvent onMissionCompleted;
-    public UnityEvent onMissionFailed;
-    public UnityEvent<int> onStepCompleted;
-
-    // Runtime state
-    int currentStepIndex;
-    MissionState state = MissionState.Locked;
-    int retryCount;
-
-    // Public properties
-    public MissionState State => state;
-    public bool IsActive => state == MissionState.Active;
-    public bool IsCompleted => state == MissionState.Completed;
-    public string MissionId => missionData != null ? missionData.missionId : "";
-    public string MissionTitle => missionData != null ? missionData.title : "";
+    [Header("Mission List")]
+    public MissionStep[] allMissions;
+    public int currentStepIndex = 0;
 
     void Start()
     {
-        // Nếu có MissionData, lấy steps từ đó (nếu chưa gán thủ công)
-        if (missionData != null && (steps == null || steps.Length == 0))
-            steps = missionData.steps;
-
-        // Sync state từ QuestLog nếu có
-        if (QuestLog.Instance != null && missionData != null)
+        // Không reset index ở Start để giữ tiến trình khi chuyển scene
+        if (allMissions != null && allMissions.Length > 0 && currentStepIndex < allMissions.Length)
         {
-            state = QuestLog.Instance.GetMissionState(missionData.missionId);
-            retryCount = QuestLog.Instance.GetRetryCount(missionData.missionId);
+            // Chỉ start nếu mission chưa active (đề phòng chuyển cảnh)
+            if (allMissions[currentStepIndex] != null && !allMissions[currentStepIndex].IsCompleted && !allMissions[currentStepIndex].IsFailed)
+                allMissions[currentStepIndex].StartStep();
         }
     }
-
-    // ─────────────────── PUBLIC API ───────────────────
-
-    /// <summary>
-    /// Bắt đầu mission
-    /// </summary>
-    public void StartMission()
-    {
-        if (steps == null || steps.Length == 0)
-        {
-            Debug.LogWarning($"[Mission] {MissionTitle}: Không có steps!");
-            return;
-        }
-
-        // Đăng ký với QuestLog
-        if (QuestLog.Instance != null && missionData != null)
-        {
-            if (!QuestLog.Instance.StartMission(missionData.missionId))
-                return; // Không thể start (đã completed hoặc locked)
-        }
-
-        state = MissionState.Active;
-        currentStepIndex = 0;
-        retryCount = QuestLog.Instance != null
-            ? QuestLog.Instance.GetRetryCount(MissionId)
-            : 0;
-
-        // Reset tất cả steps
-        foreach (var s in steps)
-        {
-            if (s != null) s.ResetStep();
-        }
-
-        steps[0].StartStep();
-        onMissionStarted?.Invoke();
-
-        Debug.Log($"[Mission] Started: {MissionTitle} ({MissionId})");
-    }
-
-    /// <summary>
-    /// Thử lại mission sau khi fail (gọi từ MissionFailUI)
-    /// </summary>
-    public void RetryMission()
-    {
-        if (missionData != null && QuestLog.Instance != null)
-            QuestLog.Instance.SetMissionAvailable(missionData.missionId);
-
-        Debug.Log($"[Mission] Retrying: {MissionTitle}");
-        StartMission();
-    }
-
-    /// <summary>
-    /// Bỏ qua mission sau fail (gọi từ MissionFailUI)
-    /// </summary>
-    public void SkipAfterFail()
-    {
-        if (missionData != null && QuestLog.Instance != null)
-            QuestLog.Instance.SetMissionAvailable(missionData.missionId);
-
-        state = MissionState.Available;
-        Debug.Log($"[Mission] Skipped: {MissionTitle} — vẫn Available để thử lại sau");
-    }
-
-    // ─────────────────── UPDATE LOOP ───────────────────
 
     void Update()
     {
+        if (allMissions == null || currentStepIndex >= allMissions.Length) return;
 
-        if (state != MissionState.Active) return;
-        if (steps == null || currentStepIndex >= steps.Length) return;
-
-        MissionStep step = steps[currentStepIndex];
+        MissionStep step = allMissions[currentStepIndex];
         if (step == null) return;
 
-
+        // Cập nhật logic nhiệm vụ hiện tại
+        if (Time.frameCount % 120 == 0)
+            Debug.Log($"[MissionManager] Updating Step {currentStepIndex}: {step.gameObject.name}");
+        
         step.UpdateStep();
 
         if (step.IsCompleted)
         {
-
-            HandleStepCompleted(step);
+            Debug.Log($"Mission Step {currentStepIndex} Completed!");
+            currentStepIndex++;
+            
+            if (currentStepIndex < allMissions.Length)
+            {
+                if (allMissions[currentStepIndex] != null)
+                    allMissions[currentStepIndex].StartStep();
+                }
+            else
+            {
+                Debug.Log("All Missions Completed!");
+            }
         }
         else if (step.IsFailed)
         {
-            HandleStepFailed();
+            Debug.Log($"Mission Step {currentStepIndex} Failed! Resetting...");
+            if (DayManager.Instance != null)
+                DayManager.Instance.FailDay("");
+            else
+                ResetCurrentMission(); // Fallback if no DayManager
         }
     }
 
-    // ─────────────────── INTERNAL ───────────────────
-
-    void HandleStepCompleted(MissionStep step)
+    /// <summary>
+    /// Reset lại đúng nhiệm vụ hiện tại (không nhảy index)
+    /// </summary>
+    public void ResetCurrentMission()
     {
-        step.EndStep();
-        onStepCompleted?.Invoke(currentStepIndex);
-        Debug.Log($"[Mission] {MissionTitle} — Step {currentStepIndex} completed");
+        if (allMissions != null && currentStepIndex < allMissions.Length)
+        {
+            if (allMissions[currentStepIndex] != null)
+            {
+                allMissions[currentStepIndex].ResetStep();
+                allMissions[currentStepIndex].StartStep();
+            }
+        }
+    }
 
+    // ================== COMPATIBILITY HOOKS ==================
+    public bool IsActive => allMissions != null && currentStepIndex < allMissions.Length;
+
+    public void RetryMission() => ResetCurrentMission();
+
+    public void SkipAfterFail()
+    {
+        Debug.Log($"[MissionManager] Skipping Step {currentStepIndex}");
         currentStepIndex++;
-
-        if (currentStepIndex < steps.Length)
+        if (currentStepIndex < allMissions.Length && allMissions[currentStepIndex] != null)
         {
-            // Chuyển sang step tiếp theo
-            steps[currentStepIndex].StartStep();
-        }
-        else
-        {
-            // Hoàn thành toàn bộ mission
-            CompleteMission();
+            allMissions[currentStepIndex].StartStep();
         }
     }
 
-    void CompleteMission()
+    public void StartMission()
     {
-        state = MissionState.Completed;
-
-        if (QuestLog.Instance != null && missionData != null)
-            QuestLog.Instance.CompleteMission(missionData.missionId);
-
-        onMissionCompleted?.Invoke();
-        Debug.Log($"[Mission] Completed: {MissionTitle}");
-    }
-
-    void HandleStepFailed()
-    {
-        bool canFail = missionData != null ? missionData.canFail : true;
-
-        if (!canFail)
-        {
-            // Không cho phép fail → reset step và tiếp tục
-            steps[currentStepIndex].ResetStep();
-            steps[currentStepIndex].StartStep();
-            return;
-        }
-
-        state = MissionState.Failed;
-
-        // Thông báo QuestLog
-        if (QuestLog.Instance != null && missionData != null)
-            QuestLog.Instance.FailMission(missionData.missionId);
-
-        onMissionFailed?.Invoke();
-
-        // Hiển thị Fail UI
-        bool canRetry = missionData != null ? missionData.canRetry : true;
-        int maxRetries = missionData != null ? missionData.maxRetries : 3;
-
-        retryCount = QuestLog.Instance != null
-            ? QuestLog.Instance.GetRetryCount(MissionId)
-            : retryCount + 1;
-
-        // Hết lượt retry
-        if (canRetry && retryCount >= maxRetries)
-            canRetry = false;
-
-        if (MissionFailUI.Instance != null)
-        {
-            MissionFailUI.Instance.Show(this, MissionTitle, retryCount, maxRetries, canRetry);
-        }
-        else
-        {
-            // Không có UI → tự động retry
-            Debug.LogWarning("[Mission] MissionFailUI not found — auto retrying");
-            RetryMission();
-        }
-
-        Debug.Log($"[Mission] Failed: {MissionTitle} (retry {retryCount}/{maxRetries})");
+        currentStepIndex = 0;
+        if (allMissions != null && allMissions.Length > 0 && allMissions[0] != null)
+            allMissions[0].StartStep();
     }
 }

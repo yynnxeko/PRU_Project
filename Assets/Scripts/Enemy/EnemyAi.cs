@@ -392,7 +392,7 @@ public class EnemyAi : MonoBehaviour
 
             if (d <= 1.2f)
             {
-                GameManager.Instance.HandlePlayerCaught(cachedPlayerInventory);
+                GameManager.Instance.HandlePlayerCaught(cachedPlayerInventory, this);
             }
         }
     }
