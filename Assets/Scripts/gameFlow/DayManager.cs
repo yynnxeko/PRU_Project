@@ -134,7 +134,7 @@ public class DayManager : MonoBehaviour
         MissionManager mm = Object.FindFirstObjectByType<MissionManager>();
         if (mm != null)
         {
-            mm.ResetCurrentMission();
+            mm.RetryMission();
         }
 
         // 1b. Reset tiến độ câu hỏi về 0
