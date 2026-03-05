@@ -307,7 +307,7 @@ public class EnemyAi : MonoBehaviour
         if (canSee)
         {
             float rate = (zone == 2) ? rateNear : rateFar;
-            float mult = (cachedPlayerInventory != null && cachedPlayerInventory.handEvidences.Count > 0) ? 1f + (cachedPlayerInventory.handEvidences.Count * 2f) : 1f;
+            float mult = 1f;
             suspicionLevel += rate * mult * Time.deltaTime;
         }
         else
