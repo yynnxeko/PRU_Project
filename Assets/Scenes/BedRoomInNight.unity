@@ -426,6 +426,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!1 &105747884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 105747886}
+  - component: {fileID: 105747885}
+  m_Layer: 0
+  m_Name: LobbyFlagCleaner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &105747885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105747884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c9bdebfc7561746a1d2ac13c8406af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagsToClear:
+  - lobby_To_Bed
+--- !u!4 &105747886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105747884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.564364, y: 3.585188, z: -10.036468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &119231712
 GameObject:
   m_ObjectHideFlags: 0
@@ -4270,7 +4316,6 @@ GameObject:
   - component: {fileID: 701696848}
   - component: {fileID: 701696847}
   - component: {fileID: 701696846}
-  - component: {fileID: 701696849}
   m_Layer: 0
   m_Name: SleepZone
   m_TagString: Untagged
@@ -4346,28 +4391,12 @@ Transform:
   m_GameObject: {fileID: 701696845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.45, y: -3.67, z: -9.910652}
+  m_LocalPosition: {x: -9.47, y: -3.32, z: -9.910652}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &701696849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701696845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2751ba3d226196e43ab8efbce23e8ea1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDay: 1
-  currentPhase: 0
-  bedroomSceneName: BedRoom
-  dayStartUIPrefab: {fileID: 0}
 --- !u!1 &762679866
 GameObject:
   m_ObjectHideFlags: 0
@@ -13405,7 +13434,8 @@ MonoBehaviour:
   sceneToLoad: Map_Lobby
   spawnIdInNextScene: to_lobbybed
   playerTag: Player
-  hasKey: 0
+  requiredFlag: 
+  advancePhaseOnPass: 0
   bubblePrefab: {fileID: 601460350}
   lockedText: "Ch\u01B0a c\xF3 ch\xECa kh\xF3a!\nKh\xF4ng th\u1EC3 ra."
   bubbleOffsetY: 1.5
@@ -14106,3 +14136,4 @@ SceneRoots:
   - {fileID: 888220593}
   - {fileID: 1932842322}
   - {fileID: 601460349}
+  - {fileID: 105747886}

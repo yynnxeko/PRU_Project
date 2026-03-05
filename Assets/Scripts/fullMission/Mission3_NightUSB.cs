@@ -2,6 +2,22 @@ using UnityEngine;
 
 public class Mission3_NightUSB : MissionStep
 {
+    [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
+    public int missionIndex = 2;
+
+    void Start()
+    {
+        // Tự đăng ký với FullMissionManager
+        if (FullMissionManager.Instance != null)
+        {
+            FullMissionManager.Instance.RegisterStep(missionIndex, this);
+        }
+        else
+        {
+            Debug.LogWarning("[Mission3_NightUSB] FullMissionManager.Instance is null!");
+        }
+    }
+
     public override void StartStep()
     {
         base.StartStep();
@@ -11,7 +27,6 @@ public class Mission3_NightUSB : MissionStep
     public override void UpdateStep()
     {
         // Có thể thêm logic cảnh báo nếu người chơi vào phòng IT lúc ban ngày
-        // Nhưng logic chính sẽ nằm ở hàm nhặt USB bên dưới
     }
 
     // Gọi hàm này khi tương tác với USB
@@ -24,6 +39,10 @@ public class Mission3_NightUSB : MissionStep
             
             Debug.Log("Đã lấy được USB thành công trong đêm!");
             CompleteStep();
+
+            // Báo cho FullMissionManager
+            if (FullMissionManager.Instance != null)
+                FullMissionManager.Instance.ReportComplete();
         }
         else
         {

@@ -65,8 +65,8 @@ public class NpcSceneEntry : MonoBehaviour
             activated = true;
             Debug.Log($"[NpcSceneEntry] Flag '{requiredFlag}' is TRUE. Activating NPC '{name}'.");
 
-            // Hiện lại NPC nếu đang ẩn
-            if (isHidden) ShowNPC();
+            // Luôn gọi ShowNPC để đảm bảo NPC hiện
+            ShowNPC();
 
             if (behaviorToEnable != null) behaviorToEnable.enabled = true;
             foreach (var director in directorsToStart)

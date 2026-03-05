@@ -87,10 +87,17 @@ public class LoppyCutscene : MonoBehaviour
         foreach (var f in followers)
             if (f != null) f.Resume();
 
+        // Bật cờ để có thể qua cửa về Lobby
+        if (GameFlagManager.Instance != null)
+        {
+            GameFlagManager.Instance.SetFlag("lobby_To_Bed", true);
+            Debug.Log("[LoppyCutscene] Flag 'lobby_To_Bed' set to TRUE");
+        }
+
         // Đánh dấu đã chạy trong lần Play này
         hasPlayed = true;
         isPlaying = false;
-}
+    }
 
     IEnumerator MoveAndTalk(Transform target, string text, string name)
     {

@@ -8,25 +8,49 @@ public class DoorWithKeyChangeScene : MonoBehaviour
     [SerializeField] private string spawnIdInNextScene;
     [SerializeField] private string playerTag = "Player";
 
-    [Header("Key Requirement")]
-    [Tooltip("Đánh dấu True nếu người chơi đã nhặt được chìa khóa này.")]
-    public bool hasKey = false; 
+    [Header("Flag Requirement")]
+    [Tooltip("Tên cờ cần bật TRUE để qua được cửa này")]
+    public string requiredFlag;
+
+    [Header("Phase Advance")]
+    [Tooltip("Tích để chuyển buổi khi qua cửa (Morning → Noon → Night)")]
+    public bool advancePhaseOnPass = false;
 
     [Header("Feedback when locked")]
     public SpeechBubble bubblePrefab;
     [TextArea]
-    public string lockedText = "Chưa có chìa khóa!\nKhông thể vào.";
+    public string lockedText = "Chưa đủ điều kiện!\nKhông thể vào.";
     public float bubbleOffsetY = 1.5f;
     public float bubbleDuration = 2f;
 
     private SpeechBubble currentBubble;
 
+    private bool CanPass()
+    {
+        // Kiểm tra cờ (nếu có set)
+        if (!string.IsNullOrEmpty(requiredFlag))
+        {
+            if (GameFlagManager.Instance == null || !GameFlagManager.Instance.GetFlag(requiredFlag))
+                return false;
+        }
+
+        return true;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag(playerTag)) return;
 
-        if (hasKey)
+        if (CanPass())
         {
+            // Chuyển buổi nếu được bật
+            if (advancePhaseOnPass && DayManager.Instance != null)
+            {
+                Debug.Log($"[DoorWithKeyChangeScene] Trước khi qua cửa: {DayManager.Instance.currentPhase}");
+                DayManager.Instance.AdvancePhase();
+                Debug.Log($"[DoorWithKeyChangeScene] Sau khi qua cửa: {DayManager.Instance.currentPhase}");
+            }
+
             // Báo cho scene mới biết ID của điểm spawn
             DoorSceneChange.NextSpawnId = spawnIdInNextScene;
             SceneManager.LoadScene(sceneToLoad);

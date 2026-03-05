@@ -18,11 +18,18 @@ public class NarrativeDirector : MonoBehaviour
         public float duration = 2f;
         public float moveTimeout = 7f;
         public string flagName;
+        public bool flagValue = true; // Giá trị cần set cho flag (mặc định true)
     }
 
     [Header("Sequence Settings")]
     public List<NarrativeStep> steps;
     public bool playOnStart = false;
+
+    [Tooltip("Nếu bật, kịch bản này chỉ chạy 1 lần duy nhất (lưu bằng GameFlagManager)")]
+    public bool playOnce = false;
+
+    [Tooltip("Tên flag dùng để đánh dấu đã chạy (tự sinh nếu để trống)")]
+    public string onceFlagName = "";
 
     [Header("References")]
     public CameraFollowPersist camFollow;
@@ -48,6 +55,17 @@ public class NarrativeDirector : MonoBehaviour
     {
         Debug.Log("Director STARTED on: " + gameObject.name);
         if (isPlaying) return;
+
+        // Kiểm tra nếu kịch bản chỉ chạy 1 lần và đã chạy rồi → bỏ qua (lưu PlayerPrefs)
+        if (playOnce)
+        {
+            string flag = GetOnceFlag();
+            if (PlayerPrefs.GetInt(flag, 0) == 1)
+            {
+                Debug.Log($"[NarrativeDirector] Skipped (already played, saved to disk): {flag}");
+                return;
+            }
+        }
 
         // Cập nhật lại camFollow nếu vẫn null (đề phòng trường hợp Manager sinh sau đẻ muộn)
         if (camFollow == null) camFollow = FindFirstObjectByType<CameraFollowPersist>();
@@ -103,8 +121,8 @@ public class NarrativeDirector : MonoBehaviour
                 case StepType.SetFlag:
                     if (GameFlagManager.Instance != null)
                     {
-                        GameFlagManager.Instance.SetFlag(step.flagName, true);
-                        Debug.Log($"[NarrativeDirector] FLAG SET: {step.flagName} = TRUE (Step: {step.stepName})+aaaaaaaa");
+                        GameFlagManager.Instance.SetFlag(step.flagName, step.flagValue);
+                        Debug.Log($"[NarrativeDirector] FLAG SET: {step.flagName} = {step.flagValue} (Step: {step.stepName})");
                     }
                     else
                     {
@@ -120,6 +138,13 @@ public class NarrativeDirector : MonoBehaviour
             }
         }
 
+
+        // Đánh dấu đã chạy xong nếu playOnce (lưu vào ổ cứng)
+        if (playOnce)
+        {
+            PlayerPrefs.SetInt(GetOnceFlag(), 1);
+            PlayerPrefs.Save();
+        }
 
         isPlaying = false;
         Debug.Log("[NarrativeDirector] Sequence Finished.");
@@ -280,4 +305,28 @@ public class NarrativeDirector : MonoBehaviour
             camFollow.enabled = true;
         }
     }
+
+    /// <summary>
+    /// Trả về tên flag dùng để đánh dấu đã chạy.
+    /// Nếu onceFlagName để trống thì tự sinh từ tên GameObject.
+    /// </summary>
+    private string GetOnceFlag()
+    {
+        return string.IsNullOrEmpty(onceFlagName)
+            ? $"narrative_done_{gameObject.name}"
+            : onceFlagName;
+    }
+
+#if UNITY_EDITOR
+    void Update()
+    {
+        // F10 = xóa tất cả narrative playOnce đã lưu, để test lại
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            Debug.Log("<color=yellow>[NarrativeDirector] PlayerPrefs cleared! Narrative sẽ chạy lại lần Play sau.</color>");
+        }
+    }
+#endif
 }

@@ -45,7 +45,7 @@ public class PlayerController2 : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Map_Internal Area_Day_record")
+        if (scene.name == "Map_Internal Area_Day_record" || scene.name == "Map_Lobby_punch")
         {
             canMove = false;
         }

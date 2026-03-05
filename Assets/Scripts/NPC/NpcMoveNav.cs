@@ -95,7 +95,7 @@ public class NpcMoveNav : MonoBehaviour
             }
         }
 
-        if (waypoints.Count > 0)
+        if (waypoints.Count > 0 && agent.isOnNavMesh)
             agent.SetDestination(waypoints[currentIndex].point.position);
     }
 
@@ -140,6 +140,8 @@ public class NpcMoveNav : MonoBehaviour
     {
         if (IsSitting || isSittingProcessStarted) return;
 
+        if (!agent.isOnNavMesh) return;
+
         if (!canMove || isFinished)
         {
             agent.isStopped = true;
@@ -156,12 +158,13 @@ public class NpcMoveNav : MonoBehaviour
 
     void Move()
     {
-        if (currentIndex < waypoints.Count)
+        if (currentIndex < waypoints.Count && agent.isOnNavMesh)
             agent.SetDestination(waypoints[currentIndex].point.position);
     }
 
     void CheckDestination()
     {
+        if (!agent.isOnNavMesh) return;
         if (agent.pathPending) return;
         if (agent.remainingDistance > agent.stoppingDistance + arriveDistance) return;
 
@@ -191,7 +194,7 @@ public class NpcMoveNav : MonoBehaviour
         agent.SetDestination(wp.point.position);
 
         // ← CHỈ ĐỂ NPC ĐI TỚI CUỐI CÙNG (KHÔNG TẮT NAVMESH SỚM)
-        while (agent.pathPending || agent.remainingDistance > 0.02f)
+        while (agent.isOnNavMesh && (agent.pathPending || agent.remainingDistance > 0.02f))
         {
             UpdateAnimation(true);
             yield return null;

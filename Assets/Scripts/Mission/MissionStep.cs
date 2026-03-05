@@ -32,4 +32,12 @@ public abstract class MissionStep : MonoBehaviour
         IsCompleted = false;
         IsFailed = false;
     }
+
+    /// <summary>
+    /// Đánh dấu đã hoàn thành (dùng bởi FullMissionManager cho các step cũ).
+    /// </summary>
+    public void MarkAsCompleted()
+    {
+        IsCompleted = true;
+    }
 }

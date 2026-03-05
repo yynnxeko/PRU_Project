@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2751ba3d226196e43ab8efbce23e8ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDay: 1
-  currentPhase: 0
+  currentDay: 0
+  currentPhase: 2
   bedroomSceneName: BedRoom
   dayStartUIPrefab: {fileID: 0}
 --- !u!4 &751007281
@@ -364,6 +364,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1862870790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1862870792}
+  - component: {fileID: 1862870791}
+  m_Layer: 0
+  m_Name: FullMissionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1862870791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862870790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b23bcb997f24d04a8c927e1d3197c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMissionIndex: 0
+  totalMissions: 3
+--- !u!4 &1862870792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862870790}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.5666595, y: -4.537191, z: -0.08366922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2436487256605598249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,3 +479,4 @@ SceneRoots:
   - {fileID: 2436487256605598249}
   - {fileID: 1042131981}
   - {fileID: 751007281}
+  - {fileID: 1862870792}
