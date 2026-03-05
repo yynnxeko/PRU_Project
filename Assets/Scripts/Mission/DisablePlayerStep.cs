@@ -8,7 +8,8 @@ public class DisablePlayerStep : MissionStep
 
     public override void StartStep()
     {
+        base.StartStep();
         player.enabled = false;
-        IsCompleted = true;
+        CompleteStep();
     }
 }

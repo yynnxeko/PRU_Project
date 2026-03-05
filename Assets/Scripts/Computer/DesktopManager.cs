@@ -72,6 +72,18 @@ public class DesktopManager : MonoBehaviour
     //Game1: nếu đang mở thì focus, nếu chưa thì tạo mới (reset)
     private void OpenOrFocusGame1()
     {
+        // ✅ Kiểm tra USB trong người trước khi mở Game1
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            PlayerInventory inv = playerObj.GetComponent<PlayerInventory>();
+            if (inv == null || !inv.HasEvidenceOfType(EvidenceType.USB))
+            {
+                Debug.Log("[Desktop] Cần có USB mới mở được Game1!");
+                return;
+            }
+        }
+
         // nếu instance cũ vẫn tồn tại -> focus
         if (game1Instance != null)
         {

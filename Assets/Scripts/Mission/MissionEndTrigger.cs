@@ -1,49 +1,15 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MissionEndTrigger : MonoBehaviour
 {
-    [Header("Settings")]
-    public bool triggerOnEnter = true;
-    public bool triggerOnKeyPress = true;
-    public KeyCode interactKey = KeyCode.E;
-
-    [Header("Sự kiện khi kích hoạt")]
-    public UnityEvent onTriggered;
-
-    private bool isPlayerInside = false;
-
-    void Update()
-    {
-        if (triggerOnKeyPress && isPlayerInside && Input.GetKeyDown(interactKey))
-        {
-            ActivateTrigger();
-        }
-    }
+    public MissionManager mission;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && mission != null && mission.IsActive)
         {
-            isPlayerInside = true;
-            if (triggerOnEnter)
-            {
-                ActivateTrigger();
-            }
+            // Mission sẽ tự complete khi step cuối hoàn thành
+            Debug.Log("[MissionEndTrigger] Player reached end trigger");
         }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInside = false;
-        }
-    }
-
-    private void ActivateTrigger()
-    {
-        Debug.Log("Trigger activated on: " + gameObject.name);
-        onTriggered.Invoke();
     }
 }

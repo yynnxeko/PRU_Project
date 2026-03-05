@@ -8,6 +8,14 @@ public class HackTerminalInteractable : Interactable
     {
         Debug.Log("HackTerminal OnHoldComplete on " + gameObject.name);
 
+        // ✅ Kiểm tra USB trong người trước khi cho chơi
+        PlayerInventory inv = player.GetComponent<PlayerInventory>();
+        if (inv == null || !inv.HasEvidenceOfType(EvidenceType.USB))
+        {
+            Debug.Log("[HackTerminal] Cần có USB mới chơi được minigame này!");
+            return;
+        }
+
         if (HackUIManager.Instance == null)
         {
             Debug.LogError("HackUIManager.Instance is NULL! Check if HackUIManager exists and Awake() sets Instance.");
