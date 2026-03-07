@@ -19,6 +19,14 @@ public class DesktopManager : MonoBehaviour
     // giữ 1 instance Game1
     private AppWindow game1Instance;
 
+    // Flags to control app visibility/activation
+    [Header("App Flags")]
+    [SerializeField] private bool allowGame1 = true;
+    [SerializeField] private bool allowDialogueGame = true;
+
+    // PlayerPrefs key chỉ cho Game1
+    private const string AllowGame1Key = "DesktopManager_AllowGame1";
+
     void Start()
     {
         if (windowsParent == null)
@@ -45,12 +53,21 @@ public class DesktopManager : MonoBehaviour
                 Debug.LogWarning("Không tìm thấy GameObject 'Taskbar' trong scene.");
             }
         }
+
+        // Đọc cờ từ PlayerPrefs nếu có (chỉ cho Game1)
+        if (PlayerPrefs.HasKey(AllowGame1Key))
+            allowGame1 = PlayerPrefs.GetInt(AllowGame1Key) == 1;
     }
 
     public void OpenApp(string appName)
     {
         if (appName == "Game1")
         {
+            if (!allowGame1)
+            {
+                Debug.Log("[Desktop] Game1 is not active (flag is off)");
+                return;
+            }
             OpenOrFocusGame1();
             return;
         }
@@ -67,6 +84,18 @@ public class DesktopManager : MonoBehaviour
         openWindows.Add(appWin);
         CreateTaskBtn(appWin);
         winObj.transform.SetAsLastSibling();
+    }
+
+    // Public methods to set flags (optional, for external control)
+    public void SetAllowGame1(bool allow)
+    {
+        allowGame1 = allow;
+        PlayerPrefs.SetInt(AllowGame1Key, allow ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+    public void SetAllowDialogueGame(bool allow)
+    {
+        allowDialogueGame = allow;
     }
 
     //Game1: nếu đang mở thì focus, nếu chưa thì tạo mới (reset)
