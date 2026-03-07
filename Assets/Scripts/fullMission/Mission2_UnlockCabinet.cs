@@ -36,27 +36,10 @@ public class Mission2_UnlockCabinet : MissionStep
     }
 
     /// <summary>
-    /// Gọi khi player đã đến phòng y tế (Hospital scene).
-    /// Script ở scene Hospital sẽ gọi hàm này để hoàn thành nhiệm vụ.
-    /// (Chưa sử dụng - chờ implement phần Hospital)
+    /// Không cần gọi trực tiếp nữa.
+    /// Mission2_HospitalComplete sẽ tự gọi FullMissionManager.ReportComplete()
+    /// khi player tìm thấy USB trong scene Hospital.
     /// </summary>
-    public void OnArrivedAtMedicalRoom()
-    {
-        if (IsCompleted) return;
-
-        Debug.Log("[Mission2] Đã đến phòng y tế!");
-        CompleteStep();
-
-        // Tắt cờ mission_accepted vì nhiệm vụ đã xong
-        if (GameFlagManager.Instance != null)
-        {
-            GameFlagManager.Instance.SetFlag("mission_accepted", false);
-        }
-
-        // Báo cho FullMissionManager
-        if (FullMissionManager.Instance != null)
-            FullMissionManager.Instance.ReportComplete();
-    }
 
     public override string GetMissionDescription()
     {
