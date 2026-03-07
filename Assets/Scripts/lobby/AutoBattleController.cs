@@ -126,7 +126,7 @@ public class AutoBattleController : MonoBehaviour
         {
             GameFlagManager.Instance.SetFlag("go_to_medical", false); // Reset để lần sau không bị lặp
             DoorSceneChange.NextSpawnId = "medical";
-            SceneManager.LoadScene("BossRoom");
+            SceneManager.LoadScene("Hospital");
         }
         else
         {

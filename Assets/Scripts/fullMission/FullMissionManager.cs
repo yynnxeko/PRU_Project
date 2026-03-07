@@ -22,7 +22,7 @@ public class FullMissionManager : MonoBehaviour
     public string[] missionDescriptions = new string[]
     {
         "Hãy đến IT Room và lấy chìa khóa trong tủ đồ.",
-        "Tìm mật khẩu trên máy tính để mở tủ phòng ngủ.",
+        "Hãy đến IT Room làm nhiệm vụ trả lời câu hỏi hằng ngày.",
         "Hãy trả lời các câu hỏi để chứng minh sự vô tội và tìm ra kẻ lừa đảo."
     };
 
