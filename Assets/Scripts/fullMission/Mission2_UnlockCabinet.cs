@@ -4,11 +4,9 @@ public class Mission2_UnlockCabinet : MissionStep
 {
     [Header("Mô tả nhiệm vụ")]
     [TextArea]
-    public string missionDescription = "Tìm mật khẩu trên máy tính để mở tủ phòng ngủ.";
+    public string missionDescription = "Hãy đến IT Room làm nhiệm vụ trả lời câu hỏi hằng ngày.";
     [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
     public int missionIndex = 1;
-
-    private bool hasPassword = false;
 
     void Start()
     {
@@ -26,39 +24,40 @@ public class Mission2_UnlockCabinet : MissionStep
     public override void StartStep()
     {
         base.StartStep();
-        hasPassword = false;
         Debug.Log($"Nhiệm vụ 2: {missionDescription}");
-    }
 
-    // Gọi hàm này khi tương tác với máy tính
-    public void OnComputerInteracted()
-    {
-        if (hasPassword) return;
-
-        hasPassword = true;
-        Debug.Log("Đã tìm thấy mật khẩu! Giờ hãy đi mở tủ.");
-    }
-
-    // Gọi hàm này khi tương tác với tủ sau khi đã có pass
-    public void OnCabinetOpened()
-    {
-        if (!hasPassword)
+        // Bật cờ mission_accepted để khi trả lời sai trong DialogueMissionStep
+        // → FailedRoutine() sẽ bật cờ go_to_medical → bị chích điện → đi phòng y tế
+        if (GameFlagManager.Instance != null)
         {
-            Debug.Log("Tủ đã khóa, bạn cần mật khẩu từ máy tính.");
-            return;
+            GameFlagManager.Instance.SetFlag("mission_accepted", true);
+            Debug.Log("[Mission2] Đã bật cờ mission_accepted → sẵn sàng cho luồng chích điện");
         }
+    }
 
+    /// <summary>
+    /// Gọi khi player đã đến phòng y tế (Hospital scene).
+    /// Script ở scene Hospital sẽ gọi hàm này để hoàn thành nhiệm vụ.
+    /// (Chưa sử dụng - chờ implement phần Hospital)
+    /// </summary>
+    public void OnArrivedAtMedicalRoom()
+    {
         if (IsCompleted) return;
 
-        Debug.Log("Đã mở tủ thành công!");
+        Debug.Log("[Mission2] Đã đến phòng y tế!");
         CompleteStep();
+
+        // Tắt cờ mission_accepted vì nhiệm vụ đã xong
+        if (GameFlagManager.Instance != null)
+        {
+            GameFlagManager.Instance.SetFlag("mission_accepted", false);
+        }
 
         // Báo cho FullMissionManager
         if (FullMissionManager.Instance != null)
             FullMissionManager.Instance.ReportComplete();
     }
 
-    // Hàm cho phép lấy mô tả nhiệm vụ này
     public override string GetMissionDescription()
     {
         return missionDescription;
