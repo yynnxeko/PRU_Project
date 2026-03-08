@@ -1,18 +1,23 @@
-using UnityEngine;
+using System.Diagnostics;
 using TMPro;
+using UnityEngine;
 
 public class KeypadInput : MonoBehaviour
 {
     public TextMeshProUGUI displayText;
     public AudioSource beepSound;
-    public string correctCode = "1234";   // mật mã đúng
+    public AudioClip beepClip;
+    public string correctCode = "1234";
+
     string currentCode = "";
 
     public void PressNumber(string number)
     {
         currentCode += number;
         displayText.text = currentCode;
-        beepSound.Play();
+
+        if (beepSound && beepClip)
+            beepSound.PlayOneShot(beepClip);
     }
 
     public void Clear()
@@ -26,12 +31,12 @@ public class KeypadInput : MonoBehaviour
         if (currentCode == correctCode)
         {
             Debug.Log("Correct Code!");
-            // TODO: mở cửa / trigger event
         }
         else
         {
             Debug.Log("Wrong Code!");
         }
+
         Clear();
     }
 }

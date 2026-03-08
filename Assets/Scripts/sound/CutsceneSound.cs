@@ -1,14 +1,33 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CutsceneSound : MonoBehaviour
+public class ShockingSound : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip shockingSound;
 
-    public void PlayShocking()
-    {
-        if (audioSource == null || shockingSound == null) return;
+    Animator animator;
+    bool played = false;
 
-        audioSource.PlayOneShot(shockingSound);
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (animator == null) return;
+
+        bool isShocking = animator.GetBool("IsShocking");
+
+        if (isShocking && !played)
+        {
+            audioSource.PlayOneShot(shockingSound);
+            played = true;
+        }
+
+        if (!isShocking)
+        {
+            played = false;
+        }
     }
 }
