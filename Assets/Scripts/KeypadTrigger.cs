@@ -1,4 +1,4 @@
-Fusing UnityEngine;
+using UnityEngine;
 
 public class KeypadTrigger : MonoBehaviour
 {
