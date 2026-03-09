@@ -61,16 +61,16 @@ public class DesktopManager : MonoBehaviour
 
     public void OpenApp(string appName)
     {
-        if (appName == "Game1")
-        {
-            if (!allowGame1)
-            {
-                Debug.Log("[Desktop] Game1 is not active (flag is off)");
-                return;
-            }
-            OpenOrFocusGame1();
-            return;
-        }
+        // if (appName == "Game1")
+        // {
+        //     if (!allowGame1)
+        //     {
+        //         Debug.Log("[Desktop] Game1 is not active (flag is off)");
+        //         return;
+        //     }
+        //     OpenOrFocusGame1();
+        //     return;
+        // }
         if (appName == "DialogueGame")
         {
             OpenDialogueGame();
@@ -83,6 +83,70 @@ public class DesktopManager : MonoBehaviour
         appWin.Init(appName, this);
         openWindows.Add(appWin);
         CreateTaskBtn(appWin);
+        winObj.transform.SetAsLastSibling();
+    }
+
+    /// <summary>
+    /// Mở một cửa sổ mới và hiển thị một tấm hình bên trong
+    /// </summary>
+    // giữ instance cửa sổ ảnh duy nhất
+    private AppWindow imageViewerInstance;
+
+    public void OpenImageApp(string appName, Sprite imageToShow)
+    {
+        if (imageToShow == null)
+        {
+            Debug.LogError("Chưa gán hình ảnh cho icon này!");
+            return;
+        }
+
+        // 1. Nếu đang mở ảnh rồi -> Đóng cái cũ để tránh hiện "2 cái trắng"
+        if (imageViewerInstance != null)
+        {
+            CloseWindow(imageViewerInstance);
+        }
+
+        var winObj = Instantiate(windowPrefab, windowsParent);
+        var appWin = winObj.GetComponent<AppWindow>() ?? winObj.AddComponent<AppWindow>();
+
+        appWin.Init(appName, this);
+        openWindows.Add(appWin);
+        imageViewerInstance = appWin;
+
+        // KHÔNG gọi CreateTaskBtn(appWin) để không hiện cái ô màu xám dưới thanh tác vụ
+
+        // 2) Tạo GameObject con chứa Image và gán vào contentRoot của AppWindow
+        if (appWin.contentRoot != null)
+        {
+            // --- LÀM TRONG SUỐT TUYỆT ĐỐI ---
+            // Ẩn tất cả các hình ảnh có sẵn của Prefab cửa sổ (khung, nền, nút...)
+            Image[] allImages = appWin.GetComponentsInChildren<Image>(true);
+            foreach (var i in allImages) i.enabled = false;
+
+            GameObject imgObj = new GameObject("ImageContent_" + appName);
+            imgObj.transform.SetParent(appWin.contentRoot, false);
+            
+            Image img = imgObj.AddComponent<Image>();
+            img.enabled = true; // Đảm bảo Image mới luôn hiện
+            img.sprite = imageToShow;
+            img.preserveAspect = true; // Giữ nguyên tỉ lệ ảnh
+
+            // --- THÊM LOGIC CLICK ĐỂ ĐÓNG ---
+            Button btn = imgObj.AddComponent<Button>();
+            btn.onClick.AddListener(() => CloseWindow(appWin));
+
+            // Căn giãn toàn bộ khu vực Content
+            RectTransform imgRect = img.GetComponent<RectTransform>();
+            imgRect.anchorMin = Vector2.zero;
+            imgRect.anchorMax = Vector2.one;
+            imgRect.offsetMin = Vector2.zero;
+            imgRect.offsetMax = Vector2.zero;
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy ContentRoot trên Prefab Window để gắn ảnh!");
+        }
+
         winObj.transform.SetAsLastSibling();
     }
 
@@ -234,6 +298,8 @@ public class DesktopManager : MonoBehaviour
     public void CloseWindow(AppWindow appWin)
     {
         if (appWin == null) return;
+
+        if (appWin == imageViewerInstance) imageViewerInstance = null;
 
         openWindows.Remove(appWin);
 

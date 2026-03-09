@@ -99,7 +99,8 @@ public class CanteenSceneTalking : MonoBehaviour
 
         // 5. Giao nhiệm vụ đầu tiên: Chìa khóa phòng IT
         yield return ShowLine("Trong này quản chặt lắm, chỉ có ban đêm mới dễ hành động. Tôi có tin là chìa khóa phòng ngủ được giấu trong tủ của phòng IT.", npc, npcAvatar);
-        yield return ShowLine("Ráng mà canh lúc làm việc hoặc lúc sơ hở mà lấy cho bằng được. Có chìa khóa rồi tôi sẽ nói bước tiếp theo.", npc, npcAvatar);
+        yield return ShowLine("Ráng mà canh lúc làm việc hoặc lúc sơ hở mà lấy cho bằng được tài liệu trong tủ khóa, nhớ tìm chìa khóa trong phòng IT.", npc, npcAvatar);
+
 
         // 6. Kết thúc hội thoại
         yield return ShowLine("Thôi, lấy phần cơm rồi về phòng ngủ đi, đừng ở đây lâu bọn nó nghi. Cẩn thận đấy!", npc, npcAvatar);
