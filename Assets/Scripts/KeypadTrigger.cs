@@ -44,8 +44,45 @@ public class KeypadTrigger : MonoBehaviour
     {
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            if (keypadUI != null)
-                keypadUI.SetActive(true);
+            // Giả định có FullMissionManager.Instance.CurrentMissionState
+            int missionIndex = 0;
+            if (FullMissionManager.Instance != null)
+                missionIndex = FullMissionManager.Instance.currentMissionIndex;
+
+            if (missionIndex == 0)
+            {
+                if (keypadUI != null)
+                    keypadUI.SetActive(true);
+            }
+            else if (missionIndex >= 1)
+            {
+                // Hiện khung thông báo giống IntroCutscene
+                ShowPopup("Không tìm thấy gì.");
+            }
+        }
+
+        // --- THÊM LOGIC: BẤM CHUỘT RA NGOÀI LÀ TẮT ---
+        if (keypadUI != null && keypadUI.activeSelf && Input.GetMouseButtonDown(0))
+        {
+            // Kiểm tra xem chuột có đang đè lên bất kỳ UI nào không (nút bấm, khung hình...)
+            if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                keypadUI.SetActive(false);
+            }
+        }
+    }
+
+    // Hàm mẫu để hiện popup giống IntroCutscene
+    void ShowPopup(string message)
+    {
+        // TODO: Thay bằng code hiện popup thực tế của bạn
+        if (DialogueUI.Instance != null)
+        {
+            DialogueUI.Instance.ShowDialogue(message, "Tôi", null, null);
+        }
+        else
+        {
+            Debug.Log($"Popup: {message}");
         }
     }
 }
