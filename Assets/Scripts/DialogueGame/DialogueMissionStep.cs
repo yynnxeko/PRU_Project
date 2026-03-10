@@ -86,7 +86,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Anh tin tôi đi, tôi làm ở đây 10 năm rồi.",
         choice3 = "Nếu anh không đọc, tiền sẽ mất ngay lập tức.",
         choice4 = "Anh không đọc thì thôi.",
-        correctIndex = -1
+        correctIndex = 0
     },
     new DialogueLine {
         question = "9. Tôi vẫn thấy không yên tâm...",
@@ -182,7 +182,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Thôi bị phát hiện rồi, em cúp máy đây!",
         choice3 = "Chị gọi đi rồi nhớ chuyển tiền nhé.",
         choice4 = "Nhanh lên chị, em còn phải gọi người khác nữa!",
-        correctIndex = -1
+        correctIndex = 0
     },
 
 
@@ -264,7 +264,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Ừ tôi lừa đó, nhưng lừa có tâm mà!",
         choice3 = "Thôi bị phát hiện rồi thì tôi cúp máy đây!",
         choice4 = "Nhanh lên anh, tôi còn phải gọi người khác nữa!",
-        correctIndex = -1
+        correctIndex = 0
     },
 
 
@@ -346,7 +346,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Thôi bị phát hiện rồi, em xin lỗi… (cúp máy).",
         choice3 = "Anh/chị đừng căng, em đùa thôi mà.",
         choice4 = "Nhanh lên anh/chị, em còn phải gọi người khác nữa!",
-        correctIndex = -1
+        correctIndex = 0
     },
 
 		// Giả Danh Điện Lực 
@@ -425,7 +425,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Anh/chị cứ gọi cũng được, nhưng có khi chờ lâu xong rồi vẫn phải quay lại làm đúng bước này thôi.",
         choice3 = "Nếu anh/chị thích kiểm tra lại thì em cũng không cản, chỉ là mình đang làm gần xong rồi thôi ạ.",
         choice4 = "Thôi được ạ, em dừng ở đây, nhưng đúng là anh/chị cảnh giác hơi nhiều hơn mức cần thiết rồi.",
-        correctIndex = -1
+        correctIndex = 0
     },
 	//	Cọc Tiền Để Ứng Tuyển Việc Làm
 
@@ -504,7 +504,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Nếu anh/chị muốn an toàn quá mức thì em cũng chịu, nhưng cơ hội tốt thường không chờ lâu đâu.",
         choice3 = "Thôi được ạ, em dừng hỗ trợ tại đây, nhưng đúng là mình đang bỏ lỡ một vị trí khá ổn đó.",
         choice4 = "Anh/chị cứ kiểm tra thêm cũng được, còn bên em sẽ chuyển suất này cho người xác nhận sớm hơn.",
-        correctIndex = -1
+        correctIndex = 0
     },
 
 //	Giả Nhà Trường Báo Học Phí
@@ -583,7 +583,7 @@ public class DialogueMissionStep : MissionStep
         choice2 = "Nếu phụ huynh muốn kiểm tra thêm thì em cũng không cản, nhưng hạn xử lý hôm nay sẽ không chờ lâu đâu ạ.",
         choice3 = "Thôi được ạ, em dừng hỗ trợ tại đây, còn danh sách này bên em sẽ chuyển sang phụ huynh khác sau nhé.",
         choice4 = "Phụ huynh cứ xác minh thêm cũng được, nhưng thật sự lúc này mình đang ở rất gần bước hoàn tất rồi ạ.",
-        correctIndex = -1
+        correctIndex = 0
     },
 
 
@@ -767,9 +767,22 @@ public class DialogueMissionStep : MissionStep
         if (GameManager.Instance != null)
             GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
 
-        // Nếu đã nhận nhiệm vụ (flag bật) → sai sẽ đi medical
-        if (GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("mission_accepted"))
+        // Nếu đang ở Mission 2 (currentMissionIndex == 1) → sai sẽ đi medical
+        // Kiểm tra trực tiếp FullMissionManager thay vì dùng flag (đáng tin hơn)
+        bool shouldGoMedical = false;
+
+        if (FullMissionManager.Instance != null && FullMissionManager.Instance.GetCurrentMissionIndex() == 1)
+            shouldGoMedical = true;
+
+        // Fallback: kiểm tra flag cũ nếu có
+        if (!shouldGoMedical && GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("mission_accepted"))
+            shouldGoMedical = true;
+
+        if (shouldGoMedical && GameFlagManager.Instance != null)
+        {
             GameFlagManager.Instance.SetFlag("go_to_medical", true);
+            Debug.Log("[DialogueMissionStep] Mission 2 → bật go_to_medical → sẽ đi Hospital");
+        }
 
         DoorSceneChange.NextSpawnId = "lobby_punch";
         SceneManager.LoadScene(failSceneName);
