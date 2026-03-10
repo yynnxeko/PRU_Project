@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,11 @@ public class CutsceneController : MonoBehaviour
     public GameObject dialogueCanvas;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contextText;
+    public Image avatarImage;          // Image hiển thị avatar
+
+    [Header("Avatars")]
+    public Sprite avatarBroker;        // Avatar tên môi giới
+    public Sprite avatarMan;           // Avatar người đàn ông
 
 
     Animator a1, a2, a3, a4;
@@ -55,22 +61,22 @@ public class CutsceneController : MonoBehaviour
         FaceDirection(a1, Vector2.left);
 
         // ===== DIALOG =====
-        yield return ShowLine("Tên môi giới", "Chỗ này chính là nơi làm việc của chúng ta.");
-        yield return ShowLine("Tên môi giới", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!");
-        yield return ShowLine("Người đàn ông", "Tôi... tôi có thể về được không?");
+        yield return ShowLine("Tên môi giới", "Chỗ này chính là nơi làm việc của chúng ta.", avatarBroker);
+        yield return ShowLine("Tên môi giới", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!", avatarBroker);
+        yield return ShowLine("Người đàn ông", "Tôi... tôi có thể về được không?", avatarMan);
 
         // ===== NV1 QUAY LẠI =====
         yield return WalkSingleToPoint(nv1, a1, nv2.transform.position + Vector3.right * 0.5f);
 
-        yield return ShowLine("Tên môi giới", "Mày vừa nói gì!!");
-        yield return ShowLine("Người đàn ông", "Tôi muốn về...");
+        yield return ShowLine("Tên môi giới", "Mày vừa nói gì!!", avatarBroker);
+        yield return ShowLine("Người đàn ông", "Tôi muốn về...", avatarMan);
 
         // ===== SHOCK =====
         a1.SetTrigger("shocking");
 
         yield return new WaitForSeconds(1f);
 
-        yield return ShowLine("Người đàn ông", "Á Á Á....");
+        yield return ShowLine("Người đàn ông", "Á Á Á....", avatarMan);
 
         // ===== FAINT =====
         a2.SetTrigger("shocked");
@@ -79,14 +85,14 @@ public class CutsceneController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // ===== AFTER =====
-        yield return ShowLine("Tên môi giới", "Cút vào phòng ngay!");
+        yield return ShowLine("Tên môi giới", "Cút vào phòng ngay!", avatarBroker);
 
         // 👉 đi ngang tới sp3
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp3.position);
 
         FaceDirection(a1, Vector2.left);
 
-        yield return ShowLine("Tên môi giới", "Còn đứng đó nhìn à?");
+        yield return ShowLine("Tên môi giới", "Còn đứng đó nhìn à?", avatarBroker);
 
         // 👉 đi lên trên tới sp4
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp4.position);
@@ -204,12 +210,26 @@ public class CutsceneController : MonoBehaviour
 
     // ================= DIALOG =================
 
-    IEnumerator ShowLine(string name, string text)
+    IEnumerator ShowLine(string name, string text, Sprite avatar = null)
     {
         dialogueCanvas.SetActive(true);
 
         nameText.text = name;
         contextText.text = text;
+
+        // Hiển thị avatar nếu có
+        if (avatarImage != null)
+        {
+            if (avatar != null)
+            {
+                avatarImage.sprite = avatar;
+                avatarImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                avatarImage.gameObject.SetActive(false);
+            }
+        }
 
         yield return new WaitForSeconds(2f);
 
