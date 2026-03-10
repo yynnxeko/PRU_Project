@@ -49,12 +49,6 @@ public class CabinetPoint : Interactable
             Debug.Log($"Bạn đã tìm được {evidenceReward} evidence trong tủ.");
         }
 
-        // Báo cáo hoàn thành nhiệm vụ cho FullMissionManager
-        if (FullMissionManager.Instance != null)
-        {
-            FullMissionManager.Instance.ReportComplete();
-        }
-
         if (InteractionUI.Instance != null)
             InteractionUI.Instance.HideAll();
             

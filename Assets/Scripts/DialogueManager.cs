@@ -8,6 +8,8 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("UI Components")]
     public GameObject dialoguePanel;
+    public Image dialogueFrameImage;   // Khung viền dialogue box
+    public Image portraitFrameImage;   // Khung viền portrait avatar
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contentText;
     public GameObject staticEffectImage;

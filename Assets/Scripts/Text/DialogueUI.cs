@@ -11,6 +11,8 @@ public class DialogueUI : MonoBehaviour
 
     [Header("UI Components")]
     public GameObject dialoguePanel;
+    public Image dialogueFrameImage;   // Khung viền dialogue box
+    public Image portraitFrameImage;   // Khung viền portrait avatar
     public Image avatarImage;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contextText;

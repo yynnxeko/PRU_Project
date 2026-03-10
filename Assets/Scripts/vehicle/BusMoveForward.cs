@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BusMoveForward : MonoBehaviour
 {
@@ -7,6 +7,11 @@ public class BusMoveForward : MonoBehaviour
     public float speed = 2f;
     public float stopDistancePx = 100f;
     public Vector3 finalTarget;
+
+    [Header("Bus Audio")]
+    public AudioSource audioSource;
+    public AudioClip busMoveSound;
+    public AudioClip busStopSound;
 
     [Header("Barriers (open together)")]
     public Animator[] barrierAnimators;
@@ -43,19 +48,13 @@ public class BusMoveForward : MonoBehaviour
 
     void Start()
     {
+        // tìm player nếu chưa gán
         if (player == null)
         {
             GameObject p = GameObject.FindWithTag("Player");
-            if (p != null)
-            {
-                player = p;
-            }
-            else
-            {
-                Debug.LogWarning("Không tìm thấy Player với tag 'Player'");
-            }
+            if (p) player = p;
         }
-        //  Khóa game khi bus chạy
+
         GameFlow.BusCutscene = true;
 
         float moveUnit = stopDistancePx / 32f;
@@ -68,46 +67,85 @@ public class BusMoveForward : MonoBehaviour
 
         if (cameraFollow)
             cameraFollow.target = transform;
+
+        // nếu chưa gán AudioSource thì tự lấy
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
+
+        StartBusEngine();
     }
 
     void Update()
     {
         if (finished) return;
 
-        // 🚍 Chặng 1: tới barrier
+        // 🚍 đoạn 1: chạy tới barrier
         if (!reachedStop)
         {
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                stopTarget,
-                speed * Time.deltaTime
-            );
+            MoveTo(stopTarget);
 
             if (Vector3.Distance(transform.position, stopTarget) < 0.01f)
             {
                 reachedStop = true;
+                StopBus();
                 StartCoroutine(StopAndOpenBarriers());
             }
             return;
         }
 
-        // 🚍 Chặng 2: chạy tiếp
+        // 🚍 đoạn 2: chạy tới điểm cuối
         if (movingToFinal)
         {
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                finalTarget,
-                speed * Time.deltaTime
-            );
+            MoveTo(finalTarget);
 
             if (Vector3.Distance(transform.position, finalTarget) < 0.01f)
             {
                 finished = true;
                 movingToFinal = false;
+
+                StopBus();
                 StartCoroutine(SpawnSequence());
             }
         }
     }
+
+    void MoveTo(Vector3 target)
+    {
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            target,
+            speed * Time.deltaTime
+        );
+    }
+
+    // ======================
+    // BUS AUDIO
+    // ======================
+
+    void StartBusEngine()
+    {
+        if (audioSource && busMoveSound)
+        {
+            audioSource.clip = busMoveSound;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    void StopBus()
+    {
+        if (audioSource)
+        {
+            audioSource.Stop();
+
+            if (busStopSound)
+                audioSource.PlayOneShot(busStopSound);
+        }
+    }
+
+    // ======================
+    // BARRIER
+    // ======================
 
     IEnumerator StopAndOpenBarriers()
     {
@@ -116,26 +154,27 @@ public class BusMoveForward : MonoBehaviour
             if (anim)
                 anim.Play("traffic_barrier_open", 0, 0f);
         }
-yield return new WaitForSeconds(waitAfterOpen);
+
+        yield return new WaitForSeconds(waitAfterOpen);
+
+        StartBusEngine();
         movingToFinal = true;
     }
 
-    // =========================
-    // SEQUENCE SAU KHI BUS XONG
-    // =========================
+    // ======================
+    // SPAWN SEQUENCE
+    // ======================
+
     IEnumerator SpawnSequence()
     {
-        // 🔓 Mở game logic
         GameFlow.BusCutscene = false;
 
-        // 👾 ENEMY xuất hiện
         if (enemy)
         {
             enemy.transform.position = enemySpawnPos;
             enemy.SetActive(true);
         }
 
-        // 💬 Bubble trên enemy
         if (enemyBubble && enemy)
         {
             var bubble = Instantiate(
@@ -155,7 +194,6 @@ yield return new WaitForSeconds(waitAfterOpen);
             yield return new WaitForSeconds(bubbleTime);
         }
 
-        // 👤 PLAYER
         if (player)
         {
             player.transform.position = playerSpawnPos;
@@ -167,7 +205,6 @@ yield return new WaitForSeconds(waitAfterOpen);
 
         yield return new WaitForSeconds(spawnDelay);
 
-        // 👥 NPC 1
         if (npc1)
         {
             npc1.transform.position = npcSpawnPos1;
@@ -176,7 +213,6 @@ yield return new WaitForSeconds(waitAfterOpen);
 
         yield return new WaitForSeconds(spawnDelay);
 
-        // 👥 NPC 2
         if (npc2)
         {
             npc2.transform.position = npcSpawnPos2;
