@@ -5,19 +5,21 @@ using UnityEngine;
 public class KeypadInput : MonoBehaviour
 {
     public TextMeshProUGUI displayText;
+
     public AudioClip beepClip;
+    public AudioClip correctClip;
+    public AudioClip incorrectClip;
+
     public string correctCode = "9466";
 
     string currentCode = "";
 
-    AudioSource mainAudioSource;
+    AudioSource audioSource;
 
     void Awake()
     {
-        // Tự động lấy AudioSource từ Main Camera
-        GameObject mainCamera = Camera.main != null ? Camera.main.gameObject : null;
-        if (mainCamera != null)
-            mainAudioSource = mainCamera.GetComponent<AudioSource>();
+        // Lấy AudioSource gắn trên chính object Keypad
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void PressNumber(string number)
@@ -27,8 +29,8 @@ public class KeypadInput : MonoBehaviour
             currentCode += number;
             displayText.text = currentCode;
 
-            if (mainAudioSource && beepClip)
-                mainAudioSource.PlayOneShot(beepClip);
+            if (audioSource && beepClip)
+                audioSource.PlayOneShot(beepClip);
         }
     }
 
@@ -46,13 +48,18 @@ public class KeypadInput : MonoBehaviour
         {
             Debug.Log("Correct Code!");
 
-            // Xử lý cộng Evidence
+            if (audioSource && correctClip)
+                audioSource.PlayOneShot(correctClip);
+
+            // cộng Evidence
             if (rewardEvidence != null)
             {
                 GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
                 if (playerObj != null)
                 {
                     PlayerInventory inventory = playerObj.GetComponent<PlayerInventory>();
+
                     if (inventory != null)
                     {
                         inventory.AddEvidence(rewardEvidence);
@@ -61,7 +68,7 @@ public class KeypadInput : MonoBehaviour
                 }
             }
 
-            // Hoàn thành nhiệm vụ
+            // hoàn thành nhiệm vụ
             if (FullMissionManager.Instance != null)
             {
                 FullMissionManager.Instance.ReportComplete();
@@ -70,6 +77,9 @@ public class KeypadInput : MonoBehaviour
         else
         {
             Debug.Log("Wrong Code!");
+
+            if (audioSource && incorrectClip)
+                audioSource.PlayOneShot(incorrectClip);
         }
 
         Clear();
