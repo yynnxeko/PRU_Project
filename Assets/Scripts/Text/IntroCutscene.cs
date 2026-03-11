@@ -42,10 +42,7 @@ public class IntroCutscene : MonoBehaviour
             yield return ShowBossLine(bossLines[i], bossName);
             yield return new WaitForSeconds(0.15f);
         }
-
         yield return new WaitForSeconds(1.0f);
-
-
         yield return new WaitUntil(() => GameFlow.BusCutscene == false);
 
         string guardName = "<color=orange>Lính gác</color>";
