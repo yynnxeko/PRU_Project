@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MissionTriggerNPC : MonoBehaviour
 {
-    public MissionController mission;
+    public MissionManager mission;
 
     void Start()
     {

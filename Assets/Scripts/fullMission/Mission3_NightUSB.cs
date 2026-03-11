@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Mission3_NightUSB : MissionStep
 {
+    [Header("Mô tả nhiệm vụ")]
+    [TextArea]
+    public string missionDescription = "Đợi đến tối, lẻn vào IT Room để lấy USB.";
     [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
-    public int missionIndex = 2;
+    public int missionIndex = 1;
 
     void Start()
     {
@@ -21,7 +24,7 @@ public class Mission3_NightUSB : MissionStep
     public override void StartStep()
     {
         base.StartStep();
-        Debug.Log("Nhiệm vụ 3: Đợi đến tối, lẻn vào IT Room để lấy USB.");
+        Debug.Log($"Nhiệm vụ 3: {missionDescription}");
     }
 
     public override void UpdateStep()
@@ -36,7 +39,7 @@ public class Mission3_NightUSB : MissionStep
         if (DayManager.Instance != null && DayManager.Instance.currentPhase == DayPhase.Night)
         {
             if (IsCompleted) return;
-            
+
             Debug.Log("Đã lấy được USB thành công trong đêm!");
             CompleteStep();
 
@@ -48,5 +51,11 @@ public class Mission3_NightUSB : MissionStep
         {
             Debug.Log("Bây giờ là ban ngày, lấy USB lúc này sẽ bị lộ!");
         }
+    }
+
+    // Hàm cho phép lấy mô tả nhiệm vụ này
+    public string GetMissionDescription()
+    {
+        return missionDescription;
     }
 }

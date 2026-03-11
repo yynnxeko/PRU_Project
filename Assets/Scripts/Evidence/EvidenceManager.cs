@@ -9,13 +9,11 @@ public class EvidenceManager : MonoBehaviour
     // Danh sách đã nhặt (evidence không hiện lại)
     private HashSet<string> collectedEvidence = new HashSet<string>();
 
-    // Inventory thực tế (để load/save)
+    // Inventory thực tế (chỉ còn hidden — trong người)
     public List<EvidenceItem> savedHidden = new List<EvidenceItem>();
-    public List<EvidenceItem> savedHand = new List<EvidenceItem>();
 
     private const string SAVE_KEY_COLLECTED = "CollectedEvidence";
     private const string SAVE_KEY_HIDDEN = "InventoryHidden";
-    private const string SAVE_KEY_HAND = "InventoryHand";
 
     private void Awake()
     {
@@ -38,13 +36,11 @@ public class EvidenceManager : MonoBehaviour
     
     private HashSet<string> dayStartCollected = new HashSet<string>();
     private List<EvidenceItem> dayStartHidden = new List<EvidenceItem>();
-    private List<EvidenceItem> dayStartHand = new List<EvidenceItem>();
 
     public void BackupDayStart()
     {
         dayStartCollected = new HashSet<string>(collectedEvidence);
         dayStartHidden = new List<EvidenceItem>(savedHidden);
-        dayStartHand = new List<EvidenceItem>(savedHand);
         Debug.Log("Evidence snapshot created for start of day.");
     }
 
@@ -52,7 +48,6 @@ public class EvidenceManager : MonoBehaviour
     {
         collectedEvidence = new HashSet<string>(dayStartCollected);
         savedHidden = new List<EvidenceItem>(dayStartHidden);
-        savedHand = new List<EvidenceItem>(dayStartHand);
         
         // Cần lưu lại vào PlayerPrefs để đồng bộ
         SaveAllData();
@@ -61,13 +56,9 @@ public class EvidenceManager : MonoBehaviour
 
     // ====================== PUBLIC METHODS ======================
 
-    public void AddToInventory(EvidenceItem item, bool isHidden)
+    public void AddToInventory(EvidenceItem item)
     {
-        if (isHidden)
-            savedHidden.Add(item);
-        else
-            savedHand.Add(item);
-
+        savedHidden.Add(item);
         SaveAllData();
     }
 
@@ -93,9 +84,6 @@ public class EvidenceManager : MonoBehaviour
         string hiddenJson = JsonUtility.ToJson(new Serialization<EvidenceItem>(savedHidden));
         PlayerPrefs.SetString(SAVE_KEY_HIDDEN, hiddenJson);
 
-        string handJson = JsonUtility.ToJson(new Serialization<EvidenceItem>(savedHand));
-        PlayerPrefs.SetString(SAVE_KEY_HAND, handJson);
-
         PlayerPrefs.Save();
     }
 
@@ -104,7 +92,6 @@ public class EvidenceManager : MonoBehaviour
     {
         collectedEvidence.Clear();
         savedHidden.Clear();
-        savedHand.Clear();
 
         // Load collected
         string collectedData = PlayerPrefs.GetString(SAVE_KEY_COLLECTED, "");
@@ -122,21 +109,12 @@ public class EvidenceManager : MonoBehaviour
             Serialization<EvidenceItem> wrapper = JsonUtility.FromJson<Serialization<EvidenceItem>>(hiddenJson);
             savedHidden = wrapper?.target ?? new List<EvidenceItem>();
         }
-
-        // Load Hand
-        string handJson = PlayerPrefs.GetString(SAVE_KEY_HAND, "");
-        if (!string.IsNullOrEmpty(handJson))
-        {
-            Serialization<EvidenceItem> wrapper = JsonUtility.FromJson<Serialization<EvidenceItem>>(handJson);
-            savedHand = wrapper?.target ?? new List<EvidenceItem>();
-        }
     }
 
     public void DeleteAllSave()
     {
         collectedEvidence.Clear();
         savedHidden.Clear();
-        savedHand.Clear();
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         Debug.Log("ĐÃ XÓA HẾT SAVE EVIDENCE!");

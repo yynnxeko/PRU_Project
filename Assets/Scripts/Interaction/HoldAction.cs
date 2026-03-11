@@ -4,6 +4,7 @@ using UnityEngine;
 public class HoldAction
 {
     public float requiredHoldTime = 1.5f;
+    public bool resetOnStart = true;
 
     float timer;
     bool holding;
@@ -11,7 +12,7 @@ public class HoldAction
     public void StartHold()
     {
         holding = true;
-        timer = 0f;
+        if (resetOnStart) timer = 0f;
     }
 
     public bool UpdateHold(float deltaTime)
@@ -25,7 +26,6 @@ public class HoldAction
     public void CancelHold()
     {
         holding = false;
-        timer = 0f;
     }
 
     public float GetProgress()

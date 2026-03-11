@@ -14,12 +14,25 @@ public class FollowNPCStep : MissionStep
     [Header("Followers")]
     public Follower[] extraFollowers;
 
+    [Header("FullMission Settings (Optional)")]
+    [Tooltip("Set to >= 0 to register with FullMissionManager")]
+    public int missionIndex = -1;
+
     [Header("Fail Condition")]
     public float maxLostTime = 3f;
 
     float lostTimer;
     bool npcWaiting;
     SpeechBubble currentBubble;
+
+    private void Start()
+    {
+        // Chỉ đăng ký nếu có index hợp lệ (>= 0)
+        if (missionIndex >= 0 && FullMissionManager.Instance != null)
+        {
+            FullMissionManager.Instance.RegisterStep(missionIndex, this);
+        }
+    }
 
     public override void StartStep()
     {
@@ -32,6 +45,18 @@ public class FollowNPCStep : MissionStep
         {
             npc.ResetPath();
             npc.Resume();
+        }
+    }
+
+    public void OnFollowComplete()
+    {
+        if (IsCompleted) return;
+        CompleteStep();
+
+        // Báo cho FullMissionManager nếu là nhiệm vụ chính
+        if (missionIndex >= 0 && FullMissionManager.Instance != null)
+        {
+            FullMissionManager.Instance.ReportComplete();
         }
     }
 
@@ -60,7 +85,7 @@ public class FollowNPCStep : MissionStep
                 // Player đã trong zone → hoàn thành
                 HideBubble();
                 npc.Pause();
-                CompleteStep();
+                OnFollowComplete();
             }
             else
             {

@@ -63,9 +63,8 @@ public class LoppyCutscene : MonoBehaviour
         foreach (var f in followers)
             if (f != null) f.Pause();
 
-        string boss = "<color=red>Giang hồ</color>";
+        string boss = "<color=red>Bảo vệ</color>";
 
-        yield return ShowLine("Nhìn cho kỹ, nhớ cho rõ. Ở đây không có chỗ cho lũ ngu.", boss);
         yield return ShowLine("Có 4 khu vực chúng mày buộc phải thuộc lòng.", boss);
 
         yield return MoveAndTalk(posRelax, "Khu SINH HOẠT: Ngủ và im lặng.", boss);

@@ -5,5 +5,6 @@ public enum EvidenceType
     Document,   
     Audio,      
     Video, 
-    KeyItem
+    KeyItem,
+    USB
 }

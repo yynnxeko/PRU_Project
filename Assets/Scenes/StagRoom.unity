@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 16621753}
+  - component: {fileID: 16621754}
   m_Layer: 0
   m_Name: ChangeScene_Lobby
   m_TagString: Untagged
@@ -155,6 +156,20 @@ Transform:
   - {fileID: 401791302}
   m_Father: {fileID: 1638741804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &16621754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16621752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4723c5445930c74ab7baf1927bd54fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorSound: {fileID: 8300000, guid: ed5e7fec70acfd347b65eea705ba1a84, type: 3}
+  playerTag: Player
 --- !u!1 &53414279
 GameObject:
   m_ObjectHideFlags: 0

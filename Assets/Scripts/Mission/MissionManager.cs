@@ -6,15 +6,13 @@ public class MissionManager : MonoBehaviour
     public MissionStep[] allMissions;
     public int currentStepIndex = 0;
 
-    // Đã xóa Awake và DontDestroyOnLoad theo yêu cầu của bạn
-
     void Start()
     {
         // Không reset index ở Start để giữ tiến trình khi chuyển scene
         if (allMissions != null && allMissions.Length > 0 && currentStepIndex < allMissions.Length)
         {
             // Chỉ start nếu mission chưa active (đề phòng chuyển cảnh)
-            if (!allMissions[currentStepIndex].IsCompleted && !allMissions[currentStepIndex].IsFailed)
+            if (allMissions[currentStepIndex] != null && !allMissions[currentStepIndex].IsCompleted && !allMissions[currentStepIndex].IsFailed)
                 allMissions[currentStepIndex].StartStep();
         }
     }
@@ -41,7 +39,7 @@ public class MissionManager : MonoBehaviour
             {
                 if (allMissions[currentStepIndex] != null)
                     allMissions[currentStepIndex].StartStep();
-            }
+                }
             else
             {
                 Debug.Log("All Missions Completed!");
@@ -70,5 +68,27 @@ public class MissionManager : MonoBehaviour
                 allMissions[currentStepIndex].StartStep();
             }
         }
+    }
+
+    // ================== COMPATIBILITY HOOKS ==================
+    public bool IsActive => allMissions != null && currentStepIndex < allMissions.Length;
+
+    public void RetryMission() => ResetCurrentMission();
+
+    public void SkipAfterFail()
+    {
+        Debug.Log($"[MissionManager] Skipping Step {currentStepIndex}");
+        currentStepIndex++;
+        if (currentStepIndex < allMissions.Length && allMissions[currentStepIndex] != null)
+        {
+            allMissions[currentStepIndex].StartStep();
+        }
+    }
+
+    public void StartMission()
+    {
+        currentStepIndex = 0;
+        if (allMissions != null && allMissions.Length > 0 && allMissions[0] != null)
+            allMissions[0].StartStep();
     }
 }

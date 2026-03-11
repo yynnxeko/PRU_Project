@@ -20,7 +20,7 @@ public class FollowTargetStep : MissionStep
 
             if (followTimer >= requiredTime)
             {
-                IsCompleted = true;
+                CompleteStep();
             }
         }
         else

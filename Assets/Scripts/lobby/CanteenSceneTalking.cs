@@ -4,6 +4,7 @@ using System;
 
 public class CanteenSceneTalking : MonoBehaviour
 {
+    private bool playerInZone = false;
     private const string PREFS_KEY = "CanteenDialoguePlayed";
 
     [Header("Assets")]
@@ -15,16 +16,47 @@ public class CanteenSceneTalking : MonoBehaviour
     public string flagOnComplete;
 
     private bool hasTriggered = false; // Tránh trigger nhiều lần trong 1 session
+    private bool dialoguePlayed = false; // Đã từng chạy thoại này trong mọi session
 
     // Player đi vào vùng trigger → tự động chạy thoại
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (hasTriggered) return;
         if (!other.CompareTag("Player")) return;
-        if (PlayerPrefs.GetInt(PREFS_KEY, 0) == 1) return;
+        playerInZone = true;
+
+        if (hasTriggered) return;
+        if (PlayerPrefs.GetInt(PREFS_KEY, 0) == 1)
+        {
+            dialoguePlayed = true;
+            return;
+        }
 
         hasTriggered = true;
         PlayCanteenDialogue(null);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        playerInZone = false;
+    }
+
+    void Update()
+    {
+        Debug.Log($"Update: dialoguePlayed={dialoguePlayed}, playerInZone={playerInZone}");
+
+        // Luôn cho phép hiện mô tả nhiệm vụ khi player trong vùng và bấm E
+        if (playerInZone && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Bấm E: Hiện nhiệm vụ");
+
+            string msg = "Không có nhiệm vụ hiện tại.";
+            if (FullMissionManager.Instance != null)
+            {
+                msg = FullMissionManager.Instance.GetActiveMissionDescription();
+            }
+            DialogueUI.Instance.ShowDialogue(msg, "Nhiệm vụ", null, null);
+        }
     }
 
     /// <summary>
@@ -35,6 +67,7 @@ public class CanteenSceneTalking : MonoBehaviour
     {
         if (PlayerPrefs.GetInt(PREFS_KEY, 0) == 1)
         {
+            dialoguePlayed = true;
             Debug.Log("[CanteenSceneTalking] Đã chạy rồi, bỏ qua.");
             onFinish?.Invoke();
             return;
@@ -66,7 +99,8 @@ public class CanteenSceneTalking : MonoBehaviour
 
         // 5. Giao nhiệm vụ đầu tiên: Chìa khóa phòng IT
         yield return ShowLine("Trong này quản chặt lắm, chỉ có ban đêm mới dễ hành động. Tôi có tin là chìa khóa phòng ngủ được giấu trong tủ của phòng IT.", npc, npcAvatar);
-        yield return ShowLine("Ráng mà canh lúc làm việc hoặc lúc sơ hở mà lấy cho bằng được. Có chìa khóa rồi tôi sẽ nói bước tiếp theo.", npc, npcAvatar);
+        yield return ShowLine("Ráng mà canh lúc làm việc hoặc lúc sơ hở mà lấy cho bằng được tài liệu trong tủ khóa, nhớ tìm chìa khóa trong phòng IT.", npc, npcAvatar);
+
 
         // 6. Kết thúc hội thoại
         yield return ShowLine("Thôi, lấy phần cơm rồi về phòng ngủ đi, đừng ở đây lâu bọn nó nghi. Cẩn thận đấy!", npc, npcAvatar);
@@ -74,6 +108,7 @@ public class CanteenSceneTalking : MonoBehaviour
         // Đánh dấu đã chạy xong, lưu vào đĩa
         PlayerPrefs.SetInt(PREFS_KEY, 1);
         PlayerPrefs.Save();
+        dialoguePlayed = true; // Cho phép bấm E ngay sau khi thoại xong
 
         // Bật cờ khi hoàn thành
         if (!string.IsNullOrEmpty(flagOnComplete) && GameFlagManager.Instance != null)

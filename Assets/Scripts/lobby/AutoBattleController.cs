@@ -103,11 +103,23 @@ public class AutoBattleController : MonoBehaviour
     {
         bool isDialogueFinished = false;
 
+        // === DEBUG: Kiểm tra trạng thái flag ngay khi vào scene ===
+        bool goMedicalInit = GameFlagManager.Instance != null
+            && GameFlagManager.Instance.GetFlag("go_to_medical");
+        int missionIdx = FullMissionManager.Instance != null 
+            ? FullMissionManager.Instance.GetCurrentMissionIndex() : -1;
+        Debug.Log($"<color=yellow>[AutoBattle] === VÀO SCENE Map_Lobby_punch ===</color>");
+        Debug.Log($"<color=yellow>[AutoBattle] go_to_medical = {goMedicalInit}</color>");
+        Debug.Log($"<color=yellow>[AutoBattle] currentMissionIndex = {missionIdx}</color>");
+        Debug.Log($"<color=yellow>[AutoBattle] dialogueController = {(dialogueController != null ? "CÓ" : "NULL")}</color>");
+
         if (dialogueController != null)
         {
             // Nếu có flag nhận nhiệm vụ → chạy kịch bản đánh nhập viện
             bool goMedical = GameFlagManager.Instance != null
                 && GameFlagManager.Instance.GetFlag("go_to_medical");
+
+            Debug.Log($"<color=cyan>[AutoBattle] goMedical cho dialogue = {goMedical}</color>");
 
             if (goMedical)
                 dialogueController.PlayHospitalDialogue(() => { isDialogueFinished = true; });
@@ -122,15 +134,19 @@ public class AutoBattleController : MonoBehaviour
         bool goMedical2 = GameFlagManager.Instance != null
             && GameFlagManager.Instance.GetFlag("go_to_medical");
 
+        Debug.Log($"<color=cyan>[AutoBattle] goMedical2 (quyết định scene) = {goMedical2}</color>");
+
         if (goMedical2)
         {
             GameFlagManager.Instance.SetFlag("go_to_medical", false); // Reset để lần sau không bị lặp
             DoorSceneChange.NextSpawnId = "medical";
-            SceneManager.LoadScene("BossRoom");
+            Debug.Log("<color=green>[AutoBattle] → LOADING HOSPITAL!</color>");
+            SceneManager.LoadScene("Hospital");
         }
         else
         {
             DoorSceneChange.NextSpawnId = "IT";
+            Debug.Log("<color=red>[AutoBattle] → LOADING IT_Room (KHÔNG đi Hospital)</color>");
             SceneManager.LoadScene("IT_Room");
         }
     }

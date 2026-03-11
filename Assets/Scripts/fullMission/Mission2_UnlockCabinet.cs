@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Mission2_UnlockCabinet : MissionStep
 {
+    [Header("Mô tả nhiệm vụ")]
+    [TextArea]
+    public string missionDescription = "Hãy đến IT Room làm nhiệm vụ trả lời câu hỏi hằng ngày.";
     [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
-    public int missionIndex = 1;
-
-    private bool hasPassword = false;
+    public int missionIndex = 2;
 
     void Start()
     {
@@ -23,35 +24,25 @@ public class Mission2_UnlockCabinet : MissionStep
     public override void StartStep()
     {
         base.StartStep();
-        hasPassword = false;
-        Debug.Log("Nhiệm vụ 2: Tìm mật khẩu trên máy tính để mở tủ phòng ngủ.");
-    }
+        Debug.Log($"Nhiệm vụ 2: {missionDescription}");
 
-    // Gọi hàm này khi tương tác với máy tính
-    public void OnComputerInteracted()
-    {
-        if (hasPassword) return;
-        
-        hasPassword = true;
-        Debug.Log("Đã tìm thấy mật khẩu! Giờ hãy đi mở tủ.");
-    }
-
-    // Gọi hàm này khi tương tác với tủ sau khi đã có pass
-    public void OnCabinetOpened()
-    {
-        if (!hasPassword)
+        // Bật cờ mission_accepted để khi trả lời sai trong DialogueMissionStep
+        // → FailedRoutine() sẽ bật cờ go_to_medical → bị chích điện → đi phòng y tế
+        if (GameFlagManager.Instance != null)
         {
-            Debug.Log("Tủ đã khóa, bạn cần mật khẩu từ máy tính.");
-            return;
+            GameFlagManager.Instance.SetFlag("mission_accepted", true);
+            Debug.Log("[Mission2] Đã bật cờ mission_accepted → sẵn sàng cho luồng chích điện");
         }
+    }
 
-        if (IsCompleted) return;
+    /// <summary>
+    /// Không cần gọi trực tiếp nữa.
+    /// Mission2_HospitalComplete sẽ tự gọi FullMissionManager.ReportComplete()
+    /// khi player tìm thấy USB trong scene Hospital.
+    /// </summary>
 
-        Debug.Log("Đã mở tủ thành công!");
-        CompleteStep();
-
-        // Báo cho FullMissionManager
-        if (FullMissionManager.Instance != null)
-            FullMissionManager.Instance.ReportComplete();
+    public override string GetMissionDescription()
+    {
+        return missionDescription;
     }
 }

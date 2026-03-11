@@ -7350,6 +7350,7 @@ MonoBehaviour:
     duration: 2
     moveTimeout: 7
     flagName: 
+    flagValue: 1
   - stepName: moveE
     type: 1
     actors:
@@ -7359,41 +7360,7 @@ MonoBehaviour:
     duration: 0
     moveTimeout: 7
     flagName: 
-  - stepName: hideE
-    type: 2
-    actors:
-    - {fileID: 808448764}
-    textValue: 
-    targetPoint: {fileID: 0}
-    duration: 0
-    moveTimeout: 7
-    flagName: 
-  - stepName: moveNPC
-    type: 1
-    actors:
-    - {fileID: 1963928564}
-    - {fileID: 1002799239}
-    - {fileID: 396668200}
-    - {fileID: 788694919}
-    - {fileID: 1132572835}
-    - {fileID: 1226615353}
-    - {fileID: 311775598}
-    - {fileID: 938172564}
-    - {fileID: 1031207981}
-    - {fileID: 630184878}
-    - {fileID: 1693987947}
-    - {fileID: 338936971}
-    - {fileID: 779539168}
-    - {fileID: 282738079}
-    - {fileID: 1169600943}
-    - {fileID: 1398617177}
-    - {fileID: 1865037579}
-    - {fileID: 1922360763}
-    textValue: 
-    targetPoint: {fileID: 1022690969}
-    duration: 0
-    moveTimeout: 6
-    flagName: 
+    flagValue: 1
   - stepName: flag
     type: 3
     actors:
@@ -7420,6 +7387,44 @@ MonoBehaviour:
     duration: 0
     moveTimeout: 7
     flagName: npc_moved_to_lobby
+    flagValue: 1
+  - stepName: hideE
+    type: 2
+    actors:
+    - {fileID: 808448764}
+    textValue: 
+    targetPoint: {fileID: 0}
+    duration: 0
+    moveTimeout: 7
+    flagName: 
+    flagValue: 1
+  - stepName: moveNPC
+    type: 1
+    actors:
+    - {fileID: 1963928564}
+    - {fileID: 1002799239}
+    - {fileID: 396668200}
+    - {fileID: 788694919}
+    - {fileID: 1132572835}
+    - {fileID: 1226615353}
+    - {fileID: 311775598}
+    - {fileID: 938172564}
+    - {fileID: 1031207981}
+    - {fileID: 630184878}
+    - {fileID: 1693987947}
+    - {fileID: 338936971}
+    - {fileID: 779539168}
+    - {fileID: 282738079}
+    - {fileID: 1169600943}
+    - {fileID: 1398617177}
+    - {fileID: 1865037579}
+    - {fileID: 1922360763}
+    textValue: 
+    targetPoint: {fileID: 1022690969}
+    duration: 0
+    moveTimeout: 6
+    flagName: 
+    flagValue: 1
   - stepName: hideNPC
     type: 2
     actors:
@@ -7446,7 +7451,10 @@ MonoBehaviour:
     duration: 0
     moveTimeout: 7
     flagName: 
+    flagValue: 1
   playOnStart: 1
+  playOnce: 0
+  onceFlagName: 
   camFollow: {fileID: 0}
   bubblePrefab: {fileID: 627346432}
   bubbleOffset: {x: 0, y: 1.5, z: 0}
@@ -7868,6 +7876,7 @@ GameObject:
   - component: {fileID: 756090603}
   - component: {fileID: 756090605}
   - component: {fileID: 756090604}
+  - component: {fileID: 756090606}
   m_Layer: 0
   m_Name: DoorTrigger
   m_TagString: Untagged
@@ -7952,6 +7961,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &756090606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756090602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4723c5445930c74ab7baf1927bd54fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorSound: {fileID: 8300000, guid: ed5e7fec70acfd347b65eea705ba1a84, type: 3}
+  playerTag: Player
 --- !u!1 &779539168 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6691835540487930053, guid: b793f815e683bde4e848a69a7ba4a7d8, type: 3}
@@ -8352,7 +8375,10 @@ MonoBehaviour:
     duration: 3
     moveTimeout: 0
     flagName: 
+    flagValue: 1
   playOnStart: 1
+  playOnce: 0
+  onceFlagName: 
   camFollow: {fileID: 0}
   bubblePrefab: {fileID: 627346432}
   bubbleOffset: {x: 0, y: 1.5, z: 0}
@@ -8482,6 +8508,52 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6691835540487930053, guid: b793f815e683bde4e848a69a7ba4a7d8, type: 3}
   m_PrefabInstance: {fileID: 1484054164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &984293769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984293771}
+  - component: {fileID: 984293770}
+  m_Layer: 0
+  m_Name: LobbyFlagCleaner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &984293770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984293769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c9bdebfc7561746a1d2ac13c8406af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagsToClear:
+  - canteen_ToLobby
+--- !u!4 &984293771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984293769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.564364, y: 3.585188, z: -10.036468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002799239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6691835540487930053, guid: b793f815e683bde4e848a69a7ba4a7d8, type: 3}
@@ -13702,3 +13774,4 @@ SceneRoots:
   - {fileID: 389824320}
   - {fileID: 812563210}
   - {fileID: 1413909181}
+  - {fileID: 984293771}
