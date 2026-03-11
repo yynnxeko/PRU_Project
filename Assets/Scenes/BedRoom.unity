@@ -7876,6 +7876,7 @@ GameObject:
   - component: {fileID: 756090603}
   - component: {fileID: 756090605}
   - component: {fileID: 756090604}
+  - component: {fileID: 756090606}
   m_Layer: 0
   m_Name: DoorTrigger
   m_TagString: Untagged
@@ -7960,6 +7961,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &756090606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756090602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4723c5445930c74ab7baf1927bd54fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorSound: {fileID: 8300000, guid: ed5e7fec70acfd347b65eea705ba1a84, type: 3}
+  playerTag: Player
 --- !u!1 &779539168 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6691835540487930053, guid: b793f815e683bde4e848a69a7ba4a7d8, type: 3}

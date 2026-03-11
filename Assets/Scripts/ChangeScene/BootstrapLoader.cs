@@ -4,9 +4,8 @@ using System.Collections;
 
 public class BootstrapLoader : MonoBehaviour
 {
-    void Start()
+    public void LoadGameSceneButton()
     {
-        // Optionally đợi 0.1s cho chắc chắn player khởi tạo
         StartCoroutine(LoadGameScene());
     }
 
@@ -14,8 +13,8 @@ public class BootstrapLoader : MonoBehaviour
     {
         yield return null; // Hoặc yield return new WaitForSeconds(0.1f);
 
-        // SceneManager.LoadScene("Buss");
-        SceneManager.LoadScene("Map_Internal Area_Night");
+        SceneManager.LoadScene("Buss");
+        // SceneManager.LoadScene("Map_Internal Area_Night");
         // SceneManager.LoadScene("IT_Room");
     }
 }

@@ -43,6 +43,14 @@ public class FullMissionManager : MonoBehaviour
         // Load tiến trình từ ổ cứng
         currentMissionIndex = PlayerPrefs.GetInt(SAVE_KEY, 0);
         Debug.Log($"[FullMissionManager] Loaded progress: Mission {currentMissionIndex}");
+
+        // Nếu đang ở Mission 2 → đảm bảo cờ mission_accepted luôn bật
+        // để khi trả lời sai sẽ đi phòng y tế
+        if (currentMissionIndex == 1 && GameFlagManager.Instance != null)
+        {
+            GameFlagManager.Instance.SetFlag("mission_accepted", true);
+            Debug.Log("[FullMissionManager] Mission 2 active → bật cờ mission_accepted");
+        }
     }
 
     /// <summary>
@@ -69,6 +77,13 @@ public class FullMissionManager : MonoBehaviour
             activeStep = step;
             step.StartStep();
             Debug.Log($"[FullMissionManager] Step {missionIndex} là nhiệm vụ hiện tại → StartStep()");
+
+            // Nếu là Mission 2 → đảm bảo cờ mission_accepted bật
+            if (currentMissionIndex == 1 && GameFlagManager.Instance != null)
+            {
+                GameFlagManager.Instance.SetFlag("mission_accepted", true);
+                Debug.Log("[FullMissionManager] Mission 2 RegisterStep → bật cờ mission_accepted");
+            }
             return;
         }
 

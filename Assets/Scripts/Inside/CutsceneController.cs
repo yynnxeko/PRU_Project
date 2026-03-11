@@ -61,15 +61,13 @@ public class CutsceneController : MonoBehaviour
         FaceDirection(a1, Vector2.left);
 
         // ===== DIALOG =====
-        yield return ShowLine("Tên môi giới", "Chỗ này chính là nơi làm việc của chúng ta.", avatarBroker);
-        yield return ShowLine("Tên môi giới", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!", avatarBroker);
+        yield return ShowLine("Bảo vệ", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!", avatarBroker);
         yield return ShowLine("Người đàn ông", "Tôi... tôi có thể về được không?", avatarMan);
 
         // ===== NV1 QUAY LẠI =====
         yield return WalkSingleToPoint(nv1, a1, nv2.transform.position + Vector3.right * 0.5f);
 
-        yield return ShowLine("Tên môi giới", "Mày vừa nói gì!!", avatarBroker);
-        yield return ShowLine("Người đàn ông", "Tôi muốn về...", avatarMan);
+        yield return ShowLine("Bảo vệ", "Mày vừa nói gì!!", avatarBroker);
 
         // ===== SHOCK =====
         a1.SetTrigger("shocking");
@@ -85,14 +83,13 @@ public class CutsceneController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // ===== AFTER =====
-        yield return ShowLine("Tên môi giới", "Cút vào phòng ngay!", avatarBroker);
+        yield return ShowLine("Bảo vệ", "Cút vào phòng ngay!", avatarBroker);
 
         // 👉 đi ngang tới sp3
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp3.position);
 
         FaceDirection(a1, Vector2.left);
 
-        yield return ShowLine("Tên môi giới", "Còn đứng đó nhìn à?", avatarBroker);
 
         // 👉 đi lên trên tới sp4
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp4.position);

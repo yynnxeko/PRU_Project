@@ -3,6 +3,7 @@ using UnityEngine;
 public class CabinetPoint : Interactable
 {
     bool isCompleted = false;
+    private const string CABINET_ID = "Main_Cabinet";
 
     [Header("Evidence Settings")]
     public int evidenceReward = 1;
@@ -10,20 +11,49 @@ public class CabinetPoint : Interactable
 
     void Awake()
     {
+        // Phải bật enabled lúc đầu để Update chạy được và kiểm tra mission
+        this.enabled = true;
+
         promptMessage = "Hold E";
-        holdAction.requiredHoldTime = 2.0f;
-        holdAction.resetOnStart = false; // Không reset progress khi bấm lại
+        holdAction.requiredHoldTime = 15.0f; // Chỉnh lại theo ảnh bạn gửi cho chắc
+        holdAction.resetOnStart = true;    // Tùy bạn muốn reset hay không, mình để true theo ảnh Inspector
+
+        // Kiểm tra trạng thái lưu vĩnh viễn
+        if (EvidenceManager.Instance != null && EvidenceManager.Instance.IsCollected(CABINET_ID))
+        {
+            isCompleted = true;
+            this.enabled = false;
+            gameObject.layer = 0; // Chuyển layer về default
+        }
     }
 
     public void Update()
     {
-        // Nếu đã hoàn thành thì disable chính mình để PlayerInteraction không tìm thấy Interactable nữa
-        if (isCompleted)
+        if (isCompleted) return;
+
+        // KIỂM TRA NHIỆM VỤ: Chỉ hiện khi đang ở nhiệm vụ index 2
+        if (FullMissionManager.Instance != null)
         {
-            if (InteractionUI.Instance != null)
-                InteractionUI.Instance.HideAll();
-            this.enabled = false;
-            gameObject.layer = 0; // Chuyển layer về default để Raycast/Trigger không dính (tùy setup)
+            int currentMission = FullMissionManager.Instance.currentMissionIndex;
+            
+            // Nếu không phải nhiệm vụ 2, tự tắt component để PlayerInteraction không tìm thấy
+            if (currentMission != 2)
+            {
+                if (this.enabled) 
+                {
+                    this.enabled = false;
+                    // Nếu player đang đứng trong Trigger mà nv đổi, ẩn UI luôn
+                    if (InteractionUI.Instance != null)
+                        InteractionUI.Instance.HideAll();
+                }
+                return;
+            }
+            else
+            {
+                // Nếu đang ở nhiệm vụ 2 mà script vô tình bị tắt (không phải do hoàn thành)
+                if (!this.enabled && !isCompleted)
+                    this.enabled = true;
+            }
         }
     }
 
@@ -37,6 +67,12 @@ public class CabinetPoint : Interactable
     {
         if (isCompleted) return;
         isCompleted = true;
+
+        // Lưu trạng thái vĩnh viễn
+        if (EvidenceManager.Instance != null)
+        {
+            EvidenceManager.Instance.MarkAsCollected(CABINET_ID);
+        }
 
         PlayerInventory inventory = player.GetComponent<PlayerInventory>();
         if (inventory != null)
@@ -54,5 +90,6 @@ public class CabinetPoint : Interactable
             
         // Disable để không hiện UI Prompt nữa
         this.enabled = false;
+        gameObject.layer = 0;
     }
 }

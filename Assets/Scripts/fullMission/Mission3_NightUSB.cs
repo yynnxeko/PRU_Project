@@ -6,7 +6,7 @@ public class Mission3_NightUSB : MissionStep
     [TextArea]
     public string missionDescription = "Đợi đến tối, lẻn vào IT Room để lấy USB.";
     [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
-    public int missionIndex = 2;
+    public int missionIndex = 1;
 
     void Start()
     {
