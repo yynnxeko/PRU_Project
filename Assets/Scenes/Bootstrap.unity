@@ -196,7 +196,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1ef75255a00d34a4c940dd62d5199207, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.225
+  m_Volume: 0.005
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -608,13 +608,17 @@ MonoBehaviour:
   currentMissionIndex: 0
   totalMissions: 3
   missionDescriptions:
-  - "H\xE3y \u0111\u1EBFn phong IT t\xECm m\u1EADt kh\u1EA9u \u0111\u1EC3 l\u1EA5y
-    t\xE0i li\u1EC7u trong ph\xF2ng ng\u1EE7 v\xE0 \u0111\u01B0a cho t\xF4i."
+  - "H\xE3y \u0111\u1EBFn phong IT t\xECm m\u1EADt kh\u1EA9u t\u1EEB m\u1ED9t \u0111\u1ED3ng
+    \u0111\u1ED9i \u0111\xE3 hy sinh \u0111\u1EC3 l\u1EA5y t\xE0i li\u1EC7u trong
+    ph\xF2ng ng\u1EE7 v\xE0 \u0111\u01B0a cho t\xF4i."
   - "Gi\u1EDD c\u1EADu t\xECm c\xE1ch v\xE0o ph\xF2ng y t\u1EBF \u0111\u1EC3 l\u1EA5y
-    usb trong ng\u01B0\u1EDDi \u0111\u1ED3ng \u0111\u1ED9i \u0111\xE3 hy sinh , v\xE0
-    \u0111i\u1EC1u tra ph\xF2ng kho \u1EDF l\u1EA7u 2 \u0111\u01B0a cho t\xF4i."
-  - "H\xE3y tr\u1EA3 l\u1EDDi c\xE1c c\xE2u h\u1ECFi \u0111\u1EC3 ch\u1EE9ng minh
-    s\u1EF1 v\xF4 t\u1ED9i v\xE0 t\xECm ra k\u1EBB l\u1EEBa \u0111\u1EA3o."
+    usb trong ng\u01B0\u1EDDi \u0111\u1ED3ng \u0111\u1ED9i \u0111\xE3 hy sinh , n\xF3
+    s\u1EBD gi\xFAp c\u1EADu v\xE0o 1 l\xFAc n\xE0o \u0111\xF3."
+  - "b\xE2y gi\u1EDD \u0111ang c\xF3 1 th\xF4ng tin quan tr\u1ECDng trong ph\xF2ng
+    kho \u1EDF l\u1EA7u 2, c\u1EADu h\xE3y l\u1EA5y ch\xECa kh\xF3a ph\xF2ng ng\u1EE7
+    trong t\u1EE7 \u0111\u1ED3 ph\xF2ng IT v\xE0 trong \u0111\xEAm hay l\xEAn ph\xF2ng
+    kho l\u1EA5y b\u1EB1ng ch\u1EE9ng \u0111\u01B0a cho t\xF4i, may l\xE0 ph\xF2ng
+    kho kh\xF4ng c\u1EA7n ch\xECa kh\xF3a."
 --- !u!4 &1862870792
 Transform:
   m_ObjectHideFlags: 0

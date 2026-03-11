@@ -7,6 +7,7 @@ public class KeypadInput : MonoBehaviour
     public TextMeshProUGUI displayText;
     public AudioClip beepClip;
     public string correctCode = "9466";
+    public KeypadTrigger keypadTrigger; // Tham chiếu tới KeypadTrigger
 
     string currentCode = "";
 
@@ -45,6 +46,13 @@ public class KeypadInput : MonoBehaviour
         if (currentCode == correctCode)
         {
             Debug.Log("Correct Code!");
+            displayText.text = "Correct!";
+
+            // Hiện popup với nội dung mong muốn
+            if (keypadTrigger != null)
+            {
+                keypadTrigger.ShowPopup("Đã tìm thấy tài liệu, tìm cách đưa cho đầu bếp mà không bị bắt");
+            }
 
             // Xử lý cộng Evidence
             if (rewardEvidence != null)
@@ -70,6 +78,7 @@ public class KeypadInput : MonoBehaviour
         else
         {
             Debug.Log("Wrong Code!");
+            displayText.text = "Wrong!";
         }
 
         Clear();

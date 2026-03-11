@@ -73,7 +73,7 @@ public class KeypadTrigger : MonoBehaviour
     }
 
     // Hàm mẫu để hiện popup giống IntroCutscene
-    void ShowPopup(string message)
+    public void ShowPopup(string message)
     {
         // TODO: Thay bằng code hiện popup thực tế của bạn
         if (DialogueUI.Instance != null)
