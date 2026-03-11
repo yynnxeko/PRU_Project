@@ -767,9 +767,22 @@ public class DialogueMissionStep : MissionStep
         if (GameManager.Instance != null)
             GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
 
-        // Nếu đã nhận nhiệm vụ (flag bật) → sai sẽ đi medical
-        if (GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("mission_accepted"))
+        // Nếu đang ở Mission 2 (currentMissionIndex == 1) → sai sẽ đi medical
+        // Kiểm tra trực tiếp FullMissionManager thay vì dùng flag (đáng tin hơn)
+        bool shouldGoMedical = false;
+
+        if (FullMissionManager.Instance != null && FullMissionManager.Instance.GetCurrentMissionIndex() == 1)
+            shouldGoMedical = true;
+
+        // Fallback: kiểm tra flag cũ nếu có
+        if (!shouldGoMedical && GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("mission_accepted"))
+            shouldGoMedical = true;
+
+        if (shouldGoMedical && GameFlagManager.Instance != null)
+        {
             GameFlagManager.Instance.SetFlag("go_to_medical", true);
+            Debug.Log("[DialogueMissionStep] Mission 2 → bật go_to_medical → sẽ đi Hospital");
+        }
 
         DoorSceneChange.NextSpawnId = "lobby_punch";
         SceneManager.LoadScene(failSceneName);
