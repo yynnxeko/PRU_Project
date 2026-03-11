@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-<<<<<<< Updated upstream
-=======
 
 [System.Serializable]
 public class BossDialogueLine
@@ -10,7 +8,6 @@ public class BossDialogueLine
     public string text;
     public AudioClip voiceClip;
 }
->>>>>>> Stashed changes
 
 public class IntroCutscene : MonoBehaviour
 {
@@ -19,14 +16,11 @@ public class IntroCutscene : MonoBehaviour
     public Sprite bossAvatar;
     public Sprite guardAvatar;
 
-<<<<<<< Updated upstream
-=======
     [Header("Voice")]
     public AudioSource voiceAudioSource;
 
     [Header("Boss Dialogues")]
     public BossDialogueLine[] bossLines;
->>>>>>> Stashed changes
 
     void Start()
     {
@@ -41,20 +35,6 @@ public class IntroCutscene : MonoBehaviour
         Debug.Log("--- [SFX] Màn hình nhiễu sóng, âm thanh méo ---");
         yield return new WaitForSeconds(1.0f);
 
-<<<<<<< Updated upstream
-        // --- PHẦN 2: CẤP TRÊN GỌI ---
-        // Có thể đổi màu chữ hoặc font cho Cấp trên để tạo cảm giác "mã hóa"
-        string bossName = "<color=red>UNKNOWN_ID</color>";
-
-        yield return ShowLine("Từ thời điểm này, cậu không còn là người của chúng tôi.", bossName, bossAvatar);
-        yield return ShowLine("Nếu bị lộ… chúng tôi sẽ phủ nhận toàn bộ.", bossName, bossAvatar);
-
-        yield return new WaitForSeconds(1.0f); // (Ngắt một nhịp - như kịch bản)
-
-        yield return ShowLine("Mục tiêu: thâm nhập.", bossName, bossAvatar);
-        yield return ShowLine("Sống sót.", bossName, bossAvatar);
-        yield return ShowLine("Và ghi nhớ mọi thứ.", bossName, bossAvatar);
-=======
         string bossName = "<color=red>Nhớ Lại Lời Của Boss</color>";
 
         for (int i = 0; i < bossLines.Length; i++)
@@ -64,7 +44,7 @@ public class IntroCutscene : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.0f);
->>>>>>> Stashed changes
+
 
         yield return new WaitUntil(() => GameFlow.BusCutscene == false);
 
