@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking; // Để tải file mp3 từ Google TTS
 
 public class IntroCutscene : MonoBehaviour
 {
@@ -8,8 +7,6 @@ public class IntroCutscene : MonoBehaviour
     public Sprite playerAvatar; // Kéo hình người chơi vào
     public Sprite bossAvatar;   // Kéo hình "Cấp trên" (hoặc để trống nếu là giọng nói bí ẩn)
     public Sprite guardAvatar;
-
-    public AudioSource ttsAudioSource; // Kéo AudioSource vào Inspector
 
 
     void Start()
@@ -29,41 +26,18 @@ public class IntroCutscene : MonoBehaviour
         Debug.Log("--- [SFX] Màn hình nhiễu sóng, âm thanh méo ---");
         yield return new WaitForSeconds(1.0f);
 
-        // --- PHẦN 2: CẤP TRÊN GỌI ---
+        // --- PHẦN 2: CẤP TRÊN GỌI ---*
         // Có thể đổi màu chữ hoặc font cho Cấp trên để tạo cảm giác "mã hóa"
-        string bossName = "<color=red>Nhớ lại lời của Boss</color>";
+        string bossName = "<color=red>Nhớ </color>";
 
         yield return ShowLine("Từ thời điểm này, cậu không còn là người của chúng tôi.", bossName, bossAvatar);
+        yield return ShowLine("Nếu bị lộ… chúng tôi sẽ phủ nhận toàn bộ.", bossName, bossAvatar);
 
         yield return new WaitForSeconds(1.0f); // (Ngắt một nhịp - như kịch bản)
 
-        // Coroutine tải và phát thoại từ Google TTS
-        IEnumerator PlayGoogleTTS(string text)
-        {
-            // Tạo link Google TTS
-            string url = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + UnityWebRequest.EscapeURL(text) + "&tl=vi&client=tw-ob";
-            using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.MPEG))
-            {
-                yield return www.SendWebRequest();
-                if (www.result == UnityWebRequest.Result.Success)
-                {
-                    AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
-                    if (ttsAudioSource != null && clip != null)
-                    {
-                        ttsAudioSource.clip = clip;
-                        ttsAudioSource.Play();
-                        // Chờ phát xong
-                        yield return new WaitForSeconds(clip.length);
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("TTS download failed: " + www.error);
-                }
-            }
-        }
-
-        yield return ShowLine("Mục tiêu: thâm nhập và ghi nhớ mọi thứ.", bossName, bossAvatar);
+        yield return ShowLine("Mục tiêu: thâm nhập.", bossName, bossAvatar);
+        yield return ShowLine("Sống sót.", bossName, bossAvatar);
+        yield return ShowLine("Và ghi nhớ mọi thứ.", bossName, bossAvatar);
 
 
         // Chờ xe buýt dừng hẳn
