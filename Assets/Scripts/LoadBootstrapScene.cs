@@ -3,10 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class LoadBootstrapScene : MonoBehaviour
 {
-    public string sceneName = "Bootstrap";
 
     void OnMouseDown()
     {
-        SceneManager.LoadScene(sceneName);
+        // SceneManager.LoadScene("Buss");
+        SceneManager.LoadScene("Map_Internal Area_Night");
+        // SceneManager.LoadScene("IT_Room");
     }
 }

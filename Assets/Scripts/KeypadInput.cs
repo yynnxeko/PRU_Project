@@ -9,8 +9,8 @@ public class KeypadInput : MonoBehaviour
     public AudioClip beepClip;
     public AudioClip correctClip;
     public AudioClip incorrectClip;
-
     public string correctCode = "9466";
+    public KeypadTrigger keypadTrigger; // Tham chiếu tới KeypadTrigger
 
     string currentCode = "";
 
@@ -51,15 +51,23 @@ public class KeypadInput : MonoBehaviour
             if (audioSource && correctClip)
                 audioSource.PlayOneShot(correctClip);
 
+            // Tắt canvas keypadUI nếu có
+            if (keypadTrigger != null && keypadTrigger.keypadUI != null)
+                keypadTrigger.keypadUI.SetActive(false);
+
+            // Hiện popup với nội dung mong muốn
+            if (keypadTrigger != null)
+            {
+                keypadTrigger.ShowPopup("Đã tìm thấy tài liệu, tìm cách đưa cho đầu bếp mà không bị bắt");
+            }
+
             // cộng Evidence
             if (rewardEvidence != null)
             {
                 GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
                 if (playerObj != null)
                 {
                     PlayerInventory inventory = playerObj.GetComponent<PlayerInventory>();
-
                     if (inventory != null)
                     {
                         inventory.AddEvidence(rewardEvidence);
