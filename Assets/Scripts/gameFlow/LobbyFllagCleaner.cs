@@ -8,6 +8,7 @@ public class LobbyFlagCleaner : MonoBehaviour
 
     IEnumerator Start()
     {
+        Debug.Log("[LobbyFlagCleaner] Khởi tạo và dọn cất cờ trong lobby");
         yield return null; // đợi 1 frame
 
         if (GameFlagManager.Instance != null)
