@@ -8,23 +8,39 @@ public class CanteenSceneTalking : MonoBehaviour
     private const string PREFS_KEY = "CanteenDialoguePlayed";
 
     [Header("Assets")]
-    public Sprite npcAvatar;    // Hình NPC trong canteen
-    public Sprite playerAvatar; // Hình người chơi
+    public Sprite npcAvatar;
+    public Sprite playerAvatar;
+
+    [Header("Voice")]
+    public AudioSource voiceAudioSource;
+
+    [Header("Dialogue Voice Clips")]
+    public AudioClip npcLine01;
+    public AudioClip playerLine01;
+    public AudioClip npcLine02;
+    public AudioClip playerLine02;
+    public AudioClip npcLine03;
+    public AudioClip playerLine03;
+    public AudioClip npcLine04;
+    public AudioClip playerLine04;
+    public AudioClip npcLine05;
+    public AudioClip npcLine06;
+    public AudioClip npcLine07;
 
     [Header("Flag Setting")]
     [Tooltip("Cờ sẽ bật TRUE khi thoại xong")]
     public string flagOnComplete;
 
-    private bool hasTriggered = false; // Tránh trigger nhiều lần trong 1 session
-    private bool dialoguePlayed = false; // Đã từng chạy thoại này trong mọi session
+    private bool hasTriggered = false;
+    private bool dialoguePlayed = false;
 
-    // Player đi vào vùng trigger → tự động chạy thoại
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
         playerInZone = true;
 
         if (hasTriggered) return;
+
         if (PlayerPrefs.GetInt(PREFS_KEY, 0) == 1)
         {
             dialoguePlayed = true;
@@ -45,7 +61,6 @@ public class CanteenSceneTalking : MonoBehaviour
     {
         Debug.Log($"Update: dialoguePlayed={dialoguePlayed}, playerInZone={playerInZone}");
 
-        // Luôn cho phép hiện mô tả nhiệm vụ khi player trong vùng và bấm E
         if (playerInZone && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Bấm E: Hiện nhiệm vụ");
@@ -55,14 +70,11 @@ public class CanteenSceneTalking : MonoBehaviour
             {
                 msg = FullMissionManager.Instance.GetActiveMissionDescription();
             }
+
             DialogueUI.Instance.ShowDialogue(msg, "Nhiệm vụ", null, null);
         }
     }
 
-    /// <summary>
-    /// Gọi hội thoại canteen. Chỉ chạy 1 lần duy nhất (lưu PlayerPrefs).
-    /// Nếu đã chạy rồi thì gọi onFinish ngay.
-    /// </summary>
     public void PlayCanteenDialogue(Action onFinish)
     {
         if (PlayerPrefs.GetInt(PREFS_KEY, 0) == 1)
@@ -81,36 +93,87 @@ public class CanteenSceneTalking : MonoBehaviour
         string npc = "<color=#FFA500>Đầu bếp</color>";
         string me = "Tôi";
 
-        // 1. Gặp mặt: Nhờ vả việc vặt để che mắt
-        yield return ShowLine("Này chú em, đứng ngây ra đó làm gì? Lại đây bê hộ tôi mấy cái khay inox này vào trong đi!", npc, npcAvatar);
-        yield return ShowLine("Dạ... dạ tôi tới ngay.", me, playerAvatar);
+        yield return ShowLine(
+            "Này chú em, đứng ngây ra đó làm gì? Lại đây bê hộ tôi mấy cái khay inox này vào trong đi!",
+            npc,
+            npcAvatar,
+            npcLine01
+        );
 
-        // 2. Thăm dò bằng ám hiệu (Chiếc mũ cao bồi)
-        yield return ShowLine("Lính mới hả? Nhìn mặt lạ hoắc. Mà này... ở ngoài kia chú có quen ai hay đội mũ cao bồi không?", npc, npcAvatar);
-        yield return ShowLine("Hả? Mũ cao bồi? Tôi... tôi không biết ông đang nói gì cả. Tôi chỉ tới đây làm việc thôi.", me, playerAvatar);
+        yield return ShowLine(
+            "Dạ... dạ tôi tới ngay.",
+            me,
+            playerAvatar,
+            playerLine01
+        );
 
-        // 3. NPC xác nhận danh tính
-        yield return ShowLine("Khéo lo! Tôi nhận được thông tin về chú rồi. Đều là người một nhà cả nên cứ yên tâm.", npc, npcAvatar);
-        yield return ShowLine("Anh... anh cũng là người của chúng ta sao?", me, playerAvatar);
+        yield return ShowLine(
+            "Lính mới hả? Nhìn mặt lạ hoắc. Mà này... ở ngoài kia chú có quen ai hay đội mũ cao bồi không?",
+            npc,
+            npcAvatar,
+            npcLine02
+        );
 
-        // 4. Thiết lập điểm liên lạc
-        yield return ShowLine("Suỵt! Khẽ thôi. Sau này cứ canh giờ ăn chiều, chạy ra đây phụ tôi, tôi sẽ bàn giao nhiệm vụ tiếp theo cho.", npc, npcAvatar);
-        yield return ShowLine("Rõ! Vậy bây giờ tôi cần phải làm gì trước tiên?", me, playerAvatar);
+        yield return ShowLine(
+            "Hả? Mũ cao bồi? Tôi... tôi không biết ông đang nói gì cả. Tôi chỉ tới đây làm việc thôi.",
+            me,
+            playerAvatar,
+            playerLine02
+        );
 
-        // 5. Giao nhiệm vụ đầu tiên: Chìa khóa phòng IT
-        yield return ShowLine("Trong này quản chặt lắm, chỉ có ban đêm mới dễ hành động. Tôi có tin là chìa khóa phòng ngủ được giấu trong tủ của phòng IT.", npc, npcAvatar);
-        yield return ShowLine("Ráng mà canh lúc làm việc hoặc lúc sơ hở mà lấy cho bằng được tài liệu trong tủ khóa, nhớ tìm chìa khóa trong phòng IT.", npc, npcAvatar);
+        yield return ShowLine(
+            "Khéo lo! Tôi nhận được thông tin về chú rồi. Đều là người một nhà cả nên cứ yên tâm.",
+            npc,
+            npcAvatar,
+            npcLine03
+        );
 
+        yield return ShowLine(
+            "Anh... anh cũng là người của chúng ta sao?",
+            me,
+            playerAvatar,
+            playerLine03
+        );
 
-        // 6. Kết thúc hội thoại
-        yield return ShowLine("Thôi, lấy phần cơm rồi về phòng ngủ đi, đừng ở đây lâu bọn nó nghi. Cẩn thận đấy!", npc, npcAvatar);
+        yield return ShowLine(
+            "Suỵt! Khẽ thôi. Sau này cứ canh giờ ăn chiều, chạy ra đây phụ tôi, tôi sẽ bàn giao nhiệm vụ tiếp theo cho.",
+            npc,
+            npcAvatar,
+            npcLine04
+        );
 
-        // Đánh dấu đã chạy xong, lưu vào đĩa
+        yield return ShowLine(
+            "Rõ! Vậy bây giờ tôi cần phải làm gì trước tiên?",
+            me,
+            playerAvatar,
+            playerLine04
+        );
+
+        yield return ShowLine(
+            "Trong này quản chặt lắm, chỉ có ban đêm mới dễ hành động. Tôi có tin là chìa khóa phòng ngủ được giấu trong tủ của phòng IT.",
+            npc,
+            npcAvatar,
+            npcLine05
+        );
+
+        yield return ShowLine(
+            "Ráng mà canh lúc làm việc hoặc lúc sơ hở mà lấy cho bằng được tài liệu trong tủ khóa, nhớ tìm chìa khóa trong phòng IT.",
+            npc,
+            npcAvatar,
+            npcLine06
+        );
+
+        yield return ShowLine(
+            "Thôi, lấy phần cơm rồi về phòng ngủ đi, đừng ở đây lâu bọn nó nghi. Cẩn thận đấy!",
+            npc,
+            npcAvatar,
+            npcLine07
+        );
+
         PlayerPrefs.SetInt(PREFS_KEY, 1);
         PlayerPrefs.Save();
-        dialoguePlayed = true; // Cho phép bấm E ngay sau khi thoại xong
+        dialoguePlayed = true;
 
-        // Bật cờ khi hoàn thành
         if (!string.IsNullOrEmpty(flagOnComplete) && GameFlagManager.Instance != null)
         {
             GameFlagManager.Instance.SetFlag(flagOnComplete, true);
@@ -120,19 +183,30 @@ public class CanteenSceneTalking : MonoBehaviour
         onFinish?.Invoke();
     }
 
-    // Hàm phụ trợ giống PunchSceneTalking
-    IEnumerator ShowLine(string text, string name, Sprite avatar)
+    IEnumerator ShowLine(string text, string name, Sprite avatar, AudioClip voiceClip = null)
     {
         bool done = false;
+
         DialogueUI.Instance.ShowDialogue(text, name, avatar, () => { done = true; });
+
+        if (voiceAudioSource != null && voiceClip != null)
+        {
+            voiceAudioSource.Stop();
+            voiceAudioSource.clip = voiceClip;
+            voiceAudioSource.Play();
+        }
 
         while (!done)
         {
             yield return null;
         }
+
+        if (voiceAudioSource != null && voiceAudioSource.isPlaying)
+        {
+            voiceAudioSource.Stop();
+        }
     }
 
-    // === Dùng trong Editor để reset (test lại) ===
 #if UNITY_EDITOR
     [ContextMenu("Reset Canteen Dialogue")]
     private void ResetDialogue()

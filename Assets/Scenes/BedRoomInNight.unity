@@ -15777,6 +15777,7 @@ MonoBehaviour:
   keypadUI: {fileID: 1958493481}
   bubblePrefab: {fileID: 601460350}
   foundText: "T\xECm th\u1EA5y g\xEC \u0111\xF3, b\u1EA5m E \u0111\u1EC3 m\u1EDF"
+  foundVoice: {fileID: 0}
   bubbleDuration: 2
   bubbleOffset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1674271488
@@ -16133,6 +16134,7 @@ MonoBehaviour:
   advancePhaseOnPass: 0
   bubblePrefab: {fileID: 601460350}
   lockedText: "Ch\u01B0a c\xF3 ch\xECa kh\xF3a!\nKh\xF4ng th\u1EC3 ra."
+  lockedVoice: {fileID: 0}
   bubbleOffsetY: 1.5
   bubbleDuration: 2
 --- !u!1 &1807227217
@@ -16366,8 +16368,10 @@ MonoBehaviour:
   enemyName: "Gi\xE1m th\u1ECB"
   enemyAvatar: {fileID: 0}
   dialogueText: "Ng\u1EE7 \u0111i mai c\xF2n l\xE0m vi\u1EC7c!"
+  enemyVoice: {fileID: 8300000, guid: 228fbbaba45c28a47a74beb302982806, type: 3}
   bubblePrefab: {fileID: 601460350}
   bedInstructionText: "B\u1EA5m E \u0111\u1EC3 ng\u1EE7"
+  instructionVoice: {fileID: 0}
   bubbleOffsetY: 1.5
   bubbleDuration: 2
   enemy: {fileID: 1246547596}
