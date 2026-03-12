@@ -7,6 +7,17 @@ public class LoppyCutscene : MonoBehaviour
     public float moveTime = 1.0f;
     public Sprite enemyAvatar;
 
+    [Header("Voice")]
+    public AudioSource voiceAudioSource;
+
+    [Header("Voice Clips")]
+    public AudioClip lineIntro;
+    public AudioClip lineRelax;
+    public AudioClip lineEat;
+    public AudioClip lineMedical;
+    public AudioClip lineWork;
+    public AudioClip lineEnd;
+
     [Header("Room Points")]
     public Transform posRelax;
     public Transform posEat;
@@ -26,16 +37,15 @@ public class LoppyCutscene : MonoBehaviour
 
     void Start()
     {
-        // 1. Khoá các tính năng khác lại ngay lập tức từ đầu frame
         if (!hasPlayed)
         {
             isPlaying = true;
         }
 
-        // Nếu đã chạy rồi trong lần Play này thì không chạy lại
         if (hasPlayed)
         {
             if (npcPath != null) npcPath.gameObject.SetActive(false);
+
             if (followers != null)
             {
                 foreach (var f in followers)
@@ -43,6 +53,7 @@ public class LoppyCutscene : MonoBehaviour
                     if (f != null) f.gameObject.SetActive(false);
                 }
             }
+
             gameObject.SetActive(false);
             return;
         }
@@ -58,76 +69,98 @@ public class LoppyCutscene : MonoBehaviour
     {
         if (camFollow != null) camFollow.enabled = false;
 
-        // ===== PAUSE NPC trong lúc cutscene =====
         if (npcPath != null) npcPath.Pause();
-        foreach (var f in followers)
-            if (f != null) f.Pause();
+
+        if (followers != null)
+        {
+            foreach (var f in followers)
+            {
+                if (f != null) f.Pause();
+            }
+        }
 
         string boss = "<color=red>Bảo vệ</color>";
 
-        yield return ShowLine("Có 4 khu vực chúng mày buộc phải thuộc lòng.", boss);
+        yield return ShowLine("Có 4 khu vực chúng mày buộc phải thuộc lòng.", boss, lineIntro);
 
-        yield return MoveAndTalk(posRelax, "Khu SINH HOẠT: Ngủ và im lặng.", boss);
-        yield return MoveAndTalk(posEat, "NHÀ BẾP: Đớp nhanh rồi biến, đừng có lề mề.", boss);
-        yield return MoveAndTalk(posMedical, "Khu Y TẾ: Nơi dành cho mấy thằng sắp chết.", boss);
-        yield return MoveAndTalk(posWork, "PHÒNG LÀM VIỆC: Đến giờ thì vác xác vào mà cày!", boss);
+        yield return MoveAndTalk(posRelax, "Khu SINH HOẠT: Ngủ và im lặng.", boss, lineRelax);
+        yield return MoveAndTalk(posEat, "NHÀ BẾP: Đớp nhanh rồi biến, đừng có lề mề.", boss, lineEat);
+        yield return MoveAndTalk(posMedical, "Khu Y TẾ: Nơi dành cho mấy thằng sắp chết.", boss, lineMedical);
+        yield return MoveAndTalk(posWork, "PHÒNG LÀM VIỆC: Đến giờ thì vác xác vào mà cày!", boss, lineWork);
 
         yield return MoveCamera(cam.transform.position, initialCamPos);
-        yield return ShowLine("Nghe thủng chưa? Giờ thì biến vào phòng tập thể đi!", boss);
+        yield return ShowLine("Nghe thủng chưa? Giờ thì biến vào phòng tập thể đi!", boss, lineEnd);
 
         if (camFollow != null) camFollow.enabled = true;
 
-        // ===== RESUME NPC sau cutscene =====
         if (npcPath != null)
         {
             npcPath.ResetPath();
             npcPath.Resume();
         }
-        foreach (var f in followers)
-            if (f != null) f.Resume();
 
-        // Bật cờ để có thể qua cửa về Lobby
+        if (followers != null)
+        {
+            foreach (var f in followers)
+            {
+                if (f != null) f.Resume();
+            }
+        }
+
         if (GameFlagManager.Instance != null)
         {
             GameFlagManager.Instance.SetFlag("lobby_To_Bed", true);
             Debug.Log("[LoppyCutscene] Flag 'lobby_To_Bed' set to TRUE");
         }
 
-        // Đánh dấu đã chạy trong lần Play này
         hasPlayed = true;
         isPlaying = false;
     }
 
-    IEnumerator MoveAndTalk(Transform target, string text, string name)
+    IEnumerator MoveAndTalk(Transform target, string text, string name, AudioClip voiceClip)
     {
         if (target == null) yield break;
 
         Vector3 targetPos = new Vector3(target.position.x, target.position.y, initialCamPos.z);
         yield return MoveCamera(cam.transform.position, targetPos);
-        yield return ShowLine(text, name);
+        yield return ShowLine(text, name, voiceClip);
     }
 
     IEnumerator MoveCamera(Vector3 from, Vector3 to)
     {
-        float t = 0;
+        float t = 0f;
+
         while (t < moveTime)
         {
             cam.transform.position = Vector3.Lerp(from, to, t / moveTime);
             t += Time.deltaTime;
             yield return null;
         }
+
         cam.transform.position = to;
     }
 
-    IEnumerator ShowLine(string text, string name)
+    IEnumerator ShowLine(string text, string name, AudioClip voiceClip = null)
     {
         bool done = false;
 
         DialogueUI.Instance.ShowDialogue(text, name, enemyAvatar, () => { done = true; });
 
+        if (voiceAudioSource != null && voiceClip != null)
+        {
+            voiceAudioSource.Stop();
+            voiceAudioSource.clip = voiceClip;
+            voiceAudioSource.Play();
+        }
+
         while (!done)
         {
             yield return null;
+        }
+
+        if (voiceAudioSource != null && voiceAudioSource.isPlaying)
+        {
+            voiceAudioSource.Stop();
         }
     }
 }

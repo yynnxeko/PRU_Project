@@ -27,12 +27,20 @@ public class CutsceneController : MonoBehaviour
     public GameObject dialogueCanvas;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI contextText;
-    public Image avatarImage;          // Image hiển thị avatar
+    public Image avatarImage;
 
     [Header("Avatars")]
-    public Sprite avatarBroker;        // Avatar tên môi giới
-    public Sprite avatarMan;           // Avatar người đàn ông
+    public Sprite avatarBroker;
+    public Sprite avatarMan;
 
+    [Header("Dialogue Audio")]
+    public AudioSource dialogueAudioSource;
+
+    public AudioClip line1Audio; // "Ở đây không cần bằng cấp..."
+    public AudioClip line2Audio; // "Tôi... tôi có thể về được không?"
+    public AudioClip line3Audio; // "Mày vừa nói gì!!"
+    public AudioClip line4Audio; // "Á Á Á...."
+    public AudioClip line5Audio; // "Cút vào phòng ngay!"
 
     Animator a1, a2, a3, a4;
 
@@ -61,20 +69,20 @@ public class CutsceneController : MonoBehaviour
         FaceDirection(a1, Vector2.left);
 
         // ===== DIALOG =====
-        yield return ShowLine("Bảo vệ", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!", avatarBroker);
-        yield return ShowLine("Người đàn ông", "Tôi... tôi có thể về được không?", avatarMan);
+        yield return ShowLine("Bảo vệ", "Ở đây không cần bằng cấp, chỉ cần dám nghĩ dám làm!", avatarBroker, line1Audio);
+        yield return ShowLine("Người đàn ông", "Tôi... tôi có thể về được không?", avatarMan, line2Audio);
 
         // ===== NV1 QUAY LẠI =====
         yield return WalkSingleToPoint(nv1, a1, nv2.transform.position + Vector3.right * 0.5f);
 
-        yield return ShowLine("Bảo vệ", "Mày vừa nói gì!!", avatarBroker);
+        yield return ShowLine("Bảo vệ", "Mày vừa nói gì!!", avatarBroker, line3Audio);
 
         // ===== SHOCK =====
         a1.SetTrigger("shocking");
 
         yield return new WaitForSeconds(1f);
 
-        yield return ShowLine("Người đàn ông", "Á Á Á....", avatarMan);
+        yield return ShowLine("Người đàn ông", "Á Á Á....", avatarMan, line4Audio);
 
         // ===== FAINT =====
         a2.SetTrigger("shocked");
@@ -83,20 +91,18 @@ public class CutsceneController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // ===== AFTER =====
-        yield return ShowLine("Bảo vệ", "Cút vào phòng ngay!", avatarBroker);
+        yield return ShowLine("Bảo vệ", "Cút vào phòng ngay!", avatarBroker, line5Audio);
 
         // 👉 đi ngang tới sp3
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp3.position);
 
         FaceDirection(a1, Vector2.left);
 
-
         // 👉 đi lên trên tới sp4
         yield return WalkTwoToPoint(nv1, a1, nv2, a2, sp4.position);
 
         yield return new WaitForSeconds(1f);
 
-        // Load scene mới
         SceneManager.LoadScene("Map_Internal Area_Night");
     }
 
@@ -207,14 +213,13 @@ public class CutsceneController : MonoBehaviour
 
     // ================= DIALOG =================
 
-    IEnumerator ShowLine(string name, string text, Sprite avatar = null)
+    IEnumerator ShowLine(string name, string text, Sprite avatar = null, AudioClip voiceClip = null)
     {
         dialogueCanvas.SetActive(true);
 
         nameText.text = name;
         contextText.text = text;
 
-        // Hiển thị avatar nếu có
         if (avatarImage != null)
         {
             if (avatar != null)
@@ -228,7 +233,21 @@ public class CutsceneController : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2f);
+        // Phát âm thanh thoại
+        if (dialogueAudioSource != null && voiceClip != null)
+        {
+            dialogueAudioSource.Stop();
+            dialogueAudioSource.clip = voiceClip;
+            dialogueAudioSource.Play();
+
+            // Chờ theo độ dài file âm thanh
+            yield return new WaitForSeconds(voiceClip.length);
+        }
+        else
+        {
+            // Nếu chưa gắn âm thanh thì dùng thời gian mặc định
+            yield return new WaitForSeconds(2f);
+        }
 
         dialogueCanvas.SetActive(false);
     }
