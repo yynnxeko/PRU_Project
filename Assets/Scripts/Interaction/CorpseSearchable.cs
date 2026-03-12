@@ -144,7 +144,23 @@ public class CorpseSearchable : MonoBehaviour
             if (EvidenceManager.Instance != null)
                 EvidenceManager.Instance.MarkAsCollected(uniqueID);
 
-            // Phát event để Mission2_HospitalComplete bắt
+            // Tắt cờ mission_accepted (không tắt go_to_medical ở đây
+            // vì RoomSafetyCheck cần cờ này để bypass, tắt sẽ bị bắt ngay)
+            if (GameFlagManager.Instance != null)
+            {
+                GameFlagManager.Instance.SetFlag("mission_accepted", false);
+                // go_to_medical sẽ được tắt khi rời Hospital (LobbyFlagCleaner)
+                Debug.Log("[CorpseSearchable] Đã tắt cờ mission_accepted");
+            }
+
+            // Tăng index nhiệm vụ trực tiếp
+            if (FullMissionManager.Instance != null)
+            {
+                FullMissionManager.Instance.ReportComplete();
+                Debug.Log("[CorpseSearchable] Đã gọi ReportComplete() → tăng mission index!");
+            }
+
+            // Phát event (giữ lại cho các script khác nếu cần)
             OnUSBFound?.Invoke();
         }
         else

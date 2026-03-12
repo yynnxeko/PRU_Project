@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LobbyFlagCleaner : MonoBehaviour
 {
-    public List<string> flagsToClear = new List<string> { "npc_ready_in_lobby" };
+    public List<string> flagsToClear = new List<string> { "npc_ready_in_lobby", "go_to_medical" };
 
     // Flags sẽ KHÔNG bị xóa (luôn giữ nguyên dù có trong danh sách)
     // private static readonly HashSet<string> protectedFlags = new HashSet<string>

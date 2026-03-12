@@ -87,6 +87,13 @@ public class CabinetPoint : Interactable
 
         if (InteractionUI.Instance != null)
             InteractionUI.Instance.HideAll();
+
+        // Bật cờ keyBedroom
+        if (GameFlagManager.Instance != null)
+        {
+            GameFlagManager.Instance.SetFlag("keyBedroom", true);
+            Debug.Log("[CabinetPoint] Đã bật cờ keyBedroom!");
+        }
             
         // Disable để không hiện UI Prompt nữa
         this.enabled = false;
