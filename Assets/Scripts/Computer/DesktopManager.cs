@@ -125,7 +125,7 @@ public class DesktopManager : MonoBehaviour
 
             GameObject imgObj = new GameObject("ImageContent_" + appName);
             imgObj.transform.SetParent(appWin.contentRoot, false);
-            
+
             Image img = imgObj.AddComponent<Image>();
             img.enabled = true; // Đảm bảo Image mới luôn hiện
             img.sprite = imageToShow;
