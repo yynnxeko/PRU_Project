@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -19,10 +19,17 @@ public class SpeechBubble : MonoBehaviour
         cam = Camera.main;
     }
 
-    public void Show(string message, float duration = -1f)
+    public void Show(string message, float duration = -1f, AudioClip voiceClip = null)
     {
         Debug.Log("GOI HAM SHOW ROI NE!");
         if (duration <= 0f) duration = defaultDuration;
+
+        if (voiceClip != null)
+        {
+            AudioSource source = GetComponent<AudioSource>();
+            if (source == null) source = gameObject.AddComponent<AudioSource>();
+            source.PlayOneShot(voiceClip);
+        }
 
         if (routine != null)
             StopCoroutine(routine);

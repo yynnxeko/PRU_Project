@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class BusMoveForward : MonoBehaviour
@@ -24,6 +24,7 @@ public class BusMoveForward : MonoBehaviour
     public GameObject enemy;
     public Vector3 enemySpawnPos;
     public SpeechBubble enemyBubble;
+    public AudioClip enemyVoice;
     public float enemyBubbleOffsetY = 1.5f;
 
     [Header("Player")]
@@ -184,7 +185,7 @@ public class BusMoveForward : MonoBehaviour
             );
 
             bubble.Init(enemy.transform, Vector3.up * enemyBubbleOffsetY);
-            bubble.Show("Lê lê cái chân lên", bubbleTime);
+            bubble.Show("Lê lê cái chân lên", bubbleTime, enemyVoice);
 
             yield return new WaitForSeconds(bubbleTime);
             Destroy(bubble.gameObject);

@@ -6,7 +6,7 @@ public class Mission2_UnlockCabinet : MissionStep
     [TextArea]
     public string missionDescription = "Hãy đến IT Room làm nhiệm vụ trả lời câu hỏi hằng ngày.";
     [Header("Thứ tự nhiệm vụ trong FullMissionManager")]
-    public int missionIndex = 2;
+    public int missionIndex = 1;
 
     void Start()
     {

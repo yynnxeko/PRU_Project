@@ -18,6 +18,7 @@ public class CorpseSearchable : MonoBehaviour
 
     [Header("Feedback")]
     public SpeechBubble bubblePrefab;
+    public string hintMessage = "Giữ E để lục soát";
     public string emptyMessage = "Không tìm thấy gì...";
     public string foundMessage = "Tìm thấy USB!";
     public float bubbleOffsetY = 1.5f;
@@ -64,7 +65,9 @@ public class CorpseSearchable : MonoBehaviour
             playerTransform = other.transform;
 
             if (!isSearched)
-                Debug.Log("Nhấn giữ E để lục soát xác");
+            {
+                ShowBubble(hintMessage);
+            }
         }
     }
 
@@ -75,6 +78,7 @@ public class CorpseSearchable : MonoBehaviour
             playerInRange = false;
             playerTransform = null;
             CancelHold();
+            HideBubble();
         }
     }
 
@@ -153,16 +157,25 @@ public class CorpseSearchable : MonoBehaviour
 
     private void ShowBubble(string message)
     {
-        if (bubblePrefab == null || playerTransform == null) return;
+        if (bubblePrefab == null) return;
 
-        if (currentBubble != null)
-            Destroy(currentBubble.gameObject);
+        HideBubble();
 
         currentBubble = Instantiate(
             bubblePrefab,
             transform.position + Vector3.up * bubbleOffsetY,
             Quaternion.identity
         );
+        currentBubble.Init(transform, Vector3.up * bubbleOffsetY);
         currentBubble.Show(message, bubbleDuration);
+    }
+
+    private void HideBubble()
+    {
+        if (currentBubble != null)
+        {
+            Destroy(currentBubble.gameObject);
+            currentBubble = null;
+        }
     }
 }

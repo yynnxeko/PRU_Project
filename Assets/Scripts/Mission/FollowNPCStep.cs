@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class FollowNPCStep : MissionStep
 {
@@ -9,6 +9,7 @@ public class FollowNPCStep : MissionStep
     [Header("Feedback")]
     public SpeechBubble bubblePrefab;
     public string waitText = "Đi lại đây nhanh lên";
+    public AudioClip waitVoice;
     public float bubbleOffsetY = 1.5f;
 
     [Header("Followers")]
@@ -151,7 +152,7 @@ public class FollowNPCStep : MissionStep
         );
 
         currentBubble.Init(npc.transform, Vector3.up * bubbleOffsetY);
-        currentBubble.Show(waitText, maxLostTime);
+        currentBubble.Show(waitText, maxLostTime, waitVoice);
     }
 
     void HideBubble()

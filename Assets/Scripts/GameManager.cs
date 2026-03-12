@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Caught Feedback")]
     public SpeechBubble bubblePrefab;
     public string caughtMessage = "Bị phát hiện! Chạy đi!";
+    public AudioClip caughtVoice;
     public float bubbleDuration = 3f;
     public Vector3 bubbleOffset = new Vector3(0, 1.5f, 0);
 
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
             {
                 SpeechBubble bubble = Instantiate(bubblePrefab, caughtBy.transform.position + bubbleOffset, Quaternion.identity);
                 bubble.Init(caughtBy.transform, bubbleOffset);
-                bubble.Show(caughtMessage, 3f);
+                bubble.Show(caughtMessage, 3f, caughtVoice);
             }
         }
         else
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
 
         SpeechBubble bubble = Instantiate(bubblePrefab, player.transform.position + bubbleOffset, Quaternion.identity);
         bubble.Init(player.transform, bubbleOffset);
-        bubble.Show(caughtMessage, bubbleDuration);
+        bubble.Show(caughtMessage, bubbleDuration, caughtVoice);
     }
     // Hàm này Camera sẽ gọi khi báo động
     public void AlertAllEnemies(Vector3 targetPos)

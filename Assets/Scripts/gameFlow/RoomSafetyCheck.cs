@@ -13,6 +13,7 @@ public class RoomSafetyCheck : MonoBehaviour
     [Header("Feedback Settings")]
     public SpeechBubble bubblePrefab;
     public string catchMessage = "AI ĐÓ? ĐỨNG LẠI MAU!";
+    public AudioClip catchVoice;
     public float waitBeforeReset = 2f;
     public string resetSpawnId = "Bed";
 
@@ -30,6 +31,12 @@ public class RoomSafetyCheck : MonoBehaviour
     private void CheckSafety()
     {
         if (DayManager.Instance == null || isResetting) return;
+
+        // Bypass: nếu go_to_medical đang TRUE → luôn cho vào (Mission 2 gửi player đến Hospital)
+        if (GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("go_to_medical"))
+        {
+            return;
+        }
 
         bool isSafe = false;
 
@@ -101,7 +108,7 @@ public class RoomSafetyCheck : MonoBehaviour
             {
                 SpeechBubble bubble = Instantiate(bubblePrefab, nearestEnemy.transform.position + Vector3.up * 1.5f, Quaternion.identity);
                 bubble.Init(nearestEnemy.transform, Vector3.up * 1.5f);
-                bubble.Show(catchMessage, 3f); // Hiện bóng thoại 3s
+                bubble.Show(catchMessage, 3f, catchVoice); // Hiện bóng thoại 3s
             }
         }
 
