@@ -31,6 +31,8 @@ public class IntroCutscene : MonoBehaviour
         {
             DialogueLineData line = dialogueSequence[i];
             yield return ShowLine(line);
+
+            yield return new WaitForSeconds(0.1f);
         }
 
         Debug.Log("--- Cutscene kết thúc ---");
