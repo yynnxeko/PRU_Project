@@ -15,6 +15,7 @@ public class FirstTimeLobbyRestrictor : MonoBehaviour
     public SpeechBubble bubblePrefab;
     [TextArea]
     public string restrictText = "Tôi phải về phòng tập thể\nđể cất đồ đã.";
+    public AudioClip restrictVoice;
     public float bubbleOffsetY = 1.5f;
     public float bubbleDuration = 2f;
 
@@ -57,7 +58,7 @@ public class FirstTimeLobbyRestrictor : MonoBehaviour
         );
 
         currentBubble.Init(playerTransform, Vector3.up * bubbleOffsetY);
-        currentBubble.Show(restrictText, bubbleDuration);
+        currentBubble.Show(restrictText, bubbleDuration, restrictVoice);
     }
 }
 

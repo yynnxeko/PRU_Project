@@ -5,6 +5,7 @@ public class KeypadTrigger : MonoBehaviour
     public GameObject keypadUI;
     public SpeechBubble bubblePrefab;
     public string foundText = "Tìm thấy gì đó, bấm E để mở";
+    public AudioClip foundVoice;
     public float bubbleDuration = 2f;
     public Vector3 bubbleOffset = new Vector3(0, 1.5f, 0);
     private SpeechBubble currentBubble;
@@ -20,7 +21,7 @@ public class KeypadTrigger : MonoBehaviour
                 Vector3 spawnPos = transform.position + bubbleOffset;
                 currentBubble = Instantiate(bubblePrefab, spawnPos, Quaternion.identity);
                 currentBubble.Init(transform, bubbleOffset);
-                currentBubble.Show(foundText, bubbleDuration);
+                currentBubble.Show(foundText, bubbleDuration, foundVoice);
             }
         }
     }

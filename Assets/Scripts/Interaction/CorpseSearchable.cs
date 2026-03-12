@@ -19,7 +19,9 @@ public class CorpseSearchable : MonoBehaviour
     [Header("Feedback")]
     public SpeechBubble bubblePrefab;
     public string emptyMessage = "Không tìm thấy gì...";
+    public AudioClip emptyVoice;
     public string foundMessage = "Tìm thấy USB!";
+    public AudioClip foundVoice;
     public float bubbleOffsetY = 1.5f;
     public float bubbleDuration = 2f;
 
@@ -122,7 +124,7 @@ public class CorpseSearchable : MonoBehaviour
         {
             // Tìm thấy USB!
             Debug.Log("[CorpseSearchable] Tìm thấy USB trong xác!");
-            ShowBubble(foundMessage);
+            ShowBubble(foundMessage, foundVoice);
 
             // Thêm evidence vào inventory
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
@@ -151,7 +153,7 @@ public class CorpseSearchable : MonoBehaviour
         }
     }
 
-    private void ShowBubble(string message)
+    private void ShowBubble(string message, AudioClip voiceClip = null)
     {
         if (bubblePrefab == null || playerTransform == null) return;
 
@@ -163,6 +165,7 @@ public class CorpseSearchable : MonoBehaviour
             transform.position + Vector3.up * bubbleOffsetY,
             Quaternion.identity
         );
-        currentBubble.Show(message, bubbleDuration);
+        currentBubble.Init(transform, Vector3.up * bubbleOffsetY);
+        currentBubble.Show(message, bubbleDuration, voiceClip);
     }
 }

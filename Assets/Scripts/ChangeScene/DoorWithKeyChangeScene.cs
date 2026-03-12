@@ -20,6 +20,7 @@ public class DoorWithKeyChangeScene : MonoBehaviour
     public SpeechBubble bubblePrefab;
     [TextArea]
     public string lockedText = "Chưa đủ điều kiện!\nKhông thể vào.";
+    public AudioClip lockedVoice;
     public float bubbleOffsetY = 1.5f;
     public float bubbleDuration = 2f;
 
@@ -80,7 +81,7 @@ public class DoorWithKeyChangeScene : MonoBehaviour
         );
 
         currentBubble.Init(playerTransform, Vector3.up * bubbleOffsetY);
-        currentBubble.Show(lockedText, bubbleDuration);
+        currentBubble.Show(lockedText, bubbleDuration, lockedVoice);
     }
 
     void HideBubble()

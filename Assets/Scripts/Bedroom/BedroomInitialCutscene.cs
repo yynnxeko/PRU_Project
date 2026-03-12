@@ -10,11 +10,13 @@ public class BedroomInitialCutscene : MonoBehaviour
     public Sprite enemyAvatar;
     [TextArea]
     public string dialogueText = "Ngủ đi mai còn làm việc!";
+    public AudioClip enemyVoice;
     
     [Header("Bed Instruction (Speech Bubble)")]
     public SpeechBubble bubblePrefab;
     [TextArea]
     public string bedInstructionText = "Bấm E để ngủ";
+    public AudioClip instructionVoice;
     public float bubbleOffsetY = 1.5f;
     public float bubbleDuration = 3f;
 
@@ -112,7 +114,7 @@ public class BedroomInitialCutscene : MonoBehaviour
                 Quaternion.identity
             );
             enemyBubble.Init(enemy.transform, Vector3.up * bubbleOffsetY);
-            enemyBubble.Show(dialogueText, bubbleDuration);
+            enemyBubble.Show(dialogueText, bubbleDuration, enemyVoice);
             
             // Hiện trong thời gian cấu hình
             yield return new WaitForSeconds(bubbleDuration);
@@ -141,7 +143,7 @@ public class BedroomInitialCutscene : MonoBehaviour
                     Quaternion.identity
                 );
                 bubble.Init(playerBedPoint, Vector3.up * bubbleOffsetY);
-                bubble.Show(bedInstructionText, bubbleDuration);
+                bubble.Show(bedInstructionText, bubbleDuration, instructionVoice);
                 
                 // Đợi thời gian hiển thị bubble
                 yield return new WaitForSeconds(bubbleDuration);
