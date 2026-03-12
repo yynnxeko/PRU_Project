@@ -6,6 +6,7 @@ public class DailyDialogueTrigger : MonoBehaviour
     public DailyDialogueData dialogueData;
     public SpeechBubble bubblePrefab;
     public Vector3 bubbleOffset = new Vector3(0, 1.5f, 0);
+    public AudioClip entryVoice;
 
     private void Start()
     {
@@ -46,7 +47,7 @@ public class DailyDialogueTrigger : MonoBehaviour
         {
             SpeechBubble bubble = Instantiate(bubblePrefab, player.transform.position + bubbleOffset, Quaternion.identity);
             bubble.Init(player.transform, bubbleOffset);
-            bubble.Show(line, dialogue.durationPerLine);
+            bubble.Show(line, dialogue.durationPerLine, entryVoice);
 
             // Chờ cho đến khi bong bóng biến mất trước khi hiện câu tiếp theo
             yield return new WaitForSeconds(dialogue.durationPerLine + 0.2f);
