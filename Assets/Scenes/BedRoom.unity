@@ -633,8 +633,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keypadUI: {fileID: 1787086317}
-  bubblePrefab: {fileID: 0}
+  bubblePrefab: {fileID: 627346432}
   foundText: "T\xECm th\u1EA5y g\xEC \u0111\xF3, b\u1EA5m E \u0111\u1EC3 m\u1EDF"
+  foundVoice: {fileID: 0}
   bubbleDuration: 2
   bubbleOffset: {x: 0, y: 1.5, z: 0}
 --- !u!61 &52025265
@@ -7063,6 +7064,7 @@ MonoBehaviour:
   dialogueData: {fileID: 11400000, guid: 1f236c0117729aa4584ac7c82c8d475c, type: 2}
   bubblePrefab: {fileID: 627346432}
   bubbleOffset: {x: 0, y: 1.5, z: 0}
+  entryVoice: {fileID: 0}
 --- !u!4 &447006485
 Transform:
   m_ObjectHideFlags: 0
@@ -8075,6 +8077,7 @@ MonoBehaviour:
     actors:
     - {fileID: 808448764}
     textValue: "D\u1EADy m\xE0 \u0111i l\xE0m vi\u1EC7c cho tao"
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 0}
     duration: 2
     moveTimeout: 7
@@ -8085,6 +8088,7 @@ MonoBehaviour:
     actors:
     - {fileID: 808448764}
     textValue: 
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 1022690969}
     duration: 0
     moveTimeout: 7
@@ -8112,6 +8116,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     textValue: 
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 1022690969}
     duration: 0
     moveTimeout: 7
@@ -8122,6 +8127,7 @@ MonoBehaviour:
     actors:
     - {fileID: 808448764}
     textValue: 
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 0}
     duration: 0
     moveTimeout: 7
@@ -8149,6 +8155,7 @@ MonoBehaviour:
     - {fileID: 1865037579}
     - {fileID: 1922360763}
     textValue: 
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 1022690969}
     duration: 0
     moveTimeout: 5
@@ -8176,6 +8183,7 @@ MonoBehaviour:
     - {fileID: 1865037579}
     - {fileID: 1922360763}
     textValue: 
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 0}
     duration: 0
     moveTimeout: 7
@@ -9682,6 +9690,7 @@ MonoBehaviour:
     actors:
     - {fileID: 808448764}
     textValue: 
+    voiceClip: {fileID: 0}
     targetPoint: {fileID: 0}
     duration: 3
     moveTimeout: 0
