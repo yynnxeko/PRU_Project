@@ -48,7 +48,9 @@ public class SpeechBubble : MonoBehaviour
     {
         if (target == null) return;
 
-        transform.position = target.position + offset;
+        Vector3 pos = target.position + offset;
+        pos.z = 0f; // Ép Z = 0 để không bị đẩy sau camera
+        transform.position = pos;
 
         if (cam == null) cam = Camera.main;
         if (cam != null)
