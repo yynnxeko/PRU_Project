@@ -4588,6 +4588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1449420663}
   - component: {fileID: 1449420662}
+  - component: {fileID: 1449420664}
   m_Layer: 0
   m_Name: Director
   m_TagString: Untagged
@@ -4609,6 +4610,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAvatar: {fileID: 21300000, guid: bb60ce38842e610459eaeca961c607b9, type: 3}
   playerAvatar: {fileID: 21300000, guid: 4b436717f21b56a4d9c17566ada1a939, type: 3}
+  voiceAudioSource: {fileID: 1449420664}
+  warningBossLine01: {fileID: 8300000, guid: 4813bf383ed27c6459c50c19d6d7190a, type: 3}
+  warningPlayerLine01: {fileID: 8300000, guid: ac5154ff76686774782effa66087a5f8, type: 3}
+  warningBossLine02: {fileID: 8300000, guid: 40fda499a90d44c4297298b2a2ba9f95, type: 3}
+  warningPlayerLine02: {fileID: 8300000, guid: 5565438743b81c34999e9751e912a50e, type: 3}
+  hospitalBossLine01: {fileID: 8300000, guid: 8a71c6e342a0dea4c945678384c9559d, type: 3}
+  hospitalPlayerLine01: {fileID: 8300000, guid: 7ebaaa263adecf54185b767bd1e7bdba, type: 3}
+  hospitalBossLine02: {fileID: 8300000, guid: e9a664a1c913a6b4a981e81612d30bd6, type: 3}
+  hospitalPlayerLine02: {fileID: 8300000, guid: f97e5d748f16715418b797c674873050, type: 3}
 --- !u!4 &1449420663
 Transform:
   m_ObjectHideFlags: 0
@@ -4624,6 +4634,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1449420664
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449420661}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1602269373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5255,6 +5361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 0}
   caughtMessage: "B\u1ECB ph\xE1t hi\u1EC7n! Ch\u1EA1y \u0111i!"
+  caughtVoice: {fileID: 0}
   bubbleDuration: 3
   bubbleOffset: {x: 0, y: 1.5, z: 0}
 --- !u!4 &1672157485
