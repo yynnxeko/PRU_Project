@@ -14,6 +14,7 @@ public class NarrativeDirector : MonoBehaviour
         public StepType type;
         public List<GameObject> actors; // Hỗ trợ nhiều nhân vật cùng hành động
         [TextArea] public string textValue;
+        public AudioClip voiceClip;
         public Transform targetPoint;
         public float duration = 2f;
         public float moveTimeout = 7f;
@@ -157,7 +158,7 @@ public class NarrativeDirector : MonoBehaviour
         GameObject mainActor = step.actors[0];
         SpeechBubble bubble = Instantiate(bubblePrefab, mainActor.transform.position + bubbleOffset, Quaternion.identity);
         bubble.Init(mainActor.transform, bubbleOffset);
-        bubble.Show(step.textValue, step.duration);
+        bubble.Show(step.textValue, step.duration, step.voiceClip);
         yield return new WaitForSeconds(step.duration + 0.5f);
     }
 
