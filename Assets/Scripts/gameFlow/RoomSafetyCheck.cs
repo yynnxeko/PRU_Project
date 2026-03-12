@@ -10,6 +10,10 @@ public class RoomSafetyCheck : MonoBehaviour
     public string requiredFlag; // Tên flag cần có (vd: "has_hospital_pass")
     public string roomName = "Unknown Room";
 
+    [Header("Bypass")]
+    [Tooltip("Nếu flag này đang TRUE thì bỏ qua kiểm tra (vd: go_to_medical)")]
+    public string bypassFlag; // Khi flag này = true → luôn cho phép vào
+
     [Header("Feedback Settings")]
     public SpeechBubble bubblePrefab;
     public string catchMessage = "AI ĐÓ? ĐỨNG LẠI MAU!";
@@ -30,6 +34,14 @@ public class RoomSafetyCheck : MonoBehaviour
     private void CheckSafety()
     {
         if (DayManager.Instance == null || isResetting) return;
+
+        // Bypass: nếu có bypassFlag và flag đang TRUE → luôn an toàn
+        if (!string.IsNullOrEmpty(bypassFlag)
+            && GameFlagManager.Instance != null
+            && GameFlagManager.Instance.GetFlag(bypassFlag))
+        {
+            return; // Cho phép ở lại, không bắt
+        }
 
         bool isSafe = false;
 
