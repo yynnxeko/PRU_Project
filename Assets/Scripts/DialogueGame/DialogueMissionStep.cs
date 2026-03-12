@@ -768,14 +768,10 @@ public class DialogueMissionStep : MissionStep
             GameManager.Instance.TeleportAllEnemies(enemyTeleportPoint.position, 2f);
 
         // Nếu đang ở Mission 2 (currentMissionIndex == 1) → sai sẽ đi medical
-        // Kiểm tra trực tiếp FullMissionManager thay vì dùng flag (đáng tin hơn)
+        // CHỈ check FullMissionManager, không dùng fallback flag
         bool shouldGoMedical = false;
 
         if (FullMissionManager.Instance != null && FullMissionManager.Instance.GetCurrentMissionIndex() == 1)
-            shouldGoMedical = true;
-
-        // Fallback: kiểm tra flag cũ nếu có
-        if (!shouldGoMedical && GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("mission_accepted"))
             shouldGoMedical = true;
 
         if (shouldGoMedical && GameFlagManager.Instance != null)

@@ -31,6 +31,12 @@ public class RoomSafetyCheck : MonoBehaviour
     {
         if (DayManager.Instance == null || isResetting) return;
 
+        // Bypass: nếu go_to_medical đang TRUE → luôn cho vào (Mission 2 gửi player đến Hospital)
+        if (GameFlagManager.Instance != null && GameFlagManager.Instance.GetFlag("go_to_medical"))
+        {
+            return;
+        }
+
         bool isSafe = false;
 
         if (allowFlag)

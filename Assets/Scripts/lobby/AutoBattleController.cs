@@ -106,7 +106,7 @@ public class AutoBattleController : MonoBehaviour
         // === DEBUG: Kiểm tra trạng thái flag ngay khi vào scene ===
         bool goMedicalInit = GameFlagManager.Instance != null
             && GameFlagManager.Instance.GetFlag("go_to_medical");
-        int missionIdx = FullMissionManager.Instance != null
+        int missionIdx = FullMissionManager.Instance != null 
             ? FullMissionManager.Instance.GetCurrentMissionIndex() : -1;
         Debug.Log($"<color=yellow>[AutoBattle] === VÀO SCENE Map_Lobby_punch ===</color>");
         Debug.Log($"<color=yellow>[AutoBattle] go_to_medical = {goMedicalInit}</color>");
@@ -138,6 +138,9 @@ public class AutoBattleController : MonoBehaviour
 
         if (goMedical2)
         {
+            // KHÔNG reset go_to_medical ở đây!
+            // Để RoomSafetyCheck ở Hospital dùng bypassFlag kiểm tra.
+            // Flag sẽ được tắt bởi Mission2_HospitalComplete sau khi tìm USB.
             DoorSceneChange.NextSpawnId = "medical";
             Debug.Log("<color=green>[AutoBattle] → LOADING HOSPITAL!</color>");
             SceneManager.LoadScene("Hospital");

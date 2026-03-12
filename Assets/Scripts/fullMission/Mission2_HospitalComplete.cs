@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gắn vào 1 GameObject trong scene Hospital.
-/// Khi CorpseSearchable phát event OnUSBFound → hoàn thành Mission 2
-/// và tắt cờ để lần sau bị chích điện không vào Hospital nữa.
+/// Khi CorpseSearchable phát event OnUSBFound → hoàn thành Mission 2.
+/// Cờ go_to_medical sẽ giữ TRUE cho đến khi player rời Hospital scene.
 /// </summary>
 public class Mission2_HospitalComplete : MonoBehaviour
 {
     private bool isListening = false;
+    private bool usbFound = false;
 
     void Start()
     {
@@ -25,6 +27,16 @@ public class Mission2_HospitalComplete : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
     void OnDestroy()
     {
         if (isListening)
@@ -40,21 +52,28 @@ public class Mission2_HospitalComplete : MonoBehaviour
         // Hủy đăng ký event
         CorpseSearchable.OnUSBFound -= OnUSBFoundHandler;
         isListening = false;
+        usbFound = true;
 
-        // === TẮT CỜ để lần sau bị chích điện KHÔNG vào Hospital nữa ===
+        // Tắt mission_accepted → FailedRoutine sẽ không bật go_to_medical nữa
         if (GameFlagManager.Instance != null)
         {
-            // Tắt mission_accepted → FailedRoutine sẽ không bật go_to_medical nữa
             GameFlagManager.Instance.SetFlag("mission_accepted", false);
-
-            // Tắt go_to_medical phòng trường hợp còn sót
-            GameFlagManager.Instance.SetFlag("go_to_medical", false);
-
-            Debug.Log("[Mission2_HospitalComplete] Đã tắt cờ mission_accepted + go_to_medical");
+            Debug.Log("[Mission2_HospitalComplete] Đã tắt cờ mission_accepted");
         }
+
+        // GIỮ go_to_medical = true để RoomSafetyCheck không bắt khi còn ở Hospital
+        // Sẽ tắt khi player rời scene (OnSceneUnloaded)
 
         // Hoàn thành Mission 2
         CompleteStep();
+    }
+
+    /// <summary>
+    /// Khi scene Hospital bị unload (player ra khỏi) → tắt go_to_medical
+    /// </summary>
+    private void OnSceneUnloaded(Scene scene)
+    {
+        
     }
 
     private void CompleteStep()

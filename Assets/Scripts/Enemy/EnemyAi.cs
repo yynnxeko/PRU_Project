@@ -109,7 +109,8 @@ public class EnemyAi : MonoBehaviour
             flashlight.pointLightInnerAngle = currentViewAngle * 0.7f;
         }
 
-        if (patrolPoints != null && patrolPoints.Length > 0 && patrolPoints[0] != null)
+        if (patrolPoints != null && patrolPoints.Length > 0 && patrolPoints[0] != null
+            && agent != null && agent.isOnNavMesh)
             agent.SetDestination(patrolPoints[0].position);
 
         if (rotatingPart != null) patrolBaseRotation = rotatingPart.rotation;
@@ -144,7 +145,7 @@ public class EnemyAi : MonoBehaviour
         UpdateAnimation();
 
         // Xử lý xoay đèn khi di chuyển
-        bool isArrivedAtPatrolPoint = (currentState == EnemyState.Idle && !agent.pathPending && agent.remainingDistance <= 0.5f);
+        bool isArrivedAtPatrolPoint = (currentState == EnemyState.Idle && agent.isOnNavMesh && !agent.pathPending && agent.remainingDistance <= 0.5f);
         if (agent.velocity.sqrMagnitude > 0.1f && !isArrivedAtPatrolPoint)
         {
             LookAtTarget(transform.position + agent.velocity);
@@ -183,7 +184,7 @@ public class EnemyAi : MonoBehaviour
             anim.SetFloat("InputY", 0);
 
             // Kiểm tra xem có đang ở chế độ "Lắc Đèn" (Patrol Wait) không?
-            bool isWaitingAtPoint = (currentState == EnemyState.Idle && !agent.pathPending && agent.remainingDistance <= 0.5f);
+            bool isWaitingAtPoint = (currentState == EnemyState.Idle && agent.isOnNavMesh && !agent.pathPending && agent.remainingDistance <= 0.5f);
 
             if (isWaitingAtPoint && rotatingPart != null)
             {
@@ -209,6 +210,7 @@ public class EnemyAi : MonoBehaviour
         if (suspicionLevel > 0) { ChangeState(EnemyState.Suspicious); return; }
 
         if (patrolPoints == null || patrolPoints.Length == 0) return;
+        if (agent == null || !agent.isOnNavMesh) return;
         agent.isStopped = false;
 
         if (!agent.pathPending && agent.remainingDistance <= 0.5f)
@@ -248,6 +250,7 @@ public class EnemyAi : MonoBehaviour
 
     void HandleAlert()
     {
+        if (agent == null || !agent.isOnNavMesh) return;
         agent.isStopped = false;
         if (CheckZone() > 0 && player != null)
         {
@@ -268,6 +271,7 @@ public class EnemyAi : MonoBehaviour
 
     void HandleSearching()
     {
+        if (agent == null || !agent.isOnNavMesh) return;
         agent.isStopped = false;
         searchTimer -= Time.deltaTime;
         searchMoveTimer -= Time.deltaTime;
@@ -288,6 +292,7 @@ public class EnemyAi : MonoBehaviour
 
     void HandleReturn()
     {
+        if (agent == null || !agent.isOnNavMesh) return;
         agent.isStopped = false;
         Vector3 targetReturn = startPosition;
         if (patrolPoints != null && patrolPoints.Length > 0 && patrolPoints[currentPatrolIndex] != null)

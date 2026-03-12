@@ -116,9 +116,16 @@ public class NpcMoveNav : MonoBehaviour
 
         if (chairWP == null || chairWP.point == null) return;
 
-        agent.Warp(chairWP.point.position);
-        agent.isStopped = true;
-        agent.velocity = Vector3.zero;
+        if (agent.isOnNavMesh)
+        {
+            agent.Warp(chairWP.point.position);
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
+        else
+        {
+            transform.position = chairWP.point.position;
+        }
 
         IsSitting = true;
         isFinished = true;
