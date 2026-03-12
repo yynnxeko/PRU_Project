@@ -18,10 +18,9 @@ public class CorpseSearchable : MonoBehaviour
 
     [Header("Feedback")]
     public SpeechBubble bubblePrefab;
+    public string hintMessage = "Giữ E để lục soát";
     public string emptyMessage = "Không tìm thấy gì...";
-    public AudioClip emptyVoice;
     public string foundMessage = "Tìm thấy USB!";
-    public AudioClip foundVoice;
     public float bubbleOffsetY = 1.5f;
     public float bubbleDuration = 2f;
 
@@ -66,7 +65,9 @@ public class CorpseSearchable : MonoBehaviour
             playerTransform = other.transform;
 
             if (!isSearched)
-                Debug.Log("Nhấn giữ E để lục soát xác");
+            {
+                ShowBubble(hintMessage);
+            }
         }
     }
 
@@ -77,6 +78,7 @@ public class CorpseSearchable : MonoBehaviour
             playerInRange = false;
             playerTransform = null;
             CancelHold();
+            HideBubble();
         }
     }
 
@@ -124,7 +126,7 @@ public class CorpseSearchable : MonoBehaviour
         {
             // Tìm thấy USB!
             Debug.Log("[CorpseSearchable] Tìm thấy USB trong xác!");
-            ShowBubble(foundMessage, foundVoice);
+            ShowBubble(foundMessage);
 
             // Thêm evidence vào inventory
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
@@ -153,12 +155,11 @@ public class CorpseSearchable : MonoBehaviour
         }
     }
 
-    private void ShowBubble(string message, AudioClip voiceClip = null)
+    private void ShowBubble(string message)
     {
-        if (bubblePrefab == null || playerTransform == null) return;
+        if (bubblePrefab == null) return;
 
-        if (currentBubble != null)
-            Destroy(currentBubble.gameObject);
+        HideBubble();
 
         currentBubble = Instantiate(
             bubblePrefab,
@@ -166,6 +167,15 @@ public class CorpseSearchable : MonoBehaviour
             Quaternion.identity
         );
         currentBubble.Init(transform, Vector3.up * bubbleOffsetY);
-        currentBubble.Show(message, bubbleDuration, voiceClip);
+        currentBubble.Show(message, bubbleDuration);
+    }
+
+    private void HideBubble()
+    {
+        if (currentBubble != null)
+        {
+            Destroy(currentBubble.gameObject);
+            currentBubble = null;
+        }
     }
 }

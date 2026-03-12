@@ -6,7 +6,7 @@ public class ShockingSound : MonoBehaviour
     public AudioClip shockingSound;
 
     Animator animator;
-    bool played = false;
+    bool played;
 
     void Start()
     {
@@ -15,17 +15,19 @@ public class ShockingSound : MonoBehaviour
 
     void Update()
     {
-        if (animator == null) return;
+        if (!animator) return;
 
-        bool isShocking = animator.GetBool("IsShocking");
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (isShocking && !played)
+        if (state.IsName("Base Layer.shocking"))
         {
-            audioSource.PlayOneShot(shockingSound);
-            played = true;
+            if (!played)
+            {
+                audioSource.PlayOneShot(shockingSound);
+                played = true;
+            }
         }
-
-        if (!isShocking)
+        else
         {
             played = false;
         }

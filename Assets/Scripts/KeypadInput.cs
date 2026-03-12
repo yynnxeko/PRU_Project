@@ -1,4 +1,5 @@
 
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -15,11 +16,48 @@ public class KeypadInput : MonoBehaviour
     string currentCode = "";
 
     AudioSource audioSource;
+    private bool isActive = false;
 
     void Awake()
     {
         // Lấy AudioSource gắn trên chính object Keypad
         audioSource = GetComponent<AudioSource>();
+    }
+
+    void OnEnable()
+    {
+        isActive = true;
+    }
+
+    void OnDisable()
+    {
+        isActive = false;
+    }
+
+    void Update()
+    {
+        if (!isActive) return;
+
+        // Nhập số 0-9 từ bàn phím
+        for (int i = 0; i <= 9; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha0 + i) || Input.GetKeyDown(KeyCode.Keypad0 + i))
+            {
+                PressNumber(i.ToString());
+            }
+        }
+
+        // Backspace = Xóa hết
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            Clear();
+        }
+
+        // Enter = Xác nhận
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            Enter();
+        }
     }
 
     public void PressNumber(string number)
@@ -48,18 +86,9 @@ public class KeypadInput : MonoBehaviour
         {
             Debug.Log("Correct Code!");
 
-            if (audioSource && correctClip)
-                audioSource.PlayOneShot(correctClip);
-
-            // Tắt canvas keypadUI nếu có
-            if (keypadTrigger != null && keypadTrigger.keypadUI != null)
-                keypadTrigger.keypadUI.SetActive(false);
-
-            // Hiện popup với nội dung mong muốn
-            if (keypadTrigger != null)
-            {
-                keypadTrigger.ShowPopup("Đã tìm thấy tài liệu, tìm cách đưa cho đầu bếp mà không bị bắt");
-            }
+            // Dùng PlayClipAtPoint để âm thanh không bị cắt khi tắt UI
+            if (correctClip)
+                AudioSource.PlayClipAtPoint(correctClip, Camera.main.transform.position);
 
             // cộng Evidence
             if (rewardEvidence != null)
@@ -81,15 +110,33 @@ public class KeypadInput : MonoBehaviour
             {
                 FullMissionManager.Instance.ReportComplete();
             }
+
+            // Delay tắt UI để âm thanh kịp phát
+            StartCoroutine(DelayedCloseUI());
         }
         else
         {
             Debug.Log("Wrong Code!");
 
-            if (audioSource && incorrectClip)
-                audioSource.PlayOneShot(incorrectClip);
+            if (incorrectClip)
+                AudioSource.PlayClipAtPoint(incorrectClip, Camera.main.transform.position);
         }
 
         Clear();
+    }
+
+    IEnumerator DelayedCloseUI()
+    {
+        yield return new WaitForSeconds(0.15f);
+
+        // Tắt canvas keypadUI
+        if (keypadTrigger != null && keypadTrigger.keypadUI != null)
+            keypadTrigger.keypadUI.SetActive(false);
+
+        // Hiện popup
+        if (keypadTrigger != null)
+        {
+            keypadTrigger.ShowPopup("Đã tìm thấy tài liệu, tìm cách đưa cho đầu bếp mà không bị bắt");
+        }
     }
 }
