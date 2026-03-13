@@ -32,7 +32,8 @@ public class LoppyCutscene : MonoBehaviour
     private CameraFollowPersist camFollow;
     private Vector3 initialCamPos;
 
-    private static bool hasPlayed = false;
+    private const string PREFS_KEY = "LoppyCutscenePlayed";
+    private bool hasPlayed => PlayerPrefs.GetInt(PREFS_KEY, 0) == 1;
     public static bool isPlaying = false;
 
     void Start()
@@ -113,7 +114,8 @@ public class LoppyCutscene : MonoBehaviour
             Debug.Log("[LoppyCutscene] Flag 'lobby_To_Bed' set to TRUE");
         }
 
-        hasPlayed = true;
+        PlayerPrefs.SetInt(PREFS_KEY, 1);
+        PlayerPrefs.Save();
         isPlaying = false;
     }
 

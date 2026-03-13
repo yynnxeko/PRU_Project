@@ -14,7 +14,7 @@ public class DayManager : MonoBehaviour
     public static DayManager Instance { get; private set; }
 
     [Header("Day State")]
-    public int currentDay = 1;
+    public int currentDay = 0;
     public DayPhase currentPhase = DayPhase.Morning;
 
     public bool isNight => currentPhase == DayPhase.Night;
@@ -24,6 +24,9 @@ public class DayManager : MonoBehaviour
 
     [Header("UI References")]
     public GameObject dayStartUIPrefab; // Kéo Prefab hiện chữ đỏ vào đây (nếu có)
+
+    private const string DAY_SAVE_KEY = "CurrentDay";
+    private const string PHASE_SAVE_KEY = "CurrentPhase";
 
     private void Awake()
     {
@@ -36,12 +39,33 @@ public class DayManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Hiện thông báo ngày 1 khi bắt đầu (hoặc trong Start)
+        LoadDayData();
     }
 
     private void Start()
     {
         ShowDayStartNotification();
+    }
+
+    // ====================== SAVE / LOAD LOGIC ======================
+
+    public void SaveDayData()
+    {
+        PlayerPrefs.SetInt(DAY_SAVE_KEY, currentDay);
+        PlayerPrefs.SetInt(PHASE_SAVE_KEY, (int)currentPhase);
+        PlayerPrefs.Save();
+        Debug.Log($"[DayManager] Saved Day: {currentDay}, Phase: {currentPhase}");
+    }
+
+    public void LoadDayData()
+    {
+        // Vẫn lưu/load số Ngày, nếu chưa từng chơi thì nạp Gốc hiện có (currentDay tùy chỉnh trên máy Dev)
+        currentDay = PlayerPrefs.GetInt(DAY_SAVE_KEY, currentDay);
+
+        // Load Buổi, nếu chưa từng chơi thì nạp Gốc (currentPhase)
+        currentPhase = (DayPhase)PlayerPrefs.GetInt(PHASE_SAVE_KEY, (int)currentPhase);
+
+        Debug.Log($"[DayManager] Loaded từ PlayerPrefs -> Day: {currentDay}, Phase: {currentPhase}");
     }
 
     /// <summary>
@@ -110,6 +134,7 @@ public class DayManager : MonoBehaviour
     {
         currentPhase = newPhase;
         Debug.Log("Time changed to: " + currentPhase);
+        SaveDayData();
     }
 
     /// <summary>
@@ -121,6 +146,7 @@ public class DayManager : MonoBehaviour
         else if (currentPhase == DayPhase.Noon) currentPhase = DayPhase.Night;
 
         Debug.Log("Time advanced to: " + currentPhase);
+        SaveDayData();
     }
 
     /// <summary>
@@ -150,6 +176,7 @@ public class DayManager : MonoBehaviour
         // 3. Spawn về phòng ngủ
         // Reset về sáng sớm
         currentPhase = DayPhase.Morning;
+        SaveDayData(); // Ghi đè lại lưu trữ (hôm nay chơi fail nên chơi lại từ đầu ngày)
 
         // Thiết lập vị trí spawn khi load scene
         if (!string.IsNullOrEmpty(spawnId))
@@ -167,6 +194,7 @@ public class DayManager : MonoBehaviour
     {
         currentDay++;
         currentPhase = DayPhase.Morning;
+        SaveDayData();
         Debug.Log("Day Advanced! Starting Day " + currentDay);
 
         // 1. Reset tiến độ câu hỏi về 0 cho ngày mới
@@ -195,6 +223,7 @@ public class DayManager : MonoBehaviour
 
         currentDay++;
         currentPhase = DayPhase.Morning;
+        SaveDayData();
 
         Debug.Log($"[DayManager] SAU khi AdvanceDay → currentDay={currentDay}, currentPhase={currentPhase}");
         Debug.Log($"[DayManager] Đợi {delay}s rồi load scene '{bedroomSceneName}'...");

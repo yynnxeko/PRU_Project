@@ -21,8 +21,16 @@ public class FirstTimeLobbyRestrictor : MonoBehaviour
 
     private SpeechBubble currentBubble;
     
-    // Biến static để theo dõi xem người chơi đã vào bedroom lần nào chưa
-    public static bool hasVisitedBedroom = false;
+    // Sử dụng PlayerPrefs để lưu ổ cứng
+    public static bool hasVisitedBedroom
+    {
+        get => PlayerPrefs.GetInt("HasVisitedBedroom", 0) == 1;
+        set
+        {
+            PlayerPrefs.SetInt("HasVisitedBedroom", value ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+    }
 
     void Start()
     {

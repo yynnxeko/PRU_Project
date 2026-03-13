@@ -43,8 +43,15 @@ public class BedroomInitialCutscene : MonoBehaviour
     public string nextSceneName = "Scene A";
     public string nextSceneSpawnId = "SpawnFromBedroom";
     public UnityEngine.UI.Image fadeImage;
-
-    private static bool hasPlayed = false;
+    private bool hasPlayed
+    {
+        get => PlayerPrefs.GetInt("BedroomCutscenePlayed", 0) == 1;
+        set
+        {
+            PlayerPrefs.SetInt("BedroomCutscenePlayed", value ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+    }
     private Camera cam;
     private CameraFollowPersist camFollow;
     private Vector3 initialCamPos;
