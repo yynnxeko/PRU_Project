@@ -15,8 +15,8 @@ public class CabinetPoint : Interactable
         this.enabled = true;
 
         promptMessage = "Hold E";
-        holdAction.requiredHoldTime = 15.0f; // Chỉnh lại theo ảnh bạn gửi cho chắc
-        holdAction.resetOnStart = true;    // Tùy bạn muốn reset hay không, mình để true theo ảnh Inspector
+        holdAction.requiredHoldTime = 10f; // Chỉnh lại theo ảnh bạn gửi cho chắc
+        holdAction.resetOnStart = false;    // Tùy bạn muốn reset hay không, mình để true theo ảnh Inspector
 
         // Kiểm tra trạng thái lưu vĩnh viễn
         if (EvidenceManager.Instance != null && EvidenceManager.Instance.IsCollected(CABINET_ID))
@@ -35,11 +35,11 @@ public class CabinetPoint : Interactable
         if (FullMissionManager.Instance != null)
         {
             int currentMission = FullMissionManager.Instance.currentMissionIndex;
-            
+
             // Nếu không phải nhiệm vụ 2, tự tắt component để PlayerInteraction không tìm thấy
             if (currentMission != 2)
             {
-                if (this.enabled) 
+                if (this.enabled)
                 {
                     this.enabled = false;
                     // Nếu player đang đứng trong Trigger mà nv đổi, ẩn UI luôn
@@ -94,7 +94,7 @@ public class CabinetPoint : Interactable
             GameFlagManager.Instance.SetFlag("keyBedroom", true);
             Debug.Log("[CabinetPoint] Đã bật cờ keyBedroom!");
         }
-            
+
         // Disable để không hiện UI Prompt nữa
         this.enabled = false;
         gameObject.layer = 0;

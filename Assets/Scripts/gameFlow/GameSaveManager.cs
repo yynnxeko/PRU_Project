@@ -27,12 +27,38 @@ public static class GameSaveManager
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
 
-        // 2. Xóa đặc thù của Evidence
+        // 2. Xóa đặc thù của Evidence trong RAM
         if (EvidenceManager.Instance != null)
         {
             EvidenceManager.Instance.DeleteAllSave();
         }
 
-        Debug.Log("[GameSaveManager] Đã xóa TẤT CẢ Save Data! Sẵn sàng cho New Game.");
+        // 3. Xóa dữ liệu Ngày và Buổi trong RAM (DayManager)
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.currentDay = 0;
+            DayManager.Instance.currentPhase = DayPhase.Night; // Bắt đầu game là buổi Tối
+        }
+
+        // 4. Xóa nhiệm vụ hiện tại trong RAM
+        if (FullMissionManager.Instance != null)
+        {
+            FullMissionManager.Instance.ResetAllProgress();
+        }
+
+        // 5. Reset các cờ (Bao gồm Cutscene, v.v.)
+        if (GameFlagManager.Instance != null)
+        {
+            GameFlagManager.Instance.ResetAllFlags();
+        }
+
+        // 6. Reset tiến độ câu hỏi (DialogueMissionStep)
+        DialogueMissionStep.ResetSavedIndex();
+
+        // Xóa sạch cờ Chơi Tiếp để chắc chắn đây là ván mới
+        PlayerPrefs.SetInt("IsContinueFlow", 0);
+        PlayerPrefs.Save();
+
+        Debug.Log("[GameSaveManager] Đã dọn dẹp sạch sẽ toàn bộ Ổ cứng và RAM! Sẵn sàng cho New Game.");
     }
 }

@@ -47,6 +47,15 @@ public class GameFlagManager : MonoBehaviour
             return value;
         return false;
     }
+
+    /// <summary>
+    /// Xóa toàn bộ các cờ hiện có (Dùng khi Chơi Mới).
+    /// </summary>
+    public void ResetAllFlags()
+    {
+        flags.Clear();
+        Debug.Log("[GameFlagManager] Đã xóa toàn bộ flags trong bộ nhớ!");
+    }
 #if UNITY_EDITOR
     void Update()
     {
