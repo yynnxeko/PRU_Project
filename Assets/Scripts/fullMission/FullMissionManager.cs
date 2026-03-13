@@ -14,10 +14,10 @@ public class FullMissionManager : MonoBehaviour
     [Header("Tiến trình")]
     public int currentMissionIndex;
 
-    [Header("Tổng số nhiệm vụ (để biết khi nào xong hết)")]
+    [Header("Tổng số nhiệm vụ")]
     public int totalMissions = 3;
 
-    [Header("Mô tả nhiệm vụ (Dùng cho mọi Scene)")]
+    [Header("Mô tả nhiệm vụ")]
     [TextArea(2, 4)]
     public string[] missionDescriptions = new string[]
     {
@@ -26,7 +26,10 @@ public class FullMissionManager : MonoBehaviour
         "Hãy trả lời các câu hỏi để chứng minh sự vô tội và tìm ra kẻ lừa đảo."
     };
 
-    // Mission step đang active trong scene hiện tại
+    [Header("Mission Voice (index = mission index)")]
+    public AudioSource voiceAudioSource;
+    public AudioClip[] missionVoices;
+
     private MissionStep activeStep;
 
     private void Awake()
@@ -40,12 +43,11 @@ public class FullMissionManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Load tiến trình từ ổ cứng
+        // Load tiến trình
         currentMissionIndex = PlayerPrefs.GetInt(SAVE_KEY, 0);
+
         Debug.Log($"[FullMissionManager] Loaded progress: Mission {currentMissionIndex}");
 
-        // Nếu đang ở Mission 2 → đảm bảo cờ mission_accepted luôn bật
-        // để khi trả lời sai sẽ đi phòng y tế
         if (currentMissionIndex == 1 && GameFlagManager.Instance != null)
         {
             GameFlagManager.Instance.SetFlag("mission_accepted", true);
@@ -54,47 +56,39 @@ public class FullMissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Mỗi MissionStep gọi hàm này trong Start() để đăng ký.
-    /// Nếu missionIndex khớp currentMissionIndex → StartStep().
-    /// Nếu không → step tự disable.
+    /// MissionStep gọi hàm này để đăng ký.
     /// </summary>
     public void RegisterStep(int missionIndex, MissionStep step)
     {
-        Debug.Log($"[FullMissionManager] RegisterStep: index={missionIndex}, current={currentMissionIndex}, step={step.gameObject.name}");
+        Debug.Log($"[FullMissionManager] RegisterStep: index={missionIndex}, current={currentMissionIndex}");
 
         if (missionIndex < currentMissionIndex)
         {
-            // Nhiệm vụ này đã hoàn thành trước đó
             step.MarkAsCompleted();
             step.gameObject.SetActive(false);
-            Debug.Log($"[FullMissionManager] Step {missionIndex} đã hoàn thành trước đó → disable");
             return;
         }
 
         if (missionIndex == currentMissionIndex)
         {
-            // Đây là nhiệm vụ hiện tại → kích hoạt
             activeStep = step;
             step.StartStep();
-            Debug.Log($"[FullMissionManager] Step {missionIndex} là nhiệm vụ hiện tại → StartStep()");
 
-            // Nếu là Mission 2 → đảm bảo cờ mission_accepted bật
+            PlayMissionVoice(currentMissionIndex);
+
             if (currentMissionIndex == 1 && GameFlagManager.Instance != null)
             {
                 GameFlagManager.Instance.SetFlag("mission_accepted", true);
-                Debug.Log("[FullMissionManager] Mission 2 RegisterStep → bật cờ mission_accepted");
             }
+
             return;
         }
 
-        // missionIndex > currentMissionIndex → chưa đến lượt
         step.gameObject.SetActive(false);
-        Debug.Log($"[FullMissionManager] Step {missionIndex} chưa đến lượt → disable");
     }
 
     /// <summary>
-    /// Gọi khi MissionStep hoàn thành. Tăng index, lưu PlayerPrefs,
-    /// và tìm step tiếp theo trong scene (nếu có).
+    /// Khi nhiệm vụ hoàn thành
     /// </summary>
     public void ReportComplete()
     {
@@ -102,11 +96,11 @@ public class FullMissionManager : MonoBehaviour
 
         currentMissionIndex++;
 
-        // Lưu vào ổ cứng
         PlayerPrefs.SetInt(SAVE_KEY, currentMissionIndex);
         PlayerPrefs.Save();
-        
+
         string nextMissionDesc = GetActiveMissionDescription();
+
         Debug.Log($"<color=green>[FullMission] TIẾN TRÌNH MỚI: Mission {currentMissionIndex}</color>");
         Debug.Log($"<color=cyan>[FullMission] HIỆN TẠI: {nextMissionDesc}</color>");
 
@@ -115,35 +109,42 @@ public class FullMissionManager : MonoBehaviour
         if (currentMissionIndex >= totalMissions)
         {
             Debug.Log("[FullMissionManager] TẤT CẢ NHIỆM VỤ ĐÃ HOÀN THÀNH!");
-            return;
         }
-
-        // Không tự tìm step tiếp theo ở đây — khi player vào scene có step tiếp theo,
-        // step đó sẽ tự RegisterStep() trong Start()
     }
 
     /// <summary>
-    /// Lấy chỉ số nhiệm vụ hiện tại (dùng cho UI hoặc NPC dialogue).
+    /// Phát audio tương ứng với nhiệm vụ
     /// </summary>
+    void PlayMissionVoice(int index)
+    {
+        if (voiceAudioSource == null) return;
+
+        if (missionVoices != null && index < missionVoices.Length && missionVoices[index] != null)
+        {
+            voiceAudioSource.Stop();
+            voiceAudioSource.clip = missionVoices[index];
+            voiceAudioSource.Play();
+        }
+    }
+
     public int GetCurrentMissionIndex() => currentMissionIndex;
 
-    /// <summary>
-    /// Kiểm tra xem tất cả nhiệm vụ đã xong chưa.
-    /// </summary>
     public bool AllMissionsCompleted() => currentMissionIndex >= totalMissions;
 
     /// <summary>
-    /// Tìm mô tả nhiệm vụ hiện tại. 
-    /// Lấy trực tiếp từ danh sách được cấu hình trên Inspector để dùng chung cho mọi Scene.
+    /// Lấy mô tả nhiệm vụ hiện tại + phát âm thanh
     /// </summary>
     public string GetActiveMissionDescription()
     {
-        // Ưu tiên 1: Nếu đang có activeStep (nhiệm vụ nằm ngay trong scene này) thì lấy luôn
-        if (activeStep != null) return activeStep.GetMissionDescription();
+        if (activeStep != null)
+            return activeStep.GetMissionDescription();
 
-        // Ưu tiên 2: Lấy từ danh sách mô tả cấu hình sẵn trên FullMissionManager (hữu ích khi nhảy Scene)
-        if (missionDescriptions != null && currentMissionIndex >= 0 && currentMissionIndex < missionDescriptions.Length)
+        if (missionDescriptions != null &&
+            currentMissionIndex >= 0 &&
+            currentMissionIndex < missionDescriptions.Length)
         {
+            PlayMissionVoice(currentMissionIndex);
+
             return missionDescriptions[currentMissionIndex];
         }
 
@@ -151,13 +152,15 @@ public class FullMissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Reset toàn bộ tiến trình (chơi lại từ đầu).
+    /// Reset tiến trình
     /// </summary>
     public void ResetAllProgress()
     {
         currentMissionIndex = 0;
+
         PlayerPrefs.SetInt(SAVE_KEY, 0);
         PlayerPrefs.Save();
-        Debug.Log("[FullMissionManager] RESET tất cả tiến trình về 0!");
+
+        Debug.Log("[FullMissionManager] RESET tất cả tiến trình!");
     }
 }
