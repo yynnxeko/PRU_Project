@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
     [Header("=== INVENTORY ===")]
     public List<EvidenceItem> hiddenEvidences = new List<EvidenceItem>(); // Giấu trong người
 
-    public int maxHidden = 2;
+    public int maxHidden = 4;
 
     private void Start()
     {
