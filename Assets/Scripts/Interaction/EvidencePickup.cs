@@ -25,6 +25,12 @@ public class EvidencePickup : MonoBehaviour
     public string speakerName = "Tôi";
     public Sprite speakerAvatar;
 
+    [Header("Game Flag (sau khi nhặt)")]
+    [SerializeField] private bool setFlagOnCollect = true;
+    [SerializeField] private string flagName = "Pass_Internal";
+    [SerializeField] private bool flagValue = true;
+    [SerializeField] private bool increaseMissionIndexAfterSetFlag = false;
+
     private bool playerInRange;
     private PlayerInventory inventory;
     private SpeechBubble currentBubble;
@@ -101,11 +107,38 @@ public class EvidencePickup : MonoBehaviour
         if (EvidenceManager.Instance != null)
             EvidenceManager.Instance.MarkAsCollected(uniqueID);
 
-        // Bật cờ Pass_Internal
-        if (GameFlagManager.Instance != null)
+        // Bật cờ game (có thể cấu hình theo từng evidence)
+        if (setFlagOnCollect)
         {
-            GameFlagManager.Instance.SetFlag("Pass_Internal", true);
-            Debug.Log("[EvidencePickup] Đã bật cờ Pass_Internal!");
+            if (GameFlagManager.Instance != null && !string.IsNullOrWhiteSpace(flagName))
+            {
+                GameFlagManager.Instance.SetFlag(flagName, flagValue);
+                Debug.Log($"[EvidencePickup] Đã đặt cờ {flagName} = {flagValue}");
+
+                if (increaseMissionIndexAfterSetFlag)
+                {
+                    if (FullMissionManager.Instance != null)
+                    {
+                        if (!FullMissionManager.Instance.AllMissionsCompleted())
+                        {
+                            FullMissionManager.Instance.ReportComplete();
+                            Debug.Log("[EvidencePickup] Đã +1 Mission Index sau khi bật cờ.");
+                        }
+                        else
+                        {
+                            Debug.Log("[EvidencePickup] Mission đã hoàn thành hết, không tăng index nữa.");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[EvidencePickup] Không thể tăng Mission Index: thiếu FullMissionManager.Instance.");
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[EvidencePickup] Không thể đặt cờ: thiếu GameFlagManager hoặc flagName rỗng.");
+            }
         }
 
         // Tắt dialogue cũ trước, rồi hiện popup mới
