@@ -54,11 +54,18 @@ public class CameraFollowPersist : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Nếu scene là Map_Internal Area_Night thì bỏ qua không chạy logic
+        if (scene.name == "Map_Internal Area_Night")
+        {
+            Debug.Log("[CameraFollowPersist] Bỏ qua OnSceneLoaded cho scene: " + scene.name);
+            return;
+        }
+
         // Phá hủy các camera khác trong scene mới để tránh xung đột
         var cams = FindObjectsOfType<Camera>();
         foreach (var c in cams)
         {
-            if (c != cam && c.gameObject != gameObject) 
+            if (c != cam && c.gameObject != gameObject)
             {
                 Debug.Log("[CameraFollowPersist] Destroying extra camera: " + c.gameObject.name);
                 Destroy(c.gameObject);

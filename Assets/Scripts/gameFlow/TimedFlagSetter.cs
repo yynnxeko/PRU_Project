@@ -31,7 +31,7 @@ public class TimedFlagSetter : MonoBehaviour
         }
 
         Debug.Log($"[TimedFlagSetter] Đang đợi {delayInSeconds} giây để bật cờ '{flagToSet}' cho ngày {targetDay}...");
-        
+
         yield return new WaitForSeconds(delayInSeconds);
 
         if (GameFlagManager.Instance != null)
