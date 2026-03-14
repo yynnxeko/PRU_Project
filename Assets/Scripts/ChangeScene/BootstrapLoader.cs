@@ -8,8 +8,8 @@ public class BootstrapLoader : MonoBehaviour
     void OnMouseDown()
     {
         GameSaveManager.DeleteAllSaveData(); // Chơi mới -> Xóa sạch save cũ
-        // StartCoroutine(LoadGameScene("Buss"));
-        StartCoroutine(LoadGameScene("Map_Internal Area_Night"));
+        StartCoroutine(LoadGameScene("Buss"));
+        // StartCoroutine(LoadGameScene("Map_Internal Area_Night"));
     }
 
     // Bỏ hàm Continue vì nút Continue đã có script riêng ContinueGameClick.cs
